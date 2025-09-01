@@ -4,10 +4,13 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import { Button } from '@/components/ui/button';
-import { Search, GraduationCap, Building2, FileText, Shield, Smartphone } from 'lucide-react';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Search, GraduationCap, Building2, FileText, Shield, Smartphone, Filter, School } from 'lucide-react';
 
 const Services = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedSchool, setSelectedSchool] = useState('general');
 
   const serviceCategories = [
     {
@@ -83,12 +86,84 @@ const Services = () => {
     }
   ];
 
-  const filteredCategories = serviceCategories.map(category => ({
-    ...category,
-    services: category.services.filter(service =>
-      service.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-  })).filter(category => category.services.length > 0);
+  const nigerianSchools = [
+    {
+      name: 'University of Lagos (UNILAG)',
+      services: [
+        { name: 'UNILAG School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20School%20Fees%20Payment.' },
+        { name: 'UNILAG Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20Course%20Registration.' },
+        { name: 'UNILAG Hostel Booking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20Hostel%20Booking.' }
+      ]
+    },
+    {
+      name: 'University of Ibadan (UI)',
+      services: [
+        { name: 'UI School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UI%20School%20Fees%20Payment.' },
+        { name: 'UI Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UI%20Course%20Registration.' },
+        { name: 'UI Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20checking%20my%20UI%20Results.' }
+      ]
+    },
+    {
+      name: 'Obafemi Awolowo University (OAU)',
+      services: [
+        { name: 'OAU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20OAU%20School%20Fees%20Payment.' },
+        { name: 'OAU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20OAU%20Course%20Registration.' }
+      ]
+    },
+    {
+      name: 'University of Nigeria Nsukka (UNN)',
+      services: [
+        { name: 'UNN School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNN%20School%20Fees%20Payment.' },
+        { name: 'UNN Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNN%20Course%20Registration.' }
+      ]
+    },
+    {
+      name: 'Ahmadu Bello University (ABU)',
+      services: [
+        { name: 'ABU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABU%20School%20Fees%20Payment.' },
+        { name: 'ABU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABU%20Course%20Registration.' }
+      ]
+    },
+    {
+      name: 'University of Benin (UNIBEN)',
+      services: [
+        { name: 'UNIBEN School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20School%20Fees%20Payment.' },
+        { name: 'UNIBEN Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Course%20Registration.' }
+      ]
+    }
+  ];
+
+  const categoryButtons = [
+    { id: 'all', label: 'All Services', icon: null },
+    { id: 'education', label: 'Education & Exams', icon: GraduationCap },
+    { id: 'university', label: 'University Portals', icon: Building2 },
+    { id: 'academic', label: 'Academic Support', icon: FileText },
+    { id: 'nysc', label: 'NYSC & Government', icon: Shield },
+    { id: 'utilities', label: 'Utilities & Bills', icon: Smartphone }
+  ];
+
+  const getFilteredCategories = () => {
+    let filtered = serviceCategories;
+    
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter(category => category.id === selectedCategory);
+    }
+    
+    return filtered.map(category => ({
+      ...category,
+      services: category.services.filter(service =>
+        service.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    })).filter(category => category.services.length > 0);
+  };
+
+  const getSchoolServices = () => {
+    const school = nigerianSchools.find(s => s.name.toLowerCase().includes(selectedSchool.toLowerCase()));
+    return school ? school.services : [];
+  };
+
+  const filteredCategories = getFilteredCategories();
+  const schoolServices = getSchoolServices();
 
   return (
     <div className="min-h-screen bg-background">
@@ -101,19 +176,104 @@ const Services = () => {
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Services</h1>
             <p className="text-xl mb-8">Complete digital solutions for Nigerian students and communities</p>
             
-            {/* Search Bar */}
-            <div className="max-w-md mx-auto relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-              <input
-                type="text"
-                placeholder="Search services..."
-                className="w-full pl-10 pr-4 py-3 rounded-lg text-gray-900 border-0 focus:ring-2 focus:ring-white"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
+            {/* Search and Filters */}
+            <div className="max-w-4xl mx-auto space-y-4">
+              {/* Search Bar */}
+              <div className="max-w-md mx-auto relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="text"
+                  placeholder="Search services..."
+                  className="w-full pl-10 pr-4 py-3 rounded-lg text-gray-900 border-0 focus:ring-2 focus:ring-white"
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </div>
+              
+              {/* Category Filter Buttons */}
+              <div className="flex flex-wrap justify-center gap-2">
+                {categoryButtons.map((category) => {
+                  const IconComponent = category.icon;
+                  return (
+                    <Button
+                      key={category.id}
+                      variant={selectedCategory === category.id ? "secondary" : "outline"}
+                      className={`${selectedCategory === category.id 
+                        ? 'bg-white text-primary' 
+                        : 'bg-white/20 border-white/30 text-white hover:bg-white hover:text-primary'
+                      } text-sm`}
+                      onClick={() => setSelectedCategory(category.id)}
+                    >
+                      {IconComponent && <IconComponent className="w-4 h-4 mr-2" />}
+                      {category.label}
+                    </Button>
+                  );
+                })}
+              </div>
+              
+              {/* School Selection */}
+              <div className="max-w-md mx-auto">
+                <Select value={selectedSchool} onValueChange={setSelectedSchool}>
+                  <SelectTrigger className="bg-white text-gray-900">
+                    <School className="w-4 h-4 mr-2" />
+                    <SelectValue placeholder="Select your school for specific services" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="general">General Services</SelectItem>
+                    {nigerianSchools.map((school, index) => (
+                      <SelectItem key={index} value={school.name.toLowerCase()}>
+                        {school.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
             </div>
           </div>
         </section>
+
+        {/* School-Specific Services */}
+        {selectedSchool !== 'general' && schoolServices.length > 0 && (
+          <section className="section-padding bg-blue-50">
+            <div className="container-custom">
+              <h2 className="text-2xl font-bold mb-6 flex items-center">
+                <School className="w-6 h-6 mr-2 text-primary" />
+                {nigerianSchools.find(s => s.name.toLowerCase().includes(selectedSchool.toLowerCase()))?.name} Services
+              </h2>
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                {schoolServices.map((service, index) => (
+                  <div key={index} className="service-card">
+                    <h3 className="text-lg font-semibold mb-4">{service.name}</h3>
+                    <Button 
+                      className="w-full btn-whatsapp justify-center"
+                      onClick={() => window.open(service.link, '_blank')}
+                    >
+                      Get Started
+                    </Button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
+
+        {/* School Not Found Section */}
+        {selectedSchool !== 'general' && schoolServices.length === 0 && (
+          <section className="section-padding bg-yellow-50">
+            <div className="container-custom text-center">
+              <h2 className="text-2xl font-bold mb-4">School Not Found?</h2>
+              <p className="text-lg text-gray-600 mb-6">
+                Don't worry! We support services for all Nigerian universities and polytechnics.
+              </p>
+              <Button 
+                className="btn-whatsapp"
+                onClick={() => window.open('https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20my%20school%20portal%20services.%20My%20school%20is%20not%20listed.', '_blank')}
+              >
+                Chat with us for your school
+              </Button>
+            </div>
+          </section>
+        )}
 
         {/* Services Categories */}
         <section className="section-padding">
@@ -151,9 +311,12 @@ const Services = () => {
                 <p className="text-xl text-gray-600">No services found matching your search.</p>
                 <Button 
                   className="mt-4"
-                  onClick={() => setSearchTerm('')}
+                  onClick={() => {
+                    setSearchTerm('');
+                    setSelectedCategory('all');
+                  }}
                 >
-                  Clear Search
+                  Clear Filters
                 </Button>
               </div>
             )}

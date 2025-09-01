@@ -2,9 +2,29 @@
 import React from 'react';
 import { MessageCircle, CheckCircle, Zap, Shield, DollarSign } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel';
 
 const Hero = () => {
   const whatsappLink = "https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20assistance%20today";
+
+  const studentImages = [
+    {
+      src: "/api/placeholder/600/400",
+      alt: "African students studying together"
+    },
+    {
+      src: "/api/placeholder/600/400", 
+      alt: "Nigerian student using laptop"
+    },
+    {
+      src: "/api/placeholder/600/400",
+      alt: "Group of African university students"
+    },
+    {
+      src: "/api/placeholder/600/400",
+      alt: "Student checking exam results online"
+    }
+  ];
 
   return (
     <section id="home" className="hero-section section-padding min-h-[90vh] flex items-center relative overflow-hidden">
@@ -62,8 +82,35 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Hero Visual */}
+          {/* Hero Visual with Sliding Images */}
           <div className="relative">
+            {/* Student Images Carousel */}
+            <div className="mb-6">
+              <Carousel
+                opts={{
+                  align: "start",
+                  loop: true,
+                }}
+                className="w-full"
+              >
+                <CarouselContent>
+                  {studentImages.map((image, index) => (
+                    <CarouselItem key={index}>
+                      <div className="relative rounded-2xl overflow-hidden">
+                        <img 
+                          src={image.src} 
+                          alt={image.alt}
+                          className="w-full h-64 md:h-80 object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                      </div>
+                    </CarouselItem>
+                  ))}
+                </CarouselContent>
+              </Carousel>
+            </div>
+
+            {/* Service Highlights */}
             <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
               <div className="space-y-4">
                 <div className="flex items-center gap-3 p-4 bg-white/20 rounded-lg">

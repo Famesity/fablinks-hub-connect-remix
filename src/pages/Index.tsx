@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import FeaturedServices from '@/components/FeaturedServices';
 import WhyChooseUs from '@/components/WhyChooseUs';
+import BlogPostsSlider from '@/components/BlogPostsSlider';
 import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
@@ -15,6 +16,7 @@ const Index = () => {
       <Hero />
       <FeaturedServices />
       <WhyChooseUs />
+      <BlogPostsSlider />
       <ContactSection />
       <Footer />
       <WhatsAppFloat />
