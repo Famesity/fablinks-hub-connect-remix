@@ -1,11 +1,10 @@
-
 import React, { useState } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, GraduationCap, Building2, FileText, Shield, Smartphone, Filter, School } from 'lucide-react';
+import { Search, GraduationCap, Building2, FileText, Shield, Smartphone, Filter, School, Printer, CreditCard, Globe, FileImage, Camera } from 'lucide-react';
 
 const Services = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -31,7 +30,9 @@ const Services = () => {
         { name: 'Check JAMB Admission Status', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20please%20help%20me%20check%20my%20JAMB%20Admission%20Status.' },
         { name: 'JAMB O\'Level Upload', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20JAMB%20O%E2%80%99Level%20Result%20Upload.' },
         { name: 'JAMB Profile Code Retrieval', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20retrieving%20my%20JAMB%20Profile%20Code.' },
-        { name: 'JAMB Registration Number Retrieval', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20retrieving%20my%20JAMB%20Registration%20Number.' }
+        { name: 'JAMB Registration Number Retrieval', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20retrieving%20my%20JAMB%20Registration%20Number.' },
+        { name: 'WAEC GCE Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20WAEC%20GCE%20Registration.' },
+        { name: 'NECO Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20NECO%20Registration.' }
       ]
     },
     {
@@ -44,7 +45,11 @@ const Services = () => {
         { name: 'School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20School%20Fees%20Payment.' },
         { name: 'Hostel Accommodation', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Hostel%20Accommodation.' },
         { name: 'Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20checking%20my%20University%20Results.' },
-        { name: 'Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Course%20Registration.' }
+        { name: 'Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Course%20Registration.' },
+        { name: 'Transcript Application', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Transcript%20Application.' },
+        { name: 'Post-UTME Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Post-UTME%20Registration.' },
+        { name: 'Student ID Card Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Student%20ID%20Card%20Services.' },
+        { name: 'Medical Form Submission', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Medical%20Form%20Submission.' }
       ]
     },
     {
@@ -55,7 +60,10 @@ const Services = () => {
       services: [
         { name: 'Project Writing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Project%20Writing.' },
         { name: 'Assignments & Research', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Assignments%20and%20Research.' },
-        { name: 'Seminars & Presentations', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Seminar%20or%20Presentation%20Preparation.' }
+        { name: 'Seminars & Presentations', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Seminar%20or%20Presentation%20Preparation.' },
+        { name: 'Thesis/Dissertation Support', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Thesis/Dissertation%20writing.' },
+        { name: 'CV/Resume Writing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20CV/Resume%20writing.' },
+        { name: 'Business Plan Writing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Business%20Plan%20writing.' }
       ]
     },
     {
@@ -67,7 +75,11 @@ const Services = () => {
         { name: 'NYSC Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20NYSC%20Registration.' },
         { name: 'NYSC Green Card Printing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20NYSC%20Green%20Card%20Printing.' },
         { name: 'NYSC Call-Up Letter Printing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20NYSC%20Call-Up%20Letter%20Printing.' },
-        { name: 'NIN / NIMC Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20NIN/NIMC%20Services.' }
+        { name: 'NIN / NIMC Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20NIN/NIMC%20Services.' },
+        { name: 'Police Character Certificate', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Police%20Character%20Certificate.' },
+        { name: 'International Passport Application', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20International%20Passport%20Application.' },
+        { name: 'Drivers License Application', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Drivers%20License%20Application.' },
+        { name: 'Voters Card Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Voters%20Card%20Registration.' }
       ]
     },
     {
@@ -81,7 +93,37 @@ const Services = () => {
         { name: 'Internet Subscription', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20want%20to%20renew%20Internet%20Subscription.' },
         { name: 'Cable TV Subscription', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20want%20to%20pay%20for%20Cable%20TV%20Subscription.' },
         { name: 'Electricity Bill Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20want%20to%20pay%20my%20Electricity%20Bill.' },
-        { name: 'Water Bill Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20want%20to%20pay%20my%20Water%20Bill.' }
+        { name: 'Water Bill Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20want%20to%20pay%20my%20Water%20Bill.' },
+        { name: 'Betting & Gaming Top-up', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20want%20to%20fund%20my%20betting%20account.' }
+      ]
+    },
+    {
+      id: 'printing',
+      title: '🖨️ Printing & Document Services',
+      icon: Printer,
+      color: 'bg-teal-500',
+      services: [
+        { name: 'Document Printing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20document%20printing%20services.' },
+        { name: 'Passport Photograph', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20passport%20photograph%20services.' },
+        { name: 'Lamination Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20lamination%20services.' },
+        { name: 'Photocopy Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20photocopy%20services.' },
+        { name: 'Binding Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20document%20binding%20services.' },
+        { name: 'Scanning Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20document%20scanning%20services.' },
+        { name: 'Large Format Printing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20large%20format%20printing%20services.' }
+      ]
+    },
+    {
+      id: 'digital',
+      title: '💻 Digital Services',
+      icon: Globe,
+      color: 'bg-indigo-500',
+      services: [
+        { name: 'Computer Training', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20computer%20training%20services.' },
+        { name: 'Email Setup', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20email%20setup.' },
+        { name: 'Online Application Assistance', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20online%20applications.' },
+        { name: 'Digital Marketing Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20digital%20marketing%20services.' },
+        { name: 'Website Development', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20website%20development%20services.' },
+        { name: 'Social Media Management', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20social%20media%20management%20services.' }
       ]
     }
   ];
@@ -92,7 +134,8 @@ const Services = () => {
       services: [
         { name: 'UNILAG School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20School%20Fees%20Payment.' },
         { name: 'UNILAG Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20Course%20Registration.' },
-        { name: 'UNILAG Hostel Booking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20Hostel%20Booking.' }
+        { name: 'UNILAG Hostel Booking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20Hostel%20Booking.' },
+        { name: 'UNILAG Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20checking%20my%20UNILAG%20Results.' }
       ]
     },
     {
@@ -100,35 +143,126 @@ const Services = () => {
       services: [
         { name: 'UI School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UI%20School%20Fees%20Payment.' },
         { name: 'UI Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UI%20Course%20Registration.' },
-        { name: 'UI Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20checking%20my%20UI%20Results.' }
+        { name: 'UI Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20checking%20my%20UI%20Results.' },
+        { name: 'UI Post-UTME Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UI%20Post-UTME%20Registration.' }
       ]
     },
     {
       name: 'Obafemi Awolowo University (OAU)',
       services: [
         { name: 'OAU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20OAU%20School%20Fees%20Payment.' },
-        { name: 'OAU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20OAU%20Course%20Registration.' }
+        { name: 'OAU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20OAU%20Course%20Registration.' },
+        { name: 'OAU Hostel Application', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20OAU%20Hostel%20Application.' }
       ]
     },
     {
       name: 'University of Nigeria Nsukka (UNN)',
       services: [
         { name: 'UNN School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNN%20School%20Fees%20Payment.' },
-        { name: 'UNN Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNN%20Course%20Registration.' }
+        { name: 'UNN Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNN%20Course%20Registration.' },
+        { name: 'UNN Results Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNN%20Results%20Portal.' }
       ]
     },
     {
       name: 'Ahmadu Bello University (ABU)',
       services: [
         { name: 'ABU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABU%20School%20Fees%20Payment.' },
-        { name: 'ABU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABU%20Course%20Registration.' }
+        { name: 'ABU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABU%20Course%20Registration.' },
+        { name: 'ABU Admission Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABU%20Admission%20Portal.' }
       ]
     },
     {
       name: 'University of Benin (UNIBEN)',
       services: [
         { name: 'UNIBEN School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20School%20Fees%20Payment.' },
-        { name: 'UNIBEN Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Course%20Registration.' }
+        { name: 'UNIBEN Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Course%20Registration.' },
+        { name: 'UNIBEN Student Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Student%20Portal.' }
+      ]
+    },
+    {
+      name: 'Lagos State University (LASU)',
+      services: [
+        { name: 'LASU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASU%20School%20Fees%20Payment.' },
+        { name: 'LASU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASU%20Course%20Registration.' },
+        { name: 'LASU E-Learning Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASU%20E-Learning%20Portal.' }
+      ]
+    },
+    {
+      name: 'University of Port Harcourt (UNIPORT)',
+      services: [
+        { name: 'UNIPORT School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20School%20Fees%20Payment.' },
+        { name: 'UNIPORT Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20Course%20Registration.' },
+        { name: 'UNIPORT Student Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20Student%20Portal.' }
+      ]
+    },
+    {
+      name: 'Covenant University',
+      services: [
+        { name: 'Covenant University Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Covenant%20University%20Payment.' },
+        { name: 'Covenant University Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Covenant%20University%20Portal.' }
+      ]
+    },
+    {
+      name: 'Babcock University',
+      services: [
+        { name: 'Babcock University Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Babcock%20University%20Payment.' },
+        { name: 'Babcock University Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Babcock%20University%20Portal.' }
+      ]
+    },
+    {
+      name: 'Federal University of Technology Akure (FUTA)',
+      services: [
+        { name: 'FUTA School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FUTA%20School%20Fees%20Payment.' },
+        { name: 'FUTA Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FUTA%20Course%20Registration.' }
+      ]
+    },
+    {
+      name: 'University of Ilorin (UNILORIN)',
+      services: [
+        { name: 'UNILORIN School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILORIN%20School%20Fees%20Payment.' },
+        { name: 'UNILORIN Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILORIN%20Course%20Registration.' }
+      ]
+    },
+    {
+      name: 'Nnamdi Azikiwe University (UNIZIK)',
+      services: [
+        { name: 'UNIZIK School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIZIK%20School%20Fees%20Payment.' },
+        { name: 'UNIZIK Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIZIK%20Course%20Registration.' }
+      ]
+    },
+    {
+      name: 'Bayero University Kano (BUK)',
+      services: [
+        { name: 'BUK School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20BUK%20School%20Fees%20Payment.' },
+        { name: 'BUK Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20BUK%20Course%20Registration.' }
+      ]
+    },
+    {
+      name: 'Federal Polytechnic Nekede',
+      services: [
+        { name: 'FPNO School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Federal%20Polytechnic%20Nekede%20School%20Fees%20Payment.' },
+        { name: 'FPNO Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Federal%20Polytechnic%20Nekede%20Course%20Registration.' }
+      ]
+    },
+    {
+      name: 'Yaba College of Technology (YABATECH)',
+      services: [
+        { name: 'YABATECH School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20YABATECH%20School%20Fees%20Payment.' },
+        { name: 'YABATECH Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20YABATECH%20Course%20Registration.' }
+      ]
+    },
+    {
+      name: 'Lagos State Polytechnic (LASPOTECH)',
+      services: [
+        { name: 'LASPOTECH School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASPOTECH%20School%20Fees%20Payment.' },
+        { name: 'LASPOTECH Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASPOTECH%20Course%20Registration.' }
+      ]
+    },
+    {
+      name: 'Federal College of Education Akoka',
+      services: [
+        { name: 'FCE Akoka School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FCE%20Akoka%20School%20Fees%20Payment.' },
+        { name: 'FCE Akoka Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FCE%20Akoka%20Course%20Registration.' }
       ]
     }
   ];
@@ -139,7 +273,9 @@ const Services = () => {
     { id: 'university', label: 'University Portals', icon: Building2 },
     { id: 'academic', label: 'Academic Support', icon: FileText },
     { id: 'nysc', label: 'NYSC & Government', icon: Shield },
-    { id: 'utilities', label: 'Utilities & Bills', icon: Smartphone }
+    { id: 'utilities', label: 'Utilities & Bills', icon: Smartphone },
+    { id: 'printing', label: 'Printing & Documents', icon: Printer },
+    { id: 'digital', label: 'Digital Services', icon: Globe }
   ];
 
   const getFilteredCategories = () => {
