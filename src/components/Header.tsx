@@ -3,12 +3,17 @@ import React, { useState } from 'react';
 import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
+import { useSiteSettings } from '@/hooks/useSiteSettings';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
+  const { getSetting } = useSiteSettings();
 
-  const whatsappLink = "https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20assistance%20today";
+  const whatsappLink = `https://wa.me/${getSetting('contact_whatsapp', '2347068122861').replace(/\+/g, '')}?text=Hello,%20I%20need%20assistance`;
+  const siteTitle = getSetting('site_title', 'EduPoint Services');
+  const siteLogo = getSetting('site_logo', '');
+  const contactPhone = getSetting('contact_phone', '+234 XXX XXX XXXX');
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -20,13 +25,19 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-r from-primary to-fablinks-blue-dark rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">F</span>
-            </div>
-            <div>
-              <h1 className="text-lg font-bold gradient-text">Fablinks Online Café</h1>
-              <p className="text-xs text-gray-500 -mt-1">Your Digital Gateway</p>
-            </div>
+            {siteLogo ? (
+              <img src={siteLogo} alt={siteTitle} className="h-10 w-auto object-contain" />
+            ) : (
+              <>
+                <div className="w-8 h-8 bg-gradient-to-r from-primary to-fablinks-blue-dark rounded-lg flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">{siteTitle.charAt(0)}</span>
+                </div>
+                <div>
+                  <h1 className="text-lg font-bold gradient-text">{siteTitle}</h1>
+                  <p className="text-xs text-gray-500 -mt-1">{getSetting('site_description', 'Your Digital Gateway')}</p>
+                </div>
+              </>
+            )}
           </Link>
 
           {/* Desktop Navigation */}
@@ -149,7 +160,7 @@ const Header = () => {
               <div className="flex flex-col space-y-2 pt-4">
                 <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-white w-full">
                   <Phone className="w-4 h-4 mr-2" />
-                  +234 706 812 2861
+                  {contactPhone}
                 </Button>
                 <Button 
                   className="btn-whatsapp w-full justify-center"

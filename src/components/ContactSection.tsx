@@ -3,9 +3,15 @@ import React from 'react';
 import { MessageCircle, Phone, Mail, MapPin, Clock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
+import { useSiteSettings } from '@/hooks/useSiteSettings';
 
 const ContactSection = () => {
-  const whatsappLink = "https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20assistance%20today";
+  const { getSetting } = useSiteSettings();
+  
+  const whatsappLink = `https://wa.me/${getSetting('contact_whatsapp', '2347068122861').replace(/\+/g, '')}`;
+  const contactPhone = getSetting('contact_phone', '+234 XXX XXX XXXX');
+  const contactEmail = getSetting('contact_email', 'info@edupointservices.com');
+  const contactAddress = getSetting('contact_address', 'Lagos, Nigeria');
 
   return (
     <section id="contact" className="section-padding bg-fablinks-gray-light">
@@ -51,7 +57,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Phone Call</h3>
-                    <p className="text-gray-600">+234 706 812 2861</p>
+                    <p className="text-gray-600">{contactPhone}</p>
                     <p className="text-sm text-gray-500">Available 24/7</p>
                   </div>
                 </div>
@@ -66,7 +72,7 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Email Support</h3>
-                    <p className="text-gray-600">info@fablinks.com</p>
+                    <p className="text-gray-600">{contactEmail}</p>
                     <p className="text-sm text-gray-500">Response within 2 hours</p>
                   </div>
                 </div>
@@ -112,7 +118,7 @@ const ContactSection = () => {
                 </Button>
                 
                 <div className="text-sm text-gray-500">
-                  Or call us directly at <span className="font-semibold text-primary">+234 706 812 2861</span>
+                  Or call us directly at <span className="font-semibold text-primary">{contactPhone}</span>
                 </div>
               </div>
 

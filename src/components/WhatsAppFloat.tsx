@@ -1,9 +1,11 @@
 
 import React from 'react';
 import { MessageCircle } from 'lucide-react';
+import { useSiteSettings } from '@/hooks/useSiteSettings';
 
 const WhatsAppFloat = () => {
-  const whatsappLink = "https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20assistance%20today";
+  const { getSetting } = useSiteSettings();
+  const whatsappLink = `https://wa.me/${getSetting('contact_whatsapp', '2347068122861').replace(/\+/g, '')}?text=Hello,%20I%20need%20assistance`;
 
   return (
     <a

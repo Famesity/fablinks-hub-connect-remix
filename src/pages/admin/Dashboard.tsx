@@ -4,7 +4,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, School, Briefcase, FileText, LogOut } from "lucide-react";
+import { Loader2, School, Briefcase, FileText, LogOut, Settings } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function AdminDashboard() {
@@ -51,7 +51,7 @@ export default function AdminDashboard() {
       </header>
 
       <main className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <Link to="/admin/schools">
             <Card className="hover:shadow-lg transition-shadow cursor-pointer">
               <CardHeader>
@@ -78,6 +78,16 @@ export default function AdminDashboard() {
                 <FileText className="h-8 w-8 mb-2 text-primary" />
                 <CardTitle>Manage Blog Posts</CardTitle>
                 <CardDescription>Create and edit blog content</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+
+          <Link to="/admin/settings">
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+              <CardHeader>
+                <Settings className="h-8 w-8 mb-2 text-primary" />
+                <CardTitle>Site Settings</CardTitle>
+                <CardDescription>Customize website appearance</CardDescription>
               </CardHeader>
             </Card>
           </Link>

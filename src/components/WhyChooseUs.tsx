@@ -1,8 +1,13 @@
 
 import React from 'react';
 import { Shield, Clock, Users, Award, Heart, Zap } from 'lucide-react';
+import { useSiteSettings } from '@/hooks/useSiteSettings';
 
 const WhyChooseUs = () => {
+  const { getSetting } = useSiteSettings();
+  
+  const featuresTitle = getSetting('features_title', 'Why Choose Us');
+  const featuresSubtitle = getSetting('features_subtitle', 'We provide comprehensive educational services with professionalism and care');
   const features = [
     {
       icon: Shield,
@@ -41,11 +46,10 @@ const WhyChooseUs = () => {
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Why Choose <span className="gradient-text">Fablinks Online Café?</span>
+            {featuresTitle}
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            We're more than just a service provider - we're your digital partner in academic success. 
-            Here's what makes us the preferred choice for Nigerian students.
+            {featuresSubtitle}
           </p>
         </div>
 
