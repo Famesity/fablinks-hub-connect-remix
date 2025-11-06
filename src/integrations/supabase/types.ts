@@ -58,6 +58,7 @@ export type Database = {
           abbreviation: string | null
           created_at: string | null
           id: string
+          logo_url: string | null
           name: string
           state: string | null
           updated_at: string | null
@@ -66,6 +67,7 @@ export type Database = {
           abbreviation?: string | null
           created_at?: string | null
           id?: string
+          logo_url?: string | null
           name: string
           state?: string | null
           updated_at?: string | null
@@ -74,6 +76,7 @@ export type Database = {
           abbreviation?: string | null
           created_at?: string | null
           id?: string
+          logo_url?: string | null
           name?: string
           state?: string | null
           updated_at?: string | null

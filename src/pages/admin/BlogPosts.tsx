@@ -40,6 +40,8 @@ export default function AdminBlogPosts() {
     image_url: "",
     published: false,
   });
+  const [uploading, setUploading] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   useEffect(() => {
     if (!adminLoading && !isAdmin) {
@@ -80,15 +82,56 @@ export default function AdminBlogPosts() {
       .replace(/^-|-$/g, "");
   };
 
+  const handleImageUpload = async (file: File): Promise<string | null> => {
+    try {
+      setUploading(true);
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random()}.${fileExt}`;
+      const filePath = `${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('blog-images')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('blog-images')
+        .getPublicUrl(filePath);
+
+      return publicUrl;
+    } catch (error: any) {
+      console.error("Error uploading image:", error);
+      toast({
+        title: "Error",
+        description: "Failed to upload image",
+        variant: "destructive",
+      });
+      return null;
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      let imageUrl = formData.image_url;
+
+      // Upload new image if selected
+      if (imageFile) {
+        const uploadedUrl = await handleImageUpload(imageFile);
+        if (uploadedUrl) {
+          imageUrl = uploadedUrl;
+        }
+      }
+
       const postData = {
         title: formData.title,
         slug: formData.slug || generateSlug(formData.title),
         excerpt: formData.excerpt || null,
         content: formData.content,
-        image_url: formData.image_url || null,
+        image_url: imageUrl || null,
         published: formData.published,
       };
 
@@ -110,6 +153,7 @@ export default function AdminBlogPosts() {
       setIsDialogOpen(false);
       setEditingPost(null);
       setFormData({ title: "", slug: "", excerpt: "", content: "", image_url: "", published: false });
+      setImageFile(null);
       fetchPosts();
     } catch (error: any) {
       toast({
@@ -130,6 +174,7 @@ export default function AdminBlogPosts() {
       image_url: post.image_url || "",
       published: post.published,
     });
+    setImageFile(null);
     setIsDialogOpen(true);
   };
 
@@ -183,6 +228,7 @@ export default function AdminBlogPosts() {
                   onClick={() => {
                     setEditingPost(null);
                     setFormData({ title: "", slug: "", excerpt: "", content: "", image_url: "", published: false });
+                    setImageFile(null);
                   }}
                 >
                   <Plus className="mr-2 h-4 w-4" />
@@ -237,13 +283,26 @@ export default function AdminBlogPosts() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="image_url">Image URL</Label>
+                    <Label htmlFor="image">Blog Post Image</Label>
                     <Input
-                      id="image_url"
-                      value={formData.image_url}
-                      onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                      placeholder="https://example.com/image.jpg"
+                      id="image"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) setImageFile(file);
+                      }}
+                      disabled={uploading}
                     />
+                    {formData.image_url && (
+                      <div className="mt-2">
+                        <img 
+                          src={formData.image_url} 
+                          alt="Blog post preview" 
+                          className="h-32 w-full object-cover rounded"
+                        />
+                      </div>
+                    )}
                   </div>
                   <div className="flex items-center space-x-2">
                     <Switch
@@ -253,8 +312,8 @@ export default function AdminBlogPosts() {
                     />
                     <Label htmlFor="published">Published</Label>
                   </div>
-                  <Button type="submit" className="w-full">
-                    {editingPost ? "Update" : "Create"} Post
+                  <Button type="submit" className="w-full" disabled={uploading}>
+                    {uploading ? "Uploading..." : editingPost ? "Update" : "Create"} Post
                   </Button>
                 </form>
               </DialogContent>

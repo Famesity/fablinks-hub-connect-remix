@@ -16,6 +16,7 @@ interface School {
   name: string;
   abbreviation: string | null;
   state: string | null;
+  logo_url: string | null;
 }
 
 export default function AdminSchools() {
@@ -26,7 +27,9 @@ export default function AdminSchools() {
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingSchool, setEditingSchool] = useState<School | null>(null);
-  const [formData, setFormData] = useState({ name: "", abbreviation: "", state: "" });
+  const [formData, setFormData] = useState({ name: "", abbreviation: "", state: "", logo_url: "" });
+  const [uploading, setUploading] = useState(false);
+  const [imageFile, setImageFile] = useState<File | null>(null);
 
   useEffect(() => {
     if (!adminLoading && !isAdmin) {
@@ -60,19 +63,67 @@ export default function AdminSchools() {
     }
   };
 
+  const handleImageUpload = async (file: File): Promise<string | null> => {
+    try {
+      setUploading(true);
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random()}.${fileExt}`;
+      const filePath = `${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('school-logos')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage
+        .from('school-logos')
+        .getPublicUrl(filePath);
+
+      return publicUrl;
+    } catch (error: any) {
+      console.error("Error uploading image:", error);
+      toast({
+        title: "Error",
+        description: "Failed to upload image",
+        variant: "destructive",
+      });
+      return null;
+    } finally {
+      setUploading(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
+      let logoUrl = formData.logo_url;
+
+      // Upload new image if selected
+      if (imageFile) {
+        const uploadedUrl = await handleImageUpload(imageFile);
+        if (uploadedUrl) {
+          logoUrl = uploadedUrl;
+        }
+      }
+
+      const dataToSave = {
+        name: formData.name,
+        abbreviation: formData.abbreviation || null,
+        state: formData.state || null,
+        logo_url: logoUrl || null,
+      };
+
       if (editingSchool) {
         const { error } = await supabase
           .from("schools")
-          .update(formData)
+          .update(dataToSave)
           .eq("id", editingSchool.id);
 
         if (error) throw error;
         toast({ title: "School updated successfully" });
       } else {
-        const { error } = await supabase.from("schools").insert([formData]);
+        const { error } = await supabase.from("schools").insert([dataToSave]);
 
         if (error) throw error;
         toast({ title: "School added successfully" });
@@ -80,7 +131,8 @@ export default function AdminSchools() {
 
       setIsDialogOpen(false);
       setEditingSchool(null);
-      setFormData({ name: "", abbreviation: "", state: "" });
+      setFormData({ name: "", abbreviation: "", state: "", logo_url: "" });
+      setImageFile(null);
       fetchSchools();
     } catch (error: any) {
       toast({
@@ -97,7 +149,9 @@ export default function AdminSchools() {
       name: school.name,
       abbreviation: school.abbreviation || "",
       state: school.state || "",
+      logo_url: school.logo_url || "",
     });
+    setImageFile(null);
     setIsDialogOpen(true);
   };
 
@@ -149,7 +203,8 @@ export default function AdminSchools() {
               <DialogTrigger asChild>
                 <Button onClick={() => {
                   setEditingSchool(null);
-                  setFormData({ name: "", abbreviation: "", state: "" });
+                  setFormData({ name: "", abbreviation: "", state: "", logo_url: "" });
+                  setImageFile(null);
                 }}>
                   <Plus className="mr-2 h-4 w-4" />
                   Add School
@@ -185,8 +240,30 @@ export default function AdminSchools() {
                       onChange={(e) => setFormData({ ...formData, state: e.target.value })}
                     />
                   </div>
-                  <Button type="submit" className="w-full">
-                    {editingSchool ? "Update" : "Add"} School
+                  <div className="space-y-2">
+                    <Label htmlFor="logo">School Logo</Label>
+                    <Input
+                      id="logo"
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) => {
+                        const file = e.target.files?.[0];
+                        if (file) setImageFile(file);
+                      }}
+                      disabled={uploading}
+                    />
+                    {formData.logo_url && (
+                      <div className="mt-2">
+                        <img 
+                          src={formData.logo_url} 
+                          alt="School logo preview" 
+                          className="h-20 w-20 object-cover rounded"
+                        />
+                      </div>
+                    )}
+                  </div>
+                  <Button type="submit" className="w-full" disabled={uploading}>
+                    {uploading ? "Uploading..." : editingSchool ? "Update" : "Add"} School
                   </Button>
                 </form>
               </DialogContent>
