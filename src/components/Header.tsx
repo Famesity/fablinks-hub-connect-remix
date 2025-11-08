@@ -82,6 +82,14 @@ const Header = () => {
             >
               Contact
             </Link>
+            <Link 
+              to="/auth" 
+              className={`text-gray-700 hover:text-primary transition-colors font-medium ${
+                isActive('/auth') ? 'text-primary' : ''
+              }`}
+            >
+              Admin
+            </Link>
           </nav>
 
           {/* CTA Buttons */}
@@ -156,6 +164,15 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
+              </Link>
+              <Link 
+                to="/auth" 
+                className={`text-gray-700 hover:text-primary transition-colors font-medium ${
+                  isActive('/auth') ? 'text-primary' : ''
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Admin Login
               </Link>
               <div className="flex flex-col space-y-2 pt-4">
                 <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-white w-full">

@@ -1,79 +1,50 @@
-
-import React from 'react';
+import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { supabase } from '@/integrations/supabase/client';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import WhatsAppFloat from '@/components/WhatsAppFloat';
 import { Button } from '@/components/ui/button';
-import { Calendar, User, Share2, MessageCircle } from 'lucide-react';
+import { Calendar, User, Share2, MessageCircle, Loader2 } from 'lucide-react';
+
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  image_url: string;
+  created_at: string;
+  published: boolean;
+}
 
 const Blog = () => {
-  const articles = [
-    {
-      id: 1,
-      title: "How to Check WAEC Result Online - Complete Guide 2024",
-      excerpt: "Step-by-step guide on checking your WAEC results online using scratch cards and verification pins.",
-      author: "Fablinks Team",
-      date: "December 15, 2024",
-      readTime: "5 min read",
-      category: "Education",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 2,
-      title: "NYSC Registration Guide: Everything You Need to Know",
-      excerpt: "Complete guide for NYSC registration, requirements, and common mistakes to avoid.",
-      author: "Fablinks Team",
-      date: "December 12, 2024",
-      readTime: "8 min read",
-      category: "NYSC",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 3,
-      title: "Top 5 Mistakes to Avoid in JAMB Applications",
-      excerpt: "Learn about the most common JAMB application mistakes and how to avoid them for a successful registration.",
-      author: "Fablinks Team",
-      date: "December 10, 2024",
-      readTime: "6 min read",
-      category: "JAMB",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 4,
-      title: "University Portal Services: A Student's Complete Guide",
-      excerpt: "Navigate university portals with ease - from acceptance fees to course registration.",
-      author: "Fablinks Team",
-      date: "December 8, 2024",
-      readTime: "7 min read",
-      category: "University",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 5,
-      title: "Digital Bill Payments: Safe and Secure Methods",
-      excerpt: "Learn how to safely pay your electricity, water, and cable TV bills online.",
-      author: "Fablinks Team",
-      date: "December 5, 2024",
-      readTime: "4 min read",
-      category: "Bills",
-      image: "/placeholder.svg"
-    },
-    {
-      id: 6,
-      title: "Project Writing Tips for Nigerian Students",
-      excerpt: "Professional tips for writing outstanding academic projects and research papers.",
-      author: "Fablinks Team",
-      date: "December 3, 2024",
-      readTime: "10 min read",
-      category: "Academic",
-      image: "/placeholder.svg"
+  const [articles, setArticles] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchBlogPosts();
+  }, []);
+
+  const fetchBlogPosts = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('published', true)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setArticles(data || []);
+    } catch (error) {
+      console.error('Error fetching blog posts:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
-  const categories = ["All", "Education", "JAMB", "NYSC", "University", "Bills", "Academic"];
-
-  const shareArticle = (title: string) => {
-    const text = `Check out this article: ${title}`;
+  const shareArticle = (title: string, slug: string) => {
+    const url = `${window.location.origin}/blog/${slug}`;
+    const text = `Check out this article: ${title} ${url}`;
     const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(text)}`;
     window.open(whatsappUrl, '_blank');
   };
@@ -91,85 +62,71 @@ const Blog = () => {
           </div>
         </section>
 
-        {/* Category Filter */}
-        <section className="py-8 bg-fablinks-gray-light">
-          <div className="container-custom">
-            <div className="flex flex-wrap gap-4 justify-center">
-              {categories.map((category, index) => (
-                <Button
-                  key={index}
-                  variant={index === 0 ? "default" : "outline"}
-                  className="rounded-full"
-                >
-                  {category}
-                </Button>
-              ))}
-            </div>
-          </div>
-        </section>
-
         {/* Articles Grid */}
         <section className="section-padding">
           <div className="container-custom">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {articles.map((article) => (
-                <article key={article.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-                  <img 
-                    src={article.image} 
-                    alt={article.title}
-                    className="w-full h-48 object-cover"
-                  />
-                  
-                  <div className="p-6">
-                    <div className="flex items-center mb-3">
-                      <span className="bg-primary text-white text-xs px-2 py-1 rounded-full">
-                        {article.category}
-                      </span>
-                      <span className="text-gray-500 text-sm ml-auto">{article.readTime}</span>
-                    </div>
+            {loading ? (
+              <div className="flex items-center justify-center py-20">
+                <Loader2 className="h-8 w-8 animate-spin" />
+              </div>
+            ) : articles.length === 0 ? (
+              <div className="text-center py-20">
+                <h2 className="text-2xl font-bold mb-4">No blog posts yet</h2>
+                <p className="text-muted-foreground">Check back soon for new content!</p>
+              </div>
+            ) : (
+              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {articles.map((article) => (
+                  <article key={article.id} className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
+                    {article.image_url && (
+                      <img 
+                        src={article.image_url} 
+                        alt={article.title}
+                        className="w-full h-48 object-cover"
+                      />
+                    )}
                     
-                    <h2 className="text-xl font-bold mb-3 line-clamp-2 hover:text-primary cursor-pointer">
-                      {article.title}
-                    </h2>
-                    
-                    <p className="text-gray-600 mb-4 line-clamp-2">
-                      {article.excerpt}
-                    </p>
-                    
-                    <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
-                      <div className="flex items-center">
-                        <User className="w-4 h-4 mr-1" />
-                        {article.author}
+                    <div className="p-6">
+                      <Link to={`/blog/${article.slug}`}>
+                        <h2 className="text-xl font-bold mb-3 line-clamp-2 hover:text-primary cursor-pointer">
+                          {article.title}
+                        </h2>
+                      </Link>
+                      
+                      <p className="text-gray-600 mb-4 line-clamp-2">
+                        {article.excerpt}
+                      </p>
+                      
+                      <div className="flex items-center justify-between text-sm text-gray-500 mb-4">
+                        <div className="flex items-center">
+                          <Calendar className="w-4 h-4 mr-1" />
+                          {new Date(article.created_at).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                          })}
+                        </div>
                       </div>
-                      <div className="flex items-center">
-                        <Calendar className="w-4 h-4 mr-1" />
-                        {article.date}
+                      
+                      <div className="flex gap-2">
+                        <Link to={`/blog/${article.slug}`} className="flex-1">
+                          <Button className="w-full">
+                            Read More
+                          </Button>
+                        </Link>
+                        <Button 
+                          variant="outline" 
+                          size="icon"
+                          onClick={() => shareArticle(article.title, article.slug)}
+                        >
+                          <Share2 className="w-4 h-4" />
+                        </Button>
                       </div>
                     </div>
-                    
-                    <div className="flex gap-2">
-                      <Button className="flex-1">
-                        Read More
-                      </Button>
-                      <Button 
-                        variant="outline" 
-                        size="icon"
-                        onClick={() => shareArticle(article.title)}
-                      >
-                        <Share2 className="w-4 h-4" />
-                      </Button>
-                    </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-            
-            {/* Load More */}
-            <div className="text-center mt-12">
-              <Button variant="outline" size="lg">
-                Load More Articles
-              </Button>
-            </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </div>
         </section>
 

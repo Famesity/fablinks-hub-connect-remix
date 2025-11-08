@@ -2,6 +2,7 @@
 import React from 'react';
 import { MessageCircle, Phone, Mail, Facebook, Instagram, Twitter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
 
 const Footer = () => {
@@ -26,13 +27,6 @@ const Footer = () => {
     "Bill Payments",
     "Academic Projects",
     "University Portals"
-  ];
-
-  const quickLinks = [
-    { name: "Home", href: "#home" },
-    { name: "Services", href: "#services" },
-    { name: "About Us", href: "#about" },
-    { name: "Contact", href: "#contact" }
   ];
 
   return (
@@ -88,18 +82,14 @@ const Footer = () => {
             {/* Quick Links */}
             <div>
               <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
-              <ul className="space-y-3">
-                {quickLinks.map((link, index) => (
-                  <li key={index}>
-                    <a 
-                      href={link.href} 
-                      className="text-gray-300 hover:text-white transition-colors"
-                    >
-                      {link.name}
-                    </a>
-                  </li>
-                ))}
-              </ul>
+              <nav className="flex flex-col space-y-3">
+                <Link to="/" className="text-gray-300 hover:text-white transition-colors">Home</Link>
+                <Link to="/services" className="text-gray-300 hover:text-white transition-colors">Services</Link>
+                <Link to="/about" className="text-gray-300 hover:text-white transition-colors">About</Link>
+                <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link>
+                <Link to="/blog" className="text-gray-300 hover:text-white transition-colors">Blog</Link>
+                <Link to="/auth" className="text-gray-300 hover:text-white transition-colors">Admin Login</Link>
+              </nav>
             </div>
 
             {/* Popular Services */}
