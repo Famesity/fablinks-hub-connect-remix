@@ -75,7 +75,11 @@ export type Database = {
           excerpt: string | null
           id: string
           image_url: string | null
+          og_image: string | null
           published: boolean | null
+          seo_description: string | null
+          seo_keywords: string | null
+          seo_title: string | null
           slug: string
           title: string
           updated_at: string | null
@@ -87,7 +91,11 @@ export type Database = {
           excerpt?: string | null
           id?: string
           image_url?: string | null
+          og_image?: string | null
           published?: boolean | null
+          seo_description?: string | null
+          seo_keywords?: string | null
+          seo_title?: string | null
           slug: string
           title: string
           updated_at?: string | null
@@ -99,12 +107,120 @@ export type Database = {
           excerpt?: string | null
           id?: string
           image_url?: string | null
+          og_image?: string | null
           published?: boolean | null
+          seo_description?: string | null
+          seo_keywords?: string | null
+          seo_title?: string | null
           slug?: string
           title?: string
           updated_at?: string | null
         }
         Relationships: []
+      }
+      image_attachments: {
+        Row: {
+          alt_text: string | null
+          caption: string | null
+          created_at: string
+          display_order: number | null
+          entity_id: string
+          entity_type: string
+          id: string
+          image_url: string
+        }
+        Insert: {
+          alt_text?: string | null
+          caption?: string | null
+          created_at?: string
+          display_order?: number | null
+          entity_id: string
+          entity_type: string
+          id?: string
+          image_url: string
+        }
+        Update: {
+          alt_text?: string | null
+          caption?: string | null
+          created_at?: string
+          display_order?: number | null
+          entity_id?: string
+          entity_type?: string
+          id?: string
+          image_url?: string
+        }
+        Relationships: []
+      }
+      pages: {
+        Row: {
+          author_id: string | null
+          content: string
+          created_at: string
+          excerpt: string | null
+          featured_image: string | null
+          id: string
+          menu_order: number | null
+          og_image: string | null
+          parent_id: string | null
+          published: boolean | null
+          seo_description: string | null
+          seo_keywords: string | null
+          seo_title: string | null
+          show_in_menu: boolean | null
+          slug: string
+          template: string | null
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          author_id?: string | null
+          content: string
+          created_at?: string
+          excerpt?: string | null
+          featured_image?: string | null
+          id?: string
+          menu_order?: number | null
+          og_image?: string | null
+          parent_id?: string | null
+          published?: boolean | null
+          seo_description?: string | null
+          seo_keywords?: string | null
+          seo_title?: string | null
+          show_in_menu?: boolean | null
+          slug: string
+          template?: string | null
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          author_id?: string | null
+          content?: string
+          created_at?: string
+          excerpt?: string | null
+          featured_image?: string | null
+          id?: string
+          menu_order?: number | null
+          og_image?: string | null
+          parent_id?: string | null
+          published?: boolean | null
+          seo_description?: string | null
+          seo_keywords?: string | null
+          seo_title?: string | null
+          show_in_menu?: boolean | null
+          slug?: string
+          template?: string | null
+          title?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "pages_parent_id_fkey"
+            columns: ["parent_id"]
+            isOneToOne: false
+            referencedRelation: "pages"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       schools: {
         Row: {

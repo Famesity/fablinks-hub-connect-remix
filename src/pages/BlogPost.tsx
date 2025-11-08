@@ -11,6 +11,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2, ArrowLeft, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { Helmet } from "react-helmet";
 
 interface BlogPost {
   id: string;
@@ -19,6 +20,10 @@ interface BlogPost {
   excerpt: string;
   image_url: string;
   published: boolean;
+  seo_title: string | null;
+  seo_description: string | null;
+  seo_keywords: string | null;
+  og_image: string | null;
   created_at: string;
 }
 
@@ -166,9 +171,27 @@ export default function BlogPost() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-1">
+    <>
+      <Helmet>
+        <title>{post.seo_title || post.title}</title>
+        <meta
+          name="description"
+          content={post.seo_description || post.excerpt || ""}
+        />
+        {post.seo_keywords && (
+          <meta name="keywords" content={post.seo_keywords} />
+        )}
+        {post.og_image && <meta property="og:image" content={post.og_image} />}
+        <meta property="og:title" content={post.seo_title || post.title} />
+        <meta
+          property="og:description"
+          content={post.seo_description || post.excerpt || ""}
+        />
+      </Helmet>
+
+      <div className="min-h-screen flex flex-col">
+        <Header />
+        <main className="flex-1">
         <article className="container mx-auto px-4 py-16">
           <Button
             onClick={() => navigate("/blog")}
@@ -196,13 +219,10 @@ export default function BlogPost() {
             })}
           </p>
 
-          <div className="prose prose-lg max-w-none mb-16">
-            {post.content.split("\n").map((paragraph, index) => (
-              <p key={index} className="mb-4">
-                {paragraph}
-              </p>
-            ))}
-          </div>
+          <div
+            className="prose prose-lg max-w-none mb-16"
+            dangerouslySetInnerHTML={{ __html: post.content }}
+          />
 
           <div className="border-t pt-16">
             <h2 className="text-3xl font-bold mb-8">Comments ({comments.length})</h2>
@@ -282,5 +302,6 @@ export default function BlogPost() {
       </main>
       <Footer />
     </div>
+    </>
   );
 }
