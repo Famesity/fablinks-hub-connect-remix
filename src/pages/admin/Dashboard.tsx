@@ -4,7 +4,7 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, School, Briefcase, FileText, LogOut, Settings, Users, MessageSquare, FileCode } from "lucide-react";
+import { Loader2, School, Briefcase, FileText, LogOut, Settings, Users, MessageSquare, FileCode, BarChart3, Activity } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function AdminDashboard() {
@@ -118,6 +118,26 @@ export default function AdminDashboard() {
                 <FileCode className="h-8 w-8 mb-2 text-primary" />
                 <CardTitle>Manage Pages</CardTitle>
                 <CardDescription>Create and edit custom pages</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+
+          <Link to="/admin/analytics">
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+              <CardHeader>
+                <BarChart3 className="h-8 w-8 mb-2 text-primary" />
+                <CardTitle>Analytics</CardTitle>
+                <CardDescription>View platform statistics</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+
+          <Link to="/admin/activity">
+            <Card className="hover:shadow-lg transition-shadow cursor-pointer">
+              <CardHeader>
+                <Activity className="h-8 w-8 mb-2 text-primary" />
+                <CardTitle>Activity Logs</CardTitle>
+                <CardDescription>Recent platform activity</CardDescription>
               </CardHeader>
             </Card>
           </Link>

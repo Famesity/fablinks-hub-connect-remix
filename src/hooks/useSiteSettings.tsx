@@ -23,10 +23,15 @@ export function useSiteSettings() {
 
       const settingsMap: SiteSettings = {};
       data?.forEach((setting) => {
-        // Parse the JSONB value - it's stored as a JSON string
-        settingsMap[setting.key] = typeof setting.value === 'string' 
-          ? setting.value 
-          : JSON.parse(JSON.stringify(setting.value));
+        // Parse the JSONB value properly - remove extra quotes if present
+        let value = setting.value;
+        if (typeof value === 'string') {
+          settingsMap[setting.key] = value;
+        } else {
+          // JSONB value - convert to string and remove wrapping quotes
+          const stringValue = JSON.stringify(value);
+          settingsMap[setting.key] = stringValue.replace(/^"|"$/g, '');
+        }
       });
 
       setSettings(settingsMap);

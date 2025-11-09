@@ -19,6 +19,8 @@ import AdminSiteSettings from "./pages/admin/SiteSettings";
 import AdminUsers from "./pages/admin/Users";
 import AdminComments from "./pages/admin/Comments";
 import AdminPages from "./pages/admin/Pages";
+import AdminAnalytics from "./pages/admin/Analytics";
+import AdminActivityLogs from "./pages/admin/ActivityLogs";
 import BlogPost from "./pages/BlogPost";
 import Page from "./pages/Page";
 
@@ -46,6 +48,8 @@ const App = () => (
           <Route path="/admin/users" element={<AdminUsers />} />
           <Route path="/admin/comments" element={<AdminComments />} />
           <Route path="/admin/pages" element={<AdminPages />} />
+          <Route path="/admin/analytics" element={<AdminAnalytics />} />
+          <Route path="/admin/activity" element={<AdminActivityLogs />} />
           <Route path="/page/:slug" element={<Page />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

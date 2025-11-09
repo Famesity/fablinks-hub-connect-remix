@@ -246,11 +246,22 @@ export default function AdminSiteSettings() {
                     }}
                   />
                   {settings.find(s => s.key === 'site_logo')?.value && (
-                    <img 
-                      src={settings.find(s => s.key === 'site_logo')?.value} 
-                      alt="Logo preview" 
-                      className="h-20 w-20 object-contain mt-2"
-                    />
+                    <div className="relative inline-block mt-2">
+                      <img 
+                        src={settings.find(s => s.key === 'site_logo')?.value} 
+                        alt="Logo preview" 
+                        className="h-20 w-20 object-contain"
+                      />
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        size="sm"
+                        className="absolute -top-2 -right-2"
+                        onClick={() => updateSetting('site_logo', '')}
+                      >
+                        ✕
+                      </Button>
+                    </div>
                   )}
                 </div>
               </CardContent>
@@ -280,11 +291,22 @@ export default function AdminSiteSettings() {
                     }}
                   />
                   {settings.find(s => s.key === 'hero_background_image')?.value && (
-                    <img 
-                      src={settings.find(s => s.key === 'hero_background_image')?.value} 
-                      alt="Hero background preview" 
-                      className="h-32 w-full object-cover mt-2 rounded"
-                    />
+                    <div className="relative mt-2">
+                      <img 
+                        src={settings.find(s => s.key === 'hero_background_image')?.value} 
+                        alt="Hero background preview" 
+                        className="h-32 w-full object-cover rounded"
+                      />
+                      <Button
+                        type="button"
+                        variant="destructive"
+                        size="sm"
+                        className="absolute top-2 right-2"
+                        onClick={() => updateSetting('hero_background_image', '')}
+                      >
+                        Remove
+                      </Button>
+                    </div>
                   )}
                 </div>
               </CardContent>
