@@ -112,7 +112,7 @@ export default function AdminSiteSettings() {
           if (logoSetting) {
             await supabase
               .from("site_settings")
-              .update({ value: JSON.stringify(logoUrl) })
+              .update({ value: logoUrl })
               .eq("key", "site_logo");
           }
         }
@@ -127,17 +127,17 @@ export default function AdminSiteSettings() {
           if (heroSetting) {
             await supabase
               .from("site_settings")
-              .update({ value: JSON.stringify(heroUrl) })
+              .update({ value: heroUrl })
               .eq("key", "hero_background_image");
           }
         }
       }
 
-      // Update all text settings
+      // Update all text settings - store as JSONB strings
       for (const setting of settings) {
         const { error } = await supabase
           .from("site_settings")
-          .update({ value: JSON.stringify(setting.value) })
+          .update({ value: setting.value })
           .eq("key", setting.key);
 
         if (error) throw error;

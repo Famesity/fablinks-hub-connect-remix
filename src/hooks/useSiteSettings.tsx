@@ -23,14 +23,18 @@ export function useSiteSettings() {
 
       const settingsMap: SiteSettings = {};
       data?.forEach((setting) => {
-        // Parse the JSONB value properly - remove extra quotes if present
-        let value = setting.value;
-        if (typeof value === 'string') {
-          settingsMap[setting.key] = value;
-        } else {
-          // JSONB value - convert to string and remove wrapping quotes
-          const stringValue = JSON.stringify(value);
-          settingsMap[setting.key] = stringValue.replace(/^"|"$/g, '');
+        // JSONB values are already parsed by Supabase client
+        // Just extract the string value
+        try {
+          if (typeof setting.value === 'string') {
+            settingsMap[setting.key] = setting.value;
+          } else {
+            // Value is already a parsed object/string, just use it
+            settingsMap[setting.key] = String(setting.value);
+          }
+        } catch (e) {
+          console.error(`Error parsing setting ${setting.key}:`, e);
+          settingsMap[setting.key] = '';
         }
       });
 
