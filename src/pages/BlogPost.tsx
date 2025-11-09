@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Input } from "@/components/ui/input";
@@ -156,8 +155,7 @@ export default function BlogPost() {
 
   if (!post) {
     return (
-      <div className="min-h-screen flex flex-col">
-        <Header />
+      <Layout>
         <main className="flex-1 container mx-auto px-4 py-16 text-center">
           <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
           <Button onClick={() => navigate("/blog")}>
@@ -165,8 +163,7 @@ export default function BlogPost() {
             Back to Blog
           </Button>
         </main>
-        <Footer />
-      </div>
+      </Layout>
     );
   }
 
@@ -189,8 +186,7 @@ export default function BlogPost() {
         />
       </Helmet>
 
-      <div className="min-h-screen flex flex-col">
-        <Header />
+      <Layout>
         <main className="flex-1">
         <article className="container mx-auto px-4 py-16">
           <Button
@@ -300,8 +296,7 @@ export default function BlogPost() {
           </div>
         </article>
       </main>
-      <Footer />
-    </div>
+      </Layout>
     </>
   );
 }

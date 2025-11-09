@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import WhatsAppFloat from '@/components/WhatsAppFloat';
+import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Calendar, User, Share2, MessageCircle, Loader2 } from 'lucide-react';
 
@@ -50,9 +48,7 @@ const Blog = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
+    <Layout>
       <main className="pt-20">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-primary to-fablinks-blue-dark text-white py-16">
@@ -147,10 +143,7 @@ const Blog = () => {
           </div>
         </section>
       </main>
-      
-      <Footer />
-      <WhatsAppFloat />
-    </div>
+    </Layout>
   );
 };
 

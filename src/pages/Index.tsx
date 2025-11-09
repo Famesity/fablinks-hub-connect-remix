@@ -1,26 +1,20 @@
-
 import React from 'react';
-import Header from '@/components/Header';
+import Layout from '@/components/Layout';
 import Hero from '@/components/Hero';
 import FeaturedServices from '@/components/FeaturedServices';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import BlogPostsSlider from '@/components/BlogPostsSlider';
 import ContactSection from '@/components/ContactSection';
-import Footer from '@/components/Footer';
-import WhatsAppFloat from '@/components/WhatsAppFloat';
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <Layout>
       <Hero />
       <FeaturedServices />
       <WhyChooseUs />
       <BlogPostsSlider />
       <ContactSection />
-      <Footer />
-      <WhatsAppFloat />
-    </div>
+    </Layout>
   );
 };
 

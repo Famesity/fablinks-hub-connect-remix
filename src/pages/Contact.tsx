@@ -1,8 +1,6 @@
 
 import React, { useState } from 'react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
-import WhatsAppFloat from '@/components/WhatsAppFloat';
+import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Phone, Mail, MapPin, MessageCircle, Facebook, Instagram, Twitter } from 'lucide-react';
 
@@ -32,9 +30,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
-      
+    <Layout>
       <main className="pt-20">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-primary to-fablinks-blue-dark text-white py-16">
@@ -193,10 +189,7 @@ const Contact = () => {
           </div>
         </section>
       </main>
-      
-      <Footer />
-      <WhatsAppFloat />
-    </div>
+    </Layout>
   );
 };
 
