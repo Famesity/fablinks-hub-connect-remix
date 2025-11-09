@@ -7,7 +7,16 @@ import { useSiteSettings } from '@/hooks/useSiteSettings';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const location = useLocation();
+  
+  // Safely get location with fallback for hot reload
+  let location;
+  try {
+    location = useLocation();
+  } catch (e) {
+    // Fallback during hot reload when Router context is temporarily unavailable
+    location = { pathname: '/' };
+  }
+  
   const { getSetting } = useSiteSettings();
 
   const whatsappLink = `https://wa.me/${getSetting('contact_whatsapp', '2347068122861').replace(/\+/g, '')}?text=Hello,%20I%20need%20assistance`;
