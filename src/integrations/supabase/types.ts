@@ -47,6 +47,30 @@ export type Database = {
         }
         Relationships: []
       }
+      blog_categories: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          name?: string
+          slug?: string
+        }
+        Relationships: []
+      }
       blog_comments: {
         Row: {
           admin_id: string | null
@@ -100,20 +124,95 @@ export type Database = {
           },
         ]
       }
+      blog_post_categories: {
+        Row: {
+          category_id: string
+          created_at: string
+          id: string
+          post_id: string
+        }
+        Insert: {
+          category_id: string
+          created_at?: string
+          id?: string
+          post_id: string
+        }
+        Update: {
+          category_id?: string
+          created_at?: string
+          id?: string
+          post_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_post_categories_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "blog_categories"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blog_post_categories_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "blog_posts"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      blog_post_tags: {
+        Row: {
+          created_at: string
+          id: string
+          post_id: string
+          tag_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          post_id: string
+          tag_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          post_id?: string
+          tag_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "blog_post_tags_post_id_fkey"
+            columns: ["post_id"]
+            isOneToOne: false
+            referencedRelation: "blog_posts"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "blog_post_tags_tag_id_fkey"
+            columns: ["tag_id"]
+            isOneToOne: false
+            referencedRelation: "blog_tags"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       blog_posts: {
         Row: {
           author_id: string | null
           content: string
           created_at: string | null
           excerpt: string | null
+          featured: boolean | null
           id: string
           image_url: string | null
           og_image: string | null
           published: boolean | null
+          scheduled_date: string | null
           seo_description: string | null
           seo_keywords: string | null
           seo_title: string | null
           slug: string
+          status: string | null
           title: string
           updated_at: string | null
         }
@@ -122,14 +221,17 @@ export type Database = {
           content: string
           created_at?: string | null
           excerpt?: string | null
+          featured?: boolean | null
           id?: string
           image_url?: string | null
           og_image?: string | null
           published?: boolean | null
+          scheduled_date?: string | null
           seo_description?: string | null
           seo_keywords?: string | null
           seo_title?: string | null
           slug: string
+          status?: string | null
           title: string
           updated_at?: string | null
         }
@@ -138,16 +240,40 @@ export type Database = {
           content?: string
           created_at?: string | null
           excerpt?: string | null
+          featured?: boolean | null
           id?: string
           image_url?: string | null
           og_image?: string | null
           published?: boolean | null
+          scheduled_date?: string | null
           seo_description?: string | null
           seo_keywords?: string | null
           seo_title?: string | null
           slug?: string
+          status?: string | null
           title?: string
           updated_at?: string | null
+        }
+        Relationships: []
+      }
+      blog_tags: {
+        Row: {
+          created_at: string
+          id: string
+          name: string
+          slug: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          name: string
+          slug: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          name?: string
+          slug?: string
         }
         Relationships: []
       }

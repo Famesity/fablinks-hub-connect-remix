@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Switch } from "@/components/ui/switch";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Plus, Edit, Trash2, ArrowLeft, Eye } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -24,11 +25,26 @@ interface BlogPost {
   content: string;
   image_url: string | null;
   published: boolean;
+  featured: boolean;
+  status: 'draft' | 'scheduled' | 'published';
+  scheduled_date: string | null;
   seo_title: string | null;
   seo_description: string | null;
   seo_keywords: string | null;
   og_image: string | null;
   created_at: string;
+}
+
+interface Category {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+interface Tag {
+  id: string;
+  name: string;
+  slug: string;
 }
 
 interface ImageAttachment {
@@ -43,6 +59,8 @@ export default function AdminBlogPosts() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [tags, setTags] = useState<Tag[]>([]);
   const [loading, setLoading] = useState(true);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingPost, setEditingPost] = useState<BlogPost | null>(null);
@@ -56,6 +74,13 @@ export default function AdminBlogPosts() {
   const [content, setContent] = useState("");
   const [imageUrl, setImageUrl] = useState("");
   const [published, setPublished] = useState(false);
+  const [featured, setFeatured] = useState(false);
+  const [status, setStatus] = useState<'draft' | 'scheduled' | 'published'>('draft');
+  const [scheduledDate, setScheduledDate] = useState("");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [newCategory, setNewCategory] = useState("");
+  const [newTag, setNewTag] = useState("");
   const [seoTitle, setSeoTitle] = useState("");
   const [seoDescription, setSeoDescription] = useState("");
   const [seoKeywords, setSeoKeywords] = useState("");
@@ -71,6 +96,8 @@ export default function AdminBlogPosts() {
   useEffect(() => {
     if (isAdmin) {
       fetchPosts();
+      fetchCategories();
+      fetchTags();
     }
   }, [isAdmin]);
 
@@ -82,7 +109,7 @@ export default function AdminBlogPosts() {
         .order("created_at", { ascending: false });
 
       if (error) throw error;
-      setPosts(data || []);
+      setPosts((data || []) as BlogPost[]);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -91,6 +118,56 @@ export default function AdminBlogPosts() {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const fetchCategories = async () => {
+    const { data } = await supabase
+      .from("blog_categories")
+      .select("*")
+      .order("name");
+    if (data) setCategories(data);
+  };
+
+  const fetchTags = async () => {
+    const { data } = await supabase
+      .from("blog_tags")
+      .select("*")
+      .order("name");
+    if (data) setTags(data);
+  };
+
+  const createCategory = async () => {
+    if (!newCategory.trim()) return;
+    const slug = generateSlug(newCategory);
+    const { data, error } = await supabase
+      .from("blog_categories")
+      .insert({ name: newCategory, slug })
+      .select()
+      .single();
+    
+    if (!error && data) {
+      setCategories([...categories, data]);
+      setSelectedCategories([...selectedCategories, data.id]);
+      setNewCategory("");
+      toast({ title: "Category created" });
+    }
+  };
+
+  const createTag = async () => {
+    if (!newTag.trim()) return;
+    const slug = generateSlug(newTag);
+    const { data, error } = await supabase
+      .from("blog_tags")
+      .insert({ name: newTag, slug })
+      .select()
+      .single();
+    
+    if (!error && data) {
+      setTags([...tags, data]);
+      setSelectedTags([...selectedTags, data.id]);
+      setNewTag("");
+      toast({ title: "Tag created" });
     }
   };
 
@@ -149,6 +226,11 @@ export default function AdminBlogPosts() {
     setContent("");
     setImageUrl("");
     setPublished(false);
+    setFeatured(false);
+    setStatus('draft');
+    setScheduledDate("");
+    setSelectedCategories([]);
+    setSelectedTags([]);
     setSeoTitle("");
     setSeoDescription("");
     setSeoKeywords("");
@@ -165,6 +247,9 @@ export default function AdminBlogPosts() {
     setContent(post.content);
     setImageUrl(post.image_url || "");
     setPublished(post.published);
+    setFeatured(post.featured || false);
+    setStatus(post.status || 'draft');
+    setScheduledDate(post.scheduled_date || "");
     setSeoTitle(post.seo_title || "");
     setSeoDescription(post.seo_description || "");
     setSeoKeywords(post.seo_keywords || "");
@@ -180,6 +265,26 @@ export default function AdminBlogPosts() {
 
     if (images) {
       setGalleryImages(images);
+    }
+
+    // Fetch categories
+    const { data: postCategories } = await supabase
+      .from("blog_post_categories")
+      .select("category_id")
+      .eq("post_id", post.id);
+    
+    if (postCategories) {
+      setSelectedCategories(postCategories.map(pc => pc.category_id));
+    }
+
+    // Fetch tags
+    const { data: postTags } = await supabase
+      .from("blog_post_tags")
+      .select("tag_id")
+      .eq("post_id", post.id);
+    
+    if (postTags) {
+      setSelectedTags(postTags.map(pt => pt.tag_id));
     }
 
     setIsDialogOpen(true);
@@ -205,7 +310,10 @@ export default function AdminBlogPosts() {
         excerpt: excerpt || null,
         content,
         image_url: imageUrl || null,
-        published,
+        published: status === 'published',
+        featured,
+        status,
+        scheduled_date: scheduledDate || null,
         seo_title: seoTitle || null,
         seo_description: seoDescription || null,
         seo_keywords: seoKeywords || null,
@@ -241,6 +349,36 @@ export default function AdminBlogPosts() {
           await supabase.from("image_attachments").insert(imageData);
         }
 
+        // Update categories
+        await supabase
+          .from("blog_post_categories")
+          .delete()
+          .eq("post_id", editingPost.id);
+        
+        if (selectedCategories.length > 0) {
+          await supabase
+            .from("blog_post_categories")
+            .insert(selectedCategories.map(catId => ({
+              post_id: editingPost.id,
+              category_id: catId
+            })));
+        }
+
+        // Update tags
+        await supabase
+          .from("blog_post_tags")
+          .delete()
+          .eq("post_id", editingPost.id);
+        
+        if (selectedTags.length > 0) {
+          await supabase
+            .from("blog_post_tags")
+            .insert(selectedTags.map(tagId => ({
+              post_id: editingPost.id,
+              tag_id: tagId
+            })));
+        }
+
         toast({ title: "Blog post updated successfully" });
       } else {
         const { error, data } = await supabase
@@ -263,6 +401,26 @@ export default function AdminBlogPosts() {
           }));
 
           await supabase.from("image_attachments").insert(imageData);
+        }
+
+        // Insert categories
+        if (selectedCategories.length > 0) {
+          await supabase
+            .from("blog_post_categories")
+            .insert(selectedCategories.map(catId => ({
+              post_id: data.id,
+              category_id: catId
+            })));
+        }
+
+        // Insert tags
+        if (selectedTags.length > 0) {
+          await supabase
+            .from("blog_post_tags")
+            .insert(selectedTags.map(tagId => ({
+              post_id: data.id,
+              tag_id: tagId
+            })));
         }
 
         toast({ title: "Blog post created successfully" });
@@ -346,8 +504,9 @@ export default function AdminBlogPosts() {
               <TableHeader>
                 <TableRow>
                   <TableHead>Title</TableHead>
-                  <TableHead>Slug</TableHead>
                   <TableHead>Status</TableHead>
+                  <TableHead>Featured</TableHead>
+                  <TableHead>Scheduled</TableHead>
                   <TableHead>Created</TableHead>
                   <TableHead>Actions</TableHead>
                 </TableRow>
@@ -356,17 +515,28 @@ export default function AdminBlogPosts() {
                 {posts.map((post) => (
                   <TableRow key={post.id}>
                     <TableCell className="font-medium">{post.title}</TableCell>
-                    <TableCell className="font-mono text-sm">{post.slug}</TableCell>
                     <TableCell>
                       <span
                         className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          post.published
-                            ? "bg-green-100 text-green-800"
-                            : "bg-yellow-100 text-yellow-800"
+                          post.status === 'published'
+                            ? "bg-success/10 text-success"
+                            : post.status === 'scheduled'
+                            ? "bg-primary/10 text-primary"
+                            : "bg-warning/10 text-warning"
                         }`}
                       >
-                        {post.published ? "Published" : "Draft"}
+                        {post.status}
                       </span>
+                    </TableCell>
+                    <TableCell>
+                      {post.featured && (
+                        <span className="text-xs bg-accent/10 text-accent px-2 py-1 rounded">
+                          ⭐ Featured
+                        </span>
+                      )}
+                    </TableCell>
+                    <TableCell className="text-sm text-muted-foreground">
+                      {post.scheduled_date && new Date(post.scheduled_date).toLocaleDateString()}
                     </TableCell>
                     <TableCell>
                       {new Date(post.created_at).toLocaleDateString()}
@@ -413,8 +583,9 @@ export default function AdminBlogPosts() {
           </DialogHeader>
 
           <Tabs defaultValue="content" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
+            <TabsList className="grid w-full grid-cols-4">
               <TabsTrigger value="content">Content</TabsTrigger>
+              <TabsTrigger value="taxonomy">Categories & Tags</TabsTrigger>
               <TabsTrigger value="gallery">Gallery</TabsTrigger>
               <TabsTrigger value="seo">SEO</TabsTrigger>
             </TabsList>
@@ -480,13 +651,113 @@ export default function AdminBlogPosts() {
                 />
               </div>
 
-              <div className="flex items-center space-x-2">
-                <Switch
-                  id="published"
-                  checked={published}
-                  onCheckedChange={setPublished}
-                />
-                <Label htmlFor="published">Published</Label>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="status">Post Status *</Label>
+                  <Select value={status} onValueChange={(val: any) => setStatus(val)}>
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="draft">Draft</SelectItem>
+                      <SelectItem value="scheduled">Scheduled</SelectItem>
+                      <SelectItem value="published">Published</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {status === 'scheduled' && (
+                  <div>
+                    <Label htmlFor="scheduled-date">Scheduled Date</Label>
+                    <Input
+                      id="scheduled-date"
+                      type="datetime-local"
+                      value={scheduledDate}
+                      onChange={(e) => setScheduledDate(e.target.value)}
+                    />
+                  </div>
+                )}
+              </div>
+
+              <div className="flex items-center space-x-4">
+                <div className="flex items-center space-x-2">
+                  <Switch
+                    id="featured"
+                    checked={featured}
+                    onCheckedChange={setFeatured}
+                  />
+                  <Label htmlFor="featured">⭐ Featured Post</Label>
+                </div>
+              </div>
+            </TabsContent>
+
+            <TabsContent value="taxonomy" className="space-y-6">
+              <div>
+                <Label>Categories</Label>
+                <div className="space-y-2 mt-2">
+                  {categories.map((cat) => (
+                    <div key={cat.id} className="flex items-center space-x-2">
+                      <input
+                        type="checkbox"
+                        checked={selectedCategories.includes(cat.id)}
+                        onChange={(e) => {
+                          if (e.target.checked) {
+                            setSelectedCategories([...selectedCategories, cat.id]);
+                          } else {
+                            setSelectedCategories(selectedCategories.filter(id => id !== cat.id));
+                          }
+                        }}
+                        className="rounded border-input"
+                      />
+                      <Label className="font-normal">{cat.name}</Label>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex gap-2 mt-4">
+                  <Input
+                    placeholder="New category name"
+                    value={newCategory}
+                    onChange={(e) => setNewCategory(e.target.value)}
+                  />
+                  <Button type="button" onClick={createCategory} size="sm">
+                    Add
+                  </Button>
+                </div>
+              </div>
+
+              <div>
+                <Label>Tags</Label>
+                <div className="flex flex-wrap gap-2 mt-2">
+                  {tags.map((tag) => (
+                    <div
+                      key={tag.id}
+                      onClick={() => {
+                        if (selectedTags.includes(tag.id)) {
+                          setSelectedTags(selectedTags.filter(id => id !== tag.id));
+                        } else {
+                          setSelectedTags([...selectedTags, tag.id]);
+                        }
+                      }}
+                      className={`cursor-pointer px-3 py-1 rounded-full text-sm ${
+                        selectedTags.includes(tag.id)
+                          ? 'bg-primary text-primary-foreground'
+                          : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                      }`}
+                    >
+                      {tag.name}
+                    </div>
+                  ))}
+                </div>
+                <div className="flex gap-2 mt-4">
+                  <Input
+                    placeholder="New tag name"
+                    value={newTag}
+                    onChange={(e) => setNewTag(e.target.value)}
+                  />
+                  <Button type="button" onClick={createTag} size="sm">
+                    Add
+                  </Button>
+                </div>
               </div>
             </TabsContent>
 
