@@ -27,6 +27,8 @@ export default function AdminSiteSettings() {
   const [saving, setSaving] = useState(false);
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [heroFile, setHeroFile] = useState<File | null>(null);
+  const [previewMode, setPreviewMode] = useState(false);
+  const [previewSettings, setPreviewSettings] = useState<Setting[]>([]);
 
   useEffect(() => {
     if (!adminLoading && !isAdmin) {
@@ -97,7 +99,31 @@ export default function AdminSiteSettings() {
 
   const updateSetting = (key: string, value: string) => {
     setSettings(settings.map(s => s.key === key ? { ...s, value } : s));
+    if (previewMode) {
+      setPreviewSettings(previewSettings.map(s => s.key === key ? { ...s, value } : s));
+    }
   };
+
+  const handlePreview = () => {
+    setPreviewSettings([...settings]);
+    setPreviewMode(true);
+  };
+
+  const applyThemePreview = () => {
+    const root = document.documentElement;
+    previewSettings.forEach(setting => {
+      if (setting.category === 'theme') {
+        const cssVar = setting.key.replace('theme_', '--');
+        root.style.setProperty(cssVar, setting.value);
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (previewMode) {
+      applyThemePreview();
+    }
+  }, [previewMode, previewSettings]);
 
   const handleSave = async () => {
     try {
@@ -207,22 +233,28 @@ export default function AdminSiteSettings() {
           </Button>
           <div className="flex justify-between items-center">
             <h1 className="text-2xl font-bold">Site Settings</h1>
-            <Button onClick={handleSave} disabled={saving}>
-              <Save className="mr-2 h-4 w-4" />
-              {saving ? "Saving..." : "Save Changes"}
-            </Button>
+            <div className="flex gap-2">
+              <Button onClick={handlePreview} variant="outline">
+                Preview Changes
+              </Button>
+              <Button onClick={handleSave} disabled={saving}>
+                <Save className="mr-2 h-4 w-4" />
+                {saving ? "Saving..." : "Save Changes"}
+              </Button>
+            </div>
           </div>
         </div>
       </header>
 
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="general" className="w-full">
-          <TabsList className="grid w-full grid-cols-5">
+          <TabsList className="grid w-full grid-cols-6">
             <TabsTrigger value="general">General</TabsTrigger>
             <TabsTrigger value="hero">Hero</TabsTrigger>
             <TabsTrigger value="contact">Contact</TabsTrigger>
             <TabsTrigger value="footer">Footer</TabsTrigger>
             <TabsTrigger value="social">Social</TabsTrigger>
+            <TabsTrigger value="theme">Theme</TabsTrigger>
           </TabsList>
 
           <TabsContent value="general">
@@ -357,7 +389,134 @@ export default function AdminSiteSettings() {
               </CardContent>
             </Card>
           </TabsContent>
+
+          <TabsContent value="theme">
+            <Card>
+              <CardHeader>
+                <CardTitle>Color Theme</CardTitle>
+                <CardDescription>Customize your website's color scheme (HSL format: hue saturation% lightness%)</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="space-y-2">
+                    <Label htmlFor="theme_primary_color">Primary Color</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="theme_primary_color"
+                        value={settings.find(s => s.key === 'theme_primary_color')?.value || ''}
+                        onChange={(e) => updateSetting('theme_primary_color', e.target.value)}
+                        placeholder="217 91% 50%"
+                      />
+                      <div 
+                        className="w-12 h-10 rounded border"
+                        style={{ backgroundColor: `hsl(${settings.find(s => s.key === 'theme_primary_color')?.value || '217 91% 50%'})` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="theme_primary_foreground">Primary Text Color</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="theme_primary_foreground"
+                        value={settings.find(s => s.key === 'theme_primary_foreground')?.value || ''}
+                        onChange={(e) => updateSetting('theme_primary_foreground', e.target.value)}
+                        placeholder="0 0% 98%"
+                      />
+                      <div 
+                        className="w-12 h-10 rounded border"
+                        style={{ backgroundColor: `hsl(${settings.find(s => s.key === 'theme_primary_foreground')?.value || '0 0% 98%'})` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="theme_accent_color">Accent Color</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="theme_accent_color"
+                        value={settings.find(s => s.key === 'theme_accent_color')?.value || ''}
+                        onChange={(e) => updateSetting('theme_accent_color', e.target.value)}
+                        placeholder="217 91% 50%"
+                      />
+                      <div 
+                        className="w-12 h-10 rounded border"
+                        style={{ backgroundColor: `hsl(${settings.find(s => s.key === 'theme_accent_color')?.value || '217 91% 50%'})` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="theme_background">Background Color</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="theme_background"
+                        value={settings.find(s => s.key === 'theme_background')?.value || ''}
+                        onChange={(e) => updateSetting('theme_background', e.target.value)}
+                        placeholder="0 0% 100%"
+                      />
+                      <div 
+                        className="w-12 h-10 rounded border"
+                        style={{ backgroundColor: `hsl(${settings.find(s => s.key === 'theme_background')?.value || '0 0% 100%'})` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="theme_foreground">Text Color</Label>
+                    <div className="flex gap-2">
+                      <Input
+                        id="theme_foreground"
+                        value={settings.find(s => s.key === 'theme_foreground')?.value || ''}
+                        onChange={(e) => updateSetting('theme_foreground', e.target.value)}
+                        placeholder="222.2 84% 4.9%"
+                      />
+                      <div 
+                        className="w-12 h-10 rounded border"
+                        style={{ backgroundColor: `hsl(${settings.find(s => s.key === 'theme_foreground')?.value || '222.2 84% 4.9%'})` }}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="theme_border_radius">Border Radius</Label>
+                    <Input
+                      id="theme_border_radius"
+                      value={settings.find(s => s.key === 'theme_border_radius')?.value || ''}
+                      onChange={(e) => updateSetting('theme_border_radius', e.target.value)}
+                      placeholder="0.75rem"
+                    />
+                  </div>
+                </div>
+
+                <div className="bg-muted p-4 rounded-lg">
+                  <p className="text-sm text-muted-foreground mb-2">💡 <strong>HSL Color Format:</strong></p>
+                  <p className="text-sm text-muted-foreground">Use format: "hue saturation% lightness%" (e.g., "217 91% 50%")</p>
+                  <p className="text-sm text-muted-foreground mt-1">Tip: Use <a href="https://hslpicker.com" target="_blank" rel="noopener" className="text-primary hover:underline">HSL Color Picker</a> to choose colors</p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
         </Tabs>
+
+        {previewMode && (
+          <Card className="mt-8 border-primary">
+            <CardHeader>
+              <CardTitle>Preview Mode Active</CardTitle>
+              <CardDescription>You are viewing your changes in preview mode. Save to apply permanently.</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="flex gap-2">
+                <Button onClick={() => window.open('/', '_blank')} variant="outline">
+                  Open Homepage Preview
+                </Button>
+                <Button onClick={() => setPreviewMode(false)} variant="outline">
+                  Exit Preview
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+        )}
       </main>
     </div>
   );

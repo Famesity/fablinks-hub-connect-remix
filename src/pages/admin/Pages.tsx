@@ -392,70 +392,83 @@ export default function AdminPages() {
             <CardTitle>All Pages</CardTitle>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Title</TableHead>
-                  <TableHead>Slug</TableHead>
-                  <TableHead>Template</TableHead>
-                  <TableHead>Status</TableHead>
-                  <TableHead>Menu</TableHead>
-                  <TableHead>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {pages.map((page) => (
-                  <TableRow key={page.id}>
-                    <TableCell className="font-medium">{page.title}</TableCell>
-                    <TableCell className="font-mono text-sm">{page.slug}</TableCell>
-                    <TableCell>{page.template}</TableCell>
-                    <TableCell>
-                      <span
-                        className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
-                          page.published
-                            ? "bg-green-100 text-green-800"
-                            : "bg-yellow-100 text-yellow-800"
-                        }`}
-                      >
-                        {page.published ? "Published" : "Draft"}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      {page.show_in_menu && (
-                        <span className="text-xs text-muted-foreground">
-                          Order: {page.menu_order}
-                        </span>
-                      )}
-                    </TableCell>
-                    <TableCell>
-                      <div className="flex gap-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => window.open(`/page/${page.slug}`, "_blank")}
-                        >
-                          <Eye className="h-4 w-4" />
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          onClick={() => handleEdit(page)}
-                        >
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                        <Button
-                          variant="destructive"
-                          size="sm"
-                          onClick={() => handleDelete(page.id)}
-                        >
-                          <Trash2 className="h-4 w-4" />
-                        </Button>
-                      </div>
-                    </TableCell>
+            {pages.length === 0 ? (
+              <div className="text-center py-12">
+                <p className="text-muted-foreground mb-4">No pages yet. Create your first page to get started.</p>
+                <Button onClick={() => {
+                  resetForm();
+                  setIsDialogOpen(true);
+                }}>
+                  <Plus className="mr-2 h-4 w-4" />
+                  Create Your First Page
+                </Button>
+              </div>
+            ) : (
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead>Title</TableHead>
+                    <TableHead>Slug</TableHead>
+                    <TableHead>Template</TableHead>
+                    <TableHead>Status</TableHead>
+                    <TableHead>Menu</TableHead>
+                    <TableHead>Actions</TableHead>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+                </TableHeader>
+                <TableBody>
+                  {pages.map((page) => (
+                    <TableRow key={page.id}>
+                      <TableCell className="font-medium">{page.title}</TableCell>
+                      <TableCell className="font-mono text-sm">{page.slug}</TableCell>
+                      <TableCell>{page.template}</TableCell>
+                      <TableCell>
+                        <span
+                          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                            page.published
+                              ? "bg-success/10 text-success"
+                              : "bg-warning/10 text-warning"
+                          }`}
+                        >
+                          {page.published ? "Published" : "Draft"}
+                        </span>
+                      </TableCell>
+                      <TableCell>
+                        {page.show_in_menu && (
+                          <span className="text-xs text-muted-foreground">
+                            Order: {page.menu_order}
+                          </span>
+                        )}
+                      </TableCell>
+                      <TableCell>
+                        <div className="flex gap-2">
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => window.open(`/page/${page.slug}`, "_blank")}
+                          >
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleEdit(page)}
+                          >
+                            <Edit className="h-4 w-4" />
+                          </Button>
+                          <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={() => handleDelete(page.id)}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </div>
+                      </TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            )}
           </CardContent>
         </Card>
       </main>
