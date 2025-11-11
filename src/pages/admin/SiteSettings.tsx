@@ -8,7 +8,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, ArrowLeft, Save } from "lucide-react";
+import { Loader2, ArrowLeft, Save, Eye, Sparkles } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface Setting {
@@ -29,6 +29,44 @@ export default function AdminSiteSettings() {
   const [heroFile, setHeroFile] = useState<File | null>(null);
   const [previewMode, setPreviewMode] = useState(false);
   const [previewSettings, setPreviewSettings] = useState<Setting[]>([]);
+
+  const themePresets = {
+    'Ocean Blue': {
+      theme_primary_color: '210 100% 50%',
+      theme_primary_foreground: '0 0% 100%',
+      theme_accent_color: '190 100% 45%',
+      theme_background: '0 0% 100%',
+      theme_foreground: '222 47% 11%',
+    },
+    'Forest Green': {
+      theme_primary_color: '142 71% 45%',
+      theme_primary_foreground: '0 0% 100%',
+      theme_accent_color: '160 60% 50%',
+      theme_background: '0 0% 100%',
+      theme_foreground: '222 47% 11%',
+    },
+    'Sunset Orange': {
+      theme_primary_color: '25 95% 53%',
+      theme_primary_foreground: '0 0% 100%',
+      theme_accent_color: '45 100% 51%',
+      theme_background: '0 0% 100%',
+      theme_foreground: '222 47% 11%',
+    },
+    'Royal Purple': {
+      theme_primary_color: '271 81% 56%',
+      theme_primary_foreground: '0 0% 100%',
+      theme_accent_color: '291 47% 51%',
+      theme_background: '0 0% 100%',
+      theme_foreground: '222 47% 11%',
+    },
+    'Crimson Red': {
+      theme_primary_color: '348 83% 47%',
+      theme_primary_foreground: '0 0% 100%',
+      theme_accent_color: '0 72% 51%',
+      theme_background: '0 0% 100%',
+      theme_foreground: '222 47% 11%',
+    },
+  };
 
   useEffect(() => {
     if (!adminLoading && !isAdmin) {
@@ -116,6 +154,25 @@ export default function AdminSiteSettings() {
         const cssVar = setting.key.replace('theme_', '--');
         root.style.setProperty(cssVar, setting.value);
       }
+    });
+  };
+
+  const applyThemePreset = (presetName: keyof typeof themePresets) => {
+    const preset = themePresets[presetName];
+    const newSettings = settings.map(s => {
+      if (preset[s.key as keyof typeof preset]) {
+        return { ...s, value: preset[s.key as keyof typeof preset] };
+      }
+      return s;
+    });
+    setSettings(newSettings);
+    if (previewMode) {
+      setPreviewSettings(newSettings);
+      applyThemePreview();
+    }
+    toast({
+      title: "Theme Preset Applied",
+      description: `${presetName} theme has been applied. Click 'Save Settings' to persist.`,
     });
   };
 
@@ -235,6 +292,7 @@ export default function AdminSiteSettings() {
             <h1 className="text-2xl font-bold">Site Settings</h1>
             <div className="flex gap-2">
               <Button onClick={handlePreview} variant="outline">
+                <Eye className="mr-2 h-4 w-4" />
                 Preview Changes
               </Button>
               <Button onClick={handleSave} disabled={saving}>
@@ -391,12 +449,43 @@ export default function AdminSiteSettings() {
           </TabsContent>
 
           <TabsContent value="theme">
-            <Card>
-              <CardHeader>
-                <CardTitle>Color Theme</CardTitle>
-                <CardDescription>Customize your website's color scheme (HSL format: hue saturation% lightness%)</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-6">
+            <div className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Sparkles className="h-5 w-5" />
+                    Quick Theme Presets
+                  </CardTitle>
+                  <CardDescription>Apply a beautiful theme with one click</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                    {Object.keys(themePresets).map((presetName) => (
+                      <Button
+                        key={presetName}
+                        variant="outline"
+                        className="h-auto flex-col gap-2 p-4 hover:scale-105 transition-transform"
+                        onClick={() => applyThemePreset(presetName as keyof typeof themePresets)}
+                      >
+                        <div 
+                          className="w-full h-16 rounded-md shadow-md"
+                          style={{ 
+                            background: `linear-gradient(135deg, hsl(${themePresets[presetName as keyof typeof themePresets].theme_primary_color}), hsl(${themePresets[presetName as keyof typeof themePresets].theme_accent_color}))` 
+                          }}
+                        />
+                        <span className="text-sm font-medium">{presetName}</span>
+                      </Button>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Custom Color Theme</CardTitle>
+                  <CardDescription>Fine-tune your color scheme (HSL format: hue saturation% lightness%)</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-6">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="theme_primary_color">Primary Color</Label>
@@ -496,6 +585,7 @@ export default function AdminSiteSettings() {
                 </div>
               </CardContent>
             </Card>
+            </div>
           </TabsContent>
         </Tabs>
 

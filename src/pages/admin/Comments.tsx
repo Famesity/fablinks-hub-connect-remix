@@ -109,7 +109,32 @@ export default function AdminComments() {
     }
   };
 
-  const handleReject = async (id: string) => {
+  const handleUnapprove = async (id: string) => {
+    try {
+      const { error } = await supabase
+        .from("blog_comments")
+        .update({ approved: false })
+        .eq("id", id);
+
+      if (error) throw error;
+
+      toast({
+        title: "Success",
+        description: "Comment unapproved (held for review)",
+      });
+
+      fetchComments();
+    } catch (error) {
+      console.error("Error unapproving comment:", error);
+      toast({
+        title: "Error",
+        description: "Failed to unapprove comment",
+        variant: "destructive",
+      });
+    }
+  };
+
+  const handleDelete = async (id: string) => {
     try {
       const { error } = await supabase
         .from("blog_comments")
@@ -253,13 +278,23 @@ export default function AdminComments() {
                     </TableCell>
                     <TableCell>
                       <div className="flex gap-2">
-                        {!comment.approved && (
+                        {!comment.approved ? (
                           <Button
                             variant="outline"
                             size="sm"
                             onClick={() => handleApprove(comment.id)}
+                            title="Approve"
                           >
                             <CheckCircle className="h-4 w-4" />
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            onClick={() => handleUnapprove(comment.id)}
+                            title="Unapprove (Hold)"
+                          >
+                            <XCircle className="h-4 w-4 text-yellow-600" />
                           </Button>
                         )}
                         <Dialog>
@@ -271,6 +306,7 @@ export default function AdminComments() {
                                 setReplyingTo(comment.id);
                                 setReplyText(comment.admin_reply || "");
                               }}
+                              title="Reply"
                             >
                               <MessageSquare className="h-4 w-4" />
                             </Button>
@@ -301,7 +337,8 @@ export default function AdminComments() {
                         <Button
                           variant="destructive"
                           size="sm"
-                          onClick={() => handleReject(comment.id)}
+                          onClick={() => handleDelete(comment.id)}
+                          title="Delete"
                         >
                           <XCircle className="h-4 w-4" />
                         </Button>

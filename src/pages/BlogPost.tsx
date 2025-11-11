@@ -120,15 +120,17 @@ export default function BlogPost() {
         author_name: authorName,
         author_email: authorEmail,
         content: commentText,
-        approved: false,
+        approved: true,
       });
 
       if (error) throw error;
 
       toast({
         title: "Success",
-        description: "Comment submitted for approval",
+        description: "Comment posted successfully",
       });
+      
+      fetchComments();
 
       setAuthorName("");
       setAuthorEmail("");
