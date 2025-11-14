@@ -277,6 +277,78 @@ export type Database = {
         }
         Relationships: []
       }
+      contact_submissions: {
+        Row: {
+          admin_notes: string | null
+          created_at: string
+          email: string
+          id: string
+          message: string
+          name: string
+          phone: string | null
+          status: string | null
+          subject: string | null
+          updated_at: string
+        }
+        Insert: {
+          admin_notes?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          message: string
+          name: string
+          phone?: string | null
+          status?: string | null
+          subject?: string | null
+          updated_at?: string
+        }
+        Update: {
+          admin_notes?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          message?: string
+          name?: string
+          phone?: string | null
+          status?: string | null
+          subject?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      faqs: {
+        Row: {
+          answer: string
+          category: string
+          created_at: string
+          display_order: number | null
+          id: string
+          published: boolean | null
+          question: string
+          updated_at: string
+        }
+        Insert: {
+          answer: string
+          category: string
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          published?: boolean | null
+          question: string
+          updated_at?: string
+        }
+        Update: {
+          answer?: string
+          category?: string
+          created_at?: string
+          display_order?: number | null
+          id?: string
+          published?: boolean | null
+          question?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       image_attachments: {
         Row: {
           alt_text: string | null
@@ -307,6 +379,33 @@ export type Database = {
           entity_type?: string
           id?: string
           image_url?: string
+        }
+        Relationships: []
+      }
+      newsletter_subscribers: {
+        Row: {
+          email: string
+          id: string
+          name: string | null
+          status: string | null
+          subscribed_at: string
+          unsubscribed_at: string | null
+        }
+        Insert: {
+          email: string
+          id?: string
+          name?: string | null
+          status?: string | null
+          subscribed_at?: string
+          unsubscribed_at?: string | null
+        }
+        Update: {
+          email?: string
+          id?: string
+          name?: string | null
+          status?: string | null
+          subscribed_at?: string
+          unsubscribed_at?: string | null
         }
         Relationships: []
       }
@@ -476,6 +575,42 @@ export type Database = {
           key?: string
           updated_at?: string
           value?: Json
+        }
+        Relationships: []
+      }
+      testimonials: {
+        Row: {
+          approved: boolean | null
+          author_name: string
+          author_role: string | null
+          content: string
+          created_at: string
+          featured: boolean | null
+          id: string
+          rating: number | null
+          updated_at: string
+        }
+        Insert: {
+          approved?: boolean | null
+          author_name: string
+          author_role?: string | null
+          content: string
+          created_at?: string
+          featured?: boolean | null
+          id?: string
+          rating?: number | null
+          updated_at?: string
+        }
+        Update: {
+          approved?: boolean | null
+          author_name?: string
+          author_role?: string | null
+          content?: string
+          created_at?: string
+          featured?: boolean | null
+          id?: string
+          rating?: number | null
+          updated_at?: string
         }
         Relationships: []
       }
