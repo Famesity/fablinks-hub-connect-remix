@@ -23,6 +23,10 @@ import AdminPages from "./pages/admin/Pages";
 import AdminAnalytics from "./pages/admin/Analytics";
 import AdminActivityLogs from "./pages/admin/ActivityLogs";
 import AdminProfile from "./pages/admin/Profile";
+import AdminTestimonials from "./pages/admin/Testimonials";
+import AdminContactSubmissions from "./pages/admin/ContactSubmissions";
+import AdminFAQs from "./pages/admin/FAQs";
+import AdminNewsletter from "./pages/admin/Newsletter";
 import BlogPost from "./pages/BlogPost";
 import Page from "./pages/Page";
 
@@ -50,6 +54,10 @@ function AppContent() {
           <Route path="/admin/analytics" element={<AdminAnalytics />} />
           <Route path="/admin/activity" element={<AdminActivityLogs />} />
           <Route path="/admin/profile" element={<AdminProfile />} />
+          <Route path="/admin/testimonials" element={<AdminTestimonials />} />
+          <Route path="/admin/contact-submissions" element={<AdminContactSubmissions />} />
+          <Route path="/admin/faqs" element={<AdminFAQs />} />
+          <Route path="/admin/newsletter" element={<AdminNewsletter />} />
           <Route path="/page/:slug" element={<Page />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

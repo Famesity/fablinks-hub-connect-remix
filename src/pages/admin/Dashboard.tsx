@@ -268,6 +268,54 @@ export default function AdminDashboard() {
               </CardHeader>
             </Card>
           </Link>
+
+          <Link to="/admin/testimonials" className="group">
+            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-yellow-300 cursor-pointer group-hover:-translate-y-1">
+              <CardHeader className="pb-4">
+                <div className="w-14 h-14 bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <MessageSquare className="h-7 w-7 text-yellow-600" />
+                </div>
+                <CardTitle className="text-xl">Testimonials</CardTitle>
+                <CardDescription className="text-gray-600">Manage customer reviews and ratings</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+
+          <Link to="/admin/contact-submissions" className="group">
+            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-red-300 cursor-pointer group-hover:-translate-y-1">
+              <CardHeader className="pb-4">
+                <div className="w-14 h-14 bg-gradient-to-br from-red-100 to-red-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <MessageSquare className="h-7 w-7 text-red-600" />
+                </div>
+                <CardTitle className="text-xl">Contact Forms</CardTitle>
+                <CardDescription className="text-gray-600">View and respond to contact submissions</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+
+          <Link to="/admin/faqs" className="group">
+            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-lime-300 cursor-pointer group-hover:-translate-y-1">
+              <CardHeader className="pb-4">
+                <div className="w-14 h-14 bg-gradient-to-br from-lime-100 to-lime-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <FileText className="h-7 w-7 text-lime-600" />
+                </div>
+                <CardTitle className="text-xl">FAQs</CardTitle>
+                <CardDescription className="text-gray-600">Manage frequently asked questions</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+
+          <Link to="/admin/newsletter" className="group">
+            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-emerald-300 cursor-pointer group-hover:-translate-y-1">
+              <CardHeader className="pb-4">
+                <div className="w-14 h-14 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Users className="h-7 w-7 text-emerald-600" />
+                </div>
+                <CardTitle className="text-xl">Newsletter</CardTitle>
+                <CardDescription className="text-gray-600">Manage email subscribers</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
         </div>
       </main>
     </div>
