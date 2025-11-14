@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAdmin } from "@/hooks/useAdmin";
 import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, School, Briefcase, FileText, LogOut, Settings, Users, MessageSquare, FileCode, BarChart3, Activity } from "lucide-react";
@@ -12,12 +13,47 @@ export default function AdminDashboard() {
   const { signOut } = useAuth();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const [stats, setStats] = useState({
+    totalPosts: 0,
+    totalServices: 0,
+    totalComments: 0,
+    totalSchools: 0,
+  });
+  const [loadingStats, setLoadingStats] = useState(true);
 
   useEffect(() => {
     if (!loading && !isAdmin) {
       navigate("/auth");
     }
   }, [isAdmin, loading, navigate]);
+
+  useEffect(() => {
+    if (isAdmin) {
+      fetchStats();
+    }
+  }, [isAdmin]);
+
+  const fetchStats = async () => {
+    try {
+      const [posts, services, comments, schools] = await Promise.all([
+        supabase.from("blog_posts").select("id", { count: "exact" }),
+        supabase.from("services").select("id", { count: "exact" }),
+        supabase.from("blog_comments").select("id", { count: "exact" }),
+        supabase.from("schools").select("id", { count: "exact" }),
+      ]);
+
+      setStats({
+        totalPosts: posts.count || 0,
+        totalServices: services.count || 0,
+        totalComments: comments.count || 0,
+        totalSchools: schools.count || 0,
+      });
+    } catch (error) {
+      console.error("Error fetching stats:", error);
+    } finally {
+      setLoadingStats(false);
+    }
+  };
 
   const handleSignOut = async () => {
     await signOut();
@@ -28,7 +64,7 @@ export default function AdminDashboard() {
     navigate("/auth");
   };
 
-  if (loading) {
+  if (loading || loadingStats) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin" />
@@ -78,7 +114,7 @@ export default function AdminDashboard() {
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-blue-100 text-sm mb-1">Total Posts</p>
-                  <h3 className="text-3xl font-bold">0</h3>
+                  <h3 className="text-3xl font-bold">{stats.totalPosts}</h3>
                 </div>
                 <FileText className="h-8 w-8 opacity-80" />
               </div>
@@ -90,7 +126,7 @@ export default function AdminDashboard() {
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-green-100 text-sm mb-1">Services</p>
-                  <h3 className="text-3xl font-bold">0</h3>
+                  <h3 className="text-3xl font-bold">{stats.totalServices}</h3>
                 </div>
                 <Briefcase className="h-8 w-8 opacity-80" />
               </div>
@@ -102,7 +138,7 @@ export default function AdminDashboard() {
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-purple-100 text-sm mb-1">Comments</p>
-                  <h3 className="text-3xl font-bold">0</h3>
+                  <h3 className="text-3xl font-bold">{stats.totalComments}</h3>
                 </div>
                 <MessageSquare className="h-8 w-8 opacity-80" />
               </div>
@@ -114,7 +150,7 @@ export default function AdminDashboard() {
               <div className="flex justify-between items-start">
                 <div>
                   <p className="text-orange-100 text-sm mb-1">Schools</p>
-                  <h3 className="text-3xl font-bold">0</h3>
+                  <h3 className="text-3xl font-bold">{stats.totalSchools}</h3>
                 </div>
                 <School className="h-8 w-8 opacity-80" />
               </div>
