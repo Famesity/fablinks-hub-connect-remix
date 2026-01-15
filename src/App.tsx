@@ -27,6 +27,9 @@ import AdminTestimonials from "./pages/admin/Testimonials";
 import AdminContactSubmissions from "./pages/admin/ContactSubmissions";
 import AdminFAQs from "./pages/admin/FAQs";
 import AdminNewsletter from "./pages/admin/Newsletter";
+import AdminHeroSlides from "./pages/admin/HeroSlides";
+import AdminTrustBadges from "./pages/admin/TrustBadges";
+import AdminHowItWorks from "./pages/admin/HowItWorks";
 import BlogPost from "./pages/BlogPost";
 import Page from "./pages/Page";
 
@@ -58,6 +61,9 @@ function AppContent() {
           <Route path="/admin/contact-submissions" element={<AdminContactSubmissions />} />
           <Route path="/admin/faqs" element={<AdminFAQs />} />
           <Route path="/admin/newsletter" element={<AdminNewsletter />} />
+          <Route path="/admin/hero-slides" element={<AdminHeroSlides />} />
+          <Route path="/admin/trust-badges" element={<AdminTrustBadges />} />
+          <Route path="/admin/how-it-works" element={<AdminHowItWorks />} />
           <Route path="/page/:slug" element={<Page />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
