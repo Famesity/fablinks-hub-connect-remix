@@ -1,21 +1,25 @@
 import React from 'react';
 import Layout from '@/components/Layout';
-import Hero from '@/components/Hero';
-import FeaturedServices from '@/components/FeaturedServices';
+import HeroCarousel from '@/components/HeroCarousel';
+import TrustStrip from '@/components/TrustStrip';
+import ServicesGrid from '@/components/ServicesGrid';
 import WhyChooseUs from '@/components/WhyChooseUs';
+import HowItWorks from '@/components/HowItWorks';
+import LocationContact from '@/components/LocationContact';
+import CTASection from '@/components/CTASection';
 import FeaturedBlogPosts from '@/components/FeaturedBlogPosts';
-import BlogPostsSlider from '@/components/BlogPostsSlider';
-import ContactSection from '@/components/ContactSection';
 
 const Index = () => {
   return (
     <Layout>
-      <Hero />
-      <FeaturedServices />
+      <HeroCarousel />
+      <TrustStrip />
+      <ServicesGrid />
       <WhyChooseUs />
+      <HowItWorks />
       <FeaturedBlogPosts />
-      <BlogPostsSlider />
-      <ContactSection />
+      <CTASection />
+      <LocationContact />
     </Layout>
   );
 };

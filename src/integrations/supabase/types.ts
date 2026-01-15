@@ -349,6 +349,84 @@ export type Database = {
         }
         Relationships: []
       }
+      hero_slides: {
+        Row: {
+          badge_text: string | null
+          created_at: string
+          cta_primary_link: string | null
+          cta_primary_text: string | null
+          cta_secondary_link: string | null
+          cta_secondary_text: string | null
+          display_order: number | null
+          headline: string
+          id: string
+          image_url: string | null
+          is_active: boolean | null
+          subtext: string | null
+          updated_at: string
+        }
+        Insert: {
+          badge_text?: string | null
+          created_at?: string
+          cta_primary_link?: string | null
+          cta_primary_text?: string | null
+          cta_secondary_link?: string | null
+          cta_secondary_text?: string | null
+          display_order?: number | null
+          headline: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          subtext?: string | null
+          updated_at?: string
+        }
+        Update: {
+          badge_text?: string | null
+          created_at?: string
+          cta_primary_link?: string | null
+          cta_primary_text?: string | null
+          cta_secondary_link?: string | null
+          cta_secondary_text?: string | null
+          display_order?: number | null
+          headline?: string
+          id?: string
+          image_url?: string | null
+          is_active?: boolean | null
+          subtext?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      how_it_works_steps: {
+        Row: {
+          created_at: string
+          description: string | null
+          icon_name: string | null
+          id: string
+          is_active: boolean | null
+          step_number: number
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          icon_name?: string | null
+          id?: string
+          is_active?: boolean | null
+          step_number: number
+          title: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          icon_name?: string | null
+          id?: string
+          is_active?: boolean | null
+          step_number?: number
+          title?: string
+        }
+        Relationships: []
+      }
       image_attachments: {
         Row: {
           alt_text: string | null
@@ -611,6 +689,33 @@ export type Database = {
           id?: string
           rating?: number | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      trust_badges: {
+        Row: {
+          created_at: string
+          display_order: number | null
+          icon_name: string
+          id: string
+          is_active: boolean | null
+          title: string
+        }
+        Insert: {
+          created_at?: string
+          display_order?: number | null
+          icon_name: string
+          id?: string
+          is_active?: boolean | null
+          title: string
+        }
+        Update: {
+          created_at?: string
+          display_order?: number | null
+          icon_name?: string
+          id?: string
+          is_active?: boolean | null
+          title?: string
         }
         Relationships: []
       }
