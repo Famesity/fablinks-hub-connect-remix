@@ -5,7 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, School, Briefcase, FileText, LogOut, Settings, Users, MessageSquare, FileCode, BarChart3, Activity } from "lucide-react";
+import { Loader2, School, Briefcase, FileText, LogOut, Settings, Users, MessageSquare, FileCode, BarChart3, Activity, Image, Shield, ListChecks } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function AdminDashboard() {
@@ -156,6 +156,46 @@ export default function AdminDashboard() {
               </div>
             </CardContent>
           </Card>
+        </div>
+
+        {/* Landing Page Section */}
+        <h2 className="text-2xl font-bold mb-6 text-gray-800">Landing Page</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+          <Link to="/admin/hero-slides" className="group">
+            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-rose-300 cursor-pointer group-hover:-translate-y-1">
+              <CardHeader className="pb-4">
+                <div className="w-14 h-14 bg-gradient-to-br from-rose-100 to-rose-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Image className="h-7 w-7 text-rose-600" />
+                </div>
+                <CardTitle className="text-xl">Hero Carousel</CardTitle>
+                <CardDescription className="text-gray-600">Manage hero section slides, headlines, and CTAs</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+
+          <Link to="/admin/trust-badges" className="group">
+            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-amber-300 cursor-pointer group-hover:-translate-y-1">
+              <CardHeader className="pb-4">
+                <div className="w-14 h-14 bg-gradient-to-br from-amber-100 to-amber-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Shield className="h-7 w-7 text-amber-600" />
+                </div>
+                <CardTitle className="text-xl">Trust Badges</CardTitle>
+                <CardDescription className="text-gray-600">Configure trust strip icons and text</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+
+          <Link to="/admin/how-it-works" className="group">
+            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-sky-300 cursor-pointer group-hover:-translate-y-1">
+              <CardHeader className="pb-4">
+                <div className="w-14 h-14 bg-gradient-to-br from-sky-100 to-sky-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <ListChecks className="h-7 w-7 text-sky-600" />
+                </div>
+                <CardTitle className="text-xl">How It Works</CardTitle>
+                <CardDescription className="text-gray-600">Edit process steps and descriptions</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
         </div>
 
         {/* Management Cards */}
