@@ -2,10 +2,8 @@ import React, { useState } from 'react';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, GraduationCap, Building2, FileText, Shield, Smartphone, Filter, School, Printer, CreditCard, Globe, FileImage, Camera, ClipboardList } from 'lucide-react';
+import { Search, GraduationCap, Building2, FileText, Shield, Smartphone, Filter, School, Printer, CreditCard, Globe, FileImage, Camera } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
-import ServiceRequestForm from '@/components/ServiceRequestForm';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 
 const Services = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -619,26 +617,6 @@ const Services = () => {
                 </Button>
               </div>
             )}
-          </div>
-        </section>
-
-        {/* Service Request Form Section */}
-        <section className="section-padding bg-muted/50">
-          <div className="container-custom">
-            <Card className="max-w-3xl mx-auto">
-              <CardHeader className="text-center">
-                <div className="mx-auto w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mb-4">
-                  <ClipboardList className="w-6 h-6 text-primary" />
-                </div>
-                <CardTitle className="text-2xl">Request a Service</CardTitle>
-                <CardDescription>
-                  Can't find what you're looking for? Submit a custom service request and we'll get back to you shortly.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <ServiceRequestForm />
-              </CardContent>
-            </Card>
           </div>
         </section>
       </main>

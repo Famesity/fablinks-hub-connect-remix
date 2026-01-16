@@ -44,7 +44,7 @@ const HowItWorks = () => {
 
   if (loading) {
     return (
-      <section className="section-padding bg-secondary/50">
+      <section className="section-padding bg-muted/30">
         <div className="container-custom">
           <div className="text-center mb-12">
             <div className="h-10 bg-muted rounded w-64 mx-auto mb-4"></div>
@@ -67,7 +67,7 @@ const HowItWorks = () => {
   if (steps.length === 0) return null;
 
   return (
-    <section className="section-padding bg-secondary/50">
+    <section className="section-padding bg-muted/30">
       <div className="container-custom">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
