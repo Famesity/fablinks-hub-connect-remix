@@ -153,7 +153,18 @@ const Footer = () => {
       <div className="border-t border-gray-700 py-4">
         <div className="container-custom">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-400">
-            <p>{footerText}</p>
+            <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+              <p>{footerText}</p>
+              <span className="hidden sm:inline">|</span>
+              <a 
+                href="https://www.neocreb.vercel.app" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="hover:text-white transition-colors"
+              >
+                Website Built by Neocreb LTD
+              </a>
+            </div>
             <div className="flex gap-6">
               <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
               <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
