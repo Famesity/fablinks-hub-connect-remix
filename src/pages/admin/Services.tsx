@@ -219,14 +219,14 @@ export default function AdminServices() {
                   <div className="space-y-2">
                     <Label htmlFor="school">School (Optional)</Label>
                     <Select
-                      value={formData.school_id}
-                      onValueChange={(value) => setFormData({ ...formData, school_id: value })}
+                      value={formData.school_id || "general"}
+                      onValueChange={(value) => setFormData({ ...formData, school_id: value === "general" ? "" : value })}
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="Select school" />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="">General (All Schools)</SelectItem>
+                        <SelectItem value="general">General (All Schools)</SelectItem>
                         {schools.map((school) => (
                           <SelectItem key={school.id} value={school.id}>
                             {school.name}
