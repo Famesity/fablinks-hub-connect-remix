@@ -26,6 +26,7 @@ const Header = () => {
   const siteTitle = getSetting('site_title', 'Fablinks Computers');
   const siteLogo = getSetting('site_logo', '');
   const contactPhone = getSetting('contact_phone', '+234 XXX XXX XXXX');
+  const darkModeEnabled = getSetting('dark_mode_enabled', 'true') === 'true';
 
   const isActive = (path: string) => {
     return location.pathname === path;
@@ -111,7 +112,7 @@ const Header = () => {
           {/* Search and CTA Buttons */}
           <div className="hidden md:flex items-center space-x-3">
             <SearchBar />
-            <ThemeToggle />
+            {darkModeEnabled && <ThemeToggle />}
             <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-white">
               <Phone className="w-4 h-4 mr-2" />
               Call Us
