@@ -43,9 +43,9 @@ const Header = () => {
               alt={siteTitle} 
               className="h-12 w-12 sm:h-14 sm:w-14 object-contain rounded-lg"
             />
-            <div className="hidden sm:block">
-              <h1 className="text-base sm:text-lg font-bold gradient-text leading-tight">{siteTitle}</h1>
-              <p className="text-xs text-gray-500 -mt-0.5">{getSetting('site_description', 'Your Digital Gateway')}</p>
+            <div>
+              <h1 className="text-sm sm:text-base md:text-lg font-bold gradient-text leading-tight">{siteTitle}</h1>
+              <p className="text-[10px] sm:text-xs text-gray-500 -mt-0.5 hidden xs:block">{getSetting('site_description', 'Your Digital Gateway')}</p>
             </div>
           </Link>
 
