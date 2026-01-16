@@ -1,10 +1,10 @@
 import React, { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, GraduationCap, Building2, FileText, Shield, Smartphone, Filter, School, Printer, CreditCard, Globe, FileImage, Camera } from 'lucide-react';
+import { Search, GraduationCap, Building2, FileText, Shield, Smartphone, Filter, School, Printer, CreditCard, Globe, FileImage, Camera, ArrowRight } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
-import ServiceRequestForm from '@/components/ServiceRequestForm';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
 
 const Services = () => {
@@ -635,16 +635,19 @@ const Services = () => {
           </div>
         </section>
 
-        {/* Service Request Form Section */}
+        {/* CTA to Request Page */}
         <section className="py-16 bg-muted/30">
-          <div className="container mx-auto px-4">
-            <div className="max-w-2xl mx-auto">
-              <div className="text-center mb-8">
-                <h2 className="text-3xl font-bold mb-2">Can't Find What You Need?</h2>
-                <p className="text-muted-foreground">Submit a custom service request and we'll get back to you</p>
-              </div>
-              <ServiceRequestForm />
-            </div>
+          <div className="container mx-auto px-4 text-center">
+            <h2 className="text-3xl font-bold mb-4">Can't Find What You Need?</h2>
+            <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
+              Submit a custom service request and we'll get back to you via WhatsApp with personalized assistance.
+            </p>
+            <Button asChild size="lg">
+              <Link to="/request">
+                Request a Service
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
           </div>
         </section>
       </main>
