@@ -12,7 +12,11 @@ interface SearchResult {
   excerpt?: string;
 }
 
-const SearchBar = () => {
+interface SearchBarProps {
+  isMobile?: boolean;
+}
+
+const SearchBar = ({ isMobile = false }: SearchBarProps) => {
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -152,19 +156,21 @@ const SearchBar = () => {
   };
 
   return (
-    <div ref={searchRef} className="relative">
+    <div ref={searchRef} className="relative w-full">
       <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+        <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
         <Input
           type="text"
-          placeholder="Search..."
+          placeholder={isMobile ? "Search" : "Search..."}
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
-          className="pl-9 pr-8 w-40 lg:w-56 h-9 bg-background border-border focus:ring-primary"
+          className={`pl-8 pr-7 h-9 bg-background border-border focus:ring-primary ${
+            isMobile ? 'w-full text-sm' : 'w-40 lg:w-56'
+          }`}
         />
         {query && (
           <button
@@ -181,7 +187,9 @@ const SearchBar = () => {
 
       {/* Results Dropdown */}
       {isOpen && query.trim().length >= 2 && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-background border border-border rounded-lg shadow-lg z-50 overflow-hidden">
+        <div className={`absolute top-full left-0 mt-2 bg-background border border-border rounded-lg shadow-lg z-50 overflow-hidden ${
+          isMobile ? 'right-0 min-w-[250px]' : 'right-0'
+        }`}>
           {isLoading ? (
             <div className="p-4 text-center text-muted-foreground text-sm">
               Searching...

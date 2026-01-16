@@ -36,19 +36,24 @@ const Header = () => {
   return (
     <header className="bg-white/95 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-40">
       <div className="container-custom">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-16 gap-2">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-2 shrink-0">
             <img 
               src={logoSrc} 
               alt={siteTitle} 
-              className="h-12 w-12 sm:h-14 sm:w-14 object-contain rounded-lg"
+              className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 object-contain rounded-lg"
             />
-            <div>
+            <div className="hidden sm:block">
               <h1 className="text-sm sm:text-base md:text-lg font-bold gradient-text leading-tight">{siteTitle}</h1>
               <p className="text-[10px] sm:text-xs text-gray-500 -mt-0.5 hidden xs:block">{getSetting('site_description', 'Your Digital Gateway')}</p>
             </div>
           </Link>
+
+          {/* Mobile Search - Between logo and menu */}
+          <div className="flex-1 md:hidden max-w-[180px] mx-2">
+            <SearchBar isMobile />
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
@@ -120,7 +125,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden p-2"
+            className="md:hidden p-2 shrink-0"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -185,9 +190,6 @@ const Header = () => {
               >
                 Admin Login
               </Link>
-              <div className="pt-4">
-                <SearchBar />
-              </div>
               <div className="flex flex-col space-y-2 pt-4">
                 <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-white w-full">
                   <Phone className="w-4 h-4 mr-2" />
