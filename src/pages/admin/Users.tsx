@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, ArrowLeft, UserPlus, Trash2, Shield, AlertCircle } from "lucide-react";
+import { Loader2, ArrowLeft, UserPlus, Trash2, Shield, Copy, Check, Key } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
   Table,
@@ -24,6 +24,13 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import AdminBottomNav from "@/components/admin/AdminBottomNav";
 
@@ -31,7 +38,13 @@ interface UserRole {
   id: string;
   user_id: string;
   role: string;
+  email: string | null;
   created_at: string;
+}
+
+interface NewUserCredentials {
+  email: string;
+  password: string;
 }
 
 export default function AdminUsers() {
@@ -43,6 +56,8 @@ export default function AdminUsers() {
   const [email, setEmail] = useState("");
   const [role, setRole] = useState<Database["public"]["Enums"]["app_role"]>("admin");
   const [adding, setAdding] = useState(false);
+  const [newCredentials, setNewCredentials] = useState<NewUserCredentials | null>(null);
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (!loading && !isAdmin) {
@@ -107,10 +122,18 @@ export default function AdminUsers() {
         throw new Error(response.data.error);
       }
 
-      toast({
-        title: "Success",
-        description: response.data?.message || "User role added successfully",
-      });
+      // Show credentials dialog if new user was created
+      if (response.data?.isNewUser && response.data?.tempPassword) {
+        setNewCredentials({
+          email: response.data.email,
+          password: response.data.tempPassword,
+        });
+      } else {
+        toast({
+          title: "Success",
+          description: response.data?.message || "User role added successfully",
+        });
+      }
 
       setEmail("");
       setRole("admin");
@@ -152,6 +175,15 @@ export default function AdminUsers() {
     }
   };
 
+  const copyCredentials = () => {
+    if (newCredentials) {
+      const text = `Email: ${newCredentials.email}\nPassword: ${newCredentials.password}`;
+      navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
   if (loading || loadingUsers) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -184,13 +216,6 @@ export default function AdminUsers() {
       </header>
 
       <main className="container mx-auto px-4 py-6 space-y-6">
-        <Alert>
-          <AlertCircle className="h-4 w-4" />
-          <AlertDescription>
-            Users must sign up first before you can grant them admin access. Enter their registered email address below.
-          </AlertDescription>
-        </Alert>
-
         <Card>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
@@ -198,19 +223,19 @@ export default function AdminUsers() {
               Add New Admin
             </CardTitle>
             <CardDescription>
-              Grant admin privileges to an existing user by their email
+              Enter an email to create a new admin account or add admin privileges to an existing user
             </CardDescription>
           </CardHeader>
           <CardContent>
             <div className="grid gap-4 sm:grid-cols-[1fr,auto,auto] items-end">
               <div className="space-y-2">
-                <Label htmlFor="email">User Email</Label>
+                <Label htmlFor="email">Email Address</Label>
                 <Input
                   id="email"
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="user@example.com"
+                  placeholder="newadmin@example.com"
                 />
               </div>
               <div className="space-y-2">
@@ -231,7 +256,7 @@ export default function AdminUsers() {
                 ) : (
                   <UserPlus className="mr-2 h-4 w-4" />
                 )}
-                Add Role
+                Add Admin
               </Button>
             </div>
           </CardContent>
@@ -241,7 +266,7 @@ export default function AdminUsers() {
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Shield className="h-5 w-5" />
-              Current User Roles
+              Current Admins
             </CardTitle>
             <CardDescription>
               {users.length} user{users.length !== 1 ? 's' : ''} with assigned roles
@@ -257,18 +282,21 @@ export default function AdminUsers() {
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>User ID</TableHead>
+                      <TableHead>Email</TableHead>
                       <TableHead>Role</TableHead>
-                      <TableHead>Added</TableHead>
+                      <TableHead className="hidden sm:table-cell">Added</TableHead>
                       <TableHead className="w-20">Actions</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
                     {users.map((user) => (
                       <TableRow key={user.id}>
-                        <TableCell className="font-mono text-xs sm:text-sm">
-                          <span className="hidden sm:inline">{user.user_id}</span>
-                          <span className="sm:hidden">{user.user_id.slice(0, 8)}...</span>
+                        <TableCell className="text-sm">
+                          {user.email || (
+                            <span className="text-muted-foreground font-mono text-xs">
+                              {user.user_id.slice(0, 8)}...
+                            </span>
+                          )}
                         </TableCell>
                         <TableCell>
                           <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
@@ -279,7 +307,7 @@ export default function AdminUsers() {
                             {user.role}
                           </span>
                         </TableCell>
-                        <TableCell className="text-sm text-muted-foreground">
+                        <TableCell className="text-sm text-muted-foreground hidden sm:table-cell">
                           {new Date(user.created_at).toLocaleDateString()}
                         </TableCell>
                         <TableCell>
@@ -300,6 +328,55 @@ export default function AdminUsers() {
           </CardContent>
         </Card>
       </main>
+
+      {/* Credentials Dialog */}
+      <Dialog open={!!newCredentials} onOpenChange={() => setNewCredentials(null)}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Key className="h-5 w-5" />
+              New Admin Account Created
+            </DialogTitle>
+            <DialogDescription>
+              Share these credentials with the new admin. They should change the password after logging in.
+            </DialogDescription>
+          </DialogHeader>
+          
+          {newCredentials && (
+            <div className="space-y-4">
+              <Alert>
+                <AlertDescription className="space-y-2">
+                  <div>
+                    <strong>Email:</strong> {newCredentials.email}
+                  </div>
+                  <div>
+                    <strong>Password:</strong>{" "}
+                    <code className="bg-muted px-2 py-1 rounded">{newCredentials.password}</code>
+                  </div>
+                </AlertDescription>
+              </Alert>
+              
+              <Button onClick={copyCredentials} variant="outline" className="w-full">
+                {copied ? (
+                  <>
+                    <Check className="mr-2 h-4 w-4" />
+                    Copied!
+                  </>
+                ) : (
+                  <>
+                    <Copy className="mr-2 h-4 w-4" />
+                    Copy Credentials
+                  </>
+                )}
+              </Button>
+              
+              <p className="text-xs text-muted-foreground text-center">
+                This password will not be shown again. Make sure to copy it now.
+              </p>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <AdminBottomNav />
     </div>
