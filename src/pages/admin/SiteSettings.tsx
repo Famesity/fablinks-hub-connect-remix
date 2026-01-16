@@ -361,33 +361,54 @@ export default function AdminSiteSettings() {
                     }}
                   />
                   {(logoFile || settings.find(s => s.key === 'site_logo')?.value) && (
-                    <div className="flex items-center gap-4 mt-3 p-3 bg-background rounded-lg border">
-                      <div className="relative">
-                        <img 
-                          src={logoFile ? URL.createObjectURL(logoFile) : settings.find(s => s.key === 'site_logo')?.value} 
-                          alt="Logo preview" 
-                          className="h-16 w-16 object-contain rounded-lg border"
-                        />
+                    <div className="space-y-4 mt-3">
+                      {/* Main Logo Preview */}
+                      <div className="flex items-center gap-4 p-3 bg-background rounded-lg border">
+                        <div className="relative">
+                          <img 
+                            src={logoFile ? URL.createObjectURL(logoFile) : settings.find(s => s.key === 'site_logo')?.value} 
+                            alt="Logo preview" 
+                            className="h-16 w-16 object-contain rounded-lg border"
+                          />
+                        </div>
+                        <div className="flex-1">
+                          <p className="text-sm font-medium">
+                            {logoFile ? 'New logo selected' : 'Current logo'}
+                          </p>
+                          <p className="text-xs text-muted-foreground">
+                            {logoFile ? `${logoFile.name} (${(logoFile.size / 1024).toFixed(1)}KB)` : 'Uploaded previously'}
+                          </p>
+                        </div>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="sm"
+                          onClick={() => {
+                            setLogoFile(null);
+                            updateSetting('site_logo', '');
+                          }}
+                        >
+                          Remove
+                        </Button>
                       </div>
-                      <div className="flex-1">
-                        <p className="text-sm font-medium">
-                          {logoFile ? 'New logo selected' : 'Current logo'}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          {logoFile ? `${logoFile.name} (${(logoFile.size / 1024).toFixed(1)}KB)` : 'Uploaded previously'}
+                      
+                      {/* Favicon Preview - simulates browser tab */}
+                      <div className="p-3 bg-muted/50 rounded-lg border border-dashed">
+                        <p className="text-xs font-medium text-muted-foreground mb-2">Browser Tab Preview:</p>
+                        <div className="flex items-center gap-2 bg-background rounded-t-md border border-b-0 px-3 py-2 max-w-[200px]">
+                          <img 
+                            src={logoFile ? URL.createObjectURL(logoFile) : settings.find(s => s.key === 'site_logo')?.value} 
+                            alt="Favicon preview" 
+                            className="h-4 w-4 object-contain"
+                            style={{ imageRendering: 'auto' }}
+                          />
+                          <span className="text-xs truncate text-foreground/80">Fablinks Compu...</span>
+                          <span className="text-muted-foreground text-xs ml-auto">×</span>
+                        </div>
+                        <p className="text-[10px] text-muted-foreground mt-2 italic">
+                          This is how your logo will appear as a favicon (16×16px) in browser tabs.
                         </p>
                       </div>
-                      <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          setLogoFile(null);
-                          updateSetting('site_logo', '');
-                        }}
-                      >
-                        Remove
-                      </Button>
                     </div>
                   )}
                 </div>
