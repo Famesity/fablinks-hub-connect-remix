@@ -67,7 +67,7 @@ const FeaturedServices = () => {
   const [loading, setLoading] = useState(true);
   const { getSetting } = useSiteSettings();
   
-  const whatsapp = getSetting('whatsapp_number', '2347068122861');
+  const whatsapp = getSetting('whatsapp_number', '2348106411463');
 
   useEffect(() => {
     fetchServices();

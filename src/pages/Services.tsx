@@ -1,38 +1,47 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, GraduationCap, Building2, FileText, Shield, Smartphone, Filter, School, Printer, CreditCard, Globe, FileImage, Camera } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import ServiceRequestForm from '@/components/ServiceRequestForm';
+import { useSiteSettings } from '@/hooks/useSiteSettings';
 
 const Services = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedSchool, setSelectedSchool] = useState('general');
+  const { getSetting } = useSiteSettings();
+  
+  const whatsappNumber = getSetting('whatsapp_number', '2348106411463');
+  
+  // Helper function to generate WhatsApp link
+  const getWhatsAppLink = (message: string) => {
+    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+  };
 
-  const serviceCategories = [
+  const serviceCategories = useMemo(() => [
     {
       id: 'education',
       title: '🎓 Education & Exams',
       icon: GraduationCap,
       color: 'bg-blue-500',
       services: [
-        { name: 'WAEC Scratch Card', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20would%20like%20to%20buy%20a%20WAEC%20Scratch%20Card.' },
-        { name: 'NECO Result Token', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20a%20NECO%20Result%20Token.' },
-        { name: 'NABTEB Scratch Card', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20would%20like%20to%20buy%20a%20NABTEB%20Scratch%20Card.' },
-        { name: 'NBAIS Scratch Card', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20an%20NBAIS%20Scratch%20Card.' },
-        { name: 'WAEC Verification Pin (NYSC)', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20a%20WAEC%20Verification%20Pin%20for%20NYSC.' },
-        { name: 'NECO e-Verify Token', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20a%20NECO%20e-Verify%20Token.' },
-        { name: 'JAMB Original Result Printing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20JAMB%20Original%20Result%20Printing.' },
-        { name: 'JAMB Admission Letter Printing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20JAMB%20Admission%20Letter%20Printing.' },
-        { name: 'JAMB Reprinting', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20JAMB%20Reprinting.' },
-        { name: 'Check JAMB Admission Status', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20please%20help%20me%20check%20my%20JAMB%20Admission%20Status.' },
-        { name: 'JAMB O\'Level Upload', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20JAMB%20O%E2%80%99Level%20Result%20Upload.' },
-        { name: 'JAMB Profile Code Retrieval', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20retrieving%20my%20JAMB%20Profile%20Code.' },
-        { name: 'JAMB Registration Number Retrieval', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20retrieving%20my%20JAMB%20Registration%20Number.' },
-        { name: 'WAEC GCE Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20WAEC%20GCE%20Registration.' },
-        { name: 'NECO Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20NECO%20Registration.' }
+        { name: 'WAEC Scratch Card', message: 'Hello Fablinks Online Café, I would like to buy a WAEC Scratch Card.' },
+        { name: 'NECO Result Token', message: 'Hello Fablinks Online Café, I need a NECO Result Token.' },
+        { name: 'NABTEB Scratch Card', message: 'Hello Fablinks Online Café, I would like to buy a NABTEB Scratch Card.' },
+        { name: 'NBAIS Scratch Card', message: 'Hello Fablinks Online Café, I need an NBAIS Scratch Card.' },
+        { name: 'WAEC Verification Pin (NYSC)', message: 'Hello Fablinks Online Café, I need a WAEC Verification Pin for NYSC.' },
+        { name: 'NECO e-Verify Token', message: 'Hello Fablinks Online Café, I need a NECO e-Verify Token.' },
+        { name: 'JAMB Original Result Printing', message: 'Hello Fablinks Online Café, I need help with JAMB Original Result Printing.' },
+        { name: 'JAMB Admission Letter Printing', message: 'Hello Fablinks Online Café, I need help with JAMB Admission Letter Printing.' },
+        { name: 'JAMB Reprinting', message: 'Hello Fablinks Online Café, I need help with JAMB Reprinting.' },
+        { name: 'Check JAMB Admission Status', message: 'Hello Fablinks Online Café, please help me check my JAMB Admission Status.' },
+        { name: 'JAMB O\'Level Upload', message: 'Hello Fablinks Online Café, I need help with JAMB O-Level Result Upload.' },
+        { name: 'JAMB Profile Code Retrieval', message: 'Hello Fablinks Online Café, I need help retrieving my JAMB Profile Code.' },
+        { name: 'JAMB Registration Number Retrieval', message: 'Hello Fablinks Online Café, I need help retrieving my JAMB Registration Number.' },
+        { name: 'WAEC GCE Registration', message: 'Hello Fablinks Online Café, I need help with WAEC GCE Registration.' },
+        { name: 'NECO Registration', message: 'Hello Fablinks Online Café, I need help with NECO Registration.' }
       ]
     },
     {
@@ -41,15 +50,15 @@ const Services = () => {
       icon: Building2,
       color: 'bg-green-500',
       services: [
-        { name: 'Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Acceptance%20Fee%20Payment.' },
-        { name: 'School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20School%20Fees%20Payment.' },
-        { name: 'Hostel Accommodation', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Hostel%20Accommodation.' },
-        { name: 'Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20checking%20my%20University%20Results.' },
-        { name: 'Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Course%20Registration.' },
-        { name: 'Transcript Application', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Transcript%20Application.' },
-        { name: 'Post-UTME Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Post-UTME%20Registration.' },
-        { name: 'Student ID Card Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Student%20ID%20Card%20Services.' },
-        { name: 'Medical Form Submission', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Medical%20Form%20Submission.' }
+        { name: 'Acceptance Fee Payment', message: 'Hello Fablinks Online Café, I need help with Acceptance Fee Payment.' },
+        { name: 'School Fees Payment', message: 'Hello Fablinks Online Café, I need help with School Fees Payment.' },
+        { name: 'Hostel Accommodation', message: 'Hello Fablinks Online Café, I need help with Hostel Accommodation.' },
+        { name: 'Results Checking', message: 'Hello Fablinks Online Café, I need help checking my University Results.' },
+        { name: 'Course Registration', message: 'Hello Fablinks Online Café, I need help with Course Registration.' },
+        { name: 'Transcript Application', message: 'Hello Fablinks Online Café, I need help with Transcript Application.' },
+        { name: 'Post-UTME Registration', message: 'Hello Fablinks Online Café, I need help with Post-UTME Registration.' },
+        { name: 'Student ID Card Services', message: 'Hello Fablinks Online Café, I need help with Student ID Card Services.' },
+        { name: 'Medical Form Submission', message: 'Hello Fablinks Online Café, I need help with Medical Form Submission.' }
       ]
     },
     {
@@ -58,12 +67,12 @@ const Services = () => {
       icon: FileText,
       color: 'bg-purple-500',
       services: [
-        { name: 'Project Writing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Project%20Writing.' },
-        { name: 'Assignments & Research', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Assignments%20and%20Research.' },
-        { name: 'Seminars & Presentations', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Seminar%20or%20Presentation%20Preparation.' },
-        { name: 'Thesis/Dissertation Support', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Thesis/Dissertation%20writing.' },
-        { name: 'CV/Resume Writing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20CV/Resume%20writing.' },
-        { name: 'Business Plan Writing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Business%20Plan%20writing.' }
+        { name: 'Project Writing', message: 'Hello Fablinks Online Café, I need help with Project Writing.' },
+        { name: 'Assignments & Research', message: 'Hello Fablinks Online Café, I need help with Assignments and Research.' },
+        { name: 'Seminars & Presentations', message: 'Hello Fablinks Online Café, I need help with Seminar or Presentation Preparation.' },
+        { name: 'Thesis/Dissertation Support', message: 'Hello Fablinks Online Café, I need help with Thesis/Dissertation writing.' },
+        { name: 'CV/Resume Writing', message: 'Hello Fablinks Online Café, I need help with CV/Resume writing.' },
+        { name: 'Business Plan Writing', message: 'Hello Fablinks Online Café, I need help with Business Plan writing.' }
       ]
     },
     {
@@ -72,14 +81,14 @@ const Services = () => {
       icon: Shield,
       color: 'bg-orange-500',
       services: [
-        { name: 'NYSC Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20NYSC%20Registration.' },
-        { name: 'NYSC Green Card Printing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20NYSC%20Green%20Card%20Printing.' },
-        { name: 'NYSC Call-Up Letter Printing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20NYSC%20Call-Up%20Letter%20Printing.' },
-        { name: 'NIN / NIMC Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20NIN/NIMC%20Services.' },
-        { name: 'Police Character Certificate', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Police%20Character%20Certificate.' },
-        { name: 'International Passport Application', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20International%20Passport%20Application.' },
-        { name: 'Drivers License Application', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Drivers%20License%20Application.' },
-        { name: 'Voters Card Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Voters%20Card%20Registration.' }
+        { name: 'NYSC Registration', message: 'Hello Fablinks Online Café, I need help with NYSC Registration.' },
+        { name: 'NYSC Green Card Printing', message: 'Hello Fablinks Online Café, I need help with NYSC Green Card Printing.' },
+        { name: 'NYSC Call-Up Letter Printing', message: 'Hello Fablinks Online Café, I need help with NYSC Call-Up Letter Printing.' },
+        { name: 'NIN / NIMC Services', message: 'Hello Fablinks Online Café, I need help with NIN/NIMC Services.' },
+        { name: 'Police Character Certificate', message: 'Hello Fablinks Online Café, I need help with Police Character Certificate.' },
+        { name: 'International Passport Application', message: 'Hello Fablinks Online Café, I need help with International Passport Application.' },
+        { name: 'Drivers License Application', message: 'Hello Fablinks Online Café, I need help with Drivers License Application.' },
+        { name: 'Voters Card Registration', message: 'Hello Fablinks Online Café, I need help with Voters Card Registration.' }
       ]
     },
     {
@@ -88,13 +97,13 @@ const Services = () => {
       icon: Smartphone,
       color: 'bg-red-500',
       services: [
-        { name: 'Airtime Top-Up', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20want%20to%20buy%20Airtime.' },
-        { name: 'Data Subscription', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20want%20to%20subscribe%20for%20Data.' },
-        { name: 'Internet Subscription', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20want%20to%20renew%20Internet%20Subscription.' },
-        { name: 'Cable TV Subscription', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20want%20to%20pay%20for%20Cable%20TV%20Subscription.' },
-        { name: 'Electricity Bill Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20want%20to%20pay%20my%20Electricity%20Bill.' },
-        { name: 'Water Bill Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20want%20to%20pay%20my%20Water%20Bill.' },
-        { name: 'Betting & Gaming Top-up', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20want%20to%20fund%20my%20betting%20account.' }
+        { name: 'Airtime Top-Up', message: 'Hello Fablinks Online Café, I want to buy Airtime.' },
+        { name: 'Data Subscription', message: 'Hello Fablinks Online Café, I want to subscribe for Data.' },
+        { name: 'Internet Subscription', message: 'Hello Fablinks Online Café, I want to renew Internet Subscription.' },
+        { name: 'Cable TV Subscription', message: 'Hello Fablinks Online Café, I want to pay for Cable TV Subscription.' },
+        { name: 'Electricity Bill Payment', message: 'Hello Fablinks Online Café, I want to pay my Electricity Bill.' },
+        { name: 'Water Bill Payment', message: 'Hello Fablinks Online Café, I want to pay my Water Bill.' },
+        { name: 'Betting & Gaming Top-up', message: 'Hello Fablinks Online Café, I want to fund my betting account.' }
       ]
     },
     {
@@ -103,13 +112,13 @@ const Services = () => {
       icon: Printer,
       color: 'bg-teal-500',
       services: [
-        { name: 'Document Printing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20document%20printing%20services.' },
-        { name: 'Passport Photograph', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20passport%20photograph%20services.' },
-        { name: 'Lamination Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20lamination%20services.' },
-        { name: 'Photocopy Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20photocopy%20services.' },
-        { name: 'Binding Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20document%20binding%20services.' },
-        { name: 'Scanning Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20document%20scanning%20services.' },
-        { name: 'Large Format Printing', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20large%20format%20printing%20services.' }
+        { name: 'Document Printing', message: 'Hello Fablinks Online Café, I need document printing services.' },
+        { name: 'Passport Photograph', message: 'Hello Fablinks Online Café, I need passport photograph services.' },
+        { name: 'Lamination Services', message: 'Hello Fablinks Online Café, I need lamination services.' },
+        { name: 'Photocopy Services', message: 'Hello Fablinks Online Café, I need photocopy services.' },
+        { name: 'Binding Services', message: 'Hello Fablinks Online Café, I need document binding services.' },
+        { name: 'Scanning Services', message: 'Hello Fablinks Online Café, I need document scanning services.' },
+        { name: 'Large Format Printing', message: 'Hello Fablinks Online Café, I need large format printing services.' }
       ]
     },
     {
@@ -118,15 +127,15 @@ const Services = () => {
       icon: Globe,
       color: 'bg-indigo-500',
       services: [
-        { name: 'Computer Training', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20computer%20training%20services.' },
-        { name: 'Email Setup', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20email%20setup.' },
-        { name: 'Online Application Assistance', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20online%20applications.' },
-        { name: 'Digital Marketing Services', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20digital%20marketing%20services.' },
-        { name: 'Website Development', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20website%20development%20services.' },
-        { name: 'Social Media Management', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20social%20media%20management%20services.' }
+        { name: 'Computer Training', message: 'Hello Fablinks Online Café, I need computer training services.' },
+        { name: 'Email Setup', message: 'Hello Fablinks Online Café, I need help with email setup.' },
+        { name: 'Online Application Assistance', message: 'Hello Fablinks Online Café, I need help with online applications.' },
+        { name: 'Digital Marketing Services', message: 'Hello Fablinks Online Café, I need digital marketing services.' },
+        { name: 'Website Development', message: 'Hello Fablinks Online Café, I need website development services.' },
+        { name: 'Social Media Management', message: 'Hello Fablinks Online Café, I need social media management services.' }
       ]
     }
-  ];
+  ], []);
 
   const nigerianSchools = [
     {
@@ -454,7 +463,12 @@ const Services = () => {
 
   const getSchoolServices = () => {
     const school = nigerianSchools.find(s => s.name.toLowerCase().includes(selectedSchool.toLowerCase()));
-    return school ? school.services : [];
+    if (!school) return [];
+    // Transform link-based services to message-based for dynamic WhatsApp number
+    return school.services.map(service => ({
+      name: service.name,
+      message: `Hello Fablinks Online Café, I need help with ${service.name}.`
+    }));
   };
 
   const filteredCategories = getFilteredCategories();
@@ -544,7 +558,7 @@ const Services = () => {
                     <h3 className="text-lg font-semibold mb-4">{service.name}</h3>
                     <Button 
                       className="w-full btn-whatsapp justify-center"
-                      onClick={() => window.open(service.link, '_blank')}
+                      onClick={() => window.open(getWhatsAppLink(service.message), '_blank')}
                     >
                       Get Started
                     </Button>
@@ -565,7 +579,7 @@ const Services = () => {
               </p>
               <Button 
                 className="btn-whatsapp"
-                onClick={() => window.open('https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20my%20school%20portal%20services.%20My%20school%20is%20not%20listed.', '_blank')}
+                onClick={() => window.open(getWhatsAppLink('Hello Fablinks Online Café, I need help with my school portal services. My school is not listed.'), '_blank')}
               >
                 Chat with us for your school
               </Button>
@@ -593,7 +607,7 @@ const Services = () => {
                         <h3 className="text-lg font-semibold mb-4">{service.name}</h3>
                         <Button 
                           className="w-full btn-whatsapp justify-center"
-                          onClick={() => window.open(service.link, '_blank')}
+                          onClick={() => window.open(getWhatsAppLink(service.message), '_blank')}
                         >
                           Get Started
                         </Button>

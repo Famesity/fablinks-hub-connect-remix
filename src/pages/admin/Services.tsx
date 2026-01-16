@@ -20,6 +20,7 @@ interface Service {
   name: string;
   description: string | null;
   price: number | null;
+  whatsapp_message: string | null;
 }
 
 interface School {
@@ -42,6 +43,7 @@ export default function AdminServices() {
     name: "",
     description: "",
     price: "",
+    whatsapp_message: "",
   });
 
   useEffect(() => {
@@ -104,6 +106,7 @@ export default function AdminServices() {
         name: formData.name,
         description: formData.description || null,
         price: formData.price ? parseFloat(formData.price) : null,
+        whatsapp_message: formData.whatsapp_message || null,
       };
 
       if (editingService) {
@@ -123,7 +126,7 @@ export default function AdminServices() {
 
       setIsDialogOpen(false);
       setEditingService(null);
-      setFormData({ school_id: "", category: "", name: "", description: "", price: "" });
+      setFormData({ school_id: "", category: "", name: "", description: "", price: "", whatsapp_message: "" });
       fetchServices();
     } catch (error: any) {
       toast({
@@ -142,6 +145,7 @@ export default function AdminServices() {
       name: service.name,
       description: service.description || "",
       price: service.price?.toString() || "",
+      whatsapp_message: service.whatsapp_message || "",
     });
     setIsDialogOpen(true);
   };
@@ -200,7 +204,7 @@ export default function AdminServices() {
                 <Button
                   onClick={() => {
                     setEditingService(null);
-                    setFormData({ school_id: "", category: "", name: "", description: "", price: "" });
+                    setFormData({ school_id: "", category: "", name: "", description: "", price: "", whatsapp_message: "" });
                   }}
                 >
                   <Plus className="mr-2 h-4 w-4" />
@@ -266,6 +270,19 @@ export default function AdminServices() {
                       value={formData.price}
                       onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                     />
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="whatsapp_message">Custom WhatsApp Message (Optional)</Label>
+                    <Textarea
+                      id="whatsapp_message"
+                      value={formData.whatsapp_message}
+                      onChange={(e) => setFormData({ ...formData, whatsapp_message: e.target.value })}
+                      placeholder="e.g., Hello Fablinks, I'm interested in [Service Name]..."
+                      rows={3}
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Leave empty to use a default message based on the service name
+                    </p>
                   </div>
                   <Button type="submit" className="w-full">
                     {editingService ? "Update" : "Add"} Service
