@@ -11,6 +11,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Loader2, ArrowLeft, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Helmet } from "react-helmet";
+import SocialShareButtons from "@/components/SocialShareButtons";
+import RelatedPosts from "@/components/RelatedPosts";
 
 interface BlogPost {
   id: string;
@@ -209,20 +211,40 @@ export default function BlogPost() {
           )}
 
           <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-          <p className="text-muted-foreground mb-8">
-            {new Date(post.created_at).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </p>
+          
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+            <p className="text-muted-foreground">
+              {new Date(post.created_at).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </p>
+            <SocialShareButtons 
+              url={window.location.href} 
+              title={post.title}
+              description={post.excerpt}
+            />
+          </div>
 
           <div
-            className="prose prose-lg max-w-none mb-16"
+            className="prose prose-lg max-w-none mb-12"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
-          <div className="border-t pt-16">
+          {/* Social Share at Bottom */}
+          <div className="flex justify-center py-6 border-y border-border mb-8">
+            <SocialShareButtons 
+              url={window.location.href} 
+              title={post.title}
+              description={post.excerpt}
+            />
+          </div>
+
+          {/* Related Posts */}
+          <RelatedPosts currentPostId={post.id} />
+
+          <div className="border-t pt-16 mt-8">
             <h2 className="text-3xl font-bold mb-8">Comments ({comments.length})</h2>
 
             <Card className="mb-8">
