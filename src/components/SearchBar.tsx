@@ -3,6 +3,7 @@ import { Search, X, FileText, Briefcase, BookOpen } from 'lucide-react';
 import { Input } from '@/components/ui/input';
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '@/integrations/supabase/client';
+import { useSiteSettings } from '@/hooks/useSiteSettings';
 
 interface SearchResult {
   id: string;
@@ -17,6 +18,8 @@ interface SearchBarProps {
 }
 
 const SearchBar = ({ isMobile = false }: SearchBarProps) => {
+  const { getSetting } = useSiteSettings();
+  const searchPlaceholder = getSetting('search_placeholder', 'Search...');
   const [query, setQuery] = useState('');
   const [results, setResults] = useState<SearchResult[]>([]);
   const [isOpen, setIsOpen] = useState(false);
@@ -158,18 +161,18 @@ const SearchBar = ({ isMobile = false }: SearchBarProps) => {
   return (
     <div ref={searchRef} className="relative w-full">
       <div className="relative">
-        <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+        <Search className="absolute left-2 top-1/2 transform -translate-y-1/2 w-3.5 h-3.5 text-muted-foreground" />
         <Input
           type="text"
-          placeholder={isMobile ? "Search" : "Search..."}
+          placeholder={isMobile ? searchPlaceholder.slice(0, 6) : searchPlaceholder}
           value={query}
           onChange={(e) => {
             setQuery(e.target.value);
             setIsOpen(true);
           }}
           onFocus={() => setIsOpen(true)}
-          className={`pl-8 pr-7 h-9 bg-background border-border focus:ring-primary ${
-            isMobile ? 'w-full text-sm' : 'w-40 lg:w-56'
+          className={`pr-6 bg-background border-border focus:ring-primary ${
+            isMobile ? 'pl-7 h-8 w-full text-xs' : 'pl-8 h-9 w-40 lg:w-56'
           }`}
         />
         {query && (

@@ -36,22 +36,22 @@ const Header = () => {
   return (
     <header className="bg-white/95 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-40">
       <div className="container-custom">
-        <div className="flex items-center justify-between h-16 gap-2">
+        <div className="flex items-center justify-between h-16 gap-1 sm:gap-2">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 shrink-0">
+          <Link to="/" className="flex items-center space-x-1 sm:space-x-2 shrink-0 min-w-0">
             <img 
               src={logoSrc} 
               alt={siteTitle} 
-              className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 object-contain rounded-lg"
+              className="h-9 w-9 sm:h-12 sm:w-12 md:h-14 md:w-14 object-contain rounded-lg shrink-0"
             />
-            <div className="hidden sm:block">
-              <h1 className="text-sm sm:text-base md:text-lg font-bold gradient-text leading-tight">{siteTitle}</h1>
-              <p className="text-[10px] sm:text-xs text-gray-500 -mt-0.5 hidden xs:block">{getSetting('site_description', 'Your Digital Gateway')}</p>
+            <div className="min-w-0">
+              <h1 className="text-xs sm:text-sm md:text-lg font-bold gradient-text leading-tight truncate">{siteTitle}</h1>
+              <p className="text-[9px] sm:text-xs text-gray-500 -mt-0.5 hidden sm:block truncate">{getSetting('site_description', 'Your Digital Gateway')}</p>
             </div>
           </Link>
 
           {/* Mobile Search - Between logo and menu */}
-          <div className="flex-1 md:hidden max-w-[180px] mx-2">
+          <div className="md:hidden w-24 shrink-0">
             <SearchBar isMobile />
           </div>
 
