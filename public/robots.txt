@@ -17,7 +17,11 @@ User-agent: *
 Allow: /
 
 # Sitemap location
+# Static sitemap (fallback)
 Sitemap: https://fablinks-cyber-cafe.lovable.app/sitemap.xml
+
+# Dynamic sitemap (primary - includes blog posts)
+Sitemap: https://fptsmknmmruhmzukheds.supabase.co/functions/v1/sitemap
 
 # Disallow admin pages from indexing
 Disallow: /admin
