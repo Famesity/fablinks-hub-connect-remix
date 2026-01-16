@@ -6,6 +6,16 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
+// Generate a random password
+function generatePassword(length = 12): string {
+  const chars = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghjkmnpqrstuvwxyz23456789!@#$%";
+  let password = "";
+  for (let i = 0; i < length; i++) {
+    password += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return password;
+}
+
 serve(async (req) => {
   if (req.method === "OPTIONS") {
     return new Response(null, { headers: corsHeaders });
@@ -20,7 +30,6 @@ serve(async (req) => {
       );
     }
 
-    // Create client with user's token to verify they're an admin
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
     const supabaseAnonKey = Deno.env.get("SUPABASE_ANON_KEY")!;
     const supabaseServiceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
@@ -29,7 +38,7 @@ serve(async (req) => {
       global: { headers: { Authorization: authHeader } },
     });
 
-    // Verify the requesting user is an admin
+    // Verify the requesting user
     const token = authHeader.replace("Bearer ", "");
     const { data: claimsData, error: claimsError } = await userClient.auth.getUser(token);
     
@@ -41,16 +50,15 @@ serve(async (req) => {
     }
 
     const requestingUserId = claimsData.user.id;
-
-    // Check if requesting user is admin using service role client
     const adminClient = createClient(supabaseUrl, supabaseServiceKey);
     
+    // Check if requesting user is admin
     const { data: adminCheck } = await adminClient
       .from("user_roles")
       .select("role")
       .eq("user_id", requestingUserId)
       .eq("role", "admin")
-      .single();
+      .maybeSingle();
 
     if (!adminCheck) {
       return new Response(
@@ -59,7 +67,6 @@ serve(async (req) => {
       );
     }
 
-    // Get request body
     const { email, role } = await req.json();
 
     if (!email || !role) {
@@ -76,26 +83,35 @@ serve(async (req) => {
       );
     }
 
-    // Look up user by email using admin API
-    const { data: userData, error: userError } = await adminClient.auth.admin.listUsers();
-    
-    if (userError) {
-      console.error("Error listing users:", userError);
-      return new Response(
-        JSON.stringify({ error: "Failed to look up user" }),
-        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
-    }
-
-    const targetUser = userData.users.find(
+    // Check if user already exists
+    const { data: userData } = await adminClient.auth.admin.listUsers();
+    let targetUser = userData?.users?.find(
       (u) => u.email?.toLowerCase() === email.toLowerCase()
     );
 
+    let tempPassword: string | null = null;
+    let isNewUser = false;
+
     if (!targetUser) {
-      return new Response(
-        JSON.stringify({ error: "User not found. They must sign up first." }),
-        { status: 404, headers: { ...corsHeaders, "Content-Type": "application/json" } }
-      );
+      // Create new user with temporary password
+      tempPassword = generatePassword();
+      isNewUser = true;
+
+      const { data: newUser, error: createError } = await adminClient.auth.admin.createUser({
+        email: email,
+        password: tempPassword,
+        email_confirm: true, // Skip email confirmation
+      });
+
+      if (createError) {
+        console.error("Error creating user:", createError);
+        return new Response(
+          JSON.stringify({ error: `Failed to create user: ${createError.message}` }),
+          { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
+        );
+      }
+
+      targetUser = newUser.user;
     }
 
     // Check if role already exists
@@ -104,7 +120,7 @@ serve(async (req) => {
       .select("id")
       .eq("user_id", targetUser.id)
       .eq("role", role)
-      .single();
+      .maybeSingle();
 
     if (existingRole) {
       return new Response(
@@ -113,10 +129,10 @@ serve(async (req) => {
       );
     }
 
-    // Add the role
+    // Add the role with email for display purposes
     const { error: insertError } = await adminClient
       .from("user_roles")
-      .insert({ user_id: targetUser.id, role });
+      .insert({ user_id: targetUser.id, role, email: email.toLowerCase() });
 
     if (insertError) {
       console.error("Error adding role:", insertError);
@@ -126,12 +142,22 @@ serve(async (req) => {
       );
     }
 
+    const response: any = { 
+      success: true, 
+      message: isNewUser 
+        ? `Created new ${role} account for ${email}` 
+        : `Added ${role} role to existing user ${email}`,
+      user_id: targetUser.id,
+      email: email,
+      isNewUser
+    };
+
+    if (tempPassword) {
+      response.tempPassword = tempPassword;
+    }
+
     return new Response(
-      JSON.stringify({ 
-        success: true, 
-        message: `Successfully added ${role} role to ${email}`,
-        user_id: targetUser.id 
-      }),
+      JSON.stringify(response),
       { status: 200, headers: { ...corsHeaders, "Content-Type": "application/json" } }
     );
 
