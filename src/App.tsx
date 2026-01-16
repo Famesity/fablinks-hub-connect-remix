@@ -52,6 +52,7 @@ function AppContent() {
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/dashboard" element={<AdminDashboard />} />
           <Route path="/admin/content" element={<AdminContent />} />
           <Route path="/admin/landing" element={<AdminLanding />} />
           <Route path="/admin/customers" element={<AdminCustomers />} />
