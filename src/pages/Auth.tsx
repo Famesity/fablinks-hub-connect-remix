@@ -38,12 +38,14 @@ export default function Auth() {
           description: error.message,
           variant: "destructive",
         });
+        setIsLoading(false);
       } else {
         toast({
           title: "Success",
           description: isLogin ? "Logged in successfully" : "Account created successfully",
         });
-        navigate("/admin");
+        // Navigation is handled by the useEffect when user state updates
+        // Don't set isLoading to false here - let the redirect happen
       }
     } catch (error: any) {
       toast({
@@ -51,7 +53,6 @@ export default function Auth() {
         description: error.message,
         variant: "destructive",
       });
-    } finally {
       setIsLoading(false);
     }
   };
