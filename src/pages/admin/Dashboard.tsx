@@ -26,7 +26,7 @@ export default function AdminDashboard() {
     if (!loading && !isAdmin) {
       navigate("/auth");
     }
-  }, [isAdmin, loading, navigate]);
+  }, [isAdmin, loading]);
 
   useEffect(() => {
     if (isAdmin) {
