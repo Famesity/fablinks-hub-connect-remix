@@ -36,6 +36,8 @@ import AdminWhyChooseUs from "./pages/admin/WhyChooseUs";
 import AdminContent from "./pages/admin/Content";
 import AdminLanding from "./pages/admin/Landing";
 import AdminCustomers from "./pages/admin/Customers";
+import AdminServiceRequests from "./pages/admin/ServiceRequests";
+import AdminAnnouncement from "./pages/admin/Announcement";
 import BlogPost from "./pages/BlogPost";
 import Page from "./pages/Page";
 
@@ -77,6 +79,8 @@ function AppContent() {
           <Route path="/admin/how-it-works" element={<AdminHowItWorks />} />
           <Route path="/admin/featured-services" element={<AdminFeaturedServices />} />
           <Route path="/admin/why-choose-us" element={<AdminWhyChooseUs />} />
+          <Route path="/admin/service-requests" element={<AdminServiceRequests />} />
+          <Route path="/admin/announcement" element={<AdminAnnouncement />} />
           <Route path="/page/:slug" element={<Page />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

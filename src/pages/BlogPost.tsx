@@ -11,6 +11,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Loader2, ArrowLeft, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Helmet } from "react-helmet";
+import SocialShareButtons from "@/components/SocialShareButtons";
+import RelatedPosts from "@/components/RelatedPosts";
 
 interface BlogPost {
   id: string;
@@ -218,11 +220,23 @@ export default function BlogPost() {
           </p>
 
           <div
-            className="prose prose-lg max-w-none mb-16"
+            className="prose prose-lg max-w-none mb-8"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
-          <div className="border-t pt-16">
+          {/* Social Share Buttons */}
+          <div className="border-t border-b py-6 my-8">
+            <SocialShareButtons 
+              url={window.location.href} 
+              title={post.title}
+              description={post.excerpt || ''}
+            />
+          </div>
+
+          {/* Related Posts */}
+          <RelatedPosts currentPostId={post.id} />
+
+          <div className="border-t pt-16 mt-8">
             <h2 className="text-3xl font-bold mb-8">Comments ({comments.length})</h2>
 
             <Card className="mb-8">
