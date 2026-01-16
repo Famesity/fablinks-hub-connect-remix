@@ -312,7 +312,7 @@ export default function AdminSiteSettings() {
       <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         <Tabs defaultValue="general" className="w-full">
           <div className="overflow-x-auto -mx-3 px-3 sm:mx-0 sm:px-0">
-            <TabsList className="inline-flex w-max sm:w-full sm:grid sm:grid-cols-7 gap-1 mb-4">
+            <TabsList className="inline-flex w-max sm:w-full sm:grid sm:grid-cols-8 gap-1 mb-4">
               <TabsTrigger value="general" className="text-xs sm:text-sm px-3 sm:px-4">General</TabsTrigger>
               <TabsTrigger value="hero" className="text-xs sm:text-sm px-3 sm:px-4">Hero</TabsTrigger>
               <TabsTrigger value="contact" className="text-xs sm:text-sm px-3 sm:px-4">Contact</TabsTrigger>
@@ -320,6 +320,7 @@ export default function AdminSiteSettings() {
               <TabsTrigger value="footer" className="text-xs sm:text-sm px-3 sm:px-4">Footer</TabsTrigger>
               <TabsTrigger value="social" className="text-xs sm:text-sm px-3 sm:px-4">Social</TabsTrigger>
               <TabsTrigger value="theme" className="text-xs sm:text-sm px-3 sm:px-4">Theme</TabsTrigger>
+              <TabsTrigger value="advanced" className="text-xs sm:text-sm px-3 sm:px-4">Advanced</TabsTrigger>
             </TabsList>
           </div>
 
@@ -696,6 +697,58 @@ export default function AdminSiteSettings() {
                 </div>
               </CardContent>
             </Card>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="advanced">
+            <div className="space-y-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Cookie Consent Settings</CardTitle>
+                  <CardDescription>Configure the cookie consent banner shown to visitors</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-4 border rounded-lg">
+                    <div>
+                      <Label className="text-base font-medium">Enable Cookie Consent Banner</Label>
+                      <p className="text-sm text-muted-foreground">Show a cookie consent popup to new visitors</p>
+                    </div>
+                    <select
+                      className="border rounded px-3 py-2"
+                      value={settings.find(s => s.key === 'cookie_consent_enabled')?.value || 'true'}
+                      onChange={(e) => updateSetting('cookie_consent_enabled', e.target.value)}
+                    >
+                      <option value="true">Enabled</option>
+                      <option value="false">Disabled</option>
+                    </select>
+                  </div>
+                  {renderSetting("cookie_consent_message", "Cookie Consent Message", true)}
+                  {renderSetting("cookie_policy_link", "Privacy Policy Link")}
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardHeader>
+                  <CardTitle>Dark Mode Settings</CardTitle>
+                  <CardDescription>Configure dark mode toggle visibility</CardDescription>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="flex items-center justify-between p-4 border rounded-lg">
+                    <div>
+                      <Label className="text-base font-medium">Enable Dark Mode Toggle</Label>
+                      <p className="text-sm text-muted-foreground">Show a dark/light mode toggle button in the header</p>
+                    </div>
+                    <select
+                      className="border rounded px-3 py-2"
+                      value={settings.find(s => s.key === 'dark_mode_enabled')?.value || 'true'}
+                      onChange={(e) => updateSetting('dark_mode_enabled', e.target.value)}
+                    >
+                      <option value="true">Enabled</option>
+                      <option value="false">Disabled</option>
+                    </select>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </TabsContent>
         </Tabs>
