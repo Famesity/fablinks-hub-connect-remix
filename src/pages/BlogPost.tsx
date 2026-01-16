@@ -11,6 +11,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Loader2, ArrowLeft, Send } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { Helmet } from "react-helmet";
+import SocialShareButtons from "@/components/SocialShareButtons";
+import RelatedPosts from "@/components/RelatedPosts";
 
 interface BlogPost {
   id: string;
@@ -159,18 +161,19 @@ export default function BlogPost() {
     return (
       <Layout>
         <main className="flex-1 container mx-auto px-4 py-16 text-center">
-          <h1 className="text-4xl font-bold mb-4">Post Not Found</h1>
+          <h1 className="text-2xl font-bold mb-4">Post not found</h1>
           <Button onClick={() => navigate("/blog")}>
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Blog
+            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blog
           </Button>
         </main>
       </Layout>
     );
   }
 
+  const postUrl = `${window.location.origin}/blog/${slug}`;
+
   return (
-    <>
+    <Layout>
       <Helmet>
         <title>{post.seo_title || post.title}</title>
         <meta
@@ -188,41 +191,47 @@ export default function BlogPost() {
         />
       </Helmet>
 
-      <Layout>
-        <main className="flex-1">
-        <article className="container mx-auto px-4 py-16">
+      <main className="pt-20 pb-16">
+        <article className="container-custom max-w-4xl">
           <Button
-            onClick={() => navigate("/blog")}
-            variant="outline"
+            variant="ghost"
             className="mb-6"
+            onClick={() => navigate("/blog")}
           >
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Blog
+            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blog
           </Button>
 
           {post.image_url && (
             <img
               src={post.image_url}
               alt={post.title}
-              className="w-full h-96 object-cover rounded-lg mb-8"
+              className="w-full h-64 md:h-96 object-cover rounded-lg mb-8"
             />
           )}
 
-          <h1 className="text-4xl font-bold mb-4">{post.title}</h1>
-          <p className="text-muted-foreground mb-8">
-            {new Date(post.created_at).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
-          </p>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">{post.title}</h1>
+
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 pb-4 border-b">
+            <time className="text-muted-foreground">
+              {new Date(post.created_at).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}
+            </time>
+            <SocialShareButtons title={post.title} url={postUrl} />
+          </div>
 
           <div
-            className="prose prose-lg max-w-none mb-16"
+            className="prose prose-lg max-w-none mb-12"
             dangerouslySetInnerHTML={{ __html: post.content }}
           />
 
-          <div className="border-t pt-16">
+          {/* Related Posts */}
+          <RelatedPosts currentPostId={post.id} />
+
+          {/* Comments Section */}
+          <div className="border-t pt-16 mt-12">
             <h2 className="text-3xl font-bold mb-8">Comments ({comments.length})</h2>
 
             <Card className="mb-8">
@@ -298,7 +307,6 @@ export default function BlogPost() {
           </div>
         </article>
       </main>
-      </Layout>
-    </>
+    </Layout>
   );
 }
