@@ -586,6 +586,36 @@ export type Database = {
         }
         Relationships: []
       }
+      notification_history: {
+        Row: {
+          body: string
+          id: string
+          recipients_count: number | null
+          sent_at: string
+          sent_by: string | null
+          title: string
+          url: string | null
+        }
+        Insert: {
+          body: string
+          id?: string
+          recipients_count?: number | null
+          sent_at?: string
+          sent_by?: string | null
+          title: string
+          url?: string | null
+        }
+        Update: {
+          body?: string
+          id?: string
+          recipients_count?: number | null
+          sent_at?: string
+          sent_by?: string | null
+          title?: string
+          url?: string | null
+        }
+        Relationships: []
+      }
       pages: {
         Row: {
           author_id: string | null
@@ -656,6 +686,36 @@ export type Database = {
             referencedColumns: ["id"]
           },
         ]
+      }
+      push_subscriptions: {
+        Row: {
+          auth: string
+          created_at: string
+          endpoint: string
+          id: string
+          p256dh: string
+          updated_at: string
+          user_agent: string | null
+        }
+        Insert: {
+          auth: string
+          created_at?: string
+          endpoint: string
+          id?: string
+          p256dh: string
+          updated_at?: string
+          user_agent?: string | null
+        }
+        Update: {
+          auth?: string
+          created_at?: string
+          endpoint?: string
+          id?: string
+          p256dh?: string
+          updated_at?: string
+          user_agent?: string | null
+        }
+        Relationships: []
       }
       schools: {
         Row: {
