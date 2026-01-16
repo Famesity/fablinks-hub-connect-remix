@@ -356,7 +356,22 @@ export default function AdminSiteSettings() {
                           });
                           return;
                         }
-                        setLogoFile(file);
+                        
+                        // Check image dimensions
+                        const img = new Image();
+                        img.onload = () => {
+                          const isSquare = img.width === img.height;
+                          if (!isSquare) {
+                            toast({
+                              title: "Non-square image detected",
+                              description: `Your image is ${img.width}×${img.height}px. Square images (e.g., 512×512px) work best for logos and favicons. You can still use this image, but it may appear distorted.`,
+                              variant: "default",
+                            });
+                          }
+                          setLogoFile(file);
+                          URL.revokeObjectURL(img.src);
+                        };
+                        img.src = URL.createObjectURL(file);
                       }
                     }}
                   />
