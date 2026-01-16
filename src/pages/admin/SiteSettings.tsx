@@ -332,6 +332,7 @@ export default function AdminSiteSettings() {
               <CardContent className="space-y-6">
                 {renderSetting("site_title", "Site Title")}
                 {renderSetting("site_description", "Site Description", true)}
+                {renderSetting("search_placeholder", "Search Bar Placeholder Text")}
                 
                 {/* Logo Upload Section */}
                 <div className="space-y-3 p-4 border rounded-lg bg-muted/30">
