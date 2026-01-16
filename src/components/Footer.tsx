@@ -10,12 +10,12 @@ const Footer = () => {
   const { getSetting } = useSiteSettings();
   
   const whatsappLink = `https://wa.me/${getSetting('contact_whatsapp', '2347068122861').replace(/\+/g, '')}`;
-  const siteTitle = getSetting('site_title', 'EduPoint Services');
+  const siteTitle = getSetting('site_title', 'Fablinks Computers');
   const siteLogo = getSetting('site_logo', '');
-  const footerText = getSetting('footer_text', '© 2024 EduPoint Services. All rights reserved.');
-  const footerDescription = getSetting('footer_description', 'Your trusted partner in educational services');
-  const contactEmail = getSetting('contact_email', 'info@edupointservices.com');
-  const contactPhone = getSetting('contact_phone', '+234 XXX XXX XXXX');
+  const footerText = getSetting('footer_text', '© 2024 Fablinks Computers. All rights reserved.');
+  const footerDescription = getSetting('footer_description', 'Your trusted partner for WAEC, JAMB, NECO registrations, printing services, and all computer-assisted services in Nigeria');
+  const contactEmail = getSetting('contact_email', 'fablinkscomputers@gmail.com');
+  const contactPhone = getSetting('contact_phone', '+234 706 812 2861');
   const socialFacebook = getSetting('social_facebook', '');
   const socialTwitter = getSetting('social_twitter', '');
   const socialInstagram = getSetting('social_instagram', '');

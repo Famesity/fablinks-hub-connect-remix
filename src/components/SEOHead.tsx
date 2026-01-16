@@ -31,7 +31,7 @@ export default function SEOHead({
   const siteTitle = getSetting('site_title', 'Fablinks Computers');
   const siteDescription = getSetting('site_description', 'Your trusted partner for WAEC, JAMB, NECO registrations, printing services, and all computer-assisted services in Nigeria');
   const siteLogo = getSetting('site_logo', '');
-  const contactPhone = getSetting('contact_phone', '+234 XXX XXX XXXX');
+  const contactPhone = getSetting('contact_phone', '+234 706 812 2861');
   const contactEmail = getSetting('contact_email', 'fablinkscomputers@gmail.com');
   
   // Build the full title

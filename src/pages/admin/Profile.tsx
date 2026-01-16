@@ -246,7 +246,7 @@ export default function AdminProfile() {
                 type="tel"
                 value={profile.phone}
                 onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-                placeholder="+234 XXX XXX XXXX"
+                placeholder="+234 706 812 2861"
                 className="border-gray-200 focus:border-primary"
               />
             </div>

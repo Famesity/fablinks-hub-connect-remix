@@ -141,7 +141,7 @@ const Blog = () => {
             </p>
             <Button 
               className="btn-whatsapp"
-              onClick={() => window.open("https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20assistance%20today", '_blank')}
+              onClick={() => window.open("https://wa.me/2347068122861?text=Hello%20Fablinks%20Computers,%20I%20need%20assistance%20today", '_blank')}
             >
               <MessageCircle className="w-5 h-5" />
               Chat with Us Now
