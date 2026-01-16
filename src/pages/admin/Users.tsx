@@ -114,10 +114,18 @@ export default function AdminUsers() {
         body: { email, role },
       });
 
+      // Check for edge function errors (non-2xx responses)
       if (response.error) {
-        throw new Error(response.error.message || "Failed to add user role");
+        // The error message from edge function is in response.error.message or response.error.context
+        const errorMessage = response.error.message || "Failed to add user role";
+        // Check if it's the "already has role" error (409 conflict)
+        if (errorMessage.includes("already has this role") || response.error.context?.error) {
+          throw new Error(response.error.context?.error || "User already has this role");
+        }
+        throw new Error(errorMessage);
       }
 
+      // Also check for error in response data
       if (response.data?.error) {
         throw new Error(response.data.error);
       }
