@@ -4,10 +4,10 @@ import { useAdmin } from "@/hooks/useAdmin";
 import { supabase } from "@/integrations/supabase/client";
 import type { Database } from "@/integrations/supabase/types";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, ArrowLeft, UserPlus, Trash2 } from "lucide-react";
+import { Loader2, ArrowLeft, UserPlus, Trash2, Shield, AlertCircle } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import {
   Table,
@@ -24,6 +24,8 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import AdminBottomNav from "@/components/admin/AdminBottomNav";
 
 interface UserRole {
   id: string;
@@ -87,23 +89,27 @@ export default function AdminUsers() {
 
     setAdding(true);
     try {
-      // First, invite the user by email
-      const { data: inviteData, error: inviteError } = await supabase.auth.admin.inviteUserByEmail(email);
+      const { data: { session } } = await supabase.auth.getSession();
       
-      if (inviteError) throw inviteError;
-      
-      const userId = inviteData.user.id;
+      if (!session?.access_token) {
+        throw new Error("Not authenticated");
+      }
 
-      // Add role
-      const { error: roleError } = await supabase
-        .from("user_roles")
-        .insert({ user_id: userId, role });
+      const response = await supabase.functions.invoke("add-user-role", {
+        body: { email, role },
+      });
 
-      if (roleError) throw roleError;
+      if (response.error) {
+        throw new Error(response.error.message || "Failed to add user role");
+      }
+
+      if (response.data?.error) {
+        throw new Error(response.data.error);
+      }
 
       toast({
         title: "Success",
-        description: "User role added successfully",
+        description: response.data?.message || "User role added successfully",
       });
 
       setEmail("");
@@ -113,7 +119,7 @@ export default function AdminUsers() {
       console.error("Error adding user:", error);
       toast({
         title: "Error",
-        description: error.message || "Failed to add user",
+        description: error.message || "Failed to add user role",
         variant: "destructive",
       });
     } finally {
@@ -157,30 +163,47 @@ export default function AdminUsers() {
   if (!isAdmin) return null;
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4 flex justify-between items-center">
-          <div className="flex items-center gap-4">
-            <Button
-              onClick={() => navigate("/admin")}
-              variant="outline"
-              size="icon"
-            >
-              <ArrowLeft className="h-4 w-4" />
-            </Button>
-            <h1 className="text-2xl font-bold">Manage Users & Roles</h1>
+    <div className="min-h-screen bg-background pb-20">
+      <header className="border-b sticky top-0 bg-background z-10">
+        <div className="container mx-auto px-4 py-3 flex items-center gap-3">
+          <Button
+            onClick={() => navigate("/admin")}
+            variant="ghost"
+            size="icon"
+            className="shrink-0"
+          >
+            <ArrowLeft className="h-4 w-4" />
+          </Button>
+          <div className="min-w-0">
+            <h1 className="text-lg sm:text-xl font-bold truncate">Manage Admins</h1>
+            <p className="text-xs text-muted-foreground hidden sm:block">
+              Add or remove admin privileges
+            </p>
           </div>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
-        <Card className="mb-8">
+      <main className="container mx-auto px-4 py-6 space-y-6">
+        <Alert>
+          <AlertCircle className="h-4 w-4" />
+          <AlertDescription>
+            Users must sign up first before you can grant them admin access. Enter their registered email address below.
+          </AlertDescription>
+        </Alert>
+
+        <Card>
           <CardHeader>
-            <CardTitle>Add New User Role</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <UserPlus className="h-5 w-5" />
+              Add New Admin
+            </CardTitle>
+            <CardDescription>
+              Grant admin privileges to an existing user by their email
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="grid gap-4">
-              <div>
+            <div className="grid gap-4 sm:grid-cols-[1fr,auto,auto] items-end">
+              <div className="space-y-2">
                 <Label htmlFor="email">User Email</Label>
                 <Input
                   id="email"
@@ -190,10 +213,10 @@ export default function AdminUsers() {
                   placeholder="user@example.com"
                 />
               </div>
-              <div>
+              <div className="space-y-2">
                 <Label htmlFor="role">Role</Label>
                 <Select value={role} onValueChange={(value: any) => setRole(value)}>
-                  <SelectTrigger>
+                  <SelectTrigger className="w-full sm:w-32">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -202,13 +225,13 @@ export default function AdminUsers() {
                   </SelectContent>
                 </Select>
               </div>
-              <Button onClick={handleAddUser} disabled={adding}>
+              <Button onClick={handleAddUser} disabled={adding} className="w-full sm:w-auto">
                 {adding ? (
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                 ) : (
                   <UserPlus className="mr-2 h-4 w-4" />
                 )}
-                Add User Role
+                Add Role
               </Button>
             </div>
           </CardContent>
@@ -216,48 +239,69 @@ export default function AdminUsers() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Current User Roles</CardTitle>
+            <CardTitle className="flex items-center gap-2">
+              <Shield className="h-5 w-5" />
+              Current User Roles
+            </CardTitle>
+            <CardDescription>
+              {users.length} user{users.length !== 1 ? 's' : ''} with assigned roles
+            </CardDescription>
           </CardHeader>
           <CardContent>
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>User ID</TableHead>
-                  <TableHead>Role</TableHead>
-                  <TableHead>Created At</TableHead>
-                  <TableHead>Actions</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {users.map((user) => (
-                  <TableRow key={user.id}>
-                    <TableCell className="font-mono text-sm">
-                      {user.user_id.slice(0, 8)}...
-                    </TableCell>
-                    <TableCell>
-                      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
-                        {user.role}
-                      </span>
-                    </TableCell>
-                    <TableCell>
-                      {new Date(user.created_at).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell>
-                      <Button
-                        variant="destructive"
-                        size="sm"
-                        onClick={() => handleDeleteRole(user.id)}
-                      >
-                        <Trash2 className="h-4 w-4" />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+            {users.length === 0 ? (
+              <p className="text-center text-muted-foreground py-8">
+                No user roles found
+              </p>
+            ) : (
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>User ID</TableHead>
+                      <TableHead>Role</TableHead>
+                      <TableHead>Added</TableHead>
+                      <TableHead className="w-20">Actions</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {users.map((user) => (
+                      <TableRow key={user.id}>
+                        <TableCell className="font-mono text-xs sm:text-sm">
+                          <span className="hidden sm:inline">{user.user_id}</span>
+                          <span className="sm:hidden">{user.user_id.slice(0, 8)}...</span>
+                        </TableCell>
+                        <TableCell>
+                          <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
+                            user.role === 'admin' 
+                              ? 'bg-primary/10 text-primary' 
+                              : 'bg-muted text-muted-foreground'
+                          }`}>
+                            {user.role}
+                          </span>
+                        </TableCell>
+                        <TableCell className="text-sm text-muted-foreground">
+                          {new Date(user.created_at).toLocaleDateString()}
+                        </TableCell>
+                        <TableCell>
+                          <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={() => handleDeleteRole(user.id)}
+                          >
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            )}
           </CardContent>
         </Card>
       </main>
+
+      <AdminBottomNav />
     </div>
   );
 }
