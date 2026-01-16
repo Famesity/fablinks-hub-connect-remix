@@ -12,6 +12,7 @@ interface Service {
   description: string | null;
   category: string;
   price: number | null;
+  whatsapp_message: string | null;
 }
 
 // Default services if none in database
@@ -29,7 +30,7 @@ const ServicesGrid = () => {
   const [loading, setLoading] = useState(true);
   const { getSetting } = useSiteSettings();
   
-  const whatsapp = getSetting('whatsapp_number', '2347068122861');
+  const whatsapp = getSetting('whatsapp_number', '2348106411463');
 
   useEffect(() => {
     fetchServices();
@@ -76,8 +77,10 @@ const ServicesGrid = () => {
     return categoryColors[category.toLowerCase()] || 'bg-primary';
   };
 
-  const openWhatsApp = (serviceName: string) => {
-    const message = encodeURIComponent(`Hello Fablinks, I'm interested in: ${serviceName}`);
+  const openWhatsApp = (serviceName: string, customMessage?: string | null) => {
+    const message = customMessage 
+      ? encodeURIComponent(customMessage)
+      : encodeURIComponent(`Hello Fablinks, I'm interested in: ${serviceName}`);
     window.open(`https://wa.me/${whatsapp}?text=${message}`, '_blank');
   };
 
@@ -128,7 +131,7 @@ const ServicesGrid = () => {
                   </p>
                   <Button 
                     className="w-full btn-whatsapp justify-center"
-                    onClick={() => openWhatsApp(service.name)}
+                    onClick={() => openWhatsApp(service.name, service.whatsapp_message)}
                   >
                     Get Started
                   </Button>

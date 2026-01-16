@@ -810,6 +810,7 @@ export type Database = {
           price: number | null
           school_id: string | null
           updated_at: string | null
+          whatsapp_message: string | null
         }
         Insert: {
           category: string
@@ -820,6 +821,7 @@ export type Database = {
           price?: number | null
           school_id?: string | null
           updated_at?: string | null
+          whatsapp_message?: string | null
         }
         Update: {
           category?: string
@@ -830,6 +832,7 @@ export type Database = {
           price?: number | null
           school_id?: string | null
           updated_at?: string | null
+          whatsapp_message?: string | null
         }
         Relationships: [
           {
