@@ -4,6 +4,12 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Link } from 'react-router-dom';
 
+// Import hero images
+import heroComputerServices from '@/assets/hero-computer-services.jpg';
+import heroPrintingServices from '@/assets/hero-printing-services.jpg';
+import heroOnlineRegistrations from '@/assets/hero-online-registrations.jpg';
+import heroGraphicsDesign from '@/assets/hero-graphics-design.jpg';
+
 interface HeroSlide {
   id: string;
   headline: string;
@@ -16,6 +22,14 @@ interface HeroSlide {
   badge_text: string | null;
   display_order: number;
 }
+
+// Default fallback images based on slide position
+const defaultImages = [
+  heroComputerServices,
+  heroPrintingServices,
+  heroOnlineRegistrations,
+  heroGraphicsDesign
+];
 
 const HeroCarousel = () => {
   const [slides, setSlides] = useState<HeroSlide[]>([]);
@@ -128,6 +142,7 @@ const HeroCarousel = () => {
   }
 
   const slide = slides[currentSlide];
+  const slideImage = slide.image_url || defaultImages[currentSlide % defaultImages.length];
 
   return (
     <section 
@@ -136,10 +151,10 @@ const HeroCarousel = () => {
       onMouseLeave={() => setIsPaused(false)}
     >
       {/* Background Image with Overlay */}
-      {slide.image_url && (
+      {slideImage && (
         <div 
           className="absolute inset-0 bg-cover bg-center transition-all duration-700"
-          style={{ backgroundImage: `url(${slide.image_url})` }}
+          style={{ backgroundImage: `url(${slideImage})` }}
         >
           <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/50"></div>
         </div>
@@ -179,11 +194,11 @@ const HeroCarousel = () => {
           </div>
 
           {/* Image (Mobile shows on top, Desktop on right) */}
-          {slide.image_url && (
+          {slideImage && (
             <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
               <div className="relative w-full max-w-md lg:max-w-lg">
                 <img 
-                  src={slide.image_url} 
+                  src={slideImage} 
                   alt={slide.headline}
                   className="rounded-2xl shadow-2xl w-full h-auto object-cover"
                   loading="lazy"

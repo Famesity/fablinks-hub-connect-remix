@@ -167,7 +167,7 @@ const ServicesGrid = () => {
           <Link to="/services">
             <Button 
               variant="outline" 
-              className="border-2 border-primary text-primary hover:bg-primary hover:text-white px-8 py-3 text-lg"
+              className="border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground px-8 py-3 text-lg"
             >
               View All Services
             </Button>
