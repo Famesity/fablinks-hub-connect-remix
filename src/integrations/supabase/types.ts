@@ -349,6 +349,45 @@ export type Database = {
         }
         Relationships: []
       }
+      featured_services: {
+        Row: {
+          color_class: string
+          created_at: string
+          description: string
+          display_order: number
+          icon_name: string
+          id: string
+          is_active: boolean
+          title: string
+          updated_at: string
+          whatsapp_message: string
+        }
+        Insert: {
+          color_class?: string
+          created_at?: string
+          description: string
+          display_order?: number
+          icon_name?: string
+          id?: string
+          is_active?: boolean
+          title: string
+          updated_at?: string
+          whatsapp_message: string
+        }
+        Update: {
+          color_class?: string
+          created_at?: string
+          description?: string
+          display_order?: number
+          icon_name?: string
+          id?: string
+          is_active?: boolean
+          title?: string
+          updated_at?: string
+          whatsapp_message?: string
+        }
+        Relationships: []
+      }
       hero_slides: {
         Row: {
           badge_text: string | null
