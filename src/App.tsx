@@ -12,6 +12,7 @@ import Contact from "./pages/Contact";
 import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
+import Search from "./pages/Search";
 import AdminDashboard from "./pages/admin/Dashboard";
 import AdminSchools from "./pages/admin/Schools";
 import AdminServices from "./pages/admin/Services";
@@ -50,6 +51,7 @@ function AppContent() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
