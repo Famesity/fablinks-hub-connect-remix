@@ -23,6 +23,14 @@ interface HeroSlide {
   display_order: number;
 }
 
+// Map of asset paths to imported images for production builds
+const assetMap: Record<string, string> = {
+  '/src/assets/hero-computer-services.jpg': heroComputerServices,
+  '/src/assets/hero-printing-services.jpg': heroPrintingServices,
+  '/src/assets/hero-online-registrations.jpg': heroOnlineRegistrations,
+  '/src/assets/hero-graphics-design.jpg': heroGraphicsDesign,
+};
+
 // Default fallback images based on slide position
 const defaultImages = [
   heroComputerServices,
@@ -30,6 +38,26 @@ const defaultImages = [
   heroOnlineRegistrations,
   heroGraphicsDesign
 ];
+
+// Helper to resolve image URL - handles both imported assets and external URLs
+const resolveImageUrl = (imageUrl: string | null, fallbackIndex: number): string => {
+  if (!imageUrl) {
+    return defaultImages[fallbackIndex % defaultImages.length];
+  }
+  
+  // Check if it's a mapped asset path
+  if (assetMap[imageUrl]) {
+    return assetMap[imageUrl];
+  }
+  
+  // Check if it's a relative src/assets path that we might not have mapped
+  if (imageUrl.startsWith('/src/assets/')) {
+    return defaultImages[fallbackIndex % defaultImages.length];
+  }
+  
+  // External URL or public folder path - use as-is
+  return imageUrl;
+};
 
 const HeroCarousel = () => {
   const [slides, setSlides] = useState<HeroSlide[]>([]);
@@ -142,7 +170,7 @@ const HeroCarousel = () => {
   }
 
   const slide = slides[currentSlide];
-  const slideImage = slide.image_url || defaultImages[currentSlide % defaultImages.length];
+  const slideImage = resolveImageUrl(slide.image_url, currentSlide);
 
   return (
     <section 
