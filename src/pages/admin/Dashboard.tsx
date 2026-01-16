@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Loader2, School, Briefcase, FileText, LogOut, Settings, Users, MessageSquare, FileCode, BarChart3, Activity, Image, Shield, ListChecks, Star, Award } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import AdminBottomNav from "@/components/admin/AdminBottomNav";
 
 export default function AdminDashboard() {
   const { isAdmin, loading } = useAdmin();
@@ -75,7 +76,7 @@ export default function AdminDashboard() {
   if (!isAdmin) return null;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 pb-20">
       {/* Premium Header with Gradient */}
       <header className="bg-white border-b shadow-sm sticky top-0 z-50">
         <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
@@ -383,6 +384,8 @@ export default function AdminDashboard() {
           </Link>
         </div>
       </main>
+
+      <AdminBottomNav />
     </div>
   );
 }
