@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Phone, Mail, MapPin, MessageCircle, Facebook, Instagram, Twitter } from 'lucide-react';
 import TestimonialForm from '@/components/TestimonialForm';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
+import SEOHead from '@/components/SEOHead';
 
 const Contact = () => {
   const { getSetting } = useSiteSettings();
@@ -41,6 +42,11 @@ const Contact = () => {
 
   return (
     <Layout>
+      <SEOHead 
+        title="Contact Us"
+        description="Get in touch with Fablinks Computers. Visit us at Abia State University or contact us via WhatsApp, phone, or email for fast assistance with all your computer service needs."
+        keywords="contact Fablinks, WhatsApp support, Abia State University, computer cafe contact, customer support Nigeria"
+      />
       <main className="pt-20">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-primary to-fablinks-blue-dark text-white py-16">

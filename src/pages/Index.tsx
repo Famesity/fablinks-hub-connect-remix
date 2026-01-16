@@ -10,10 +10,15 @@ import CTASection from '@/components/CTASection';
 import FeaturedBlogPosts from '@/components/FeaturedBlogPosts';
 import ContactSection from '@/components/ContactSection';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
+import SEOHead from '@/components/SEOHead';
 
 const Index = () => {
   return (
     <Layout>
+      <SEOHead 
+        description="Fablinks Computers - Your one-stop shop for WAEC, JAMB, NECO, NYSC registrations, printing services, passport photos, and all computer-assisted services in Nigeria. Fast, reliable, and affordable."
+        keywords="Fablinks Computers, WAEC scratch card, JAMB registration, NECO result, NYSC registration, printing services, passport photo, computer cafe, Nigeria, Abia State University"
+      />
       <HeroCarousel />
       <TrustStrip />
       <FeaturedServices />

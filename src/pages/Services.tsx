@@ -3,6 +3,7 @@ import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, GraduationCap, Building2, FileText, Shield, Smartphone, Filter, School, Printer, CreditCard, Globe, FileImage, Camera } from 'lucide-react';
+import SEOHead from '@/components/SEOHead';
 
 const Services = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -460,6 +461,11 @@ const Services = () => {
 
   return (
     <Layout>
+      <SEOHead 
+        title="Our Services"
+        description="Complete digital solutions for Nigerian students - WAEC, JAMB, NECO, NYSC registration, school fees payment, printing services, passport photos, and more. Fast and affordable."
+        keywords="WAEC registration, JAMB services, NECO, NYSC registration, school fees payment, course registration, Nigerian universities, computer services"
+      />
       <main className="pt-20">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-primary to-fablinks-blue-dark text-white py-16">

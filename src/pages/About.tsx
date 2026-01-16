@@ -2,6 +2,7 @@
 import React from 'react';
 import Layout from '@/components/Layout';
 import { CheckCircle, Target, Heart, Users } from 'lucide-react';
+import SEOHead from '@/components/SEOHead';
 
 const About = () => {
   const values = [
@@ -29,6 +30,11 @@ const About = () => {
 
   return (
     <Layout>
+      <SEOHead 
+        title="About Us"
+        description="Learn about Fablinks Online Café - Nigeria's trusted digital gateway for academic services. We help students with WAEC, JAMB, NECO registrations, and more."
+        keywords="about Fablinks, cyber cafe Nigeria, student services, academic support, Abia State University"
+      />
       <main className="pt-20">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-primary to-fablinks-blue-dark text-white py-16">

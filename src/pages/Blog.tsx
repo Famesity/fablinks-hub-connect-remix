@@ -4,6 +4,7 @@ import { supabase } from '@/integrations/supabase/client';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Calendar, User, Share2, MessageCircle, Loader2 } from 'lucide-react';
+import SEOHead from '@/components/SEOHead';
 
 interface BlogPost {
   id: string;
@@ -49,6 +50,11 @@ const Blog = () => {
 
   return (
     <Layout>
+      <SEOHead 
+        title="Blog & Resources"
+        description="Helpful guides, tips, and updates for Nigerian students. Learn about WAEC, JAMB, NECO registration, university applications, and more from Fablinks Computers."
+        keywords="student blog Nigeria, WAEC tips, JAMB guide, university admission tips, Nigerian education blog"
+      />
       <main className="pt-20">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-primary to-fablinks-blue-dark text-white py-16">
