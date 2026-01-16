@@ -8,7 +8,6 @@ import HowItWorks from '@/components/HowItWorks';
 import LocationContact from '@/components/LocationContact';
 import CTASection from '@/components/CTASection';
 import FeaturedBlogPosts from '@/components/FeaturedBlogPosts';
-import BlogPostsSlider from '@/components/BlogPostsSlider';
 import ContactSection from '@/components/ContactSection';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 
@@ -22,7 +21,6 @@ const Index = () => {
       <HowItWorks />
       <TestimonialsCarousel />
       <FeaturedBlogPosts />
-      <BlogPostsSlider />
       <CTASection />
       <LocationContact />
       <ContactSection />
