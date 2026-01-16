@@ -78,28 +78,29 @@ export default function AdminDashboard() {
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
       {/* Premium Header with Gradient */}
       <header className="bg-white border-b shadow-sm sticky top-0 z-50">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent">
+        <div className="container mx-auto px-4 py-3 sm:py-4">
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+            <div className="min-w-0">
+              <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent truncate">
                 Admin Dashboard
               </h1>
-              <p className="text-sm text-gray-500 mt-1">Welcome back, manage your platform</p>
+              <p className="text-xs sm:text-sm text-gray-500 mt-0.5 sm:mt-1">Welcome back, manage your platform</p>
             </div>
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center gap-2 flex-shrink-0">
               <Link to="/admin/profile">
-                <Button variant="outline" className="border-primary/20 hover:bg-primary/5">
-                  <Users className="mr-2 h-4 w-4" />
-                  Profile
+                <Button variant="outline" size="sm" className="border-primary/20 hover:bg-primary/5">
+                  <Users className="h-4 w-4 sm:mr-2" />
+                  <span className="hidden sm:inline">Profile</span>
                 </Button>
               </Link>
               <Button 
                 onClick={handleSignOut} 
                 variant="outline"
+                size="sm"
                 className="border-red-200 hover:bg-red-50 hover:text-red-600"
               >
-                <LogOut className="mr-2 h-4 w-4" />
-                Sign Out
+                <LogOut className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline">Sign Out</span>
               </Button>
             </div>
           </div>
