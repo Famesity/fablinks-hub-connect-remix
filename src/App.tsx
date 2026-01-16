@@ -40,6 +40,7 @@ import AdminServiceRequests from "./pages/admin/ServiceRequests";
 import AdminAnnouncement from "./pages/admin/Announcement";
 import BlogPost from "./pages/BlogPost";
 import Page from "./pages/Page";
+import Install from "./pages/Install";
 
 const queryClient = new QueryClient();
 
@@ -54,6 +55,7 @@ function AppContent() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/install" element={<Install />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/dashboard" element={<AdminDashboard />} />
