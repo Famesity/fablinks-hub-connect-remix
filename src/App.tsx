@@ -32,6 +32,9 @@ import AdminTrustBadges from "./pages/admin/TrustBadges";
 import AdminHowItWorks from "./pages/admin/HowItWorks";
 import AdminFeaturedServices from "./pages/admin/FeaturedServices";
 import AdminWhyChooseUs from "./pages/admin/WhyChooseUs";
+import AdminContent from "./pages/admin/Content";
+import AdminLanding from "./pages/admin/Landing";
+import AdminCustomers from "./pages/admin/Customers";
 import BlogPost from "./pages/BlogPost";
 import Page from "./pages/Page";
 
@@ -49,6 +52,9 @@ function AppContent() {
           <Route path="/blog/:slug" element={<BlogPost />} />
           <Route path="/auth" element={<Auth />} />
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/content" element={<AdminContent />} />
+          <Route path="/admin/landing" element={<AdminLanding />} />
+          <Route path="/admin/customers" element={<AdminCustomers />} />
           <Route path="/admin/schools" element={<AdminSchools />} />
           <Route path="/admin/services" element={<AdminServices />} />
           <Route path="/admin/blog" element={<AdminBlogPosts />} />
