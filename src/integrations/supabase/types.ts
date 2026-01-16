@@ -47,6 +47,42 @@ export type Database = {
         }
         Relationships: []
       }
+      announcement_bar: {
+        Row: {
+          background_color: string | null
+          created_at: string
+          id: string
+          is_active: boolean | null
+          link_text: string | null
+          link_url: string | null
+          message: string
+          text_color: string | null
+          updated_at: string
+        }
+        Insert: {
+          background_color?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          link_text?: string | null
+          link_url?: string | null
+          message: string
+          text_color?: string | null
+          updated_at?: string
+        }
+        Update: {
+          background_color?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          link_text?: string | null
+          link_url?: string | null
+          message?: string
+          text_color?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
       blog_categories: {
         Row: {
           created_at: string
@@ -313,6 +349,30 @@ export type Database = {
           status?: string | null
           subject?: string | null
           updated_at?: string
+        }
+        Relationships: []
+      }
+      cookie_consent_logs: {
+        Row: {
+          consent_date: string
+          consent_given: boolean | null
+          id: string
+          ip_address: string | null
+          visitor_id: string
+        }
+        Insert: {
+          consent_date?: string
+          consent_given?: boolean | null
+          id?: string
+          ip_address?: string | null
+          visitor_id: string
+        }
+        Update: {
+          consent_date?: string
+          consent_given?: boolean | null
+          id?: string
+          ip_address?: string | null
+          visitor_id?: string
         }
         Relationships: []
       }
@@ -626,6 +686,59 @@ export type Database = {
           updated_at?: string | null
         }
         Relationships: []
+      }
+      service_requests: {
+        Row: {
+          admin_notes: string | null
+          created_at: string
+          email: string
+          id: string
+          name: string
+          phone: string | null
+          school_id: string | null
+          service_details: string | null
+          service_type: string
+          status: string | null
+          updated_at: string
+          urgency: string | null
+        }
+        Insert: {
+          admin_notes?: string | null
+          created_at?: string
+          email: string
+          id?: string
+          name: string
+          phone?: string | null
+          school_id?: string | null
+          service_details?: string | null
+          service_type: string
+          status?: string | null
+          updated_at?: string
+          urgency?: string | null
+        }
+        Update: {
+          admin_notes?: string | null
+          created_at?: string
+          email?: string
+          id?: string
+          name?: string
+          phone?: string | null
+          school_id?: string | null
+          service_details?: string | null
+          service_type?: string
+          status?: string | null
+          updated_at?: string
+          urgency?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "service_requests_school_id_fkey"
+            columns: ["school_id"]
+            isOneToOne: false
+            referencedRelation: "schools"
+            referencedColumns: ["id"]
+          },
+        ]
       }
       services: {
         Row: {
