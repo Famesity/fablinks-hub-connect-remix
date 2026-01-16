@@ -4,7 +4,7 @@ import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
-import defaultLogo from '@/assets/fablinks-logo.jpg';
+import { resolveAssetUrl, defaultLogo } from '@/lib/assetResolver';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,7 +30,7 @@ const Header = () => {
   };
 
   // Use custom logo if set, otherwise use default logo
-  const logoSrc = siteLogo || defaultLogo;
+  const logoSrc = resolveAssetUrl(siteLogo, defaultLogo);
 
   return (
     <header className="bg-white/95 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-40">

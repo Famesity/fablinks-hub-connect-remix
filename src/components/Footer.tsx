@@ -4,6 +4,7 @@ import { MessageCircle, Phone, Mail, Facebook, Instagram, Twitter } from 'lucide
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
+import { resolveAssetUrl, defaultLogo } from '@/lib/assetResolver';
 
 const Footer = () => {
   const { getSetting } = useSiteSettings();
@@ -38,19 +39,15 @@ const Footer = () => {
             {/* Company Info */}
             <div className="lg:col-span-2">
               <div className="flex items-center space-x-2 mb-6">
-                {siteLogo ? (
-                  <img src={siteLogo} alt={siteTitle} className="h-10 w-auto object-contain" />
-                ) : (
-                  <>
-                    <div className="w-10 h-10 bg-gradient-to-r from-primary to-fablinks-blue-dark rounded-lg flex items-center justify-center">
-                      <span className="text-white font-bold">{siteTitle.charAt(0)}</span>
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold">{siteTitle}</h3>
-                      <p className="text-sm text-gray-400">{getSetting('site_description', 'Your Digital Gateway')}</p>
-                    </div>
-                  </>
-                )}
+                <img 
+                  src={resolveAssetUrl(siteLogo, defaultLogo)} 
+                  alt={siteTitle} 
+                  className="h-10 w-10 object-contain rounded-lg" 
+                />
+                <div>
+                  <h3 className="text-xl font-bold">{siteTitle}</h3>
+                  <p className="text-sm text-gray-400">{getSetting('site_description', 'Your Digital Gateway')}</p>
+                </div>
               </div>
               
               <p className="text-gray-300 mb-6 leading-relaxed max-w-md">

@@ -3,12 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { Link } from 'react-router-dom';
-
-// Import hero images
-import heroComputerServices from '@/assets/hero-computer-services.jpg';
-import heroPrintingServices from '@/assets/hero-printing-services.jpg';
-import heroOnlineRegistrations from '@/assets/hero-online-registrations.jpg';
-import heroGraphicsDesign from '@/assets/hero-graphics-design.jpg';
+import { resolveAssetUrl, heroImages } from '@/lib/assetResolver';
 
 interface HeroSlide {
   id: string;
@@ -23,41 +18,13 @@ interface HeroSlide {
   display_order: number;
 }
 
-// Map of asset paths to imported images for production builds
-const assetMap: Record<string, string> = {
-  '/src/assets/hero-computer-services.jpg': heroComputerServices,
-  '/src/assets/hero-printing-services.jpg': heroPrintingServices,
-  '/src/assets/hero-online-registrations.jpg': heroOnlineRegistrations,
-  '/src/assets/hero-graphics-design.jpg': heroGraphicsDesign,
-};
-
 // Default fallback images based on slide position
 const defaultImages = [
-  heroComputerServices,
-  heroPrintingServices,
-  heroOnlineRegistrations,
-  heroGraphicsDesign
+  heroImages.computerServices,
+  heroImages.printingServices,
+  heroImages.onlineRegistrations,
+  heroImages.graphicsDesign
 ];
-
-// Helper to resolve image URL - handles both imported assets and external URLs
-const resolveImageUrl = (imageUrl: string | null, fallbackIndex: number): string => {
-  if (!imageUrl) {
-    return defaultImages[fallbackIndex % defaultImages.length];
-  }
-  
-  // Check if it's a mapped asset path
-  if (assetMap[imageUrl]) {
-    return assetMap[imageUrl];
-  }
-  
-  // Check if it's a relative src/assets path that we might not have mapped
-  if (imageUrl.startsWith('/src/assets/')) {
-    return defaultImages[fallbackIndex % defaultImages.length];
-  }
-  
-  // External URL or public folder path - use as-is
-  return imageUrl;
-};
 
 const HeroCarousel = () => {
   const [slides, setSlides] = useState<HeroSlide[]>([]);
@@ -170,7 +137,7 @@ const HeroCarousel = () => {
   }
 
   const slide = slides[currentSlide];
-  const slideImage = resolveImageUrl(slide.image_url, currentSlide);
+  const slideImage = resolveAssetUrl(slide.image_url, defaultImages[currentSlide % defaultImages.length]);
 
   return (
     <section 
