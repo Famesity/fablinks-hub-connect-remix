@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, ArrowLeft, Save, Eye, Sparkles } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AdminBottomNav from "@/components/admin/AdminBottomNav";
 
 interface Setting {
   id: string;
@@ -281,40 +282,42 @@ export default function AdminSiteSettings() {
   if (!isAdmin) return null;
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b">
-        <div className="container mx-auto px-4 py-4">
-          <Button variant="ghost" onClick={() => navigate("/admin")} className="mb-4">
-            <ArrowLeft className="mr-2 h-4 w-4" />
-            Back to Dashboard
+    <div className="min-h-screen bg-background pb-20">
+      <header className="border-b sticky top-0 z-40 bg-background">
+        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
+          <Button variant="ghost" size="sm" onClick={() => navigate("/admin")} className="mb-2 sm:mb-4">
+            <ArrowLeft className="mr-1 sm:mr-2 h-4 w-4" />
+            <span className="text-sm">Back</span>
           </Button>
-          <div className="flex justify-between items-center">
-            <h1 className="text-2xl font-bold">Site Settings</h1>
+          <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+            <h1 className="text-xl sm:text-2xl font-bold">Site Settings</h1>
             <div className="flex gap-2">
-              <Button onClick={handlePreview} variant="outline">
-                <Eye className="mr-2 h-4 w-4" />
-                Preview Changes
+              <Button onClick={handlePreview} variant="outline" size="sm" className="flex-1 sm:flex-none">
+                <Eye className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline">Preview</span>
               </Button>
-              <Button onClick={handleSave} disabled={saving}>
-                <Save className="mr-2 h-4 w-4" />
-                {saving ? "Saving..." : "Save Changes"}
+              <Button onClick={handleSave} disabled={saving} size="sm" className="flex-1 sm:flex-none">
+                <Save className="h-4 w-4 sm:mr-2" />
+                <span className="hidden sm:inline">{saving ? "Saving..." : "Save"}</span>
               </Button>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="container mx-auto px-4 py-8">
+      <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         <Tabs defaultValue="general" className="w-full">
-          <TabsList className="grid w-full grid-cols-7">
-            <TabsTrigger value="general">General</TabsTrigger>
-            <TabsTrigger value="hero">Hero</TabsTrigger>
-            <TabsTrigger value="contact">Contact</TabsTrigger>
-            <TabsTrigger value="cta">CTA Section</TabsTrigger>
-            <TabsTrigger value="footer">Footer</TabsTrigger>
-            <TabsTrigger value="social">Social</TabsTrigger>
-            <TabsTrigger value="theme">Theme</TabsTrigger>
-          </TabsList>
+          <div className="overflow-x-auto -mx-3 px-3 sm:mx-0 sm:px-0">
+            <TabsList className="inline-flex w-max sm:w-full sm:grid sm:grid-cols-7 gap-1 mb-4">
+              <TabsTrigger value="general" className="text-xs sm:text-sm px-3 sm:px-4">General</TabsTrigger>
+              <TabsTrigger value="hero" className="text-xs sm:text-sm px-3 sm:px-4">Hero</TabsTrigger>
+              <TabsTrigger value="contact" className="text-xs sm:text-sm px-3 sm:px-4">Contact</TabsTrigger>
+              <TabsTrigger value="cta" className="text-xs sm:text-sm px-3 sm:px-4">CTA</TabsTrigger>
+              <TabsTrigger value="footer" className="text-xs sm:text-sm px-3 sm:px-4">Footer</TabsTrigger>
+              <TabsTrigger value="social" className="text-xs sm:text-sm px-3 sm:px-4">Social</TabsTrigger>
+              <TabsTrigger value="theme" className="text-xs sm:text-sm px-3 sm:px-4">Theme</TabsTrigger>
+            </TabsList>
+          </div>
 
           <TabsContent value="general">
             <Card>
@@ -624,6 +627,8 @@ export default function AdminSiteSettings() {
           </Card>
         )}
       </main>
+
+      <AdminBottomNav />
     </div>
   );
 }
