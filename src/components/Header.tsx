@@ -4,6 +4,7 @@ import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
+import defaultLogo from '@/assets/fablinks-logo.jpg';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -20,7 +21,7 @@ const Header = () => {
   const { getSetting } = useSiteSettings();
 
   const whatsappLink = `https://wa.me/${getSetting('contact_whatsapp', '2347068122861').replace(/\+/g, '')}?text=Hello,%20I%20need%20assistance`;
-  const siteTitle = getSetting('site_title', 'EduPoint Services');
+  const siteTitle = getSetting('site_title', 'Fablinks Computers');
   const siteLogo = getSetting('site_logo', '');
   const contactPhone = getSetting('contact_phone', '+234 XXX XXX XXXX');
 
@@ -28,25 +29,24 @@ const Header = () => {
     return location.pathname === path;
   };
 
+  // Use custom logo if set, otherwise use default logo
+  const logoSrc = siteLogo || defaultLogo;
+
   return (
     <header className="bg-white/95 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-40">
       <div className="container-custom">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2">
-            {siteLogo ? (
-              <img src={siteLogo} alt={siteTitle} className="h-10 w-auto object-contain" />
-            ) : (
-              <>
-                <div className="w-8 h-8 bg-gradient-to-r from-primary to-fablinks-blue-dark rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">{siteTitle.charAt(0)}</span>
-                </div>
-                <div>
-                  <h1 className="text-lg font-bold gradient-text">{siteTitle}</h1>
-                  <p className="text-xs text-gray-500 -mt-1">{getSetting('site_description', 'Your Digital Gateway')}</p>
-                </div>
-              </>
-            )}
+            <img 
+              src={logoSrc} 
+              alt={siteTitle} 
+              className="h-12 w-12 sm:h-14 sm:w-14 object-contain rounded-lg"
+            />
+            <div className="hidden sm:block">
+              <h1 className="text-base sm:text-lg font-bold gradient-text leading-tight">{siteTitle}</h1>
+              <p className="text-xs text-gray-500 -mt-0.5">{getSetting('site_description', 'Your Digital Gateway')}</p>
+            </div>
           </Link>
 
           {/* Desktop Navigation */}

@@ -323,37 +323,70 @@ export default function AdminSiteSettings() {
             <Card>
               <CardHeader>
                 <CardTitle>General Settings</CardTitle>
-                <CardDescription>Configure your site's basic information</CardDescription>
+                <CardDescription>Configure your site's basic information and branding</CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-6">
                 {renderSetting("site_title", "Site Title")}
                 {renderSetting("site_description", "Site Description", true)}
-                <div className="space-y-2">
-                  <Label htmlFor="logo">Site Logo</Label>
+                
+                {/* Logo Upload Section */}
+                <div className="space-y-3 p-4 border rounded-lg bg-muted/30">
+                  <div className="flex items-center justify-between">
+                    <Label htmlFor="logo" className="text-base font-semibold">Site Logo</Label>
+                    <span className="text-xs text-muted-foreground bg-primary/10 px-2 py-1 rounded">
+                      Also used as favicon
+                    </span>
+                  </div>
+                  <p className="text-xs text-muted-foreground">
+                    <strong>Recommended:</strong> Square image (e.g., 200×200px or 512×512px), PNG or JPG format, max 2MB. 
+                    This image will appear in the header and as the browser tab icon.
+                  </p>
                   <Input
                     id="logo"
                     type="file"
-                    accept="image/*"
+                    accept="image/png,image/jpeg,image/jpg,image/webp"
                     onChange={(e) => {
                       const file = e.target.files?.[0];
-                      if (file) setLogoFile(file);
+                      if (file) {
+                        if (file.size > 2 * 1024 * 1024) {
+                          toast({
+                            title: "File too large",
+                            description: "Please upload an image smaller than 2MB",
+                            variant: "destructive",
+                          });
+                          return;
+                        }
+                        setLogoFile(file);
+                      }
                     }}
                   />
-                  {settings.find(s => s.key === 'site_logo')?.value && (
-                    <div className="relative inline-block mt-2">
-                      <img 
-                        src={settings.find(s => s.key === 'site_logo')?.value} 
-                        alt="Logo preview" 
-                        className="h-20 w-20 object-contain"
-                      />
+                  {(logoFile || settings.find(s => s.key === 'site_logo')?.value) && (
+                    <div className="flex items-center gap-4 mt-3 p-3 bg-background rounded-lg border">
+                      <div className="relative">
+                        <img 
+                          src={logoFile ? URL.createObjectURL(logoFile) : settings.find(s => s.key === 'site_logo')?.value} 
+                          alt="Logo preview" 
+                          className="h-16 w-16 object-contain rounded-lg border"
+                        />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-medium">
+                          {logoFile ? 'New logo selected' : 'Current logo'}
+                        </p>
+                        <p className="text-xs text-muted-foreground">
+                          {logoFile ? `${logoFile.name} (${(logoFile.size / 1024).toFixed(1)}KB)` : 'Uploaded previously'}
+                        </p>
+                      </div>
                       <Button
                         type="button"
-                        variant="destructive"
+                        variant="outline"
                         size="sm"
-                        className="absolute -top-2 -right-2"
-                        onClick={() => updateSetting('site_logo', '')}
+                        onClick={() => {
+                          setLogoFile(null);
+                          updateSetting('site_logo', '');
+                        }}
                       >
-                        ✕
+                        Remove
                       </Button>
                     </div>
                   )}
