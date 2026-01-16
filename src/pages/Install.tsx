@@ -3,6 +3,7 @@ import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Download, Smartphone, Apple, Chrome, Share, Plus, MoreVertical, Check } from 'lucide-react';
+import NotificationSettings from '@/components/NotificationSettings';
 
 interface BeforeInstallPromptEvent extends Event {
   prompt: () => Promise<void>;
@@ -161,6 +162,12 @@ const Install = () => {
                 </p>
               </CardContent>
             </Card>
+          </div>
+
+          {/* Notification Settings */}
+          <div className="mb-12">
+            <h2 className="text-xl font-semibold mb-4 text-center">Stay Updated</h2>
+            <NotificationSettings />
           </div>
 
           {/* iOS Instructions */}
