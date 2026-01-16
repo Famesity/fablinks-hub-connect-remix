@@ -74,7 +74,7 @@ export default function FeaturedBlogPosts() {
 
   if (loading) {
     return (
-      <section className="py-16 bg-muted/30">
+      <section className="py-16 bg-secondary/50">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <div className="h-8 w-64 bg-muted animate-pulse rounded mx-auto mb-4" />
@@ -95,7 +95,7 @@ export default function FeaturedBlogPosts() {
   const displayPosts = posts.slice(0, 3);
 
   return (
-    <section className="py-16 bg-muted/30">
+    <section className="py-16 bg-secondary/50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold mb-4">Latest From Our Blog</h2>
