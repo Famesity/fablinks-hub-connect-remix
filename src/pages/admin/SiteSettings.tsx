@@ -306,10 +306,11 @@ export default function AdminSiteSettings() {
 
       <main className="container mx-auto px-4 py-8">
         <Tabs defaultValue="general" className="w-full">
-          <TabsList className="grid w-full grid-cols-6">
+          <TabsList className="grid w-full grid-cols-7">
             <TabsTrigger value="general">General</TabsTrigger>
             <TabsTrigger value="hero">Hero</TabsTrigger>
             <TabsTrigger value="contact">Contact</TabsTrigger>
+            <TabsTrigger value="cta">CTA Section</TabsTrigger>
             <TabsTrigger value="footer">Footer</TabsTrigger>
             <TabsTrigger value="social">Social</TabsTrigger>
             <TabsTrigger value="theme">Theme</TabsTrigger>
@@ -407,13 +408,28 @@ export default function AdminSiteSettings() {
             <Card>
               <CardHeader>
                 <CardTitle>Contact Information</CardTitle>
-                <CardDescription>Update your contact details</CardDescription>
+                <CardDescription>Update your contact details and location</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 {renderSetting("contact_email", "Email")}
                 {renderSetting("contact_phone", "Phone")}
-                {renderSetting("contact_address", "Address")}
+                {renderSetting("contact_address", "Address (used for map location)", true)}
                 {renderSetting("contact_whatsapp", "WhatsApp Number")}
+                {renderSetting("whatsapp_number", "WhatsApp Number (alternate)")}
+                {renderSetting("opening_hours", "Opening Hours")}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="cta">
+            <Card>
+              <CardHeader>
+                <CardTitle>Call-to-Action Section</CardTitle>
+                <CardDescription>Customize the CTA section on the landing page</CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {renderSetting("cta_title", "CTA Title")}
+                {renderSetting("cta_subtitle", "CTA Subtitle", true)}
               </CardContent>
             </Card>
           </TabsContent>

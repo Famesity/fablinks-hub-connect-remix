@@ -31,6 +31,7 @@ import AdminHeroSlides from "./pages/admin/HeroSlides";
 import AdminTrustBadges from "./pages/admin/TrustBadges";
 import AdminHowItWorks from "./pages/admin/HowItWorks";
 import AdminFeaturedServices from "./pages/admin/FeaturedServices";
+import AdminWhyChooseUs from "./pages/admin/WhyChooseUs";
 import BlogPost from "./pages/BlogPost";
 import Page from "./pages/Page";
 
@@ -66,6 +67,7 @@ function AppContent() {
           <Route path="/admin/trust-badges" element={<AdminTrustBadges />} />
           <Route path="/admin/how-it-works" element={<AdminHowItWorks />} />
           <Route path="/admin/featured-services" element={<AdminFeaturedServices />} />
+          <Route path="/admin/why-choose-us" element={<AdminWhyChooseUs />} />
           <Route path="/page/:slug" element={<Page />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />

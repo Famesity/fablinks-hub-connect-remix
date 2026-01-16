@@ -8,8 +8,8 @@ const CTASection = () => {
   
   const ctaTitle = getSetting('cta_title', 'Need a quick computer service today?');
   const ctaSubtitle = getSetting('cta_subtitle', 'We are here to help you with all your computer needs');
-  const whatsapp = getSetting('whatsapp_number', '');
-  const address = getSetting('contact_address', '');
+  const whatsapp = getSetting('whatsapp_number', '') || getSetting('contact_whatsapp', '2347068122861');
+  const address = getSetting('contact_address', 'Shop NO 35, Student Affairs, Abia State University Uturu, Abia State, Nigeria');
 
   return (
     <section className="relative py-16 md:py-24 overflow-hidden">
