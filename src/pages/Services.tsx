@@ -4,15 +4,11 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, GraduationCap, Building2, FileText, Shield, Smartphone, Filter, School, Printer, CreditCard, Globe, FileImage, Camera } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
-import ServiceRequestForm from '@/components/ServiceRequestForm';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 
 const Services = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedSchool, setSelectedSchool] = useState('general');
-  const [showRequestForm, setShowRequestForm] = useState(false);
 
   const serviceCategories = [
     {
@@ -621,25 +617,6 @@ const Services = () => {
                 </Button>
               </div>
             )}
-          </div>
-        </section>
-
-        {/* Service Request CTA */}
-        <section className="section-padding bg-muted">
-          <div className="container-custom text-center">
-            <h2 className="text-3xl font-bold mb-4">Can't Find What You Need?</h2>
-            <p className="text-lg text-muted-foreground mb-6">Submit a service request and we'll get back to you shortly</p>
-            <Dialog open={showRequestForm} onOpenChange={setShowRequestForm}>
-              <DialogTrigger asChild>
-                <Button size="lg">Request a Service</Button>
-              </DialogTrigger>
-              <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
-                <DialogHeader>
-                  <DialogTitle>Submit Service Request</DialogTitle>
-                </DialogHeader>
-                <ServiceRequestForm onSuccess={() => setShowRequestForm(false)} />
-              </DialogContent>
-            </Dialog>
           </div>
         </section>
       </main>
