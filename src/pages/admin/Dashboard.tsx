@@ -5,7 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, School, Briefcase, FileText, LogOut, Settings, Users, MessageSquare, FileCode, BarChart3, Activity, Image, Shield, ListChecks, Star } from "lucide-react";
+import { Loader2, School, Briefcase, FileText, LogOut, Settings, Users, MessageSquare, FileCode, BarChart3, Activity, Image, Shield, ListChecks, Star, Award } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export default function AdminDashboard() {
@@ -205,6 +205,18 @@ export default function AdminDashboard() {
                 </div>
                 <CardTitle className="text-xl">Featured Services</CardTitle>
                 <CardDescription className="text-gray-600">Manage landing page service cards</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+
+          <Link to="/admin/why-choose-us" className="group">
+            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-emerald-300 cursor-pointer group-hover:-translate-y-1">
+              <CardHeader className="pb-4">
+                <div className="w-14 h-14 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Award className="h-7 w-7 text-emerald-600" />
+                </div>
+                <CardTitle className="text-xl">Why Choose Us</CardTitle>
+                <CardDescription className="text-gray-600">Manage features and statistics</CardDescription>
               </CardHeader>
             </Card>
           </Link>

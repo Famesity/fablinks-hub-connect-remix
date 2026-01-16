@@ -7,10 +7,10 @@ const LocationContact = () => {
   const { getSetting } = useSiteSettings();
   
   const businessName = getSetting('site_title', 'Fablinks Computers');
-  const address = getSetting('contact_address', 'Nigeria');
+  const address = getSetting('contact_address', 'Shop NO 35, Student Affairs, Abia State University Uturu, Abia State, Nigeria');
   const phone = getSetting('contact_phone', '');
   const email = getSetting('contact_email', '');
-  const whatsapp = getSetting('whatsapp_number', '');
+  const whatsapp = getSetting('whatsapp_number', '') || getSetting('contact_whatsapp', '2347068122861');
   const openingHours = getSetting('opening_hours', 'Mon-Sat: 8:00 AM - 8:00 PM');
 
   const contactItems = [

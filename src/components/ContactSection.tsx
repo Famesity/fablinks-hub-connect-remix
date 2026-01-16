@@ -8,10 +8,11 @@ import { useSiteSettings } from '@/hooks/useSiteSettings';
 const ContactSection = () => {
   const { getSetting } = useSiteSettings();
   
-  const whatsappLink = `https://wa.me/${getSetting('contact_whatsapp', '2347068122861').replace(/\+/g, '')}`;
+  const whatsappLink = `https://wa.me/${(getSetting('whatsapp_number', '') || getSetting('contact_whatsapp', '2347068122861')).replace(/\+/g, '')}`;
   const contactPhone = getSetting('contact_phone', '+234 XXX XXX XXXX');
-  const contactEmail = getSetting('contact_email', 'info@edupointservices.com');
-  const contactAddress = getSetting('contact_address', 'Lagos, Nigeria');
+  const contactEmail = getSetting('contact_email', 'fablinkscomputers@gmail.com');
+  const contactAddress = getSetting('contact_address', 'Shop NO 35, Student Affairs, Abia State University Uturu, Abia State, Nigeria');
+  const openingHours = getSetting('opening_hours', 'Mon-Sat: 8:00 AM - 8:00 PM');
 
   return (
     <section id="contact" className="section-padding bg-fablinks-gray-light">
@@ -87,8 +88,8 @@ const ContactSection = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Operating Hours</h3>
-                    <p className="text-gray-600">Monday - Sunday</p>
-                    <p className="text-sm text-gray-500">24 hours, 7 days a week</p>
+                    <p className="text-gray-600">{openingHours}</p>
+                    <p className="text-sm text-gray-500">Always here to help</p>
                   </div>
                 </div>
               </CardContent>
