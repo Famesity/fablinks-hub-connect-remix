@@ -7,9 +7,10 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Loader2, ArrowLeft, Upload, X } from "lucide-react";
+import { Loader2, ArrowLeft, Upload, X, Lock, Eye, EyeOff } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { Separator } from "@/components/ui/separator";
 
 export default function AdminProfile() {
   const { isAdmin, loading: adminLoading } = useAdmin();
@@ -19,6 +20,7 @@ export default function AdminProfile() {
   
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
+  const [savingPassword, setSavingPassword] = useState(false);
   const [avatarFile, setAvatarFile] = useState<File | null>(null);
   const [avatarPreview, setAvatarPreview] = useState<string>("");
   
@@ -28,6 +30,13 @@ export default function AdminProfile() {
     avatar_url: "",
     phone: "",
   });
+
+  const [passwordForm, setPasswordForm] = useState({
+    newPassword: "",
+    confirmPassword: "",
+  });
+  const [showNewPassword, setShowNewPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   useEffect(() => {
     if (!adminLoading && !isAdmin) {
@@ -145,6 +154,60 @@ export default function AdminProfile() {
     }
   };
 
+  const handleChangePassword = async () => {
+    if (!passwordForm.newPassword || !passwordForm.confirmPassword) {
+      toast({
+        title: "Error",
+        description: "Please fill in both password fields",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (passwordForm.newPassword.length < 6) {
+      toast({
+        title: "Error",
+        description: "Password must be at least 6 characters",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    if (passwordForm.newPassword !== passwordForm.confirmPassword) {
+      toast({
+        title: "Error",
+        description: "Passwords do not match",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    try {
+      setSavingPassword(true);
+      
+      const { error } = await supabase.auth.updateUser({
+        password: passwordForm.newPassword,
+      });
+
+      if (error) throw error;
+
+      toast({
+        title: "Success",
+        description: "Password changed successfully",
+      });
+
+      setPasswordForm({ newPassword: "", confirmPassword: "" });
+    } catch (error: any) {
+      toast({
+        title: "Error",
+        description: error.message,
+        variant: "destructive",
+      });
+    } finally {
+      setSavingPassword(false);
+    }
+  };
+
   if (adminLoading || loading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100">
@@ -167,120 +230,208 @@ export default function AdminProfile() {
           Back to Dashboard
         </Button>
 
-        <Card className="shadow-xl border-0">
-          <CardHeader className="bg-gradient-to-r from-primary to-primary/80 text-white rounded-t-lg">
-            <CardTitle className="text-2xl">Admin Profile</CardTitle>
-            <CardDescription className="text-white/90">
-              Manage your account information
-            </CardDescription>
-          </CardHeader>
-          <CardContent className="p-8 space-y-6">
-            {/* Avatar Section */}
-            <div className="flex flex-col items-center space-y-4">
-              <div className="relative">
-                {avatarPreview ? (
-                  <div className="relative">
-                    <img
-                      src={avatarPreview}
-                      alt="Avatar"
-                      className="w-32 h-32 rounded-full object-cover border-4 border-primary/20 shadow-lg"
-                    />
-                    <button
-                      onClick={removeAvatar}
-                      className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1.5 hover:bg-red-600 transition-colors shadow-md"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  </div>
-                ) : (
-                  <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-white text-4xl font-bold shadow-lg">
-                    {profile.full_name?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || '?'}
-                  </div>
-                )}
-              </div>
-              
-              <Label htmlFor="avatar" className="cursor-pointer">
-                <div className="flex items-center space-x-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors">
-                  <Upload className="w-4 h-4" />
-                  <span className="font-medium">Upload Photo</span>
+        <div className="space-y-6">
+          {/* Profile Card */}
+          <Card className="shadow-xl border-0">
+            <CardHeader className="bg-gradient-to-r from-primary to-primary/80 text-white rounded-t-lg">
+              <CardTitle className="text-2xl">Admin Profile</CardTitle>
+              <CardDescription className="text-white/90">
+                Manage your account information
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="p-8 space-y-6">
+              {/* Avatar Section */}
+              <div className="flex flex-col items-center space-y-4">
+                <div className="relative">
+                  {avatarPreview ? (
+                    <div className="relative">
+                      <img
+                        src={avatarPreview}
+                        alt="Avatar"
+                        className="w-32 h-32 rounded-full object-cover border-4 border-primary/20 shadow-lg"
+                      />
+                      <button
+                        onClick={removeAvatar}
+                        className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full p-1.5 hover:bg-red-600 transition-colors shadow-md"
+                      >
+                        <X className="w-4 h-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="w-32 h-32 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-white text-4xl font-bold shadow-lg">
+                      {profile.full_name?.[0]?.toUpperCase() || user?.email?.[0]?.toUpperCase() || '?'}
+                    </div>
+                  )}
                 </div>
+                
+                <Label htmlFor="avatar" className="cursor-pointer">
+                  <div className="flex items-center space-x-2 px-4 py-2 bg-primary/10 hover:bg-primary/20 text-primary rounded-lg transition-colors">
+                    <Upload className="w-4 h-4" />
+                    <span className="font-medium">Upload Photo</span>
+                  </div>
+                  <Input
+                    id="avatar"
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleAvatarChange}
+                  />
+                </Label>
+              </div>
+
+              {/* Email (Read-only) */}
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-sm font-semibold text-gray-700">Email</Label>
                 <Input
-                  id="avatar"
-                  type="file"
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleAvatarChange}
+                  id="email"
+                  value={user?.email || ""}
+                  disabled
+                  className="bg-gray-50 border-gray-200"
                 />
-              </Label>
-            </div>
+                <p className="text-xs text-gray-500">Email cannot be changed</p>
+              </div>
 
-            {/* Email (Read-only) */}
-            <div className="space-y-2">
-              <Label htmlFor="email" className="text-sm font-semibold text-gray-700">Email</Label>
-              <Input
-                id="email"
-                value={user?.email || ""}
-                disabled
-                className="bg-gray-50 border-gray-200"
-              />
-              <p className="text-xs text-gray-500">Email cannot be changed</p>
-            </div>
+              {/* Full Name */}
+              <div className="space-y-2">
+                <Label htmlFor="full_name" className="text-sm font-semibold text-gray-700">Full Name</Label>
+                <Input
+                  id="full_name"
+                  value={profile.full_name}
+                  onChange={(e) => setProfile({ ...profile, full_name: e.target.value })}
+                  placeholder="Enter your full name"
+                  className="border-gray-200 focus:border-primary"
+                />
+              </div>
 
-            {/* Full Name */}
-            <div className="space-y-2">
-              <Label htmlFor="full_name" className="text-sm font-semibold text-gray-700">Full Name</Label>
-              <Input
-                id="full_name"
-                value={profile.full_name}
-                onChange={(e) => setProfile({ ...profile, full_name: e.target.value })}
-                placeholder="Enter your full name"
-                className="border-gray-200 focus:border-primary"
-              />
-            </div>
+              {/* Phone */}
+              <div className="space-y-2">
+                <Label htmlFor="phone" className="text-sm font-semibold text-gray-700">Phone Number</Label>
+                <Input
+                  id="phone"
+                  type="tel"
+                  value={profile.phone}
+                  onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+                  placeholder="+234 706 812 2861"
+                  className="border-gray-200 focus:border-primary"
+                />
+              </div>
 
-            {/* Phone */}
-            <div className="space-y-2">
-              <Label htmlFor="phone" className="text-sm font-semibold text-gray-700">Phone Number</Label>
-              <Input
-                id="phone"
-                type="tel"
-                value={profile.phone}
-                onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
-                placeholder="+234 706 812 2861"
-                className="border-gray-200 focus:border-primary"
-              />
-            </div>
+              {/* Bio */}
+              <div className="space-y-2">
+                <Label htmlFor="bio" className="text-sm font-semibold text-gray-700">Bio</Label>
+                <Textarea
+                  id="bio"
+                  value={profile.bio}
+                  onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
+                  placeholder="Tell us about yourself..."
+                  rows={4}
+                  className="border-gray-200 focus:border-primary resize-none"
+                />
+              </div>
 
-            {/* Bio */}
-            <div className="space-y-2">
-              <Label htmlFor="bio" className="text-sm font-semibold text-gray-700">Bio</Label>
-              <Textarea
-                id="bio"
-                value={profile.bio}
-                onChange={(e) => setProfile({ ...profile, bio: e.target.value })}
-                placeholder="Tell us about yourself..."
-                rows={4}
-                className="border-gray-200 focus:border-primary resize-none"
-              />
-            </div>
+              {/* Save Button */}
+              <Button
+                onClick={handleSave}
+                disabled={saving}
+                className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white font-semibold py-6 text-lg shadow-lg"
+              >
+                {saving ? (
+                  <>
+                    <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                    Saving...
+                  </>
+                ) : (
+                  "Save Profile"
+                )}
+              </Button>
+            </CardContent>
+          </Card>
 
-            {/* Save Button */}
-            <Button
-              onClick={handleSave}
-              disabled={saving}
-              className="w-full bg-gradient-to-r from-primary to-primary/80 hover:from-primary/90 hover:to-primary/70 text-white font-semibold py-6 text-lg shadow-lg"
-            >
-              {saving ? (
-                <>
-                  <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                  Saving...
-                </>
-              ) : (
-                "Save Profile"
-              )}
-            </Button>
-          </CardContent>
-        </Card>
+          {/* Password Change Card */}
+          <Card className="shadow-xl border-0">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Lock className="h-5 w-5" />
+                Change Password
+              </CardTitle>
+              <CardDescription>
+                Update your password to keep your account secure
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              {/* New Password */}
+              <div className="space-y-2">
+                <Label htmlFor="new_password" className="text-sm font-semibold text-gray-700">
+                  New Password
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="new_password"
+                    type={showNewPassword ? "text" : "password"}
+                    value={passwordForm.newPassword}
+                    onChange={(e) => setPasswordForm({ ...passwordForm, newPassword: e.target.value })}
+                    placeholder="Enter new password"
+                    className="border-gray-200 focus:border-primary pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  >
+                    {showNewPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+              </div>
+
+              {/* Confirm Password */}
+              <div className="space-y-2">
+                <Label htmlFor="confirm_password" className="text-sm font-semibold text-gray-700">
+                  Confirm Password
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="confirm_password"
+                    type={showConfirmPassword ? "text" : "password"}
+                    value={passwordForm.confirmPassword}
+                    onChange={(e) => setPasswordForm({ ...passwordForm, confirmPassword: e.target.value })}
+                    placeholder="Confirm new password"
+                    className="border-gray-200 focus:border-primary pr-10"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                  >
+                    {showConfirmPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+                  </button>
+                </div>
+              </div>
+
+              <p className="text-xs text-muted-foreground">
+                Password must be at least 6 characters long
+              </p>
+
+              <Button
+                onClick={handleChangePassword}
+                disabled={savingPassword}
+                variant="outline"
+                className="w-full"
+              >
+                {savingPassword ? (
+                  <>
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    Updating Password...
+                  </>
+                ) : (
+                  <>
+                    <Lock className="mr-2 h-4 w-4" />
+                    Update Password
+                  </>
+                )}
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
