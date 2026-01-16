@@ -24,7 +24,7 @@ const Header = () => {
   const whatsappLink = `https://wa.me/${getSetting('contact_whatsapp', '2347068122861').replace(/\+/g, '')}?text=Hello,%20I%20need%20assistance`;
   const siteTitle = getSetting('site_title', 'Fablinks Computers');
   const siteLogo = getSetting('site_logo', '');
-  const contactPhone = getSetting('contact_phone', '+234 XXX XXX XXXX');
+  const contactPhone = getSetting('contact_phone', '+234 706 812 2861');
 
   const isActive = (path: string) => {
     return location.pathname === path;

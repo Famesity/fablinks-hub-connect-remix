@@ -160,7 +160,7 @@ const ServiceRequestForm = () => {
               <Label htmlFor="phone">Phone Number</Label>
               <Input
                 id="phone"
-                placeholder="+234..."
+                placeholder="+234 706 812 2861"
                 {...register('phone')}
               />
             </div>

@@ -8,8 +8,8 @@ import { Link } from 'react-router-dom';
 const Hero = () => {
   const { getSetting } = useSiteSettings();
   
-  const heroTitle = getSetting('hero_title', 'Welcome to EduPoint Services');
-  const heroSubtitle = getSetting('hero_subtitle', 'Your one-stop solution for all educational needs');
+  const heroTitle = getSetting('hero_title', 'Welcome to Fablinks Computers');
+  const heroSubtitle = getSetting('hero_subtitle', 'Your one-stop solution for WAEC, JAMB, NECO registrations, printing services, and all computer-assisted services');
   const heroCtaText = getSetting('hero_cta_text', 'Get Started');
   const heroCtaLink = getSetting('hero_cta_link', '/services');
   const heroBackground = getSetting('hero_background_image', '');
