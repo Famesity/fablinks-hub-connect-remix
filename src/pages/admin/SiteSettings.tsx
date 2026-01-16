@@ -8,9 +8,10 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Loader2, ArrowLeft, Save, Eye, Sparkles } from "lucide-react";
+import { Loader2, ArrowLeft, Save, Eye, Sparkles, Crop } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AdminBottomNav from "@/components/admin/AdminBottomNav";
+import LogoCropDialog from "@/components/admin/LogoCropDialog";
 
 interface Setting {
   id: string;
@@ -30,6 +31,9 @@ export default function AdminSiteSettings() {
   const [heroFile, setHeroFile] = useState<File | null>(null);
   const [previewMode, setPreviewMode] = useState(false);
   const [previewSettings, setPreviewSettings] = useState<Setting[]>([]);
+  const [cropDialogOpen, setCropDialogOpen] = useState(false);
+  const [imageToCrop, setImageToCrop] = useState<string>("");
+  const [originalFileName, setOriginalFileName] = useState<string>("");
 
   const themePresets = {
     'Ocean Blue': {
@@ -361,14 +365,15 @@ export default function AdminSiteSettings() {
                         const img = new Image();
                         img.onload = () => {
                           const isSquare = img.width === img.height;
+                          setOriginalFileName(file.name);
+                          
                           if (!isSquare) {
-                            toast({
-                              title: "Non-square image detected",
-                              description: `Your image is ${img.width}×${img.height}px. Square images (e.g., 512×512px) work best for logos and favicons. You can still use this image, but it may appear distorted.`,
-                              variant: "default",
-                            });
+                            // Offer cropping for non-square images
+                            setImageToCrop(URL.createObjectURL(file));
+                            setCropDialogOpen(true);
+                          } else {
+                            setLogoFile(file);
                           }
-                          setLogoFile(file);
                           URL.revokeObjectURL(img.src);
                         };
                         img.src = URL.createObjectURL(file);
@@ -394,17 +399,34 @@ export default function AdminSiteSettings() {
                             {logoFile ? `${logoFile.name} (${(logoFile.size / 1024).toFixed(1)}KB)` : 'Uploaded previously'}
                           </p>
                         </div>
-                        <Button
-                          type="button"
-                          variant="outline"
-                          size="sm"
-                          onClick={() => {
-                            setLogoFile(null);
-                            updateSetting('site_logo', '');
-                          }}
-                        >
-                          Remove
-                        </Button>
+                        <div className="flex gap-2">
+                          {logoFile && (
+                            <Button
+                              type="button"
+                              variant="outline"
+                              size="sm"
+                              onClick={() => {
+                                setImageToCrop(URL.createObjectURL(logoFile));
+                                setOriginalFileName(logoFile.name);
+                                setCropDialogOpen(true);
+                              }}
+                            >
+                              <Crop className="h-4 w-4 sm:mr-1" />
+                              <span className="hidden sm:inline">Crop</span>
+                            </Button>
+                          )}
+                          <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            onClick={() => {
+                              setLogoFile(null);
+                              updateSetting('site_logo', '');
+                            }}
+                          >
+                            Remove
+                          </Button>
+                        </div>
                       </div>
                       
                       {/* Favicon Preview - simulates browser tab */}
@@ -698,6 +720,24 @@ export default function AdminSiteSettings() {
       </main>
 
       <AdminBottomNav />
+
+      {/* Logo Crop Dialog */}
+      <LogoCropDialog
+        open={cropDialogOpen}
+        onClose={() => {
+          setCropDialogOpen(false);
+          setImageToCrop("");
+        }}
+        imageSrc={imageToCrop}
+        onCropComplete={(croppedFile) => {
+          setLogoFile(croppedFile);
+          toast({
+            title: "Image cropped successfully",
+            description: "Your logo has been cropped to a square format.",
+          });
+        }}
+        originalFileName={originalFileName}
+      />
     </div>
   );
 }
