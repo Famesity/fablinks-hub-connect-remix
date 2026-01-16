@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Link, useLocation } from 'react-router-dom';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
 import { resolveAssetUrl, defaultLogo } from '@/lib/assetResolver';
+import SearchBar from '@/components/SearchBar';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -101,8 +102,9 @@ const Header = () => {
             </Link>
           </nav>
 
-          {/* CTA Buttons */}
+          {/* Search and CTA Buttons */}
           <div className="hidden md:flex items-center space-x-4">
+            <SearchBar />
             <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-white">
               <Phone className="w-4 h-4 mr-2" />
               Call Us
@@ -183,6 +185,9 @@ const Header = () => {
               >
                 Admin Login
               </Link>
+              <div className="pt-4">
+                <SearchBar />
+              </div>
               <div className="flex flex-col space-y-2 pt-4">
                 <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-white w-full">
                   <Phone className="w-4 h-4 mr-2" />
