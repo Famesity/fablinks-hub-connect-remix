@@ -67,7 +67,7 @@ serve(async (req) => {
       );
     }
 
-    const { email, role } = await req.json();
+    const { email, role, permissions } = await req.json();
 
     if (!email || !role) {
       return new Response(
@@ -140,6 +140,23 @@ serve(async (req) => {
         JSON.stringify({ error: "Failed to add role" }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
+    }
+
+    // If permissions are provided and role is admin, add them
+    if (role === "admin" && permissions && Array.isArray(permissions) && permissions.length > 0) {
+      const permissionsToInsert = permissions.map((permission: string) => ({
+        user_id: targetUser!.id,
+        permission,
+      }));
+
+      const { error: permError } = await adminClient
+        .from("admin_permissions")
+        .insert(permissionsToInsert);
+
+      if (permError) {
+        console.error("Error adding permissions:", permError);
+        // Don't fail the whole operation, just log
+      }
     }
 
     const response: any = { 
