@@ -2,12 +2,14 @@ import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAdmin } from "@/hooks/useAdmin";
 import { useAuth } from "@/hooks/useAuth";
+import { usePermissions, ADMIN_PERMISSIONS } from "@/hooks/usePermissions";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, School, Briefcase, FileText, LogOut, Settings, Users, MessageSquare, FileCode, BarChart3, Activity, Image, Shield, ListChecks, Star, Award } from "lucide-react";
+import { Loader2, School, Briefcase, FileText, LogOut, Settings, Users, MessageSquare, FileCode, BarChart3, Activity, Image, Shield, ListChecks, Star, Award, Bell, ClipboardList } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import AdminBottomNav from "@/components/admin/AdminBottomNav";
+import { PermissionsWidget } from "@/components/admin/PermissionsWidget";
 
 export default function AdminDashboard() {
   const { isAdmin, loading } = useAdmin();
@@ -109,6 +111,11 @@ export default function AdminDashboard() {
       </header>
 
       <main className="container mx-auto px-4 py-10">
+        {/* Permissions Widget */}
+        <div className="mb-8">
+          <PermissionsWidget />
+        </div>
+
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
           <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0 shadow-lg">
