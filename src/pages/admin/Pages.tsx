@@ -34,6 +34,9 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import RichTextEditor from "@/components/RichTextEditor";
 import ImageGallery from "@/components/ImageGallery";
 import SEOFields from "@/components/SEOFields";
+import { PermissionGate } from "@/components/admin/PermissionGate";
+import { ADMIN_PERMISSIONS } from "@/hooks/usePermissions";
+import { useActivityLog } from "@/hooks/useActivityLog";
 
 interface Page {
   id: string;
@@ -361,6 +364,7 @@ export default function AdminPages() {
   if (!isAdmin) return null;
 
   return (
+    <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_PAGES}>
     <div className="min-h-screen bg-background">
       <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -636,5 +640,6 @@ export default function AdminPages() {
         </DialogContent>
       </Dialog>
     </div>
+    </PermissionGate>
   );
 }

@@ -16,6 +16,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import RichTextEditor from "@/components/RichTextEditor";
 import ImageGallery from "@/components/ImageGallery";
 import SEOFields from "@/components/SEOFields";
+import { PermissionGate } from "@/components/admin/PermissionGate";
+import { ADMIN_PERMISSIONS } from "@/hooks/usePermissions";
+import { useActivityLog } from "@/hooks/useActivityLog";
 
 interface BlogPost {
   id: string;
@@ -469,6 +472,7 @@ export default function AdminBlogPosts() {
   if (!isAdmin) return null;
 
   return (
+    <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_BLOG}>
     <div className="min-h-screen bg-background">
       <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -799,5 +803,6 @@ export default function AdminBlogPosts() {
         </DialogContent>
       </Dialog>
     </div>
+    </PermissionGate>
   );
 }

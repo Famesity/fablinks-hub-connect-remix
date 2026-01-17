@@ -12,6 +12,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, Plus, Edit, Trash2, ArrowLeft } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { PermissionGate } from "@/components/admin/PermissionGate";
+import { ADMIN_PERMISSIONS } from "@/hooks/usePermissions";
+import { useActivityLog } from "@/hooks/useActivityLog";
 
 interface Service {
   id: string;
@@ -184,6 +187,7 @@ export default function AdminServices() {
   if (!isAdmin) return null;
 
   return (
+    <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_SERVICES}>
     <div className="min-h-screen bg-background">
       <header className="border-b">
         <div className="container mx-auto px-4 py-4">
@@ -331,5 +335,6 @@ export default function AdminServices() {
         </Card>
       </main>
     </div>
+    </PermissionGate>
   );
 }

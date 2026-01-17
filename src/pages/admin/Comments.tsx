@@ -22,6 +22,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { PermissionGate } from "@/components/admin/PermissionGate";
+import { ADMIN_PERMISSIONS } from "@/hooks/usePermissions";
+import { useActivityLog } from "@/hooks/useActivityLog";
 
 interface Comment {
   id: string;
@@ -205,6 +208,7 @@ export default function AdminComments() {
   if (!isAdmin) return null;
 
   return (
+    <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_COMMENTS}>
     <div className="min-h-screen bg-background">
       <header className="border-b">
         <div className="container mx-auto px-4 py-4 flex justify-between items-center">
@@ -352,5 +356,6 @@ export default function AdminComments() {
         </Card>
       </main>
     </div>
+    </PermissionGate>
   );
 }
