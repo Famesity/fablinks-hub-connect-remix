@@ -10,6 +10,8 @@ import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
 import { Loader2, ArrowLeft, Star, Trash2, Edit } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { PermissionGate } from "@/components/admin/PermissionGate";
+import { ADMIN_PERMISSIONS } from "@/hooks/usePermissions";
 import {
   Table,
   TableBody,
@@ -190,6 +192,7 @@ export default function AdminTestimonials() {
   if (!isAdmin) return null;
 
   return (
+    <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_TESTIMONIALS}>
     <div className="min-h-screen bg-background">
       <header className="border-b">
         <div className="container mx-auto px-4 py-4">
@@ -344,5 +347,6 @@ export default function AdminTestimonials() {
         </DialogContent>
       </Dialog>
     </div>
+    </PermissionGate>
   );
 }

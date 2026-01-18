@@ -12,6 +12,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { ArrowLeft, Plus, Pencil, Trash2, Save, ListChecks } from 'lucide-react';
 import { toast } from 'sonner';
 import * as LucideIcons from 'lucide-react';
+import { PermissionGate } from '@/components/admin/PermissionGate';
+import { ADMIN_PERMISSIONS } from '@/hooks/usePermissions';
 
 interface Step {
   id: string;
@@ -158,6 +160,7 @@ const AdminHowItWorks = () => {
   }
 
   return (
+    <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_HOW_IT_WORKS}>
     <div className="min-h-screen bg-muted/30 p-4 md:p-8">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
@@ -307,6 +310,7 @@ const AdminHowItWorks = () => {
         </div>
       </div>
     </div>
+    </PermissionGate>
   );
 };
 

@@ -10,6 +10,8 @@ import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { ArrowLeft, Plus, Pencil, Trash2, GripVertical, Save, Image } from 'lucide-react';
+import { PermissionGate } from '@/components/admin/PermissionGate';
+import { ADMIN_PERMISSIONS } from '@/hooks/usePermissions';
 import { toast } from 'sonner';
 
 interface HeroSlide {
@@ -177,6 +179,7 @@ const AdminHeroSlides = () => {
   }
 
   return (
+    <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_HERO}>
     <div className="min-h-screen bg-muted/30 p-4 md:p-8">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
@@ -388,6 +391,7 @@ const AdminHeroSlides = () => {
         </div>
       </div>
     </div>
+    </PermissionGate>
   );
 };
 

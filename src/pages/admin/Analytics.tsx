@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Loader2, ArrowLeft, TrendingUp, Users, FileText, Eye, MessageSquare } from "lucide-react";
+import { PermissionGate } from "@/components/admin/PermissionGate";
+import { ADMIN_PERMISSIONS } from "@/hooks/usePermissions";
 
 export default function AdminAnalytics() {
   const { isAdmin, loading: adminLoading } = useAdmin();
@@ -109,6 +111,7 @@ export default function AdminAnalytics() {
   ];
 
   return (
+    <PermissionGate permission={ADMIN_PERMISSIONS.VIEW_ANALYTICS}>
     <div className="min-h-screen bg-background">
       <header className="border-b">
         <div className="container mx-auto px-4 py-4">
@@ -173,5 +176,6 @@ export default function AdminAnalytics() {
         </Card>
       </main>
     </div>
+    </PermissionGate>
   );
 }

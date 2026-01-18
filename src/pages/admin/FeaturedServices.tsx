@@ -14,6 +14,8 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { ArrowLeft, Plus, Pencil, Trash2, GripVertical, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import * as LucideIcons from 'lucide-react';
+import { PermissionGate } from '@/components/admin/PermissionGate';
+import { ADMIN_PERMISSIONS } from '@/hooks/usePermissions';
 
 interface FeaturedService {
   id: string;
@@ -198,6 +200,7 @@ const AdminFeaturedServices = () => {
   if (!isAdmin) return null;
 
   return (
+    <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_FEATURED_SERVICES}>
     <div className="min-h-screen bg-background p-6">
       <div className="max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-8">
@@ -421,6 +424,7 @@ const AdminFeaturedServices = () => {
         </Card>
       </div>
     </div>
+    </PermissionGate>
   );
 };
 
