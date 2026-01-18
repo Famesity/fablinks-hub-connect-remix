@@ -154,7 +154,7 @@ const Footer = () => {
               <p>{footerText}</p>
               <span className="hidden sm:inline">|</span>
               <a 
-                href="https://www.neocreb.vercel.app" 
+                href="https://neocreb.vercel.app/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="hover:text-white transition-colors"
