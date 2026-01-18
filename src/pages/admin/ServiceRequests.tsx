@@ -14,6 +14,8 @@ import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, Loader2, Eye, Trash2, MessageSquare, MessageCircle, Phone, Mail } from 'lucide-react';
 import AdminBottomNav from '@/components/admin/AdminBottomNav';
+import { PermissionGate } from '@/components/admin/PermissionGate';
+import { ADMIN_PERMISSIONS } from '@/hooks/usePermissions';
 
 interface ServiceRequest {
   id: string;
@@ -216,6 +218,7 @@ If you have any additional information to share, please reply to this message.
   if (!isAdmin) return null;
 
   return (
+    <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_SERVICE_REQUESTS}>
     <div className="min-h-screen bg-background pb-20">
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center gap-4 mb-6">
@@ -438,6 +441,7 @@ If you have any additional information to share, please reply to this message.
       </div>
       <AdminBottomNav />
     </div>
+    </PermissionGate>
   );
 };
 

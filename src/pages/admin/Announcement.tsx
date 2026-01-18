@@ -10,6 +10,8 @@ import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, Loader2, Save, Megaphone } from 'lucide-react';
 import AdminBottomNav from '@/components/admin/AdminBottomNav';
+import { PermissionGate } from '@/components/admin/PermissionGate';
+import { ADMIN_PERMISSIONS } from '@/hooks/usePermissions';
 
 interface Announcement {
   id: string;
@@ -128,6 +130,7 @@ const AdminAnnouncement = () => {
   if (!isAdmin) return null;
 
   return (
+    <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_ANNOUNCEMENT}>
     <div className="min-h-screen bg-background pb-20">
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center gap-4 mb-6">
@@ -263,6 +266,7 @@ const AdminAnnouncement = () => {
       </div>
       <AdminBottomNav />
     </div>
+    </PermissionGate>
   );
 };
 

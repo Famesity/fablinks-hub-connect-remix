@@ -5,6 +5,8 @@ import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Loader2, ArrowLeft, Download } from "lucide-react";
+import { PermissionGate } from "@/components/admin/PermissionGate";
+import { ADMIN_PERMISSIONS } from "@/hooks/usePermissions";
 import { useToast } from "@/hooks/use-toast";
 import {
   Table,
@@ -96,6 +98,7 @@ export default function AdminNewsletter() {
   if (!isAdmin) return null;
 
   return (
+    <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_NEWSLETTER}>
     <div className="min-h-screen bg-background">
       <header className="border-b">
         <div className="container mx-auto px-4 py-4">
@@ -153,5 +156,6 @@ export default function AdminNewsletter() {
         </Card>
       </main>
     </div>
+    </PermissionGate>
   );
 }

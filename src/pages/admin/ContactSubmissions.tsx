@@ -7,6 +7,8 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Loader2, ArrowLeft, Mail } from "lucide-react";
+import { PermissionGate } from "@/components/admin/PermissionGate";
+import { ADMIN_PERMISSIONS } from "@/hooks/usePermissions";
 import { useToast } from "@/hooks/use-toast";
 import {
   Table,
@@ -134,6 +136,7 @@ export default function AdminContactSubmissions() {
   if (!isAdmin) return null;
 
   return (
+    <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_CONTACTS}>
     <div className="min-h-screen bg-background">
       <header className="border-b">
         <div className="container mx-auto px-4 py-4">
@@ -260,5 +263,6 @@ export default function AdminContactSubmissions() {
         </DialogContent>
       </Dialog>
     </div>
+    </PermissionGate>
   );
 }
