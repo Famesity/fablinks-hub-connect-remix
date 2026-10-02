@@ -42,9 +42,10 @@ const EntertainmentHero = () => {
   const siteTitle = getSetting('site_title', 'Fablinks Computers');
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-primary via-primary to-primary/80 text-white">
+    <section className="relative overflow-hidden bg-ent-ink text-white">
       {/* Stage backdrop */}
-      <div className="absolute inset-0 ent-grid-bg opacity-30" />
+      <div className="absolute inset-0 ent-grid-bg opacity-70" />
+      <div className="absolute inset-0 bg-gradient-to-br from-transparent via-ent-ink to-ent-stage" />
       <div className="absolute -top-32 -right-24 h-80 w-80 rounded-full bg-ent-gold opacity-20 blur-3xl" />
       <div className="absolute -bottom-24 -left-24 h-72 w-72 rounded-full bg-primary opacity-20 blur-3xl" />
       {/* Spotlight beams */}
