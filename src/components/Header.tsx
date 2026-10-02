@@ -50,12 +50,12 @@ const Header = () => {
           </Link>
 
           {/* Mobile Search - Between logo and menu */}
-          <div className="2xl:hidden w-24 shrink-0">
+          <div className="lg:hidden w-24 shrink-0">
             <SearchBar isMobile />
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden 2xl:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center gap-3 xl:gap-5 2xl:gap-6">
             <Link 
               to="/" 
               className={`text-gray-700 hover:text-primary transition-colors font-medium ${
@@ -107,9 +107,9 @@ const Header = () => {
           </nav>
 
           {/* Search and CTA Buttons */}
-          <div className="hidden 2xl:flex items-center space-x-4">
+          <div className="hidden xl:flex items-center gap-2 2xl:gap-4">
             <SearchBar />
-            <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-white">
+            <Button variant="outline" size="sm" className="hidden 2xl:inline-flex border-primary text-primary hover:bg-primary hover:text-white">
               <Phone className="w-4 h-4 mr-2" />
               Call Us
             </Button>
@@ -124,7 +124,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button 
-            className="2xl:hidden p-2 shrink-0"
+            className="lg:hidden p-2 shrink-0"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -133,7 +133,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="2xl:hidden py-4 border-t border-gray-200">
+          <div className="lg:hidden py-4 border-t border-gray-200">
             <nav className="flex flex-col space-y-4">
               <Link 
                 to="/" 
