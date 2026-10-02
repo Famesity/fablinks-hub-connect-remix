@@ -13,7 +13,6 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, Loader2, Eye, Trash2, MessageSquare, MessageCircle, Phone, Mail } from 'lucide-react';
-import AdminBottomNav from '@/components/admin/AdminBottomNav';
 import { PermissionGate } from '@/components/admin/PermissionGate';
 import { ADMIN_PERMISSIONS } from '@/hooks/usePermissions';
 
@@ -219,7 +218,7 @@ If you have any additional information to share, please reply to this message.
 
   return (
     <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_SERVICE_REQUESTS}>
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center gap-4 mb-6">
           <Button variant="ghost" size="icon" onClick={() => navigate('/admin')}>
@@ -439,7 +438,6 @@ If you have any additional information to share, please reply to this message.
           </DialogContent>
         </Dialog>
       </div>
-      <AdminBottomNav />
     </div>
     </PermissionGate>
   );

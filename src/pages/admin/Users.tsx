@@ -42,7 +42,6 @@ import {
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import AdminBottomNav from "@/components/admin/AdminBottomNav";
 
 interface UserRole {
   id: string;
@@ -332,7 +331,7 @@ export default function AdminUsers() {
 
   if (!canManageAdmins) {
     return (
-      <div className="min-h-screen bg-background pb-20">
+      <div className="min-h-screen bg-background">
         <header className="border-b sticky top-0 bg-background z-10">
           <div className="container mx-auto px-4 py-3 flex items-center gap-3">
             <Button onClick={() => navigate("/admin")} variant="ghost" size="icon">
@@ -352,13 +351,12 @@ export default function AdminUsers() {
             </CardContent>
           </Card>
         </main>
-        <AdminBottomNav />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background">
       <header className="border-b sticky top-0 bg-background z-10">
         <div className="container mx-auto px-4 py-3 flex items-center gap-3">
           <Button
@@ -740,7 +738,6 @@ export default function AdminUsers() {
         </DialogContent>
       </Dialog>
 
-      <AdminBottomNav />
     </div>
   );
 }

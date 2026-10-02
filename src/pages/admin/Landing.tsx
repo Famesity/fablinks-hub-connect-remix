@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import { Image, Shield, ListChecks, Star, Award, CalendarDays } from "lucide-react";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import AdminBottomNav from "@/components/admin/AdminBottomNav";
 
 export default function AdminLanding() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50 pb-20">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
       <header className="bg-white border-b shadow-sm sticky top-0 z-40">
         <div className="container mx-auto px-4 py-4">
           <h1 className="text-2xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent">
@@ -91,7 +90,6 @@ export default function AdminLanding() {
         </div>
       </main>
 
-      <AdminBottomNav />
     </div>
   );
 }

@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -6,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useTheme } from "@/hooks/useTheme";
 import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
+import AdminLayout from "@/components/admin/AdminLayout";
 import Index from "./pages/Index";
 import Experience from "./pages/Experience";
 import Services from "./pages/Services";
@@ -64,34 +64,36 @@ function AppContent() {
           <Route path="/search" element={<Search />} />
           <Route path="/install" element={<Install />} />
           <Route path="/auth" element={<Auth />} />
-          <Route path="/admin" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-          <Route path="/admin/dashboard" element={<ProtectedRoute><AdminDashboard /></ProtectedRoute>} />
-          <Route path="/admin/content" element={<ProtectedRoute><AdminContent /></ProtectedRoute>} />
-          <Route path="/admin/landing" element={<ProtectedRoute><AdminLanding /></ProtectedRoute>} />
-          <Route path="/admin/customers" element={<ProtectedRoute><AdminCustomers /></ProtectedRoute>} />
-          <Route path="/admin/schools" element={<ProtectedRoute><AdminSchools /></ProtectedRoute>} />
-          <Route path="/admin/services" element={<ProtectedRoute><AdminServices /></ProtectedRoute>} />
-          <Route path="/admin/blog" element={<ProtectedRoute><AdminBlogPosts /></ProtectedRoute>} />
-          <Route path="/admin/settings" element={<ProtectedRoute><AdminSiteSettings /></ProtectedRoute>} />
-          <Route path="/admin/users" element={<ProtectedRoute><AdminUsers /></ProtectedRoute>} />
-          <Route path="/admin/comments" element={<ProtectedRoute><AdminComments /></ProtectedRoute>} />
-          <Route path="/admin/pages" element={<ProtectedRoute><AdminPages /></ProtectedRoute>} />
-          <Route path="/admin/analytics" element={<ProtectedRoute><AdminAnalytics /></ProtectedRoute>} />
-          <Route path="/admin/activity" element={<ProtectedRoute><AdminActivityLogs /></ProtectedRoute>} />
-          <Route path="/admin/profile" element={<ProtectedRoute><AdminProfile /></ProtectedRoute>} />
-          <Route path="/admin/testimonials" element={<ProtectedRoute><AdminTestimonials /></ProtectedRoute>} />
-          <Route path="/admin/contact-submissions" element={<ProtectedRoute><AdminContactSubmissions /></ProtectedRoute>} />
-          <Route path="/admin/faqs" element={<ProtectedRoute><AdminFAQs /></ProtectedRoute>} />
-          <Route path="/admin/newsletter" element={<ProtectedRoute><AdminNewsletter /></ProtectedRoute>} />
-          <Route path="/admin/hero-slides" element={<ProtectedRoute><AdminHeroSlides /></ProtectedRoute>} />
-          <Route path="/admin/trust-badges" element={<ProtectedRoute><AdminTrustBadges /></ProtectedRoute>} />
-          <Route path="/admin/how-it-works" element={<ProtectedRoute><AdminHowItWorks /></ProtectedRoute>} />
-          <Route path="/admin/featured-services" element={<ProtectedRoute><AdminFeaturedServices /></ProtectedRoute>} />
-          <Route path="/admin/why-choose-us" element={<ProtectedRoute><AdminWhyChooseUs /></ProtectedRoute>} />
-          <Route path="/admin/events" element={<ProtectedRoute><AdminEvents /></ProtectedRoute>} />
-          <Route path="/admin/service-requests" element={<ProtectedRoute><AdminServiceRequests /></ProtectedRoute>} />
-          <Route path="/admin/announcement" element={<ProtectedRoute><AdminAnnouncement /></ProtectedRoute>} />
-          <Route path="/admin/notifications" element={<ProtectedRoute><AdminNotifications /></ProtectedRoute>} />
+          <Route path="/admin" element={<ProtectedRoute><AdminLayout /></ProtectedRoute>}>
+            <Route index element={<AdminDashboard />} />
+            <Route path="dashboard" element={<AdminDashboard />} />
+            <Route path="content" element={<AdminContent />} />
+            <Route path="landing" element={<AdminLanding />} />
+            <Route path="customers" element={<AdminCustomers />} />
+            <Route path="schools" element={<AdminSchools />} />
+            <Route path="services" element={<AdminServices />} />
+            <Route path="blog" element={<AdminBlogPosts />} />
+            <Route path="settings" element={<AdminSiteSettings />} />
+            <Route path="users" element={<AdminUsers />} />
+            <Route path="comments" element={<AdminComments />} />
+            <Route path="pages" element={<AdminPages />} />
+            <Route path="analytics" element={<AdminAnalytics />} />
+            <Route path="activity" element={<AdminActivityLogs />} />
+            <Route path="profile" element={<AdminProfile />} />
+            <Route path="testimonials" element={<AdminTestimonials />} />
+            <Route path="contact-submissions" element={<AdminContactSubmissions />} />
+            <Route path="faqs" element={<AdminFAQs />} />
+            <Route path="newsletter" element={<AdminNewsletter />} />
+            <Route path="hero-slides" element={<AdminHeroSlides />} />
+            <Route path="trust-badges" element={<AdminTrustBadges />} />
+            <Route path="how-it-works" element={<AdminHowItWorks />} />
+            <Route path="featured-services" element={<AdminFeaturedServices />} />
+            <Route path="why-choose-us" element={<AdminWhyChooseUs />} />
+            <Route path="events" element={<AdminEvents />} />
+            <Route path="service-requests" element={<AdminServiceRequests />} />
+            <Route path="announcement" element={<AdminAnnouncement />} />
+            <Route path="notifications" element={<AdminNotifications />} />
+          </Route>
           <Route path="/page/:slug" element={<Page />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
