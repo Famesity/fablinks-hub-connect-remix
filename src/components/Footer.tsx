@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { MessageCircle, Phone, Mail, Facebook, Instagram, Twitter } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -86,7 +85,6 @@ const Footer = () => {
                 <Link to="/about" className="text-gray-300 hover:text-white transition-colors">About</Link>
                 <Link to="/contact" className="text-gray-300 hover:text-white transition-colors">Contact</Link>
                 <Link to="/blog" className="text-gray-300 hover:text-white transition-colors">Blog</Link>
-                <Link to="/auth" className="text-gray-300 hover:text-white transition-colors">Admin Login</Link>
               </nav>
             </div>
 
