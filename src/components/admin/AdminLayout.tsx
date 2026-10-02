@@ -117,13 +117,13 @@ function NavigationLinks({ onNavigate }: { onNavigate?: () => void }) {
                   className={cn(
                     "group flex items-center gap-3 rounded-lg px-3 py-2 text-[13px] font-medium transition-colors",
                     active
-                      ? "bg-indigo-500/15 text-white shadow-sm ring-1 ring-inset ring-indigo-400/20"
-                      : "text-slate-300 hover:bg-white/5 hover:text-white",
+                      ? "bg-indigo-50 text-indigo-700 shadow-sm ring-1 ring-inset ring-indigo-100"
+                      : "text-slate-600 hover:bg-slate-100 hover:text-slate-900",
                   )}
                 >
-                  <Icon className={cn("h-4 w-4 shrink-0", active ? "text-indigo-300" : "text-slate-400 group-hover:text-slate-200")} />
+                  <Icon className={cn("h-4 w-4 shrink-0", active ? "text-indigo-600" : "text-slate-400 group-hover:text-slate-600")} />
                   <span className="min-w-0 flex-1 truncate">{label}</span>
-                  {active && <ChevronRight className="h-3.5 w-3.5 text-indigo-300" />}
+                  {active && <ChevronRight className="h-3.5 w-3.5 text-indigo-600" />}
                 </Link>
               );
             })}
@@ -138,14 +138,14 @@ function Sidebar() {
   const { user } = useAuth();
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-[264px] flex-col border-r border-slate-800 bg-[#111827] text-white lg:flex">
-      <Link to="/admin" className="flex h-[72px] items-center gap-3 border-b border-white/10 px-5">
-        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500 text-white shadow-lg shadow-indigo-950/40">
+    <aside className="fixed inset-y-0 left-0 z-30 hidden w-[264px] flex-col border-r border-slate-200 bg-white text-slate-900 lg:flex">
+      <Link to="/admin" className="flex h-[72px] items-center gap-3 border-b border-slate-200 px-5">
+        <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-md shadow-indigo-600/20">
           <Sparkles className="h-5 w-5" />
         </span>
         <span className="min-w-0">
           <span className="block text-sm font-semibold tracking-wide">Fablinks Hub</span>
-          <span className="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.16em] text-slate-400">Administration</span>
+          <span className="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">Administration</span>
         </span>
       </Link>
 
@@ -153,14 +153,14 @@ function Sidebar() {
         <NavigationLinks />
       </div>
 
-      <div className="border-t border-white/10 p-4">
-        <div className="flex min-w-0 items-center gap-3 rounded-lg bg-white/5 p-3">
-          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-indigo-500/20 text-sm font-semibold text-indigo-200">
+      <div className="border-t border-slate-200 p-4">
+        <div className="flex min-w-0 items-center gap-3 rounded-lg bg-slate-50 p-3">
+          <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-indigo-100 text-sm font-semibold text-indigo-700">
             {user?.email?.charAt(0).toUpperCase() ?? "A"}
           </span>
           <span className="min-w-0">
-            <span className="block text-xs font-medium text-white">Administrator</span>
-            <span className="mt-1 block truncate text-[11px] text-slate-400">{user?.email}</span>
+            <span className="block text-xs font-medium text-slate-900">Administrator</span>
+            <span className="mt-1 block truncate text-[11px] text-slate-500">{user?.email}</span>
           </span>
         </div>
       </div>
@@ -195,14 +195,14 @@ export default function AdminLayout() {
                   <Menu className="h-4 w-4" />
                 </Button>
               </SheetTrigger>
-              <SheetContent side="left" className="w-[290px] border-slate-800 bg-[#111827] p-0 text-white sm:max-w-[290px]">
-                <div className="flex h-[72px] items-center gap-3 border-b border-white/10 px-5 pr-12">
-                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-500">
+              <SheetContent side="left" className="w-[290px] border-slate-200 bg-white p-0 text-slate-900 sm:max-w-[290px]">
+                <div className="flex h-[72px] items-center gap-3 border-b border-slate-200 px-5 pr-12">
+                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white">
                     <Sparkles className="h-5 w-5" />
                   </span>
                   <span>
-                    <span className="block text-sm font-semibold">Fablinks Hub</span>
-                    <SheetTitle className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.16em] text-slate-400">Administration</SheetTitle>
+                    <span className="block text-sm font-semibold text-slate-900">Fablinks Hub</span>
+                    <SheetTitle className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">Administration</SheetTitle>
                   </span>
                 </div>
                 <div className="h-[calc(100%-72px)] overflow-y-auto px-3 py-6">
