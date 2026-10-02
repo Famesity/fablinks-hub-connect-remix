@@ -20,6 +20,7 @@ export const ADMIN_PERMISSIONS = {
   MANAGE_WHY_CHOOSE_US: "manage_why_choose_us",
   MANAGE_TRUST_BADGES: "manage_trust_badges",
   MANAGE_HOW_IT_WORKS: "manage_how_it_works",
+  MANAGE_EVENTS: "manage_events",
   
   // Customer Engagement
   MANAGE_TESTIMONIALS: "manage_testimonials",
@@ -58,6 +59,7 @@ export const PERMISSION_CATEGORIES = {
     { key: ADMIN_PERMISSIONS.MANAGE_WHY_CHOOSE_US, label: "Why Choose Us", description: "Edit features section" },
     { key: ADMIN_PERMISSIONS.MANAGE_TRUST_BADGES, label: "Trust Badges", description: "Manage trust indicators" },
     { key: ADMIN_PERMISSIONS.MANAGE_HOW_IT_WORKS, label: "How It Works", description: "Edit process steps" },
+    { key: ADMIN_PERMISSIONS.MANAGE_EVENTS, label: "Events Highlights", description: "Manage the landing page event line-up" },
   ],
   "Customer Engagement": [
     { key: ADMIN_PERMISSIONS.MANAGE_TESTIMONIALS, label: "Testimonials", description: "Approve and manage reviews" },

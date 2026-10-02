@@ -1,6 +1,5 @@
-/* Import fonts first - must precede all other CSS */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
+/* Import fonts first - must precede all other CSS */@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -159,5 +158,61 @@
   /* WhatsApp Button */
   .whatsapp-float {
     @apply fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 animate-bounce;
+  }
+}
+
+/* =========================================================
+   Entertainment brand theme
+   ========================================================= */
+:root {
+  --ent-ink: 230 40% 6%;
+  --ent-ink-soft: 228 32% 11%;
+  --ent-stage: 217 91% 14%;
+  --ent-gold: 38 96% 55%;
+  --ent-gold-deep: 30 92% 46%;
+}
+
+@layer components {
+  /* Gold display gradient for headline accents */
+  .gradient-gold {
+    background: linear-gradient(120deg, hsl(var(--ent-gold)) 0%, hsl(var(--ent-gold-deep)) 55%, hsl(var(--ent-gold)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Subtle stage-grid texture for dark sections */
+  .ent-grid-bg {
+    background-image:
+      linear-gradient(hsl(var(--ent-gold) / 0.07) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--ent-gold) / 0.07) 1px, transparent 1px);
+    background-size: 52px 52px;
+    mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 0%, black 30%, transparent 80%);
+  }
+
+  /* Infinite ticker used by the info band */
+  .ent-marquee {
+    animation: ent-marquee-scroll 38s linear infinite;
+  }
+  .ent-marquee:hover {
+    animation-play-state: paused;
+  }
+
+  @keyframes ent-marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+}
+
+/* Respect users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ent-marquee,
+  .float-animation,
+  .pulse-slow,
+  .whatsapp-float,
+  .animate-bounce,
+  .animate-pulse {
+    animation: none !important;
   }
 }

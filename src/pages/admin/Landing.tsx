@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Image, Shield, ListChecks, Star, Award } from "lucide-react";
+import { Image, Shield, ListChecks, Star, Award, CalendarDays } from "lucide-react";
 import { Card, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import AdminBottomNav from "@/components/admin/AdminBottomNav";
 
@@ -61,6 +61,18 @@ export default function AdminLanding() {
                 </div>
                 <CardTitle className="text-xl">Featured Services</CardTitle>
                 <CardDescription className="text-gray-600">Manage landing page service cards</CardDescription>
+              </CardHeader>
+            </Card>
+          </Link>
+
+          <Link to="/admin/events" className="group">
+            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-teal-300 cursor-pointer group-hover:-translate-y-1">
+              <CardHeader className="pb-4">
+                <div className="w-14 h-14 bg-gradient-to-br from-teal-100 to-teal-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <CalendarDays className="h-7 w-7 text-teal-600" />
+                </div>
+                <CardTitle className="text-xl">Events Highlights</CardTitle>
+                <CardDescription className="text-gray-600">Manage the event line-up shown on the landing page</CardDescription>
               </CardHeader>
             </Card>
           </Link>

@@ -14,7 +14,15 @@ interface BlogPost {
   created_at: string;
 }
 
-export default function FeaturedBlogPosts() {
+interface FeaturedBlogPostsProps {
+  title?: string;
+  subtitle?: string;
+}
+
+export default function FeaturedBlogPosts({
+  title = "Latest From Our Blog",
+  subtitle = "Stay informed with tips, guides, and updates on educational services in Nigeria",
+}: FeaturedBlogPostsProps) {
   const [posts, setPosts] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -98,9 +106,9 @@ export default function FeaturedBlogPosts() {
     <section className="py-16 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-3xl font-bold mb-4">Latest From Our Blog</h2>
+          <h2 className="text-3xl font-bold mb-4">{title}</h2>
           <p className="text-muted-foreground max-w-2xl mx-auto">
-            Stay informed with tips, guides, and updates on educational services in Nigeria
+            {subtitle}
           </p>
         </div>
 

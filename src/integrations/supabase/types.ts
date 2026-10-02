@@ -439,6 +439,48 @@ export type Database = {
         }
         Relationships: []
       }
+      events: {
+        Row: {
+          category: string
+          created_at: string
+          description: string | null
+          display_order: number
+          event_date: string
+          event_time: string | null
+          id: string
+          is_active: boolean
+          title: string
+          updated_at: string
+          venue: string | null
+        }
+        Insert: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          event_date: string
+          event_time?: string | null
+          id?: string
+          is_active?: boolean
+          title: string
+          updated_at?: string
+          venue?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string | null
+          display_order?: number
+          event_date?: string
+          event_time?: string | null
+          id?: string
+          is_active?: boolean
+          title?: string
+          updated_at?: string
+          venue?: string | null
+        }
+        Relationships: []
+      }
       faqs: {
         Row: {
           answer: string

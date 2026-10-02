@@ -61,6 +61,14 @@ export default {
 				},
 				success: 'hsl(var(--success))',
 				warning: 'hsl(var(--warning))',
+				/* Entertainment brand palette */
+				ent: {
+					ink: 'hsl(var(--ent-ink) / <alpha-value>)',
+					'ink-soft': 'hsl(var(--ent-ink-soft) / <alpha-value>)',
+					stage: 'hsl(var(--ent-stage) / <alpha-value>)',
+					gold: 'hsl(var(--ent-gold) / <alpha-value>)',
+					'gold-deep': 'hsl(var(--ent-gold-deep) / <alpha-value>)',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',
@@ -69,6 +77,7 @@ export default {
 			},
 			fontFamily: {
 				sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+				display: ['Sora', 'Inter', 'system-ui', 'sans-serif'],
 			},
 			keyframes: {
 				'accordion-down': {

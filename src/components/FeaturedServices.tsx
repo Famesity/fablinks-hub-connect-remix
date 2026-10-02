@@ -62,7 +62,17 @@ const defaultServices = [
   }
 ];
 
-const FeaturedServices = () => {
+interface FeaturedServicesProps {
+  title?: string;
+  titleAccent?: string;
+  subtitle?: string;
+}
+
+const FeaturedServices = ({
+  title = "Featured",
+  titleAccent = "Services",
+  subtitle = "Everything you need for your academic journey and daily digital needs, all available through instant WhatsApp chat.",
+}: FeaturedServicesProps) => {
   const [services, setServices] = useState<FeaturedService[]>([]);
   const [loading, setLoading] = useState(true);
   const { getSetting } = useSiteSettings();
@@ -107,11 +117,10 @@ const FeaturedServices = () => {
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
-            Featured <span className="gradient-text">Services</span>
+            {title} <span className="gradient-text">{titleAccent}</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Everything you need for your academic journey and daily digital needs, 
-            all available through instant WhatsApp chat.
+            {subtitle}
           </p>
         </div>
 

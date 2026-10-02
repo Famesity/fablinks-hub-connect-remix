@@ -66,6 +66,14 @@ const Header = () => {
               Home
             </Link>
             <Link 
+              to="/experience" 
+              className={`text-gray-700 hover:text-primary transition-colors font-medium ${
+                isActive('/experience') ? 'text-primary' : ''
+              }`}
+            >
+              Experience
+            </Link>
+            <Link 
               to="/services" 
               className={`text-gray-700 hover:text-primary transition-colors font-medium ${
                 isActive('/services') ? 'text-primary' : ''
@@ -144,6 +152,15 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Home
+              </Link>
+              <Link 
+                to="/experience" 
+                className={`text-gray-700 hover:text-primary transition-colors font-medium ${
+                  isActive('/experience') ? 'text-primary' : ''
+                }`}
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Experience
               </Link>
               <Link 
                 to="/services" 
