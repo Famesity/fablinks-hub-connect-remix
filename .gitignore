@@ -13,6 +13,10 @@ dist-ssr
 *.tsbuildinfo
 *.local
 
+# Tooling artifacts
+isolate/
+supabase/.temp/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
