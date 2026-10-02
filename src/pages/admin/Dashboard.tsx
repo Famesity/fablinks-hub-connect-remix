@@ -1,396 +1,180 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { ArrowRight, BarChart3, BriefcaseBusiness, FileText, Loader2, Mail, MessageSquare, School, Sparkles } from "lucide-react";
 import { useAdmin } from "@/hooks/useAdmin";
-import { useAuth } from "@/hooks/useAuth";
-import { usePermissions, ADMIN_PERMISSIONS } from "@/hooks/usePermissions";
 import { supabase } from "@/integrations/supabase/client";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-import { Loader2, School, Briefcase, FileText, LogOut, Settings, Users, MessageSquare, FileCode, BarChart3, Activity, Image, Shield, ListChecks, Star, Award, Bell, ClipboardList } from "lucide-react";
-import { useToast } from "@/hooks/use-toast";
-import { PermissionsWidget } from "@/components/admin/PermissionsWidget";
+
+interface DashboardStats {
+  totalPosts: number;
+  totalServices: number;
+  totalSchools: number;
+  pendingRequests: number;
+  pendingContacts: number;
+  pendingComments: number;
+}
+
+const initialStats: DashboardStats = {
+  totalPosts: 0,
+  totalServices: 0,
+  totalSchools: 0,
+  pendingRequests: 0,
+  pendingContacts: 0,
+  pendingComments: 0,
+};
 
 export default function AdminDashboard() {
   const { isAdmin, loading } = useAdmin();
-  const { signOut } = useAuth();
   const navigate = useNavigate();
-  const { toast } = useToast();
-  const [stats, setStats] = useState({
-    totalPosts: 0,
-    totalServices: 0,
-    totalComments: 0,
-    totalSchools: 0,
-  });
+  const [stats, setStats] = useState(initialStats);
   const [loadingStats, setLoadingStats] = useState(true);
 
   useEffect(() => {
     if (!loading && !isAdmin) {
-      navigate("/auth");
+      navigate("/auth", { replace: true });
     }
-  }, [isAdmin, loading]);
+  }, [isAdmin, loading, navigate]);
 
   useEffect(() => {
-    if (isAdmin) {
-      fetchStats();
-    }
+    if (!isAdmin) return;
+
+    const fetchStats = async () => {
+      try {
+        const results = await Promise.all([
+          supabase.from("blog_posts").select("id", { count: "exact", head: true }),
+          supabase.from("services").select("id", { count: "exact", head: true }),
+          supabase.from("schools").select("id", { count: "exact", head: true }),
+          supabase.from("service_requests").select("id", { count: "exact", head: true }).or("status.eq.pending,status.is.null"),
+          supabase.from("contact_submissions").select("id", { count: "exact", head: true }).or("status.eq.pending,status.is.null"),
+          supabase.from("blog_comments").select("id", { count: "exact", head: true }).or("approved.eq.false,approved.is.null"),
+        ]);
+
+        const failedResult = results.find(({ error }) => error);
+        if (failedResult?.error) throw failedResult.error;
+
+        setStats({
+          totalPosts: results[0].count ?? 0,
+          totalServices: results[1].count ?? 0,
+          totalSchools: results[2].count ?? 0,
+          pendingRequests: results[3].count ?? 0,
+          pendingContacts: results[4].count ?? 0,
+          pendingComments: results[5].count ?? 0,
+        });
+      } catch (error) {
+        console.error("Error fetching dashboard stats:", error);
+      } finally {
+        setLoadingStats(false);
+      }
+    };
+
+    fetchStats();
   }, [isAdmin]);
-
-  const fetchStats = async () => {
-    try {
-      const [posts, services, comments, schools] = await Promise.all([
-        supabase.from("blog_posts").select("id", { count: "exact" }),
-        supabase.from("services").select("id", { count: "exact" }),
-        supabase.from("blog_comments").select("id", { count: "exact" }),
-        supabase.from("schools").select("id", { count: "exact" }),
-      ]);
-
-      setStats({
-        totalPosts: posts.count || 0,
-        totalServices: services.count || 0,
-        totalComments: comments.count || 0,
-        totalSchools: schools.count || 0,
-      });
-    } catch (error) {
-      console.error("Error fetching stats:", error);
-    } finally {
-      setLoadingStats(false);
-    }
-  };
-
-  const handleSignOut = async () => {
-    await signOut();
-    toast({
-      title: "Signed out",
-      description: "You have been signed out successfully",
-    });
-    navigate("/auth");
-  };
 
   if (loading || loadingStats) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Loader2 className="h-8 w-8 animate-spin" />
+      <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center">
+        <Loader2 className="h-8 w-8 animate-spin text-indigo-600" />
       </div>
     );
   }
 
   if (!isAdmin) return null;
 
+  const metrics = [
+    { label: "Blog posts", value: stats.totalPosts, detail: "Manage your content library", href: "/admin/blog", icon: FileText, tone: "text-blue-600 bg-blue-50" },
+    { label: "Services", value: stats.totalServices, detail: "Services available on the platform", href: "/admin/services", icon: BriefcaseBusiness, tone: "text-emerald-600 bg-emerald-50" },
+    { label: "Schools", value: stats.totalSchools, detail: "Schools in your directory", href: "/admin/schools", icon: School, tone: "text-violet-600 bg-violet-50" },
+    { label: "Open requests", value: stats.pendingRequests, detail: "Service requests to review", href: "/admin/service-requests", icon: MessageSquare, tone: "text-amber-600 bg-amber-50" },
+  ];
+
+  const highlights = [
+    { label: "Service requests", value: stats.pendingRequests, message: "Waiting for your review", href: "/admin/service-requests", icon: MessageSquare, tone: "text-amber-700 bg-amber-50" },
+    { label: "Contact submissions", value: stats.pendingContacts, message: "Awaiting a response", href: "/admin/contact-submissions", icon: Mail, tone: "text-sky-700 bg-sky-50" },
+    { label: "Comments to moderate", value: stats.pendingComments, message: "Pending approval", href: "/admin/comments", icon: MessageSquare, tone: "text-violet-700 bg-violet-50" },
+  ];
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-gray-50">
-      {/* Premium Header with Gradient */}
-      <header className="bg-white border-b shadow-sm sticky top-0 z-50">
-        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
-          <div className="flex justify-between items-center gap-2">
-            <div className="min-w-0 flex-1">
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-primary via-primary/80 to-primary bg-clip-text text-transparent">
-                Admin Dashboard
-              </h1>
-              <p className="text-xs sm:text-sm text-gray-500 mt-0.5">Welcome back, manage your platform</p>
-            </div>
-            <div className="flex items-center gap-1.5 sm:gap-3 flex-shrink-0">
-              <Link to="/admin/profile">
-                <Button variant="outline" size="sm" className="border-primary/20 hover:bg-primary/5 px-2 sm:px-3">
-                  <Users className="h-4 w-4 sm:mr-2" />
-                  <span className="hidden sm:inline">Profile</span>
-                </Button>
-              </Link>
-              <Button 
-                onClick={handleSignOut} 
-                variant="outline"
-                size="sm"
-                className="border-red-200 hover:bg-red-50 hover:text-red-600 px-2 sm:px-3"
-              >
-                <LogOut className="h-4 w-4 sm:mr-2" />
-                <span className="hidden sm:inline">Sign Out</span>
-              </Button>
-            </div>
+    <div className="mx-auto w-full max-w-7xl space-y-8 px-4 py-6 sm:px-6 lg:px-8 lg:py-8">
+      <section className="flex flex-col gap-5 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-7">
+        <div>
+          <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-indigo-50 px-3 py-1 text-xs font-semibold text-indigo-700">
+            <Sparkles className="h-3.5 w-3.5" />
+            Admin workspace
           </div>
+          <h1 className="text-2xl font-bold tracking-tight text-slate-950 sm:text-3xl">Platform overview</h1>
+          <p className="mt-1.5 text-sm text-slate-500">A clear snapshot of your content, services, and items that need attention.</p>
         </div>
-      </header>
-
-      <main className="container mx-auto px-4 py-10">
-        {/* Permissions Widget */}
-        <div className="mb-8">
-          <PermissionsWidget />
-        </div>
-
-        {/* Quick Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
-          <Card className="bg-gradient-to-br from-blue-500 to-blue-600 text-white border-0 shadow-lg">
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-blue-100 text-sm mb-1">Total Posts</p>
-                  <h3 className="text-3xl font-bold">{stats.totalPosts}</h3>
-                </div>
-                <FileText className="h-8 w-8 opacity-80" />
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-gradient-to-br from-green-500 to-green-600 text-white border-0 shadow-lg">
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-green-100 text-sm mb-1">Services</p>
-                  <h3 className="text-3xl font-bold">{stats.totalServices}</h3>
-                </div>
-                <Briefcase className="h-8 w-8 opacity-80" />
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-gradient-to-br from-purple-500 to-purple-600 text-white border-0 shadow-lg">
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-purple-100 text-sm mb-1">Comments</p>
-                  <h3 className="text-3xl font-bold">{stats.totalComments}</h3>
-                </div>
-                <MessageSquare className="h-8 w-8 opacity-80" />
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card className="bg-gradient-to-br from-orange-500 to-orange-600 text-white border-0 shadow-lg">
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start">
-                <div>
-                  <p className="text-orange-100 text-sm mb-1">Schools</p>
-                  <h3 className="text-3xl font-bold">{stats.totalSchools}</h3>
-                </div>
-                <School className="h-8 w-8 opacity-80" />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Landing Page Section */}
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">Landing Page</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          <Link to="/admin/hero-slides" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-rose-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-rose-100 to-rose-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Image className="h-7 w-7 text-rose-600" />
-                </div>
-                <CardTitle className="text-xl">Hero Carousel</CardTitle>
-                <CardDescription className="text-gray-600">Manage hero section slides, headlines, and CTAs</CardDescription>
-              </CardHeader>
-            </Card>
+        <Button asChild className="shrink-0 bg-indigo-600 hover:bg-indigo-700">
+          <Link to="/admin/analytics">
+            <BarChart3 className="mr-2 h-4 w-4" />
+            View analytics
+            <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
+        </Button>
+      </section>
 
-          <Link to="/admin/trust-badges" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-amber-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-amber-100 to-amber-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Shield className="h-7 w-7 text-amber-600" />
-                </div>
-                <CardTitle className="text-xl">Trust Badges</CardTitle>
-                <CardDescription className="text-gray-600">Configure trust strip icons and text</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/how-it-works" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-sky-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-sky-100 to-sky-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <ListChecks className="h-7 w-7 text-sky-600" />
-                </div>
-                <CardTitle className="text-xl">How It Works</CardTitle>
-                <CardDescription className="text-gray-600">Edit process steps and descriptions</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/featured-services" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-rose-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-rose-100 to-rose-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Star className="h-7 w-7 text-rose-600" />
-                </div>
-                <CardTitle className="text-xl">Featured Services</CardTitle>
-                <CardDescription className="text-gray-600">Manage landing page service cards</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/why-choose-us" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-emerald-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Award className="h-7 w-7 text-emerald-600" />
-                </div>
-                <CardTitle className="text-xl">Why Choose Us</CardTitle>
-                <CardDescription className="text-gray-600">Manage features and statistics</CardDescription>
-              </CardHeader>
-            </Card>
+      <section aria-labelledby="overview-metrics-title">
+        <div className="mb-4 flex items-end justify-between gap-4">
+          <div>
+            <h2 id="overview-metrics-title" className="text-lg font-semibold text-slate-900">At a glance</h2>
+            <p className="mt-1 text-sm text-slate-500">Key totals across your platform</p>
+          </div>
+          <Link to="/admin/analytics" className="hidden items-center gap-1 text-sm font-medium text-indigo-700 hover:text-indigo-800 sm:inline-flex">
+            Detailed analytics <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-
-        {/* Management Cards */}
-        <h2 className="text-2xl font-bold mb-6 text-gray-800">Management</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Link to="/admin/schools" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-primary/30 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-primary/20 to-primary/10 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <School className="h-7 w-7 text-primary" />
-                </div>
-                <CardTitle className="text-xl">Manage Schools</CardTitle>
-                <CardDescription className="text-gray-600">Add, edit, or remove schools from the database</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/services" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-green-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-green-100 to-green-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Briefcase className="h-7 w-7 text-green-600" />
-                </div>
-                <CardTitle className="text-xl">Manage Services</CardTitle>
-                <CardDescription className="text-gray-600">Configure services offered on the platform</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/blog" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-blue-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-blue-100 to-blue-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <FileText className="h-7 w-7 text-blue-600" />
-                </div>
-                <CardTitle className="text-xl">Blog Posts</CardTitle>
-                <CardDescription className="text-gray-600">Create and publish engaging content</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/settings" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-purple-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-purple-100 to-purple-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Settings className="h-7 w-7 text-purple-600" />
-                </div>
-                <CardTitle className="text-xl">Site Settings</CardTitle>
-                <CardDescription className="text-gray-600">Customize website appearance and branding</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/users" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-orange-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-orange-100 to-orange-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Users className="h-7 w-7 text-orange-600" />
-                </div>
-                <CardTitle className="text-xl">User Management</CardTitle>
-                <CardDescription className="text-gray-600">Manage admins and user permissions</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/comments" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-pink-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-pink-100 to-pink-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <MessageSquare className="h-7 w-7 text-pink-600" />
-                </div>
-                <CardTitle className="text-xl">Comments</CardTitle>
-                <CardDescription className="text-gray-600">Moderate and respond to user comments</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/pages" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-indigo-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-indigo-100 to-indigo-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <FileCode className="h-7 w-7 text-indigo-600" />
-                </div>
-                <CardTitle className="text-xl">Pages</CardTitle>
-                <CardDescription className="text-gray-600">Create and manage custom pages</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/analytics" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-cyan-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-cyan-100 to-cyan-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <BarChart3 className="h-7 w-7 text-cyan-600" />
-                </div>
-                <CardTitle className="text-xl">Analytics</CardTitle>
-                <CardDescription className="text-gray-600">View detailed platform statistics</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/activity" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-teal-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-teal-100 to-teal-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Activity className="h-7 w-7 text-teal-600" />
-                </div>
-                <CardTitle className="text-xl">Activity Logs</CardTitle>
-                <CardDescription className="text-gray-600">Track recent platform activities</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/testimonials" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-yellow-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <MessageSquare className="h-7 w-7 text-yellow-600" />
-                </div>
-                <CardTitle className="text-xl">Testimonials</CardTitle>
-                <CardDescription className="text-gray-600">Manage customer reviews and ratings</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/contact-submissions" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-red-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-red-100 to-red-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <MessageSquare className="h-7 w-7 text-red-600" />
-                </div>
-                <CardTitle className="text-xl">Contact Forms</CardTitle>
-                <CardDescription className="text-gray-600">View and respond to contact submissions</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/faqs" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-lime-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-lime-100 to-lime-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <FileText className="h-7 w-7 text-lime-600" />
-                </div>
-                <CardTitle className="text-xl">FAQs</CardTitle>
-                <CardDescription className="text-gray-600">Manage frequently asked questions</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
-
-          <Link to="/admin/newsletter" className="group">
-            <Card className="hover:shadow-2xl transition-all duration-300 border-2 hover:border-emerald-300 cursor-pointer group-hover:-translate-y-1">
-              <CardHeader className="pb-4">
-                <div className="w-14 h-14 bg-gradient-to-br from-emerald-100 to-emerald-50 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Users className="h-7 w-7 text-emerald-600" />
-                </div>
-                <CardTitle className="text-xl">Newsletter</CardTitle>
-                <CardDescription className="text-gray-600">Manage email subscribers</CardDescription>
-              </CardHeader>
-            </Card>
-          </Link>
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {metrics.map(({ label, value, detail, href, icon: Icon, tone }) => (
+            <Link key={label} to={href} className="group rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2">
+              <Card className="h-full border-slate-200 shadow-sm transition-all group-hover:-translate-y-0.5 group-hover:border-indigo-200 group-hover:shadow-md">
+                <CardContent className="flex items-start justify-between gap-4 p-5">
+                  <div>
+                    <p className="text-sm font-medium text-slate-500">{label}</p>
+                    <p className="mt-2 text-3xl font-bold tracking-tight text-slate-950">{value}</p>
+                    <p className="mt-1 text-xs text-slate-500">{detail}</p>
+                  </div>
+                  <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${tone}`}>
+                    <Icon className="h-5 w-5" />
+                  </span>
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
         </div>
-      </main>
+      </section>
 
+      <section aria-labelledby="highlights-title">
+        <div className="mb-4">
+          <h2 id="highlights-title" className="text-lg font-semibold text-slate-900">Needs your attention</h2>
+          <p className="mt-1 text-sm text-slate-500">Actionable updates to help keep things moving.</p>
+        </div>
+        <div className="grid gap-4 lg:grid-cols-3">
+          {highlights.map(({ label, value, message, href, icon: Icon, tone }) => (
+            <Card key={label} className="border-slate-200 shadow-sm">
+              <CardHeader className="flex flex-row items-start justify-between space-y-0 pb-3">
+                <div className="flex items-center gap-3">
+                  <span className={`flex h-10 w-10 items-center justify-center rounded-xl ${tone}`}>
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <div>
+                    <CardTitle className="text-sm font-semibold text-slate-900">{label}</CardTitle>
+                    <CardDescription className="mt-1">{message}</CardDescription>
+                  </div>
+                </div>
+                <span className="text-2xl font-bold tracking-tight text-slate-900">{value}</span>
+              </CardHeader>
+              <CardContent className="pt-0">
+                <Button asChild variant="ghost" size="sm" className="-ml-3 text-indigo-700 hover:bg-indigo-50 hover:text-indigo-800">
+                  <Link to={href}>
+                    View more <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
