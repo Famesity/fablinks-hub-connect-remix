@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useTheme } from "@/hooks/useTheme";
 import { ProtectedRoute } from "@/components/admin/ProtectedRoute";
 import Index from "./pages/Index";
+import Experience from "./pages/Experience";
 import Services from "./pages/Services";
 import Request from "./pages/Request";
 import About from "./pages/About";
@@ -35,6 +36,7 @@ import AdminTrustBadges from "./pages/admin/TrustBadges";
 import AdminHowItWorks from "./pages/admin/HowItWorks";
 import AdminFeaturedServices from "./pages/admin/FeaturedServices";
 import AdminWhyChooseUs from "./pages/admin/WhyChooseUs";
+import AdminEvents from "./pages/admin/Events";
 import AdminContent from "./pages/admin/Content";
 import AdminLanding from "./pages/admin/Landing";
 import AdminCustomers from "./pages/admin/Customers";
@@ -52,6 +54,7 @@ function AppContent() {
   return (
     <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/experience" element={<Experience />} />
           <Route path="/services" element={<Services />} />
           <Route path="/request" element={<Request />} />
           <Route path="/about" element={<About />} />
@@ -85,6 +88,7 @@ function AppContent() {
           <Route path="/admin/how-it-works" element={<ProtectedRoute><AdminHowItWorks /></ProtectedRoute>} />
           <Route path="/admin/featured-services" element={<ProtectedRoute><AdminFeaturedServices /></ProtectedRoute>} />
           <Route path="/admin/why-choose-us" element={<ProtectedRoute><AdminWhyChooseUs /></ProtectedRoute>} />
+          <Route path="/admin/events" element={<ProtectedRoute><AdminEvents /></ProtectedRoute>} />
           <Route path="/admin/service-requests" element={<ProtectedRoute><AdminServiceRequests /></ProtectedRoute>} />
           <Route path="/admin/announcement" element={<ProtectedRoute><AdminAnnouncement /></ProtectedRoute>} />
           <Route path="/admin/notifications" element={<ProtectedRoute><AdminNotifications /></ProtectedRoute>} />

@@ -1,34 +1,52 @@
 import React from 'react';
 import Layout from '@/components/Layout';
-import HeroCarousel from '@/components/HeroCarousel';
+import EntertainmentHero from '@/components/home/EntertainmentHero';
+import InfoTicker from '@/components/home/InfoTicker';
 import TrustStrip from '@/components/TrustStrip';
-import FeaturedServices from '@/components/FeaturedServices';
-import WhyChooseUs from '@/components/WhyChooseUs';
-import HowItWorks from '@/components/HowItWorks';
-import LocationContact from '@/components/LocationContact';
-import CTASection from '@/components/CTASection';
+import EventsHighlights from '@/components/home/EventsHighlights';
 import FeaturedBlogPosts from '@/components/FeaturedBlogPosts';
-import ContactSection from '@/components/ContactSection';
-import TestimonialsCarousel from '@/components/TestimonialsCarousel';
+import FeaturedServices from '@/components/FeaturedServices';
+import GoodToKnow from '@/components/home/GoodToKnow';
+import CTASection from '@/components/CTASection';
 import SEOHead from '@/components/SEOHead';
 
 const Index = () => {
   return (
     <Layout>
-      <SEOHead 
-        description="Fablinks Computers - Your one-stop shop for WAEC, JAMB, NECO, NYSC registrations, printing services, passport photos, and all computer-assisted services in Nigeria. Fast, reliable, and affordable."
-        keywords="Fablinks Computers, WAEC scratch card, JAMB registration, NECO result, NYSC registration, printing services, passport photo, computer cafe, Nigeria, Abia State University"
+      <SEOHead
+        description="Fablinks is the entertainment hub for campus life — event highlights, blog stories and everyday digital services like WAEC, JAMB and NECO registration, printing, passport photos and graphics design in Nigeria."
+        keywords="entertainment hub, campus events, blog highlights, Fablinks, WAEC scratch card, JAMB registration, NECO result, printing services, graphics design, Nigeria, Abia State University"
       />
-      <HeroCarousel />
+
+      {/* Brand hero */}
+      <EntertainmentHero />
+
+      {/* Other information band */}
+      <InfoTicker />
+
+      {/* Social proof */}
       <TrustStrip />
-      <FeaturedServices />
-      <WhyChooseUs />
-      <HowItWorks />
-      <TestimonialsCarousel />
-      <FeaturedBlogPosts />
+
+      {/* Events highlights */}
+      <EventsHighlights />
+
+      {/* Blog post highlights */}
+      <FeaturedBlogPosts
+        title="Fresh off the feed"
+        subtitle="Stories, guides and recaps from campus life — the highlights you'll want to read before your friends do"
+      />
+
+      {/* Services highlighted */}
+      <FeaturedServices
+        title="The"
+        titleAccent="Line-up of Services"
+        subtitle="From exam registrations and printing to graphics, design and project support — the digital services students count on, started in a single WhatsApp message."
+      />
+
+      {/* Other information */}
+      <GoodToKnow />
+
       <CTASection />
-      <LocationContact />
-      <ContactSection />
     </Layout>
   );
 };

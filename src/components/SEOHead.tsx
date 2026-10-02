@@ -37,7 +37,7 @@ export default function SEOHead({
   // Build the full title
   const fullTitle = title 
     ? `${title} | ${siteTitle}`
-    : `${siteTitle} - Home for All Computer Assisted Services`;
+    : `${siteTitle} - Events, Highlights & Digital Services`;
   
   // Use provided values or fall back to site settings
   const metaDescription = description || siteDescription;
