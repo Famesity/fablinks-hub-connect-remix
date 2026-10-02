@@ -34,10 +34,10 @@ const Header = () => {
 
   return (
     <header className="bg-white/95 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-40">
-      <div className="container-custom">
+      <div className="container-custom 2xl:max-w-[1440px]">
         <div className="flex items-center justify-between h-16 gap-1 sm:gap-2">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-1 sm:space-x-2 shrink-0 min-w-0">
+          <Link to="/" className="flex flex-1 items-center space-x-1 sm:space-x-2 min-w-0 2xl:flex-none">
             <img 
               src={logoSrc} 
               alt={siteTitle} 
@@ -50,12 +50,12 @@ const Header = () => {
           </Link>
 
           {/* Mobile Search - Between logo and menu */}
-          <div className="md:hidden w-24 shrink-0">
+          <div className="2xl:hidden w-24 shrink-0">
             <SearchBar isMobile />
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden 2xl:flex items-center space-x-8">
             <Link 
               to="/" 
               className={`text-gray-700 hover:text-primary transition-colors font-medium ${
@@ -107,7 +107,7 @@ const Header = () => {
           </nav>
 
           {/* Search and CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden 2xl:flex items-center space-x-4">
             <SearchBar />
             <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-white">
               <Phone className="w-4 h-4 mr-2" />
@@ -124,7 +124,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden p-2 shrink-0"
+            className="2xl:hidden p-2 shrink-0"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -133,7 +133,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
+          <div className="2xl:hidden py-4 border-t border-gray-200">
             <nav className="flex flex-col space-y-4">
               <Link 
                 to="/" 
