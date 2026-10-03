@@ -9,7 +9,6 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { useToast } from '@/hooks/use-toast';
 import { ArrowLeft, Loader2, Save, Megaphone } from 'lucide-react';
-import AdminBottomNav from '@/components/admin/AdminBottomNav';
 import { PermissionGate } from '@/components/admin/PermissionGate';
 import { ADMIN_PERMISSIONS } from '@/hooks/usePermissions';
 
@@ -131,7 +130,7 @@ const AdminAnnouncement = () => {
 
   return (
     <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_ANNOUNCEMENT}>
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background">
       <div className="container mx-auto px-4 py-6">
         <div className="flex items-center gap-4 mb-6">
           <Button variant="ghost" size="icon" onClick={() => navigate('/admin')}>
@@ -264,7 +263,6 @@ const AdminAnnouncement = () => {
           </CardContent>
         </Card>
       </div>
-      <AdminBottomNav />
     </div>
     </PermissionGate>
   );

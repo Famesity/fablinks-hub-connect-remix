@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Menu, X, Phone, MessageCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -35,10 +34,10 @@ const Header = () => {
 
   return (
     <header className="bg-white/95 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-40">
-      <div className="container-custom">
+      <div className="container-custom 2xl:max-w-[1440px]">
         <div className="flex items-center justify-between h-16 gap-1 sm:gap-2">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-1 sm:space-x-2 shrink-0 min-w-0">
+          <Link to="/" className="flex flex-1 items-center space-x-1 sm:space-x-2 min-w-0 2xl:flex-none">
             <img 
               src={logoSrc} 
               alt={siteTitle} 
@@ -51,12 +50,12 @@ const Header = () => {
           </Link>
 
           {/* Mobile Search - Between logo and menu */}
-          <div className="md:hidden w-24 shrink-0">
+          <div className="lg:hidden w-24 shrink-0">
             <SearchBar isMobile />
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center gap-3 xl:gap-5 2xl:gap-6">
             <Link 
               to="/" 
               className={`text-gray-700 hover:text-primary transition-colors font-medium ${
@@ -105,20 +104,12 @@ const Header = () => {
             >
               Contact
             </Link>
-            <Link 
-              to="/auth" 
-              className={`text-gray-700 hover:text-primary transition-colors font-medium ${
-                isActive('/auth') ? 'text-primary' : ''
-              }`}
-            >
-              Admin
-            </Link>
           </nav>
 
           {/* Search and CTA Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          <div className="hidden xl:flex items-center gap-2 2xl:gap-4">
             <SearchBar />
-            <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-white">
+            <Button variant="outline" size="sm" className="hidden 2xl:inline-flex border-primary text-primary hover:bg-primary hover:text-white">
               <Phone className="w-4 h-4 mr-2" />
               Call Us
             </Button>
@@ -133,7 +124,7 @@ const Header = () => {
 
           {/* Mobile Menu Button */}
           <button 
-            className="md:hidden p-2 shrink-0"
+            className="lg:hidden p-2 shrink-0"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -142,7 +133,7 @@ const Header = () => {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
+          <div className="lg:hidden py-4 border-t border-gray-200">
             <nav className="flex flex-col space-y-4">
               <Link 
                 to="/" 
@@ -197,15 +188,6 @@ const Header = () => {
                 onClick={() => setIsMenuOpen(false)}
               >
                 Contact
-              </Link>
-              <Link 
-                to="/auth" 
-                className={`text-gray-700 hover:text-primary transition-colors font-medium ${
-                  isActive('/auth') ? 'text-primary' : ''
-                }`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Admin Login
               </Link>
               <div className="flex flex-col space-y-2 pt-4">
                 <Button variant="outline" size="sm" className="border-primary text-primary hover:bg-primary hover:text-white w-full">

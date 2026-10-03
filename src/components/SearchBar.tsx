@@ -38,7 +38,7 @@ const SearchBar = ({ isMobile = false }: SearchBarProps) => {
         onChange={(e) => setQuery(e.target.value)}
         onKeyDown={handleKeyDown}
         className={`pr-2 bg-background border-border focus:ring-primary ${
-          isMobile ? 'pl-7 h-8 w-full text-xs' : 'pl-8 h-9 w-40 lg:w-56'
+          isMobile ? 'pl-7 h-8 w-full text-xs' : 'pl-8 h-9 w-32 xl:w-40 2xl:w-56'
         }`}
       />
     </form>

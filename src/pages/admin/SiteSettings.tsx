@@ -10,7 +10,6 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, ArrowLeft, Save, Eye, Sparkles, Crop } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import AdminBottomNav from "@/components/admin/AdminBottomNav";
 import LogoCropDialog from "@/components/admin/LogoCropDialog";
 import { PermissionGate } from "@/components/admin/PermissionGate";
 import { ADMIN_PERMISSIONS } from "@/hooks/usePermissions";
@@ -289,7 +288,7 @@ export default function AdminSiteSettings() {
 
   return (
     <PermissionGate permission={ADMIN_PERMISSIONS.MANAGE_SETTINGS}>
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background">
       <header className="border-b sticky top-0 z-40 bg-background">
         <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
           <Button variant="ghost" size="sm" onClick={() => navigate("/admin")} className="mb-2 sm:mb-4">
@@ -723,7 +722,6 @@ export default function AdminSiteSettings() {
         )}
       </main>
 
-      <AdminBottomNav />
 
       {/* Logo Crop Dialog */}
       <LogoCropDialog
