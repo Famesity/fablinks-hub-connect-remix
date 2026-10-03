@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { Button } from '@/components/ui/button';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
-import * as LucideIcons from 'lucide-react';
-import { LucideIcon, Globe, Printer, FileText, Palette, Scan, Briefcase } from 'lucide-react';
+import { LucideIcon, Globe, Printer, FileText, Palette, Scan, Briefcase, Star } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Service {
@@ -55,14 +54,14 @@ const ServicesGrid = () => {
 
   const getCategoryIcon = (category: string): LucideIcon => {
     const categoryIcons: Record<string, LucideIcon> = {
-      'internet': LucideIcons.Globe,
-      'printing': LucideIcons.Printer,
-      'registration': LucideIcons.FileText,
-      'design': LucideIcons.Palette,
-      'scanning': LucideIcons.Scan,
-      'cv': LucideIcons.Briefcase,
+      'internet': Globe,
+      'printing': Printer,
+      'registration': FileText,
+      'design': Palette,
+      'scanning': Scan,
+      'cv': Briefcase,
     };
-    return categoryIcons[category.toLowerCase()] || LucideIcons.Star;
+    return categoryIcons[category.toLowerCase()] || Star;
   };
 
   const getCategoryColor = (category: string): string => {

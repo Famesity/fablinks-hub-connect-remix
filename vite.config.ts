@@ -17,9 +17,9 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.png', 'favicon.ico', 'robots.txt', 'og-image.png'],
       manifest: {
-        name: 'Fablinks Computers - Computer Assisted Services',
+        name: 'Fablinks — Campus Entertainment Hub',
         short_name: 'Fablinks',
-        description: 'Your trusted partner for WAEC, JAMB, NECO, NYSC registrations, printing services, and all computer-assisted services in Nigeria.',
+        description: 'Event highlights, campus stories and everyday digital services — WAEC, JAMB and NECO registrations, printing and more, all in one place.',
         theme_color: '#1A73E8',
         background_color: '#ffffff',
         display: 'standalone',

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
-import * as LucideIcons from 'lucide-react';
-import { LucideIcon, GraduationCap, FileText, Users, Smartphone, CreditCard, Globe } from 'lucide-react';
+import { GraduationCap, FileText, Users, Smartphone, CreditCard, Globe } from 'lucide-react';
+import { getLucideIcon } from '@/lib/lucideIconMap';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -100,9 +100,7 @@ const FeaturedServices = ({
     }
   };
 
-  const getIconComponent = (iconName: string): LucideIcon => {
-    return (LucideIcons as any)[iconName] || LucideIcons.Star;
-  };
+  const getIconComponent = (iconName: string) => getLucideIcon(iconName);
 
   const openWhatsApp = (message: string) => {
     const encodedMessage = encodeURIComponent(message);

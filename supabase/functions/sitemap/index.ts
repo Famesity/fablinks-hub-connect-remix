@@ -6,7 +6,7 @@ const corsHeaders = {
   "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
 };
 
-const SITE_URL = "https://fablinks-cyber-cafe.lovable.app";
+const SITE_URL = "https://fablinks.vercel.app";
 
 serve(async (req) => {
   // Handle CORS preflight requests
@@ -46,6 +46,7 @@ serve(async (req) => {
     // Static pages
     const staticPages = [
       { loc: "/", priority: "1.0", changefreq: "weekly" },
+      { loc: "/experience", priority: "0.9", changefreq: "weekly" },
       { loc: "/services", priority: "0.9", changefreq: "weekly" },
       { loc: "/about", priority: "0.8", changefreq: "monthly" },
       { loc: "/contact", priority: "0.8", changefreq: "monthly" },

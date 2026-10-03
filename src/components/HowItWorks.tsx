@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import * as LucideIcons from 'lucide-react';
-import { LucideIcon } from 'lucide-react';
+import { Circle } from 'lucide-react';
+import { getLucideIcon } from '@/lib/lucideIconMap';
 
 interface Step {
   id: string;
@@ -36,11 +36,7 @@ const HowItWorks = () => {
     }
   };
 
-  const getIcon = (iconName: string | null): LucideIcon => {
-    if (!iconName) return LucideIcons.Circle;
-    const icons = LucideIcons as unknown as Record<string, LucideIcon>;
-    return icons[iconName] || LucideIcons.Circle;
-  };
+  const getIcon = (iconName: string | null) => getLucideIcon(iconName, Circle);
 
   if (loading) {
     return (

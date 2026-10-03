@@ -7,6 +7,7 @@ import EventsHighlights from '@/components/home/EventsHighlights';
 import FeaturedBlogPosts from '@/components/FeaturedBlogPosts';
 import FeaturedServices from '@/components/FeaturedServices';
 import GoodToKnow from '@/components/home/GoodToKnow';
+import NewsletterSignup from '@/components/home/NewsletterSignup';
 import CTASection from '@/components/CTASection';
 import SEOHead from '@/components/SEOHead';
 
@@ -45,6 +46,9 @@ const Index = () => {
 
       {/* Other information */}
       <GoodToKnow />
+
+      {/* Newsletter signup */}
+      <NewsletterSignup />
 
       <CTASection />
     </Layout>

@@ -44,7 +44,7 @@ export default function SEOHead({
   const metaKeywords = keywords || 'WAEC, JAMB, NECO, NYSC, computer services, printing, Nigeria, student services, online registration';
   
   // Site base URL
-  const siteUrl = 'https://fablinks-cyber-cafe.lovable.app';
+  const siteUrl = 'https://fablinks.vercel.app';
   
   // Default OG image - use the generated OG image
   const defaultOgImage = `${siteUrl}/og-image.png`;
