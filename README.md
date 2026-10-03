@@ -1,73 +1,52 @@
-# Welcome to your Lovable project
+# Fablinks Hub
 
-## Project info
+Campus **entertainment hub + digital-services storefront** for Abia State
+University, Nigeria — event highlights, blog stories and everyday digital
+services (WAEC/JAMB/NECO registrations, printing, graphics and more), with a
+full admin CMS.
 
-**URL**: https://lovable.dev/projects/f56ef9b1-4eb5-4df4-89f1-9ecb0bbd892e
+**Live:** https://fablinks.vercel.app · **Preview/dev:** platform-managed (Freebuff)
 
-## How can I edit this code?
+## Stack
 
-There are several ways of editing your application.
+Vite 5 · React 18 · TypeScript · Tailwind CSS + shadcn/ui · Supabase
+(Postgres + RLS + Auth + Edge Functions) · react-router v6 · vite-plugin-pwa
 
-**Use Lovable**
+## Commands
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/f56ef9b1-4eb5-4df4-89f1-9ecb0bbd892e) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
+```bash
+bun install                      # Bun is the package manager (bun.lockb)
+bun run dev                      # dev server (started by the platform, not by hand)
+bun run build                    # production build → dist/
+bun run lint                     # eslint
+./node_modules/.bin/tsc -b --noEmit   # typecheck (no "tsc" script alias)
+node scripts/generate-og-image.mjs    # regenerate public/og-image.png (1200×630)
 ```
 
-**Edit a file directly in GitHub**
+Environment keys are managed in **Settings → Environment**
+(`VITE_SUPABASE_URL`, `VITE_SUPABASE_PUBLISHABLE_KEY`, `VITE_SUPABASE_PROJECT_ID`,
+`SUPABASE_ACCESS_TOKEN`). Never commit `.env`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Documentation
 
-**Use GitHub Codespaces**
+**[docs/PROJECT_GUIDE.md](docs/PROJECT_GUIDE.md)** is the full reference:
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+- architecture & directory map, landing sections, admin CMS
+- Supabase project (live ref `gepxztuwobtiztgylwok`), RLS, migrations, Management API recipes
+- permission model (super admin = zero rows in `admin_permissions`)
+- bundle/code-splitting rules (explicit lucide icon map, lazy admin routes)
+- newsletter flow, PWA config, SEO/og-image/sitemap maintenance
+- debugging playbook, decisions/history log, roadmap
 
-## What technologies are used for this project?
+## Routes of note
 
-This project is built with:
+- `/` — entertainment landing (events, blog, services highlights + newsletter)
+- `/experience` — the original cyber-café landing page
+- `/admin/*` — admin CMS (sidebar shell, permission-gated; `/admin/events`
+  manages the landing line-up)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+## Contributing
 
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/f56ef9b1-4eb5-4df4-89f1-9ecb0bbd892e) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+Squash-merge PRs with green Vercel checks. Verify changes with
+`tsc -b --noEmit && bun run build` plus a preview smoke test. See the
+project guide for conventions and gotchas.
