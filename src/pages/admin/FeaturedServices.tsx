@@ -13,8 +13,8 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { ArrowLeft, Plus, Pencil, Trash2, GripVertical, Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
-import * as LucideIcons from 'lucide-react';
 import { PermissionGate } from '@/components/admin/PermissionGate';
+import { LUCIDE_ICON_MAP, getLucideIcon } from '@/lib/lucideIconMap';
 import { ADMIN_PERMISSIONS } from '@/hooks/usePermissions';
 
 interface FeaturedService {
@@ -185,7 +185,7 @@ const AdminFeaturedServices = () => {
   };
 
   const getIconComponent = (iconName: string) => {
-    const Icon = (LucideIcons as any)[iconName] || LucideIcons.Star;
+    const Icon = getLucideIcon(iconName);
     return <Icon className="w-5 h-5 text-white" />;
   };
 
@@ -268,7 +268,7 @@ const AdminFeaturedServices = () => {
                       </SelectTrigger>
                       <SelectContent>
                         {iconOptions.map((icon) => {
-                          const IconComp = (LucideIcons as any)[icon];
+                          const IconComp = LUCIDE_ICON_MAP[icon];
                           return (
                             <SelectItem key={icon} value={icon}>
                               <div className="flex items-center gap-2">

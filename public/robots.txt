@@ -1,5 +1,5 @@
 # Fablinks Computers - Robots.txt
-# https://fablinks-cyber-cafe.lovable.app
+# https://fablinks.vercel.app
 
 User-agent: Googlebot
 Allow: /
@@ -18,10 +18,10 @@ Allow: /
 
 # Sitemap location
 # Static sitemap (fallback)
-Sitemap: https://fablinks-cyber-cafe.lovable.app/sitemap.xml
+Sitemap: https://fablinks.vercel.app/sitemap.xml
 
 # Dynamic sitemap (primary - includes blog posts)
-Sitemap: https://fptsmknmmruhmzukheds.supabase.co/functions/v1/sitemap
+Sitemap: https://gepxztuwobtiztgylwok.supabase.co/functions/v1/sitemap
 
 # Disallow admin pages from indexing
 Disallow: /admin

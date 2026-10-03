@@ -11,7 +11,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { ArrowLeft, Plus, Pencil, Trash2, Save, ListChecks } from 'lucide-react';
 import { toast } from 'sonner';
-import * as LucideIcons from 'lucide-react';
+import { getLucideIcon } from '@/lib/lucideIconMap';
 import { PermissionGate } from '@/components/admin/PermissionGate';
 import { ADMIN_PERMISSIONS } from '@/hooks/usePermissions';
 
@@ -141,8 +141,7 @@ const AdminHowItWorks = () => {
   };
 
   const getIcon = (iconName: string | null) => {
-    const icons = LucideIcons as unknown as Record<string, React.ComponentType<{ className?: string }>>;
-    const IconComponent = icons[iconName || 'Star'] || icons['Star'];
+    const IconComponent = getLucideIcon(iconName || 'Star');
     return <IconComponent className="w-5 h-5" />;
   };
 

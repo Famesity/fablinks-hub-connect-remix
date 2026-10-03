@@ -1,4 +1,5 @@
-
+import { Suspense, lazy } from "react";
+import { Loader2 } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -16,42 +17,50 @@ import Blog from "./pages/Blog";
 import NotFound from "./pages/NotFound";
 import Auth from "./pages/Auth";
 import Search from "./pages/Search";
-import AdminDashboard from "./pages/admin/Dashboard";
-import AdminSchools from "./pages/admin/Schools";
-import AdminServices from "./pages/admin/Services";
-import AdminBlogPosts from "./pages/admin/BlogPosts";
-import AdminSiteSettings from "./pages/admin/SiteSettings";
-import AdminUsers from "./pages/admin/Users";
-import AdminComments from "./pages/admin/Comments";
-import AdminPages from "./pages/admin/Pages";
-import AdminAnalytics from "./pages/admin/Analytics";
-import AdminActivityLogs from "./pages/admin/ActivityLogs";
-import AdminProfile from "./pages/admin/Profile";
-import AdminTestimonials from "./pages/admin/Testimonials";
-import AdminContactSubmissions from "./pages/admin/ContactSubmissions";
-import AdminFAQs from "./pages/admin/FAQs";
-import AdminNewsletter from "./pages/admin/Newsletter";
-import AdminHeroSlides from "./pages/admin/HeroSlides";
-import AdminTrustBadges from "./pages/admin/TrustBadges";
-import AdminHowItWorks from "./pages/admin/HowItWorks";
-import AdminFeaturedServices from "./pages/admin/FeaturedServices";
-import AdminWhyChooseUs from "./pages/admin/WhyChooseUs";
-import AdminEvents from "./pages/admin/Events";
-import AdminContent from "./pages/admin/Content";
-import AdminLanding from "./pages/admin/Landing";
-import AdminCustomers from "./pages/admin/Customers";
-import AdminServiceRequests from "./pages/admin/ServiceRequests";
-import AdminAnnouncement from "./pages/admin/Announcement";
-import AdminNotifications from "./pages/admin/Notifications";
+// Admin pages are code-split so the public landing stays lean.
+const AdminDashboard = lazy(() => import("./pages/admin/Dashboard"));
+const AdminSchools = lazy(() => import("./pages/admin/Schools"));
+const AdminServices = lazy(() => import("./pages/admin/Services"));
+const AdminBlogPosts = lazy(() => import("./pages/admin/BlogPosts"));
+const AdminSiteSettings = lazy(() => import("./pages/admin/SiteSettings"));
+const AdminUsers = lazy(() => import("./pages/admin/Users"));
+const AdminComments = lazy(() => import("./pages/admin/Comments"));
+const AdminPages = lazy(() => import("./pages/admin/Pages"));
+const AdminAnalytics = lazy(() => import("./pages/admin/Analytics"));
+const AdminActivityLogs = lazy(() => import("./pages/admin/ActivityLogs"));
+const AdminProfile = lazy(() => import("./pages/admin/Profile"));
+const AdminTestimonials = lazy(() => import("./pages/admin/Testimonials"));
+const AdminContactSubmissions = lazy(() => import("./pages/admin/ContactSubmissions"));
+const AdminFAQs = lazy(() => import("./pages/admin/FAQs"));
+const AdminNewsletter = lazy(() => import("./pages/admin/Newsletter"));
+const AdminHeroSlides = lazy(() => import("./pages/admin/HeroSlides"));
+const AdminTrustBadges = lazy(() => import("./pages/admin/TrustBadges"));
+const AdminHowItWorks = lazy(() => import("./pages/admin/HowItWorks"));
+const AdminFeaturedServices = lazy(() => import("./pages/admin/FeaturedServices"));
+const AdminWhyChooseUs = lazy(() => import("./pages/admin/WhyChooseUs"));
+const AdminEvents = lazy(() => import("./pages/admin/Events"));
+const AdminContent = lazy(() => import("./pages/admin/Content"));
+const AdminLanding = lazy(() => import("./pages/admin/Landing"));
+const AdminCustomers = lazy(() => import("./pages/admin/Customers"));
+const AdminServiceRequests = lazy(() => import("./pages/admin/ServiceRequests"));
+const AdminAnnouncement = lazy(() => import("./pages/admin/Announcement"));
+const AdminNotifications = lazy(() => import("./pages/admin/Notifications"));
 import BlogPost from "./pages/BlogPost";
 import Page from "./pages/Page";
 import Install from "./pages/Install";
 
 const queryClient = new QueryClient();
 
+const RouteFallback = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <Loader2 className="h-8 w-8 animate-spin text-primary" />
+  </div>
+);
+
 function AppContent() {
   useTheme();
   return (
+    <Suspense fallback={<RouteFallback />}>
     <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/experience" element={<Experience />} />
@@ -96,6 +105,7 @@ function AppContent() {
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>
+    </Suspense>
   );
 }
 

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import * as LucideIcons from 'lucide-react';
-import { LucideIcon } from 'lucide-react';
+import { getLucideIcon } from '@/lib/lucideIconMap';
 
 interface TrustBadge {
   id: string;
@@ -35,10 +34,7 @@ const TrustStrip = () => {
     }
   };
 
-  const getIcon = (iconName: string): LucideIcon => {
-    const icons = LucideIcons as unknown as Record<string, LucideIcon>;
-    return icons[iconName] || LucideIcons.Star;
-  };
+  const getIcon = (iconName: string) => getLucideIcon(iconName);
 
   if (loading) {
     return (
