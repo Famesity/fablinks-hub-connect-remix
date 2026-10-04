@@ -335,6 +335,19 @@ SELECT afterwards, and note them in the PR.
 
 ## 13. Known follow-ups / roadmap
 
+- **⚠️ KNOWN ISSUE — canonical domain serves a stale build (Oct 2026):**
+  `https://fablinks.vercel.app` (the canonical URL hardcoded in `index.html`,
+  `SEOHead.tsx`, `sitemap.xml` and the sitemap edge function) still serves the
+  **Sep 30 pre-rebrand build** — old title/meta, none of the entertainment
+  code, none of the light-hero styles. Cause: the hostname's alias points to
+  a deployment **outside this repo's Vercel integration** — the integration's
+  own production domain, `https://fablinks-remix.vercel.app`, IS current and
+  serves merged `main` (verified by checking for `--ent-paper` in its CSS).
+  **Fix is manual and the user must do it in the Vercel dashboard:** attach
+  `fablinks.vercel.app` to the **`famesity/fablinks-remix`** project (Project
+  → Settings → Domains), or redeploy whichever project currently owns the
+  hostname. No workspace credentials can do this (env keys are Supabase-only;
+  no Vercel CLI auth). Until fixed, canonical/OG URLs point at the stale host.
 - **Plausible analytics (agreed to skip "this round"):** add
   `VITE_PLAUSIBLE_DOMAIN` in Settings → Environment, inject the Plausible
   script with SPA route tracking (react-router location effect), then verify
