@@ -170,12 +170,24 @@
   --ent-stage: 217 91% 14%;
   --ent-gold: 38 96% 55%;
   --ent-gold-deep: 30 92% 46%;
+  /* Light-surface variants (AA-safe on paper/white) */
+  --ent-paper: 42 50% 95%;
+  --ent-gold-ink: 28 88% 34%;
+  --ent-amber: 30 88% 40%;
 }
 
 @layer components {
   /* Gold display gradient for headline accents */
   .gradient-gold {
     background: linear-gradient(120deg, hsl(var(--ent-gold)) 0%, hsl(var(--ent-gold-deep)) 55%, hsl(var(--ent-gold)) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Gold display gradient tuned for LIGHT surfaces (reads AA on paper/white) */
+  .gradient-gold-ink {
+    background: linear-gradient(120deg, hsl(var(--ent-gold-ink)) 0%, hsl(var(--ent-amber)) 50%, hsl(var(--ent-gold-ink)) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

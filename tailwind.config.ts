@@ -68,6 +68,9 @@ export default {
 					stage: 'hsl(var(--ent-stage) / <alpha-value>)',
 					gold: 'hsl(var(--ent-gold) / <alpha-value>)',
 					'gold-deep': 'hsl(var(--ent-gold-deep) / <alpha-value>)',
+					'gold-ink': 'hsl(var(--ent-gold-ink) / <alpha-value>)',
+					amber: 'hsl(var(--ent-amber) / <alpha-value>)',
+					paper: 'hsl(var(--ent-paper) / <alpha-value>)',
 				},
 			},
 			borderRadius: {
