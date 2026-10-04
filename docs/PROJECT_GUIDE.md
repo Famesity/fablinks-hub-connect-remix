@@ -79,6 +79,20 @@ EntertainmentHero → InfoTicker → TrustStrip → EventsHighlights →
 FeaturedBlogPosts → FeaturedServices → GoodToKnow → NewsletterSignup → CTASection.
 Each section is self-contained; reorder/replace there.
 
+**Theme tokens** (`src/index.css`, exposed as `ent-*` colors in
+`tailwind.config.ts`):
+
+- **Dark bands** (NewsletterSignup, og-art style sections): `--ent-ink`,
+  `--ent-ink-soft`, `--ent-stage`, `--ent-gold`, `--ent-gold-deep` + the
+  `.gradient-gold` headline accent.
+- **Light surfaces** (the landing hero): `--ent-paper` (ivory backdrop),
+  `--ent-gold-ink` (AA-safe amber for small text/icons on paper, ≥4.5:1),
+  `--ent-amber` (gradient mid-stop) + the `.gradient-gold-ink` headline
+  accent. Use these — not `ent-gold` — for text on light backgrounds.
+- The **landing hero is intentionally light** (user decision, PR #6): it
+  matches the white sticky header and the gold ticker below it. Don't flip
+  `EntertainmentHero` back to `bg-ent-ink`.
+
 ---
 
 ## 3. Everyday commands
@@ -313,6 +327,8 @@ SELECT afterwards, and note them in the PR.
 | PR #2 | Fixed stale `supabase/config.toml` ref; added `*.tsbuildinfo`, `isolate/`, `supabase/.temp/` to `.gitignore` |
 | PR #3 (parallel work) | Admin `AdminLayout` sidebar shell + nested admin routes, dashboard redesign, blog redesign, header nav changes, hero background |
 | PR #4 | This guide's subject: newsletter band, icon-map bundle fix, admin route lazy-loading, PWA manifest copy, regenerated og-image, SEO domain → `fablinks.vercel.app` (incl. live sitemap function), `manage_events` grant |
+| PR #5 | Added this guide, README refresh, deterministic og-image generator (`scripts/generate-og-image.mjs`) |
+| PR #6 | Lightened the landing hero (user request): ivory `--ent-paper` backdrop, light-surface tokens (`--ent-gold-ink`, `--ent-amber`, `.gradient-gold-ink`); dark-section tokens untouched — see §2 |
 | Decisions | **Canonical domain** `fablinks.vercel.app` (user choice, Oct 2026). **Analytics skipped** this round (Plausible — see §13). `manage_events` granted directly in the live DB because explicit-permission admins don't auto-gain new permissions |
 
 ---
