@@ -1,6 +1,6 @@
 import React from 'react';
 import Layout from '@/components/Layout';
-import EntertainmentHero from '@/components/home/EntertainmentHero';
+import HeroCarousel from '@/components/HeroCarousel';
 import InfoTicker from '@/components/home/InfoTicker';
 import TrustStrip from '@/components/TrustStrip';
 import EventsHighlights from '@/components/home/EventsHighlights';
@@ -19,8 +19,8 @@ const Index = () => {
         keywords="entertainment hub, campus events, blog highlights, Fablinks, WAEC scratch card, JAMB registration, NECO result, printing services, graphics design, Nigeria, Abia State University"
       />
 
-      {/* Brand hero */}
-      <EntertainmentHero />
+      {/* Brand hero carousel (Defabs Media) */}
+      <HeroCarousel />
 
       {/* Other information band */}
       <InfoTicker />
