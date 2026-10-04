@@ -174,6 +174,14 @@
   --ent-paper: 42 50% 95%;
   --ent-gold-ink: 28 88% 34%;
   --ent-amber: 30 88% 40%;
+
+  /* Defabs Media brand palette (hero carousel) — RGB channel triplets so
+     Tailwind opacity modifiers work: rgb(var(--defabs-*) / <alpha-value>) */
+  --defabs-primary: 30 58 138;      /* #1E3A8A */
+  --defabs-accent: 249 115 22;      /* #F97316 */
+  --defabs-accent-hover: 234 88 12; /* #EA580C */
+  --defabs-dark: 15 23 42;          /* #0F172A */
+  --defabs-light: 248 250 252;      /* #F8FAFC */
 }
 
 @layer components {
@@ -215,16 +223,65 @@
     from { transform: translateX(0); }
     to { transform: translateX(-50%); }
   }
+}/* =========================================================
+   Defabs hero carousel — motion primitives
+   ========================================================= */
+
+/* KEN BURNS (feature #5): slow zoom (scale 1.06 → 1.18) combined with a
+   gentle pan (translate) via pure CSS transforms. Applied only to the
+   currently active slide so the effect restarts on every slide change;
+   odd-index slides play it reversed for variety. */
+@keyframes hero-kenburns {
+  from {
+    transform: scale(1.06) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.18) translate3d(-2.25%, -1.5%, 0);
+  }
+}
+
+.hero-kenburns {
+  animation: hero-kenburns 16s ease-out both;
+}
+
+.hero-kenburns-alt {
+  animation-name: hero-kenburns;
+  animation-duration: 16s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: both;
+  animation-direction: alternate-reverse;
+}
+
+/* TEXT ENTRANCE (feature #10): fade + slight upward drift. Children of the
+   slide's text block carry staggered animation-delay inline. Replays on every
+   slide change because the text block is remounted (keyed by slide id). */
+@keyframes hero-text-in {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 26px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.hero-text-in {
+  animation: hero-text-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 /* Respect users who prefer reduced motion */
+
 @media (prefers-reduced-motion: reduce) {
   .ent-marquee,
   .float-animation,
   .pulse-slow,
   .whatsapp-float,
   .animate-bounce,
-  .animate-pulse {
+  .animate-pulse,
+  .hero-kenburns,
+  .hero-kenburns-alt,
+  .hero-text-in {
     animation: none !important;
   }
 }
