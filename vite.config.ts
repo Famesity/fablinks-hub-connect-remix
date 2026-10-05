@@ -17,16 +17,16 @@ export default defineConfig(({ mode }) => ({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.png', 'favicon.ico', 'robots.txt', 'og-image.png'],
       manifest: {
-        name: 'Fablinks — Campus Entertainment Hub',
-        short_name: 'Fablinks',
-        description: 'Event highlights, campus stories and everyday digital services — WAEC, JAMB and NECO registrations, printing and more, all in one place.',
-        theme_color: '#1A73E8',
+        name: 'Defabs Media — Entertainment & Digital Services Hub',
+        short_name: 'Defabs Media',
+        description: 'Live events, premium content and professional digital services — printing, design and registrations, all in one place.',
+        theme_color: '#1E3A8A',
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
         scope: '/',
         start_url: '/',
-        categories: ['education', 'business', 'utilities'],
+        categories: ['entertainment', 'business', 'utilities'],
         icons: [
           {
             src: '/pwa-192x192.png',

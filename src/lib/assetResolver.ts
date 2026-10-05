@@ -1,7 +1,7 @@
 // Utility for resolving asset URLs that may be stored as /src/assets/ paths in the database
 // In production, Vite bundles assets with hashed filenames, so direct paths don't work
 
-import defaultLogo from '@/assets/fablinks-logo.jpg';
+import defaultLogo from '@/assets/defabs-logo.jpg';
 import heroComputerServices from '@/assets/hero-computer-services.jpg';
 import heroPrintingServices from '@/assets/hero-printing-services.jpg';
 import heroOnlineRegistrations from '@/assets/hero-online-registrations.jpg';
@@ -10,6 +10,7 @@ import heroGraphicsDesign from '@/assets/hero-graphics-design.jpg';
 // Map of asset paths to imported images for production builds
 const assetMap: Record<string, string> = {
   '/src/assets/fablinks-logo.jpg': defaultLogo,
+  '/src/assets/defabs-logo.jpg': defaultLogo,
   '/src/assets/hero-computer-services.jpg': heroComputerServices,
   '/src/assets/hero-printing-services.jpg': heroPrintingServices,
   '/src/assets/hero-online-registrations.jpg': heroOnlineRegistrations,

@@ -133,8 +133,8 @@ function drawText(str, x0, y0, cell, colorFn, tracking = 1) {
 const goldAt = (x) => mix(GOLD2, GOLD1, (Math.sin((x / W) * Math.PI * 1.2 - 0.4) + 1) / 2);
 const whiteAt = () => WHITE;
 
-// ---- title: FABLINKS ----
-const title = 'FABLINKS';
+// ---- title: DEFABS ----
+const title = 'DEFABS';
 const titleCell = 15;
 const tw = textWidth(title, titleCell);
 drawText(title, Math.round((W - tw) / 2), 140, titleCell, goldAt);
@@ -148,7 +148,7 @@ drawText(title, Math.round((W - tw) / 2), 140, titleCell, goldAt);
 }
 
 // ---- tagline ----
-const tagline = 'CAMPUS ENTERTAINMENT HUB';
+const tagline = 'ENTERTAINMENT AND MEDIA SERVICES';
 const tagCell = 5;
 const tagW = textWidth(tagline, tagCell);
 drawText(tagline, Math.round((W - tagW) / 2), 320, tagCell, whiteAt);

@@ -144,7 +144,7 @@ function Sidebar() {
           <Sparkles className="h-5 w-5" />
         </span>
         <span className="min-w-0">
-          <span className="block text-sm font-semibold tracking-wide">Fablinks Hub</span>
+          <span className="block text-sm font-semibold tracking-wide">Defabs Media Hub</span>
           <span className="mt-0.5 block text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">Administration</span>
         </span>
       </Link>
@@ -201,7 +201,7 @@ export default function AdminLayout() {
                     <Sparkles className="h-5 w-5" />
                   </span>
                   <span>
-                    <span className="block text-sm font-semibold text-slate-900">Fablinks Hub</span>
+                    <span className="block text-sm font-semibold text-slate-900">Defabs Media Hub</span>
                     <SheetTitle className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.16em] text-slate-500">Administration</SheetTitle>
                   </span>
                 </div>
@@ -212,7 +212,7 @@ export default function AdminLayout() {
             </Sheet>
             <div className="min-w-0">
               <p className="truncate text-sm font-semibold text-slate-900">{currentPage}</p>
-              <p className="hidden text-xs text-slate-500 sm:block">Fablinks Hub <span className="px-1.5 text-slate-300">/</span> Admin</p>
+              <p className="hidden text-xs text-slate-500 sm:block">Defabs Media Hub <span className="px-1.5 text-slate-300">/</span> Admin</p>
             </div>
           </div>
 

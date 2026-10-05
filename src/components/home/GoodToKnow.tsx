@@ -35,9 +35,9 @@ const GoodToKnow = () => {
     'Shop NO 35, Student Affairs, Abia State University Uturu, Abia State, Nigeria'
   );
   const phone = getSetting('contact_phone', '+234 706 812 2861');
-  const email = getSetting('contact_email', 'fablinkscomputers@gmail.com');
+  const email = getSetting('contact_email', 'hello@defabsmedia.com');
   const whatsapp = getSetting('whatsapp_number', '2348106411463');
-  const siteTitle = getSetting('site_title', 'Fablinks Computers');
+  const siteTitle = getSetting('site_title', 'Defabs Media');
 
   const mapsLink = `https://maps.google.com/?q=${encodeURIComponent(address)}`;
   const whatsappLink = `https://wa.me/${whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(

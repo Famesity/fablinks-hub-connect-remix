@@ -27,21 +27,21 @@ const Services = () => {
       icon: GraduationCap,
       color: 'bg-blue-500',
       services: [
-        { name: 'WAEC Scratch Card', message: 'Hello Fablinks Online Café, I would like to buy a WAEC Scratch Card.' },
-        { name: 'NECO Result Token', message: 'Hello Fablinks Online Café, I need a NECO Result Token.' },
-        { name: 'NABTEB Scratch Card', message: 'Hello Fablinks Online Café, I would like to buy a NABTEB Scratch Card.' },
-        { name: 'NBAIS Scratch Card', message: 'Hello Fablinks Online Café, I need an NBAIS Scratch Card.' },
-        { name: 'WAEC Verification Pin (NYSC)', message: 'Hello Fablinks Online Café, I need a WAEC Verification Pin for NYSC.' },
-        { name: 'NECO e-Verify Token', message: 'Hello Fablinks Online Café, I need a NECO e-Verify Token.' },
-        { name: 'JAMB Original Result Printing', message: 'Hello Fablinks Online Café, I need help with JAMB Original Result Printing.' },
-        { name: 'JAMB Admission Letter Printing', message: 'Hello Fablinks Online Café, I need help with JAMB Admission Letter Printing.' },
-        { name: 'JAMB Reprinting', message: 'Hello Fablinks Online Café, I need help with JAMB Reprinting.' },
-        { name: 'Check JAMB Admission Status', message: 'Hello Fablinks Online Café, please help me check my JAMB Admission Status.' },
-        { name: 'JAMB O\'Level Upload', message: 'Hello Fablinks Online Café, I need help with JAMB O-Level Result Upload.' },
-        { name: 'JAMB Profile Code Retrieval', message: 'Hello Fablinks Online Café, I need help retrieving my JAMB Profile Code.' },
-        { name: 'JAMB Registration Number Retrieval', message: 'Hello Fablinks Online Café, I need help retrieving my JAMB Registration Number.' },
-        { name: 'WAEC GCE Registration', message: 'Hello Fablinks Online Café, I need help with WAEC GCE Registration.' },
-        { name: 'NECO Registration', message: 'Hello Fablinks Online Café, I need help with NECO Registration.' }
+        { name: 'WAEC Scratch Card', message: 'Hello Defabs Media, I would like to buy a WAEC Scratch Card.' },
+        { name: 'NECO Result Token', message: 'Hello Defabs Media, I need a NECO Result Token.' },
+        { name: 'NABTEB Scratch Card', message: 'Hello Defabs Media, I would like to buy a NABTEB Scratch Card.' },
+        { name: 'NBAIS Scratch Card', message: 'Hello Defabs Media, I need an NBAIS Scratch Card.' },
+        { name: 'WAEC Verification Pin (NYSC)', message: 'Hello Defabs Media, I need a WAEC Verification Pin for NYSC.' },
+        { name: 'NECO e-Verify Token', message: 'Hello Defabs Media, I need a NECO e-Verify Token.' },
+        { name: 'JAMB Original Result Printing', message: 'Hello Defabs Media, I need help with JAMB Original Result Printing.' },
+        { name: 'JAMB Admission Letter Printing', message: 'Hello Defabs Media, I need help with JAMB Admission Letter Printing.' },
+        { name: 'JAMB Reprinting', message: 'Hello Defabs Media, I need help with JAMB Reprinting.' },
+        { name: 'Check JAMB Admission Status', message: 'Hello Defabs Media, please help me check my JAMB Admission Status.' },
+        { name: 'JAMB O\'Level Upload', message: 'Hello Defabs Media, I need help with JAMB O-Level Result Upload.' },
+        { name: 'JAMB Profile Code Retrieval', message: 'Hello Defabs Media, I need help retrieving my JAMB Profile Code.' },
+        { name: 'JAMB Registration Number Retrieval', message: 'Hello Defabs Media, I need help retrieving my JAMB Registration Number.' },
+        { name: 'WAEC GCE Registration', message: 'Hello Defabs Media, I need help with WAEC GCE Registration.' },
+        { name: 'NECO Registration', message: 'Hello Defabs Media, I need help with NECO Registration.' }
       ]
     },
     {
@@ -50,15 +50,15 @@ const Services = () => {
       icon: Building2,
       color: 'bg-green-500',
       services: [
-        { name: 'Acceptance Fee Payment', message: 'Hello Fablinks Online Café, I need help with Acceptance Fee Payment.' },
-        { name: 'School Fees Payment', message: 'Hello Fablinks Online Café, I need help with School Fees Payment.' },
-        { name: 'Hostel Accommodation', message: 'Hello Fablinks Online Café, I need help with Hostel Accommodation.' },
-        { name: 'Results Checking', message: 'Hello Fablinks Online Café, I need help checking my University Results.' },
-        { name: 'Course Registration', message: 'Hello Fablinks Online Café, I need help with Course Registration.' },
-        { name: 'Transcript Application', message: 'Hello Fablinks Online Café, I need help with Transcript Application.' },
-        { name: 'Post-UTME Registration', message: 'Hello Fablinks Online Café, I need help with Post-UTME Registration.' },
-        { name: 'Student ID Card Services', message: 'Hello Fablinks Online Café, I need help with Student ID Card Services.' },
-        { name: 'Medical Form Submission', message: 'Hello Fablinks Online Café, I need help with Medical Form Submission.' }
+        { name: 'Acceptance Fee Payment', message: 'Hello Defabs Media, I need help with Acceptance Fee Payment.' },
+        { name: 'School Fees Payment', message: 'Hello Defabs Media, I need help with School Fees Payment.' },
+        { name: 'Hostel Accommodation', message: 'Hello Defabs Media, I need help with Hostel Accommodation.' },
+        { name: 'Results Checking', message: 'Hello Defabs Media, I need help checking my University Results.' },
+        { name: 'Course Registration', message: 'Hello Defabs Media, I need help with Course Registration.' },
+        { name: 'Transcript Application', message: 'Hello Defabs Media, I need help with Transcript Application.' },
+        { name: 'Post-UTME Registration', message: 'Hello Defabs Media, I need help with Post-UTME Registration.' },
+        { name: 'Student ID Card Services', message: 'Hello Defabs Media, I need help with Student ID Card Services.' },
+        { name: 'Medical Form Submission', message: 'Hello Defabs Media, I need help with Medical Form Submission.' }
       ]
     },
     {
@@ -67,12 +67,12 @@ const Services = () => {
       icon: FileText,
       color: 'bg-purple-500',
       services: [
-        { name: 'Project Writing', message: 'Hello Fablinks Online Café, I need help with Project Writing.' },
-        { name: 'Assignments & Research', message: 'Hello Fablinks Online Café, I need help with Assignments and Research.' },
-        { name: 'Seminars & Presentations', message: 'Hello Fablinks Online Café, I need help with Seminar or Presentation Preparation.' },
-        { name: 'Thesis/Dissertation Support', message: 'Hello Fablinks Online Café, I need help with Thesis/Dissertation writing.' },
-        { name: 'CV/Resume Writing', message: 'Hello Fablinks Online Café, I need help with CV/Resume writing.' },
-        { name: 'Business Plan Writing', message: 'Hello Fablinks Online Café, I need help with Business Plan writing.' }
+        { name: 'Project Writing', message: 'Hello Defabs Media, I need help with Project Writing.' },
+        { name: 'Assignments & Research', message: 'Hello Defabs Media, I need help with Assignments and Research.' },
+        { name: 'Seminars & Presentations', message: 'Hello Defabs Media, I need help with Seminar or Presentation Preparation.' },
+        { name: 'Thesis/Dissertation Support', message: 'Hello Defabs Media, I need help with Thesis/Dissertation writing.' },
+        { name: 'CV/Resume Writing', message: 'Hello Defabs Media, I need help with CV/Resume writing.' },
+        { name: 'Business Plan Writing', message: 'Hello Defabs Media, I need help with Business Plan writing.' }
       ]
     },
     {
@@ -81,14 +81,14 @@ const Services = () => {
       icon: Shield,
       color: 'bg-orange-500',
       services: [
-        { name: 'NYSC Registration', message: 'Hello Fablinks Online Café, I need help with NYSC Registration.' },
-        { name: 'NYSC Green Card Printing', message: 'Hello Fablinks Online Café, I need help with NYSC Green Card Printing.' },
-        { name: 'NYSC Call-Up Letter Printing', message: 'Hello Fablinks Online Café, I need help with NYSC Call-Up Letter Printing.' },
-        { name: 'NIN / NIMC Services', message: 'Hello Fablinks Online Café, I need help with NIN/NIMC Services.' },
-        { name: 'Police Character Certificate', message: 'Hello Fablinks Online Café, I need help with Police Character Certificate.' },
-        { name: 'International Passport Application', message: 'Hello Fablinks Online Café, I need help with International Passport Application.' },
-        { name: 'Drivers License Application', message: 'Hello Fablinks Online Café, I need help with Drivers License Application.' },
-        { name: 'Voters Card Registration', message: 'Hello Fablinks Online Café, I need help with Voters Card Registration.' }
+        { name: 'NYSC Registration', message: 'Hello Defabs Media, I need help with NYSC Registration.' },
+        { name: 'NYSC Green Card Printing', message: 'Hello Defabs Media, I need help with NYSC Green Card Printing.' },
+        { name: 'NYSC Call-Up Letter Printing', message: 'Hello Defabs Media, I need help with NYSC Call-Up Letter Printing.' },
+        { name: 'NIN / NIMC Services', message: 'Hello Defabs Media, I need help with NIN/NIMC Services.' },
+        { name: 'Police Character Certificate', message: 'Hello Defabs Media, I need help with Police Character Certificate.' },
+        { name: 'International Passport Application', message: 'Hello Defabs Media, I need help with International Passport Application.' },
+        { name: 'Drivers License Application', message: 'Hello Defabs Media, I need help with Drivers License Application.' },
+        { name: 'Voters Card Registration', message: 'Hello Defabs Media, I need help with Voters Card Registration.' }
       ]
     },
     {
@@ -97,13 +97,13 @@ const Services = () => {
       icon: Smartphone,
       color: 'bg-red-500',
       services: [
-        { name: 'Airtime Top-Up', message: 'Hello Fablinks Online Café, I want to buy Airtime.' },
-        { name: 'Data Subscription', message: 'Hello Fablinks Online Café, I want to subscribe for Data.' },
-        { name: 'Internet Subscription', message: 'Hello Fablinks Online Café, I want to renew Internet Subscription.' },
-        { name: 'Cable TV Subscription', message: 'Hello Fablinks Online Café, I want to pay for Cable TV Subscription.' },
-        { name: 'Electricity Bill Payment', message: 'Hello Fablinks Online Café, I want to pay my Electricity Bill.' },
-        { name: 'Water Bill Payment', message: 'Hello Fablinks Online Café, I want to pay my Water Bill.' },
-        { name: 'Betting & Gaming Top-up', message: 'Hello Fablinks Online Café, I want to fund my betting account.' }
+        { name: 'Airtime Top-Up', message: 'Hello Defabs Media, I want to buy Airtime.' },
+        { name: 'Data Subscription', message: 'Hello Defabs Media, I want to subscribe for Data.' },
+        { name: 'Internet Subscription', message: 'Hello Defabs Media, I want to renew Internet Subscription.' },
+        { name: 'Cable TV Subscription', message: 'Hello Defabs Media, I want to pay for Cable TV Subscription.' },
+        { name: 'Electricity Bill Payment', message: 'Hello Defabs Media, I want to pay my Electricity Bill.' },
+        { name: 'Water Bill Payment', message: 'Hello Defabs Media, I want to pay my Water Bill.' },
+        { name: 'Betting & Gaming Top-up', message: 'Hello Defabs Media, I want to fund my betting account.' }
       ]
     },
     {
@@ -112,13 +112,13 @@ const Services = () => {
       icon: Printer,
       color: 'bg-teal-500',
       services: [
-        { name: 'Document Printing', message: 'Hello Fablinks Online Café, I need document printing services.' },
-        { name: 'Passport Photograph', message: 'Hello Fablinks Online Café, I need passport photograph services.' },
-        { name: 'Lamination Services', message: 'Hello Fablinks Online Café, I need lamination services.' },
-        { name: 'Photocopy Services', message: 'Hello Fablinks Online Café, I need photocopy services.' },
-        { name: 'Binding Services', message: 'Hello Fablinks Online Café, I need document binding services.' },
-        { name: 'Scanning Services', message: 'Hello Fablinks Online Café, I need document scanning services.' },
-        { name: 'Large Format Printing', message: 'Hello Fablinks Online Café, I need large format printing services.' }
+        { name: 'Document Printing', message: 'Hello Defabs Media, I need document printing services.' },
+        { name: 'Passport Photograph', message: 'Hello Defabs Media, I need passport photograph services.' },
+        { name: 'Lamination Services', message: 'Hello Defabs Media, I need lamination services.' },
+        { name: 'Photocopy Services', message: 'Hello Defabs Media, I need photocopy services.' },
+        { name: 'Binding Services', message: 'Hello Defabs Media, I need document binding services.' },
+        { name: 'Scanning Services', message: 'Hello Defabs Media, I need document scanning services.' },
+        { name: 'Large Format Printing', message: 'Hello Defabs Media, I need large format printing services.' }
       ]
     },
     {
@@ -127,12 +127,12 @@ const Services = () => {
       icon: Globe,
       color: 'bg-indigo-500',
       services: [
-        { name: 'Computer Training', message: 'Hello Fablinks Online Café, I need computer training services.' },
-        { name: 'Email Setup', message: 'Hello Fablinks Online Café, I need help with email setup.' },
-        { name: 'Online Application Assistance', message: 'Hello Fablinks Online Café, I need help with online applications.' },
-        { name: 'Digital Marketing Services', message: 'Hello Fablinks Online Café, I need digital marketing services.' },
-        { name: 'Website Development', message: 'Hello Fablinks Online Café, I need website development services.' },
-        { name: 'Social Media Management', message: 'Hello Fablinks Online Café, I need social media management services.' }
+        { name: 'Computer Training', message: 'Hello Defabs Media, I need computer training services.' },
+        { name: 'Email Setup', message: 'Hello Defabs Media, I need help with email setup.' },
+        { name: 'Online Application Assistance', message: 'Hello Defabs Media, I need help with online applications.' },
+        { name: 'Digital Marketing Services', message: 'Hello Defabs Media, I need digital marketing services.' },
+        { name: 'Website Development', message: 'Hello Defabs Media, I need website development services.' },
+        { name: 'Social Media Management', message: 'Hello Defabs Media, I need social media management services.' }
       ]
     }
   ], []);
@@ -141,296 +141,296 @@ const Services = () => {
     {
       name: 'University of Lagos (UNILAG)',
       services: [
-        { name: 'UNILAG School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20School%20Fees%20Payment.' },
-        { name: 'UNILAG Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20Course%20Registration.' },
-        { name: 'UNILAG Hostel Booking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20Hostel%20Booking.' },
-        { name: 'UNILAG Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20checking%20my%20UNILAG%20Results.' },
-        { name: 'UNILAG Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20Acceptance%20Fee%20Payment.' },
-        { name: 'UNILAG Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20Faculty%20Dues%20Payment.' },
-        { name: 'UNILAG GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20GST%20Fees%20Payment.' }
+        { name: 'UNILAG School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20School%20Fees%20Payment.' },
+        { name: 'UNILAG Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20Course%20Registration.' },
+        { name: 'UNILAG Hostel Booking', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20Hostel%20Booking.' },
+        { name: 'UNILAG Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20checking%20my%20UNILAG%20Results.' },
+        { name: 'UNILAG Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20Acceptance%20Fee%20Payment.' },
+        { name: 'UNILAG Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20Faculty%20Dues%20Payment.' },
+        { name: 'UNILAG GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNILAG%20GST%20Fees%20Payment.' }
       ]
     },
     {
       name: 'University of Ibadan (UI)',
       services: [
-        { name: 'UI School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UI%20School%20Fees%20Payment.' },
-        { name: 'UI Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UI%20Course%20Registration.' },
-        { name: 'UI Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20checking%20my%20UI%20Results.' },
-        { name: 'UI Post-UTME Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UI%20Post-UTME%20Registration.' },
-        { name: 'UI Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UI%20Acceptance%20Fee%20Payment.' },
-        { name: 'UI Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UI%20Hostel%20Fee%20Payment.' },
-        { name: 'UI Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UI%20Faculty%20Dues%20Payment.' }
+        { name: 'UI School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UI%20School%20Fees%20Payment.' },
+        { name: 'UI Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UI%20Course%20Registration.' },
+        { name: 'UI Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20checking%20my%20UI%20Results.' },
+        { name: 'UI Post-UTME Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UI%20Post-UTME%20Registration.' },
+        { name: 'UI Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UI%20Acceptance%20Fee%20Payment.' },
+        { name: 'UI Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UI%20Hostel%20Fee%20Payment.' },
+        { name: 'UI Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UI%20Faculty%20Dues%20Payment.' }
       ]
     },
     {
       name: 'Obafemi Awolowo University (OAU)',
       services: [
-        { name: 'OAU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20OAU%20School%20Fees%20Payment.' },
-        { name: 'OAU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20OAU%20Course%20Registration.' },
-        { name: 'OAU Hostel Application', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20OAU%20Hostel%20Application.' },
-        { name: 'OAU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20OAU%20Acceptance%20Fee%20Payment.' },
-        { name: 'OAU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20OAU%20Faculty%20Dues%20Payment.' },
-        { name: 'OAU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20OAU%20GST%20Fees%20Payment.' }
+        { name: 'OAU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20OAU%20School%20Fees%20Payment.' },
+        { name: 'OAU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20OAU%20Course%20Registration.' },
+        { name: 'OAU Hostel Application', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20OAU%20Hostel%20Application.' },
+        { name: 'OAU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20OAU%20Acceptance%20Fee%20Payment.' },
+        { name: 'OAU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20OAU%20Faculty%20Dues%20Payment.' },
+        { name: 'OAU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20OAU%20GST%20Fees%20Payment.' }
       ]
     },
     {
       name: 'University of Nigeria Nsukka (UNN)',
       services: [
-        { name: 'UNN School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNN%20School%20Fees%20Payment.' },
-        { name: 'UNN Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNN%20Course%20Registration.' },
-        { name: 'UNN Results Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNN%20Results%20Portal.' },
-        { name: 'UNN Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNN%20Acceptance%20Fee%20Payment.' },
-        { name: 'UNN Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNN%20Hostel%20Fee%20Payment.' },
-        { name: 'UNN Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNN%20Faculty%20Dues%20Payment.' }
+        { name: 'UNN School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNN%20School%20Fees%20Payment.' },
+        { name: 'UNN Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNN%20Course%20Registration.' },
+        { name: 'UNN Results Portal', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNN%20Results%20Portal.' },
+        { name: 'UNN Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNN%20Acceptance%20Fee%20Payment.' },
+        { name: 'UNN Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNN%20Hostel%20Fee%20Payment.' },
+        { name: 'UNN Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNN%20Faculty%20Dues%20Payment.' }
       ]
     },
     {
       name: 'Ahmadu Bello University (ABU)',
       services: [
-        { name: 'ABU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABU%20School%20Fees%20Payment.' },
-        { name: 'ABU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABU%20Course%20Registration.' },
-        { name: 'ABU Admission Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABU%20Admission%20Portal.' },
-        { name: 'ABU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABU%20Acceptance%20Fee%20Payment.' },
-        { name: 'ABU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABU%20Hostel%20Fee%20Payment.' },
-        { name: 'ABU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABU%20GST%20Fees%20Payment.' }
+        { name: 'ABU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ABU%20School%20Fees%20Payment.' },
+        { name: 'ABU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ABU%20Course%20Registration.' },
+        { name: 'ABU Admission Portal', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ABU%20Admission%20Portal.' },
+        { name: 'ABU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ABU%20Acceptance%20Fee%20Payment.' },
+        { name: 'ABU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ABU%20Hostel%20Fee%20Payment.' },
+        { name: 'ABU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ABU%20GST%20Fees%20Payment.' }
       ]
     },
     {
       name: 'University of Benin (UNIBEN)',
       services: [
-        { name: 'UNIBEN School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20School%20Fees%20Payment.' },
-        { name: 'UNIBEN Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Course%20Registration.' },
-        { name: 'UNIBEN Student Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Student%20Portal.' },
-        { name: 'UNIBEN Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Acceptance%20Fee%20Payment.' },
-        { name: 'UNIBEN Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Hostel%20Fee%20Payment.' },
-        { name: 'UNIBEN Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Faculty%20Dues%20Payment.' }
+        { name: 'UNIBEN School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20School%20Fees%20Payment.' },
+        { name: 'UNIBEN Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Course%20Registration.' },
+        { name: 'UNIBEN Student Portal', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Student%20Portal.' },
+        { name: 'UNIBEN Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Acceptance%20Fee%20Payment.' },
+        { name: 'UNIBEN Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Hostel%20Fee%20Payment.' },
+        { name: 'UNIBEN Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIBEN%20Faculty%20Dues%20Payment.' }
       ]
     },
     {
       name: 'Abia State University (ABSU)',
       services: [
-        { name: 'ABSU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABSU%20School%20Fees%20Payment.' },
-        { name: 'ABSU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABSU%20Course%20Registration.' },
-        { name: 'ABSU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABSU%20Acceptance%20Fee%20Payment.' },
-        { name: 'ABSU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABSU%20Hostel%20Fee%20Payment.' },
-        { name: 'ABSU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABSU%20Faculty%20Dues%20Payment.' },
-        { name: 'ABSU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ABSU%20GST%20Fees%20Payment.' },
-        { name: 'ABSU Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20checking%20my%20ABSU%20Results.' }
+        { name: 'ABSU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ABSU%20School%20Fees%20Payment.' },
+        { name: 'ABSU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ABSU%20Course%20Registration.' },
+        { name: 'ABSU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ABSU%20Acceptance%20Fee%20Payment.' },
+        { name: 'ABSU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ABSU%20Hostel%20Fee%20Payment.' },
+        { name: 'ABSU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ABSU%20Faculty%20Dues%20Payment.' },
+        { name: 'ABSU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ABSU%20GST%20Fees%20Payment.' },
+        { name: 'ABSU Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20checking%20my%20ABSU%20Results.' }
       ]
     },
     {
       name: 'Imo State University (IMSU)',
       services: [
-        { name: 'IMSU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20IMSU%20School%20Fees%20Payment.' },
-        { name: 'IMSU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20IMSU%20Course%20Registration.' },
-        { name: 'IMSU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20IMSU%20Acceptance%20Fee%20Payment.' },
-        { name: 'IMSU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20IMSU%20Hostel%20Fee%20Payment.' },
-        { name: 'IMSU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20IMSU%20Faculty%20Dues%20Payment.' },
-        { name: 'IMSU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20IMSU%20GST%20Fees%20Payment.' },
-        { name: 'IMSU Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20checking%20my%20IMSU%20Results.' }
+        { name: 'IMSU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20IMSU%20School%20Fees%20Payment.' },
+        { name: 'IMSU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20IMSU%20Course%20Registration.' },
+        { name: 'IMSU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20IMSU%20Acceptance%20Fee%20Payment.' },
+        { name: 'IMSU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20IMSU%20Hostel%20Fee%20Payment.' },
+        { name: 'IMSU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20IMSU%20Faculty%20Dues%20Payment.' },
+        { name: 'IMSU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20IMSU%20GST%20Fees%20Payment.' },
+        { name: 'IMSU Results Checking', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20checking%20my%20IMSU%20Results.' }
       ]
     },
     {
       name: 'Lagos State University (LASU)',
       services: [
-        { name: 'LASU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASU%20School%20Fees%20Payment.' },
-        { name: 'LASU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASU%20Course%20Registration.' },
-        { name: 'LASU E-Learning Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASU%20E-Learning%20Portal.' },
-        { name: 'LASU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASU%20Acceptance%20Fee%20Payment.' },
-        { name: 'LASU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASU%20Hostel%20Fee%20Payment.' },
-        { name: 'LASU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASU%20Faculty%20Dues%20Payment.' }
+        { name: 'LASU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20LASU%20School%20Fees%20Payment.' },
+        { name: 'LASU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20LASU%20Course%20Registration.' },
+        { name: 'LASU E-Learning Portal', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20LASU%20E-Learning%20Portal.' },
+        { name: 'LASU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20LASU%20Acceptance%20Fee%20Payment.' },
+        { name: 'LASU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20LASU%20Hostel%20Fee%20Payment.' },
+        { name: 'LASU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20LASU%20Faculty%20Dues%20Payment.' }
       ]
     },
     {
       name: 'University of Port Harcourt (UNIPORT)',
       services: [
-        { name: 'UNIPORT School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20School%20Fees%20Payment.' },
-        { name: 'UNIPORT Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20Course%20Registration.' },
-        { name: 'UNIPORT Student Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20Student%20Portal.' },
-        { name: 'UNIPORT Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20Acceptance%20Fee%20Payment.' },
-        { name: 'UNIPORT Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20Hostel%20Fee%20Payment.' },
-        { name: 'UNIPORT GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20GST%20Fees%20Payment.' }
+        { name: 'UNIPORT School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20School%20Fees%20Payment.' },
+        { name: 'UNIPORT Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20Course%20Registration.' },
+        { name: 'UNIPORT Student Portal', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20Student%20Portal.' },
+        { name: 'UNIPORT Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20Acceptance%20Fee%20Payment.' },
+        { name: 'UNIPORT Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20Hostel%20Fee%20Payment.' },
+        { name: 'UNIPORT GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIPORT%20GST%20Fees%20Payment.' }
       ]
     },
     {
       name: 'Delta State University (DELSU)',
       services: [
-        { name: 'DELSU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20DELSU%20School%20Fees%20Payment.' },
-        { name: 'DELSU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20DELSU%20Course%20Registration.' },
-        { name: 'DELSU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20DELSU%20Acceptance%20Fee%20Payment.' },
-        { name: 'DELSU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20DELSU%20Hostel%20Fee%20Payment.' },
-        { name: 'DELSU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20DELSU%20Faculty%20Dues%20Payment.' },
-        { name: 'DELSU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20DELSU%20GST%20Fees%20Payment.' }
+        { name: 'DELSU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20DELSU%20School%20Fees%20Payment.' },
+        { name: 'DELSU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20DELSU%20Course%20Registration.' },
+        { name: 'DELSU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20DELSU%20Acceptance%20Fee%20Payment.' },
+        { name: 'DELSU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20DELSU%20Hostel%20Fee%20Payment.' },
+        { name: 'DELSU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20DELSU%20Faculty%20Dues%20Payment.' },
+        { name: 'DELSU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20DELSU%20GST%20Fees%20Payment.' }
       ]
     },
     {
       name: 'Rivers State University (RSU)',
       services: [
-        { name: 'RSU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20RSU%20School%20Fees%20Payment.' },
-        { name: 'RSU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20RSU%20Course%20Registration.' },
-        { name: 'RSU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20RSU%20Acceptance%20Fee%20Payment.' },
-        { name: 'RSU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20RSU%20Hostel%20Fee%20Payment.' },
-        { name: 'RSU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20RSU%20Faculty%20Dues%20Payment.' },
-        { name: 'RSU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20RSU%20GST%20Fees%20Payment.' }
+        { name: 'RSU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20RSU%20School%20Fees%20Payment.' },
+        { name: 'RSU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20RSU%20Course%20Registration.' },
+        { name: 'RSU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20RSU%20Acceptance%20Fee%20Payment.' },
+        { name: 'RSU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20RSU%20Hostel%20Fee%20Payment.' },
+        { name: 'RSU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20RSU%20Faculty%20Dues%20Payment.' },
+        { name: 'RSU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20RSU%20GST%20Fees%20Payment.' }
       ]
     },
     {
       name: 'Covenant University',
       services: [
-        { name: 'Covenant University Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Covenant%20University%20Payment.' },
-        { name: 'Covenant University Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Covenant%20University%20Portal.' },
-        { name: 'Covenant Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Covenant%20University%20Course%20Registration.' },
-        { name: 'Covenant Acceptance Fee', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Covenant%20University%20Acceptance%20Fee.' },
-        { name: 'Covenant Hostel Fee', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Covenant%20University%20Hostel%20Fee.' }
+        { name: 'Covenant University Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Covenant%20University%20Payment.' },
+        { name: 'Covenant University Portal', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Covenant%20University%20Portal.' },
+        { name: 'Covenant Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Covenant%20University%20Course%20Registration.' },
+        { name: 'Covenant Acceptance Fee', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Covenant%20University%20Acceptance%20Fee.' },
+        { name: 'Covenant Hostel Fee', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Covenant%20University%20Hostel%20Fee.' }
       ]
     },
     {
       name: 'Babcock University',
       services: [
-        { name: 'Babcock University Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Babcock%20University%20Payment.' },
-        { name: 'Babcock University Portal', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Babcock%20University%20Portal.' },
-        { name: 'Babcock Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Babcock%20University%20Course%20Registration.' },
-        { name: 'Babcock Acceptance Fee', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Babcock%20University%20Acceptance%20Fee.' },
-        { name: 'Babcock Hostel Fee', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Babcock%20University%20Hostel%20Fee.' }
+        { name: 'Babcock University Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Babcock%20University%20Payment.' },
+        { name: 'Babcock University Portal', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Babcock%20University%20Portal.' },
+        { name: 'Babcock Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Babcock%20University%20Course%20Registration.' },
+        { name: 'Babcock Acceptance Fee', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Babcock%20University%20Acceptance%20Fee.' },
+        { name: 'Babcock Hostel Fee', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Babcock%20University%20Hostel%20Fee.' }
       ]
     },
     {
       name: 'Federal University of Technology Akure (FUTA)',
       services: [
-        { name: 'FUTA School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FUTA%20School%20Fees%20Payment.' },
-        { name: 'FUTA Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FUTA%20Course%20Registration.' },
-        { name: 'FUTA Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FUTA%20Acceptance%20Fee%20Payment.' },
-        { name: 'FUTA Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FUTA%20Hostel%20Fee%20Payment.' },
-        { name: 'FUTA Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FUTA%20Faculty%20Dues%20Payment.' }
+        { name: 'FUTA School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FUTA%20School%20Fees%20Payment.' },
+        { name: 'FUTA Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FUTA%20Course%20Registration.' },
+        { name: 'FUTA Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FUTA%20Acceptance%20Fee%20Payment.' },
+        { name: 'FUTA Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FUTA%20Hostel%20Fee%20Payment.' },
+        { name: 'FUTA Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FUTA%20Faculty%20Dues%20Payment.' }
       ]
     },
     {
       name: 'University of Ilorin (UNILORIN)',
       services: [
-        { name: 'UNILORIN School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILORIN%20School%20Fees%20Payment.' },
-        { name: 'UNILORIN Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILORIN%20Course%20Registration.' },
-        { name: 'UNILORIN Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILORIN%20Acceptance%20Fee%20Payment.' },
-        { name: 'UNILORIN Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILORIN%20Hostel%20Fee%20Payment.' },
-        { name: 'UNILORIN GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNILORIN%20GST%20Fees%20Payment.' }
+        { name: 'UNILORIN School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNILORIN%20School%20Fees%20Payment.' },
+        { name: 'UNILORIN Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNILORIN%20Course%20Registration.' },
+        { name: 'UNILORIN Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNILORIN%20Acceptance%20Fee%20Payment.' },
+        { name: 'UNILORIN Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNILORIN%20Hostel%20Fee%20Payment.' },
+        { name: 'UNILORIN GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNILORIN%20GST%20Fees%20Payment.' }
       ]
     },
     {
       name: 'Nnamdi Azikiwe University (UNIZIK)',
       services: [
-        { name: 'UNIZIK School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIZIK%20School%20Fees%20Payment.' },
-        { name: 'UNIZIK Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIZIK%20Course%20Registration.' },
-        { name: 'UNIZIK Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIZIK%20Acceptance%20Fee%20Payment.' },
-        { name: 'UNIZIK Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIZIK%20Hostel%20Fee%20Payment.' },
-        { name: 'UNIZIK Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20UNIZIK%20Faculty%20Dues%20Payment.' }
+        { name: 'UNIZIK School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIZIK%20School%20Fees%20Payment.' },
+        { name: 'UNIZIK Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIZIK%20Course%20Registration.' },
+        { name: 'UNIZIK Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIZIK%20Acceptance%20Fee%20Payment.' },
+        { name: 'UNIZIK Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIZIK%20Hostel%20Fee%20Payment.' },
+        { name: 'UNIZIK Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20UNIZIK%20Faculty%20Dues%20Payment.' }
       ]
     },
     {
       name: 'Bayero University Kano (BUK)',
       services: [
-        { name: 'BUK School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20BUK%20School%20Fees%20Payment.' },
-        { name: 'BUK Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20BUK%20Course%20Registration.' },
-        { name: 'BUK Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20BUK%20Acceptance%20Fee%20Payment.' },
-        { name: 'BUK Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20BUK%20Hostel%20Fee%20Payment.' },
-        { name: 'BUK GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20BUK%20GST%20Fees%20Payment.' }
+        { name: 'BUK School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20BUK%20School%20Fees%20Payment.' },
+        { name: 'BUK Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20BUK%20Course%20Registration.' },
+        { name: 'BUK Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20BUK%20Acceptance%20Fee%20Payment.' },
+        { name: 'BUK Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20BUK%20Hostel%20Fee%20Payment.' },
+        { name: 'BUK GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20BUK%20GST%20Fees%20Payment.' }
       ]
     },
     {
       name: 'Enugu State University of Science and Technology (ESUT)',
       services: [
-        { name: 'ESUT School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ESUT%20School%20Fees%20Payment.' },
-        { name: 'ESUT Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ESUT%20Course%20Registration.' },
-        { name: 'ESUT Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ESUT%20Acceptance%20Fee%20Payment.' },
-        { name: 'ESUT Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ESUT%20Hostel%20Fee%20Payment.' },
-        { name: 'ESUT Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ESUT%20Faculty%20Dues%20Payment.' },
-        { name: 'ESUT GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20ESUT%20GST%20Fees%20Payment.' }
+        { name: 'ESUT School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ESUT%20School%20Fees%20Payment.' },
+        { name: 'ESUT Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ESUT%20Course%20Registration.' },
+        { name: 'ESUT Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ESUT%20Acceptance%20Fee%20Payment.' },
+        { name: 'ESUT Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ESUT%20Hostel%20Fee%20Payment.' },
+        { name: 'ESUT Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ESUT%20Faculty%20Dues%20Payment.' },
+        { name: 'ESUT GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20ESUT%20GST%20Fees%20Payment.' }
       ]
     },
     {
       name: 'Cross River University of Technology (CRUTECH)',
       services: [
-        { name: 'CRUTECH School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20CRUTECH%20School%20Fees%20Payment.' },
-        { name: 'CRUTECH Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20CRUTECH%20Course%20Registration.' },
-        { name: 'CRUTECH Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20CRUTECH%20Acceptance%20Fee%20Payment.' },
-        { name: 'CRUTECH Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20CRUTECH%20Hostel%20Fee%20Payment.' },
-        { name: 'CRUTECH Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20CRUTECH%20Faculty%20Dues%20Payment.' }
+        { name: 'CRUTECH School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20CRUTECH%20School%20Fees%20Payment.' },
+        { name: 'CRUTECH Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20CRUTECH%20Course%20Registration.' },
+        { name: 'CRUTECH Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20CRUTECH%20Acceptance%20Fee%20Payment.' },
+        { name: 'CRUTECH Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20CRUTECH%20Hostel%20Fee%20Payment.' },
+        { name: 'CRUTECH Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20CRUTECH%20Faculty%20Dues%20Payment.' }
       ]
     },
     {
       name: 'Akwa Ibom State University (AKSU)',
       services: [
-        { name: 'AKSU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20AKSU%20School%20Fees%20Payment.' },
-        { name: 'AKSU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20AKSU%20Course%20Registration.' },
-        { name: 'AKSU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20AKSU%20Acceptance%20Fee%20Payment.' },
-        { name: 'AKSU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20AKSU%20Hostel%20Fee%20Payment.' },
-        { name: 'AKSU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20AKSU%20Faculty%20Dues%20Payment.' },
-        { name: 'AKSU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20AKSU%20GST%20Fees%20Payment.' }
+        { name: 'AKSU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20AKSU%20School%20Fees%20Payment.' },
+        { name: 'AKSU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20AKSU%20Course%20Registration.' },
+        { name: 'AKSU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20AKSU%20Acceptance%20Fee%20Payment.' },
+        { name: 'AKSU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20AKSU%20Hostel%20Fee%20Payment.' },
+        { name: 'AKSU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20AKSU%20Faculty%20Dues%20Payment.' },
+        { name: 'AKSU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20AKSU%20GST%20Fees%20Payment.' }
       ]
     },
     {
       name: 'Ebonyi State University (EBSU)',
       services: [
-        { name: 'EBSU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20EBSU%20School%20Fees%20Payment.' },
-        { name: 'EBSU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20EBSU%20Course%20Registration.' },
-        { name: 'EBSU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20EBSU%20Acceptance%20Fee%20Payment.' },
-        { name: 'EBSU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20EBSU%20Hostel%20Fee%20Payment.' },
-        { name: 'EBSU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20EBSU%20Faculty%20Dues%20Payment.' },
-        { name: 'EBSU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20EBSU%20GST%20Fees%20Payment.' }
+        { name: 'EBSU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20EBSU%20School%20Fees%20Payment.' },
+        { name: 'EBSU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20EBSU%20Course%20Registration.' },
+        { name: 'EBSU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20EBSU%20Acceptance%20Fee%20Payment.' },
+        { name: 'EBSU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20EBSU%20Hostel%20Fee%20Payment.' },
+        { name: 'EBSU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20EBSU%20Faculty%20Dues%20Payment.' },
+        { name: 'EBSU GST Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20EBSU%20GST%20Fees%20Payment.' }
       ]
     },
     {
       name: 'Federal Polytechnic Nekede',
       services: [
-        { name: 'FPNO School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Federal%20Polytechnic%20Nekede%20School%20Fees%20Payment.' },
-        { name: 'FPNO Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Federal%20Polytechnic%20Nekede%20Course%20Registration.' },
-        { name: 'FPNO Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Federal%20Polytechnic%20Nekede%20Acceptance%20Fee.' },
-        { name: 'FPNO Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20Federal%20Polytechnic%20Nekede%20Hostel%20Fee.' }
+        { name: 'FPNO School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Federal%20Polytechnic%20Nekede%20School%20Fees%20Payment.' },
+        { name: 'FPNO Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Federal%20Polytechnic%20Nekede%20Course%20Registration.' },
+        { name: 'FPNO Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Federal%20Polytechnic%20Nekede%20Acceptance%20Fee.' },
+        { name: 'FPNO Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20Federal%20Polytechnic%20Nekede%20Hostel%20Fee.' }
       ]
     },
     {
       name: 'Yaba College of Technology (YABATECH)',
       services: [
-        { name: 'YABATECH School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20YABATECH%20School%20Fees%20Payment.' },
-        { name: 'YABATECH Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20YABATECH%20Course%20Registration.' },
-        { name: 'YABATECH Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20YABATECH%20Acceptance%20Fee%20Payment.' },
-        { name: 'YABATECH Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20YABATECH%20Hostel%20Fee%20Payment.' }
+        { name: 'YABATECH School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20YABATECH%20School%20Fees%20Payment.' },
+        { name: 'YABATECH Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20YABATECH%20Course%20Registration.' },
+        { name: 'YABATECH Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20YABATECH%20Acceptance%20Fee%20Payment.' },
+        { name: 'YABATECH Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20YABATECH%20Hostel%20Fee%20Payment.' }
       ]
     },
     {
       name: 'Lagos State Polytechnic (LASPOTECH)',
       services: [
-        { name: 'LASPOTECH School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASPOTECH%20School%20Fees%20Payment.' },
-        { name: 'LASPOTECH Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASPOTECH%20Course%20Registration.' },
-        { name: 'LASPOTECH Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASPOTECH%20Acceptance%20Fee%20Payment.' },
-        { name: 'LASPOTECH Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20LASPOTECH%20Hostel%20Fee%20Payment.' }
+        { name: 'LASPOTECH School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20LASPOTECH%20School%20Fees%20Payment.' },
+        { name: 'LASPOTECH Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20LASPOTECH%20Course%20Registration.' },
+        { name: 'LASPOTECH Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20LASPOTECH%20Acceptance%20Fee%20Payment.' },
+        { name: 'LASPOTECH Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20LASPOTECH%20Hostel%20Fee%20Payment.' }
       ]
     },
     {
       name: 'Federal College of Education Akoka',
       services: [
-        { name: 'FCE Akoka School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FCE%20Akoka%20School%20Fees%20Payment.' },
-        { name: 'FCE Akoka Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FCE%20Akoka%20Course%20Registration.' },
-        { name: 'FCE Akoka Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FCE%20Akoka%20Acceptance%20Fee%20Payment.' },
-        { name: 'FCE Akoka Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FCE%20Akoka%20Hostel%20Fee%20Payment.' }
+        { name: 'FCE Akoka School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FCE%20Akoka%20School%20Fees%20Payment.' },
+        { name: 'FCE Akoka Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FCE%20Akoka%20Course%20Registration.' },
+        { name: 'FCE Akoka Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FCE%20Akoka%20Acceptance%20Fee%20Payment.' },
+        { name: 'FCE Akoka Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FCE%20Akoka%20Hostel%20Fee%20Payment.' }
       ]
     },
     {
       name: 'Michael Okpara University of Agriculture (MOUAU)',
       services: [
-        { name: 'MOUAU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20MOUAU%20School%20Fees%20Payment.' },
-        { name: 'MOUAU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20MOUAU%20Course%20Registration.' },
-        { name: 'MOUAU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20MOUAU%20Acceptance%20Fee%20Payment.' },
-        { name: 'MOUAU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20MOUAU%20Hostel%20Fee%20Payment.' },
-        { name: 'MOUAU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20MOUAU%20Faculty%20Dues%20Payment.' }
+        { name: 'MOUAU School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20MOUAU%20School%20Fees%20Payment.' },
+        { name: 'MOUAU Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20MOUAU%20Course%20Registration.' },
+        { name: 'MOUAU Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20MOUAU%20Acceptance%20Fee%20Payment.' },
+        { name: 'MOUAU Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20MOUAU%20Hostel%20Fee%20Payment.' },
+        { name: 'MOUAU Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20MOUAU%20Faculty%20Dues%20Payment.' }
       ]
     },
     {
       name: 'Federal University of Agriculture Abeokuta (FUNAAB)',
       services: [
-        { name: 'FUNAAB School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FUNAAB%20School%20Fees%20Payment.' },
-        { name: 'FUNAAB Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FUNAAB%20Course%20Registration.' },
-        { name: 'FUNAAB Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FUNAAB%20Acceptance%20Fee%20Payment.' },
-        { name: 'FUNAAB Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FUNAAB%20Hostel%20Fee%20Payment.' },
-        { name: 'FUNAAB Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20help%20with%20FUNAAB%20Faculty%20Dues%20Payment.' }
+        { name: 'FUNAAB School Fees Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FUNAAB%20School%20Fees%20Payment.' },
+        { name: 'FUNAAB Course Registration', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FUNAAB%20Course%20Registration.' },
+        { name: 'FUNAAB Acceptance Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FUNAAB%20Acceptance%20Fee%20Payment.' },
+        { name: 'FUNAAB Hostel Fee Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FUNAAB%20Hostel%20Fee%20Payment.' },
+        { name: 'FUNAAB Faculty Dues Payment', link: 'https://wa.me/2347068122861?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20help%20with%20FUNAAB%20Faculty%20Dues%20Payment.' }
       ]
     }
   ];
@@ -467,7 +467,7 @@ const Services = () => {
     // Transform link-based services to message-based for dynamic WhatsApp number
     return school.services.map(service => ({
       name: service.name,
-      message: `Hello Fablinks Online Café, I need help with ${service.name}.`
+      message: `Hello Defabs Media, I need help with ${service.name}.`
     }));
   };
 
@@ -483,7 +483,7 @@ const Services = () => {
       />
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-primary to-fablinks-blue-dark text-white py-16">
+        <section className="bg-gradient-to-r from-primary to-defabs-dark text-white py-16">
           <div className="container-custom text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Services</h1>
             <p className="text-xl mb-8">Complete digital solutions for Nigerian students and communities</p>
@@ -579,7 +579,7 @@ const Services = () => {
               </p>
               <Button 
                 className="btn-whatsapp"
-                onClick={() => window.open(getWhatsAppLink('Hello Fablinks Online Café, I need help with my school portal services. My school is not listed.'), '_blank')}
+                onClick={() => window.open(getWhatsAppLink('Hello Defabs Media, I need help with my school portal services. My school is not listed.'), '_blank')}
               >
                 Chat with us for your school
               </Button>

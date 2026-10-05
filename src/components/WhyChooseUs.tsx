@@ -118,7 +118,7 @@ const WhyChooseUs = () => {
             const IconComponent = getIcon(feature.icon_name);
             return (
               <div key={feature.id} className="feature-card group">
-                <div className="w-16 h-16 bg-gradient-to-r from-primary to-fablinks-blue-dark rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-16 h-16 bg-gradient-to-r from-primary to-defabs-blue-dark rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
                   <IconComponent className="w-8 h-8 text-white" />
                 </div>
                 <h3 className="text-xl font-semibold mb-4 text-center">{feature.title}</h3>
@@ -131,7 +131,7 @@ const WhyChooseUs = () => {
         </div>
 
         {/* Statistics */}
-        <div className="mt-16 bg-gradient-to-r from-primary to-fablinks-blue-dark rounded-2xl p-8 md:p-12 text-white">
+        <div className="mt-16 bg-gradient-to-r from-primary to-defabs-blue-dark rounded-2xl p-8 md:p-12 text-white">
           <div className="grid md:grid-cols-4 gap-8 text-center">
             {statistics.map((stat) => (
               <div key={stat.id}>

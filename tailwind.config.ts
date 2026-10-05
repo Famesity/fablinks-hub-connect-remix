@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -53,32 +52,27 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				fablinks: {
-					blue: 'hsl(var(--fablinks-blue))',
-					'blue-dark': 'hsl(var(--fablinks-blue-dark))',
-					gray: 'hsl(var(--fablinks-gray))',
-					'gray-light': 'hsl(var(--fablinks-gray-light))',
-				},
 				success: 'hsl(var(--success))',
-				warning: 'hsl(var(--warning))',					/* Entertainment brand palette */
-					ent: {
-						ink: 'hsl(var(--ent-ink) / <alpha-value>)',
-						'ink-soft': 'hsl(var(--ent-ink-soft) / <alpha-value>)',
-						stage: 'hsl(var(--ent-stage) / <alpha-value>)',
-						gold: 'hsl(var(--ent-gold) / <alpha-value>)',
-						'gold-deep': 'hsl(var(--ent-gold-deep) / <alpha-value>)',
-						'gold-ink': 'hsl(var(--ent-gold-ink) / <alpha-value>)',
-						amber: 'hsl(var(--ent-amber) / <alpha-value>)',
-						paper: 'hsl(var(--ent-paper) / <alpha-value>)',
-					},
-					/* Defabs Media palette (hero carousel) */
-					defabs: {
-						primary: 'rgb(var(--defabs-primary) / <alpha-value>)',
-						accent: 'rgb(var(--defabs-accent) / <alpha-value>)',
-						'accent-hover': 'rgb(var(--defabs-accent-hover) / <alpha-value>)',
-						dark: 'rgb(var(--defabs-dark) / <alpha-value>)',
-						light: 'rgb(var(--defabs-light) / <alpha-value>)',
-					},
+				warning: 'hsl(var(--warning))',
+				/* Entertainment brand palette */
+				ent: {
+					ink: 'hsl(var(--ent-ink) / <alpha-value>)',
+					'ink-soft': 'hsl(var(--ent-ink-soft) / <alpha-value>)',
+					stage: 'hsl(var(--ent-stage) / <alpha-value>)',
+					gold: 'hsl(var(--ent-gold) / <alpha-value>)',
+					'gold-deep': 'hsl(var(--ent-gold-deep) / <alpha-value>)',
+					'gold-ink': 'hsl(var(--ent-gold-ink) / <alpha-value>)',
+					amber: 'hsl(var(--ent-amber) / <alpha-value>)',
+					paper: 'hsl(var(--ent-paper) / <alpha-value>)',
+				},
+				/* Defabs Media palette (hero carousel) */
+				defabs: {
+					primary: 'rgb(var(--defabs-primary) / <alpha-value>)',
+					accent: 'rgb(var(--defabs-accent) / <alpha-value>)',
+					'accent-hover': 'rgb(var(--defabs-accent-hover) / <alpha-value>)',
+					dark: 'rgb(var(--defabs-dark) / <alpha-value>)',
+					light: 'rgb(var(--defabs-light) / <alpha-value>)',
+				},
 			},
 			borderRadius: {
 				lg: 'var(--radius)',

@@ -17,7 +17,7 @@ const lineUp: LineUpItem[] = [
   {
     tag: 'Now showing',
     title: 'Blog highlights & recaps',
-    text: 'Stories, guides and event round-ups straight from the Fablinks floor.',
+    text: 'Stories, guides and event round-ups straight from the Defabs Media floor.',
     icon: Newspaper,
     link: '/blog',
   },
@@ -39,7 +39,7 @@ const lineUp: LineUpItem[] = [
 
 const EntertainmentHero = () => {
   const { getSetting } = useSiteSettings();
-  const siteTitle = getSetting('site_title', 'Fablinks Computers');
+  const siteTitle = getSetting('site_title', 'Defabs Media');
 
   return (
     <section className="relative overflow-hidden bg-ent-paper text-ent-ink">
@@ -96,7 +96,7 @@ const EntertainmentHero = () => {
               to="/experience"
               className="text-sm font-semibold text-ent-ink/70 underline-offset-4 transition-colors hover:text-ent-gold-ink hover:underline"
             >
-              The full Fablinks experience →
+              The full Defabs Media experience →
             </Link>
           </div>
 

@@ -10,12 +10,12 @@ const ContactSection = () => {
   
   const whatsappLink = `https://wa.me/${(getSetting('whatsapp_number', '') || getSetting('contact_whatsapp', '2347068122861')).replace(/\+/g, '')}`;
   const contactPhone = getSetting('contact_phone', '+234 706 812 2861');
-  const contactEmail = getSetting('contact_email', 'fablinkscomputers@gmail.com');
+  const contactEmail = getSetting('contact_email', 'hello@defabsmedia.com');
   const contactAddress = getSetting('contact_address', 'Shop NO 35, Student Affairs, Abia State University Uturu, Abia State, Nigeria');
   const openingHours = getSetting('opening_hours', 'Mon-Sat: 8:00 AM - 8:00 PM');
 
   return (
-    <section id="contact" className="section-padding bg-fablinks-gray-light">
+    <section id="contact" className="section-padding bg-slate-800/5">
       <div className="container-custom">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4">
@@ -99,12 +99,12 @@ const ContactSection = () => {
           {/* CTA Section */}
           <div className="bg-white rounded-2xl p-8 shadow-lg">
             <div className="text-center">
-              <div className="w-20 h-20 bg-gradient-to-r from-primary to-fablinks-blue-dark rounded-full flex items-center justify-center mx-auto mb-6">
+              <div className="w-20 h-20 bg-gradient-to-r from-primary to-defabs-dark rounded-full flex items-center justify-center mx-auto mb-6">
                 <MessageCircle className="w-10 h-10 text-white" />
               </div>
               <h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
               <p className="text-gray-600 mb-6 leading-relaxed">
-                Join thousands of Nigerian students who trust Fablinks Online Café 
+                Join thousands of Nigerian students who trust Defabs Media 
                 for their academic and digital service needs. Chat with us now and 
                 experience the difference.
               </p>

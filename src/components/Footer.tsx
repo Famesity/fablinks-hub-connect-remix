@@ -9,11 +9,11 @@ const Footer = () => {
   const { getSetting } = useSiteSettings();
   
   const whatsappLink = `https://wa.me/${getSetting('contact_whatsapp', '2347068122861').replace(/\+/g, '')}`;
-  const siteTitle = getSetting('site_title', 'Fablinks Computers');
+  const siteTitle = getSetting('site_title', 'Defabs Media');
   const siteLogo = getSetting('site_logo', '');
-  const footerText = getSetting('footer_text', '© 2024 Fablinks Computers. All rights reserved.');
+  const footerText = getSetting('footer_text', '© 2024 Defabs Media. All rights reserved.');
   const footerDescription = getSetting('footer_description', 'Your trusted partner for WAEC, JAMB, NECO registrations, printing services, and all computer-assisted services in Nigeria');
-  const contactEmail = getSetting('contact_email', 'fablinkscomputers@gmail.com');
+  const contactEmail = getSetting('contact_email', 'hello@defabsmedia.com');
   const contactPhone = getSetting('contact_phone', '+234 706 812 2861');
   const socialFacebook = getSetting('social_facebook', '');
   const socialTwitter = getSetting('social_twitter', '');
@@ -30,7 +30,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-fablinks-gray text-white">
+    <footer className="bg-slate-800 text-white">
       {/* Main Footer */}
       <div className="section-padding">
         <div className="container-custom">

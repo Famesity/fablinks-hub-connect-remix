@@ -15,8 +15,8 @@ const Index = () => {
   return (
     <Layout>
       <SEOHead
-        description="Fablinks is the entertainment hub for campus life — event highlights, blog stories and everyday digital services like WAEC, JAMB and NECO registration, printing, passport photos and graphics design in Nigeria."
-        keywords="entertainment hub, campus events, blog highlights, Fablinks, WAEC scratch card, JAMB registration, NECO result, printing services, graphics design, Nigeria, Abia State University"
+        description="Defabs Media is the entertainment hub for live events, premium content and professional digital services — printing, graphic design, registrations and more, all under one roof in Nigeria."
+        keywords="Defabs Media, entertainment hub, live events, watch parties, blog highlights, WAEC scratch card, JAMB registration, NECO result, printing services, graphics design, Nigeria"
       />
 
       {/* Brand hero carousel (Defabs Media) */}
@@ -34,14 +34,14 @@ const Index = () => {
       {/* Blog post highlights */}
       <FeaturedBlogPosts
         title="Fresh off the feed"
-        subtitle="Stories, guides and recaps from campus life — the highlights you'll want to read before your friends do"
+        subtitle="Stories, guides and highlights from the Defabs world — the reads you'll want to catch before everyone else"
       />
 
       {/* Services highlighted */}
       <FeaturedServices
         title="The"
         titleAccent="Line-up of Services"
-        subtitle="From exam registrations and printing to graphics, design and project support — the digital services students count on, started in a single WhatsApp message."
+        subtitle="From registrations and printing to graphics, design and project support — the digital services our community counts on, started in a single WhatsApp message."
       />
 
       {/* Other information */}

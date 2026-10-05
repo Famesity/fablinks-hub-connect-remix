@@ -32,14 +32,14 @@ const About = () => {
     <Layout>
       <SEOHead 
         title="About Us"
-        description="Learn about Fablinks Online Café - Nigeria's trusted digital gateway for academic services. We help students with WAEC, JAMB, NECO registrations, and more."
-        keywords="about Fablinks, cyber cafe Nigeria, student services, academic support, Abia State University"
+        description="Learn about Defabs Media - Nigeria's trusted digital gateway for academic services. We help students with WAEC, JAMB, NECO registrations, and more."
+        keywords="about Defabs Media, cyber cafe Nigeria, student services, academic support, Abia State University"
       />
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-primary to-fablinks-blue-dark text-white py-16">
+        <section className="bg-gradient-to-r from-primary to-defabs-dark text-white py-16">
           <div className="container-custom text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">About Fablinks Online Café</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">About Defabs Media</h1>
             <p className="text-xl">Your trusted digital gateway to academic success</p>
           </div>
         </section>
@@ -51,7 +51,7 @@ const About = () => {
               <div className="text-center mb-12">
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Story</h2>
                 <p className="text-lg text-gray-600 leading-relaxed">
-                  Fablinks Online Café was born from a simple observation: Nigerian students and communities 
+                  Defabs Media was born from a simple observation: Nigerian students and communities 
                   needed a reliable, affordable, and fast digital service provider. We recognized the challenges 
                   students face in accessing essential academic services, from WAEC scratch cards to JAMB registration, 
                   and decided to bridge that gap.
@@ -66,7 +66,7 @@ const About = () => {
                     reliable, and affordable digital services that remove barriers to academic and personal growth."
                   </p>
                 </div>
-                <div className="bg-fablinks-gray-light p-8 rounded-lg">
+                <div className="bg-slate-800/5 p-8 rounded-lg">
                   <h3 className="text-2xl font-bold mb-4">Our Vision</h3>
                   <p className="text-gray-600 leading-relaxed">
                     To become Nigeria's most trusted digital service provider, empowering every student 
@@ -79,7 +79,7 @@ const About = () => {
         </section>
 
         {/* Values Section */}
-        <section className="section-padding bg-fablinks-gray-light">
+        <section className="section-padding bg-slate-800/5">
           <div className="container-custom">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">Our Core Values</h2>

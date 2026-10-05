@@ -1,4 +1,4 @@
-# Fablinks Computers - Robots.txt
+# Defabs Media - Robots.txt
 # https://fablinks.vercel.app
 
 User-agent: Googlebot

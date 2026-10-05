@@ -22,42 +22,42 @@ const defaultServices = [
     icon: GraduationCap,
     title: "WAEC & NECO Results",
     description: "Get your exam results instantly with scratch cards and verification pins",
-    whatsappMessage: "Hello Fablinks Online Café, I would like to buy a WAEC Scratch Card.",
+    whatsappMessage: "Hello Defabs Media, I would like to buy a WAEC Scratch Card.",
     color: "bg-blue-500"
   },
   {
     icon: FileText,
     title: "JAMB Services",
     description: "Registration, result printing, admission letters and profile management",
-    whatsappMessage: "Hello Fablinks Online Café, I need help with JAMB Original Result Printing.",
+    whatsappMessage: "Hello Defabs Media, I need help with JAMB Original Result Printing.",
     color: "bg-green-500"
   },
   {
     icon: Users,
     title: "NYSC Registration", 
     description: "Complete NYSC services including registration and call-up letters",
-    whatsappMessage: "Hello Fablinks Online Café, I need help with NYSC Registration.",
+    whatsappMessage: "Hello Defabs Media, I need help with NYSC Registration.",
     color: "bg-purple-500"
   },
   {
     icon: Smartphone,
     title: "Airtime & Data",
     description: "Quick top-ups for all networks with instant delivery",
-    whatsappMessage: "Hello Fablinks Online Café, I want to buy Airtime.",
+    whatsappMessage: "Hello Defabs Media, I want to buy Airtime.",
     color: "bg-orange-500"
   },
   {
     icon: CreditCard,
     title: "Bill Payments",
     description: "Pay electricity, water, cable TV and internet bills easily",
-    whatsappMessage: "Hello Fablinks Online Café, I want to pay my Electricity Bill.",
+    whatsappMessage: "Hello Defabs Media, I want to pay my Electricity Bill.",
     color: "bg-red-500"
   },
   {
     icon: Globe,
     title: "Academic Projects",
     description: "Professional project writing, assignments and research support",
-    whatsappMessage: "Hello Fablinks Online Café, I need help with Project Writing.",
+    whatsappMessage: "Hello Defabs Media, I need help with Project Writing.",
     color: "bg-indigo-500"
   }
 ];
