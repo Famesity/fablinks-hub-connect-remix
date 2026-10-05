@@ -6,7 +6,7 @@ import { useSiteSettings } from '@/hooks/useSiteSettings';
 const LocationContact = () => {
   const { getSetting } = useSiteSettings();
   
-  const businessName = getSetting('site_title', 'Fablinks Computers');
+  const businessName = getSetting('site_title', 'Defabs Media');
   const address = getSetting('contact_address', 'Shop NO 35, Student Affairs, Abia State University Uturu, Abia State, Nigeria');
   const phone = getSetting('contact_phone', '');
   const email = getSetting('contact_email', '');

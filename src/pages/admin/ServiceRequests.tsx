@@ -188,7 +188,7 @@ We are reviewing your request and will assist you shortly.
 
 If you have any additional information to share, please reply to this message.
 
-- Fablinks Online Café Team`;
+- Defabs Media Team`;
   };
 
   const openWhatsApp = (request: ServiceRequest) => {

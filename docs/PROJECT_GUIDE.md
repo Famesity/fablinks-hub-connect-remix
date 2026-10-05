@@ -1,6 +1,6 @@
-# Fablinks Hub — Project Guide
+# Defabs Media Hub — Project Guide
 
-Reference for development, debugging and enhancement of the Fablinks site.
+Reference for development, debugging and enhancement of the Defabs Media site.
 Reflects the state as of PR #4 (October 2026).
 
 ---
@@ -39,7 +39,7 @@ cyber-café landing lives on at `/experience`.
 src/
   main.tsx                 entry; imports index.css (global styles + Tailwind)
   App.tsx                  providers (QueryClient, Tooltip, Toaster, Router) + ALL routes
-  index.css                design tokens: Fablinks base + "ent" entertainment theme
+  index.css                design tokens: Defabs Media base + "ent" entertainment theme
   pages/
     Index.tsx              public landing (entertainment) — section order lives here
     Experience.tsx         the OLD cyber-café landing at /experience
@@ -128,7 +128,7 @@ freebuff-env list                          # env key NAMES only, never values
 
 ## 4. Database (Supabase — LIVE)
 
-- **Project ref: `gepxztuwobtiztgylwok`** (Fablinks). `supabase/config.toml`
+- **Project ref: `gepxztuwobtiztgylwok`** (Defabs Media). `supabase/config.toml`
   must match this ref — it once pointed at a dead ref (`fptsmknmmruhmzukheds`)
   and broke CLI flows.
 - Migrations live in `supabase/migrations/`. Applied ones are recorded in
@@ -329,6 +329,9 @@ SELECT afterwards, and note them in the PR.
 | PR #4 | This guide's subject: newsletter band, icon-map bundle fix, admin route lazy-loading, PWA manifest copy, regenerated og-image, SEO domain → `fablinks.vercel.app` (incl. live sitemap function), `manage_events` grant |
 | PR #5 | Added this guide, README refresh, deterministic og-image generator (`scripts/generate-og-image.mjs`) |
 | PR #6 | Lightened the landing hero (user request): ivory `--ent-paper` backdrop, light-surface tokens (`--ent-gold-ink`, `--ent-amber`, `.gradient-gold-ink`); dark-section tokens untouched — see §2 |
+| PR #8 | Documented the stale canonical domain as a known issue (see §13) |
+| PR #9 | Added the DB-driven HeroCarousel (`HeroSlide`, `getHeroSlides()`, `hero_slides`) + `defabs-*` palette |
+| Rebrand (Oct 2026) | Renamed **Fablinks → Defabs Media** across code, meta/PWA, docs and the live DB (site_settings, hero_slides reseeded with 4 Defabs slides, blog/events/pages/testimonials copy, admin email display). Functional identifiers intentionally unchanged: canonical/SEO domain `fablinks.vercel.app` (until the user attaches a new domain — see §13), GitHub repo slug, `fablinks-logo.jpg` filename, `fablinks_newsletter_subscribed` storage key, historical migrations |
 | Decisions | **Canonical domain** `fablinks.vercel.app` (user choice, Oct 2026). **Analytics skipped** this round (Plausible — see §13). `manage_events` granted directly in the live DB because explicit-permission admins don't auto-gain new permissions |
 
 ---

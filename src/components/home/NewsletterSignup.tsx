@@ -6,7 +6,7 @@ import { supabase } from '@/integrations/supabase/client';
 
 type SignupState = 'idle' | 'loading' | 'success' | 'duplicate' | 'error';
 
-const STORAGE_KEY = 'fablinks_newsletter_subscribed';
+const STORAGE_KEY = 'defabs_newsletter_subscribed';
 
 /**
  * Newsletter signup band — writes to `newsletter_subscribers`, which the
@@ -59,7 +59,7 @@ const NewsletterSignup = () => {
             Never miss a <span className="gradient-gold">highlight</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-white/70">
-            Event line-ups, fresh blog drops and campus stories — straight to your inbox, no spam.
+            Event line-ups, fresh blog drops and fresh stories — straight to your inbox, no spam.
           </p>
 
           {state === 'success' || state === 'duplicate' ? (
@@ -86,7 +86,7 @@ const NewsletterSignup = () => {
                     setEmail(e.target.value);
                     if (state === 'error') setState('idle');
                   }}
-                  placeholder="you@campus.edu"
+                  placeholder="you@example.com"
                   aria-label="Email address"
                   className="h-12 border-white/15 bg-white/10 pl-10 text-white placeholder:text-white/40 focus-visible:border-ent-gold focus-visible:ring-ent-gold/40"
                 />

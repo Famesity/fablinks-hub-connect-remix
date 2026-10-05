@@ -28,11 +28,11 @@ export default function SEOHead({
 }: SEOHeadProps) {
   const { getSetting } = useSiteSettings();
   
-  const siteTitle = getSetting('site_title', 'Fablinks Computers');
-  const siteDescription = getSetting('site_description', 'Your trusted partner for WAEC, JAMB, NECO registrations, printing services, and all computer-assisted services in Nigeria');
+  const siteTitle = getSetting('site_title', 'Defabs Media');
+  const siteDescription = getSetting('site_description', 'Defabs Media — live events, premium content and professional digital services. Printing, design and registrations delivered with precision in Nigeria.');
   const siteLogo = getSetting('site_logo', '');
   const contactPhone = getSetting('contact_phone', '+234 706 812 2861');
-  const contactEmail = getSetting('contact_email', 'fablinkscomputers@gmail.com');
+  const contactEmail = getSetting('contact_email', 'hello@defabsmedia.com');
   
   // Build the full title
   const fullTitle = title 
@@ -41,7 +41,7 @@ export default function SEOHead({
   
   // Use provided values or fall back to site settings
   const metaDescription = description || siteDescription;
-  const metaKeywords = keywords || 'WAEC, JAMB, NECO, NYSC, computer services, printing, Nigeria, student services, online registration';
+  const metaKeywords = keywords || 'Defabs Media, entertainment hub, live events, watch parties, printing, graphic design, registrations, Nigeria, online registration';
   
   // Site base URL
   const siteUrl = 'https://fablinks.vercel.app';

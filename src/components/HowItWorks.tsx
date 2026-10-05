@@ -70,7 +70,7 @@ const HowItWorks = () => {
             How It <span className="gradient-text">Works</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Getting help from Fablinks is simple and straightforward
+            Getting help from Defabs Media is simple and straightforward
           </p>
         </div>
 

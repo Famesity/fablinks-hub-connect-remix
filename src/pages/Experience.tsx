@@ -16,7 +16,7 @@ import TestimonialsCarousel from '@/components/TestimonialsCarousel';
 import SEOHead from '@/components/SEOHead';
 
 /**
- * The full Fablinks line-up — everything that used to live on the
+ * The full Defabs Media line-up — everything that used to live on the
  * landing page now has its own sub page, while the landing page
  * leads with highlights.
  */
@@ -25,8 +25,8 @@ const Experience = () => {
     <Layout>
       <SEOHead
         title="The Experience"
-        description="Dig into the full Fablinks line-up: our services, story, process, student reviews, location and the fastest ways to reach us."
-        keywords="Fablinks experience, cyber cafe Nigeria, WAEC JAMB NECO registration, printing services, passport photo, Abia State University"
+        description="Dig into the full Defabs Media line-up: our services, story, process, student reviews, location and the fastest ways to reach us."
+        keywords="Defabs Media experience, cyber cafe Nigeria, WAEC JAMB NECO registration, printing services, passport photo, Abia State University"
       />
 
       {/* Intro banner */}
@@ -48,7 +48,7 @@ const Experience = () => {
             The full line-up
           </p>
           <h1 className="font-display mt-3 max-w-3xl text-3xl font-extrabold leading-tight md:text-5xl">
-            Everything Fablinks, in one place
+            Everything Defabs Media, in one place
           </h1>
           <p className="mt-4 max-w-2xl leading-relaxed text-white/60">
             Explore the complete line-up — every service we offer, why students trust us, how it

@@ -1,6 +1,6 @@
-# Fablinks Hub
+# Defabs Media Hub
 
-Campus **entertainment hub + digital-services storefront** for Abia State
+**entertainment & media hub + digital-services storefront** for Abia State
 University, Nigeria — event highlights, blog stories and everyday digital
 services (WAEC/JAMB/NECO registrations, printing, graphics and more), with a
 full admin CMS.

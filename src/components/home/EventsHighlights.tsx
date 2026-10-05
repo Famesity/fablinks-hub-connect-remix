@@ -62,9 +62,9 @@ const fallbackEvents: EventItem[] = [
     category: 'Tournament',
     title: 'Game Night: FIFA & eFootball Showdown',
     description:
-      'Knockout bracket on the big screen — winners take the campus bragging rights plus a free printing voucher.',
+      'Knockout bracket on the big screen — winners take the bragging rights plus a free printing voucher.',
     time: '5:00 PM',
-    venue: 'Fablinks Lounge, Student Affairs',
+    venue: 'Defabs Media Lounge, Student Affairs',
   },
   {
     id: 'fallback-2',
@@ -74,9 +74,9 @@ const fallbackEvents: EventItem[] = [
     category: 'Screening',
     title: 'Premier League Watch Party',
     description:
-      'Match day with the loudest crowd on campus — big screen, live commentary and halftime giveaways.',
+      'Match day with the loudest crowd in town — big screen, live commentary and halftime giveaways.',
     time: '3:00 PM',
-    venue: 'Fablinks Lounge, Student Affairs',
+    venue: 'Defabs Media Lounge, Student Affairs',
   },
   {
     id: 'fallback-3',
@@ -86,7 +86,7 @@ const fallbackEvents: EventItem[] = [
     category: 'Workshop',
     title: 'Flyers, Posters & Content Clinic',
     description:
-      'Bring your idea — we design, print and package it while you wait, with a free portfolio review for campus creatives.',
+      'Bring your idea — we design, print and package it while you wait, with a free portfolio review for local creatives.',
     time: '1:00 PM',
     venue: 'Design Corner, Shop 35',
   },
@@ -96,17 +96,17 @@ const fallbackEvents: EventItem[] = [
     day: '07',
     weekday: 'Saturday',
     category: 'Community',
-    title: 'Campus Creators Meet-Up',
+    title: 'Creators Meet-Up',
     description:
       'Musicians, comedians, bloggers and designers swap ideas, trade collabs and preview the December line-up.',
     time: '2:00 PM',
-    venue: 'Fablinks Lounge, Student Affairs',
+    venue: 'Defabs Media Lounge, Student Affairs',
   },
 ];
 
 const EventsHighlights = () => {
   const { getSetting } = useSiteSettings();
-  const siteTitle = getSetting('site_title', 'Fablinks Computers');
+  const siteTitle = getSetting('site_title', 'Defabs Media');
   const whatsapp = getSetting('whatsapp_number', '2348106411463');
   const [events, setEvents] = useState<EventItem[]>(fallbackEvents);
 
@@ -159,7 +159,7 @@ const EventsHighlights = () => {
             </h2>
             <p className="mt-4 leading-relaxed text-white/60">
               Tournaments, watch parties, workshops and meet-ups — the moments that make the
-              Fablinks floor feel like home.
+              Defabs Media floor feel like home.
             </p>
           </div>
           <Link to="/blog" className="shrink-0">

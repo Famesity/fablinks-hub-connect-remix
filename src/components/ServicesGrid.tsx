@@ -79,7 +79,7 @@ const ServicesGrid = () => {
   const openWhatsApp = (serviceName: string, customMessage?: string | null) => {
     const message = customMessage 
       ? encodeURIComponent(customMessage)
-      : encodeURIComponent(`Hello Fablinks, I'm interested in: ${serviceName}`);
+      : encodeURIComponent(`Hello Defabs Media, I'm interested in: ${serviceName}`);
     window.open(`https://wa.me/${whatsapp}?text=${message}`, '_blank');
   };
 

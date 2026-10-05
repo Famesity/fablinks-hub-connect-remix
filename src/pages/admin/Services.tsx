@@ -281,7 +281,7 @@ export default function AdminServices() {
                       id="whatsapp_message"
                       value={formData.whatsapp_message}
                       onChange={(e) => setFormData({ ...formData, whatsapp_message: e.target.value })}
-                      placeholder="e.g., Hello Fablinks, I'm interested in [Service Name]..."
+                      placeholder="e.g., Hello Defabs Media, I'm interested in [Service Name]..."
                       rows={3}
                     />
                     <p className="text-xs text-muted-foreground">

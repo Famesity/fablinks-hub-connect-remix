@@ -71,7 +71,7 @@ const pad2 = (n: number) => String(n).padStart(2, '0');
 const isExternalLink = (link: string) =>
   link.startsWith('http://') || link.startsWith('https://');
 
-/** Renders one CTA as an anchor (external) or router Link (internal). */
+/** Renders one CTA as an anchor (external/#hash) or router Link (internal). */
 const SlideCTA: React.FC<{
   text: string | null;
   link: string | null;
@@ -87,6 +87,14 @@ const SlideCTA: React.FC<{
   if (isExternalLink(link)) {
     return (
       <a href={link} target="_blank" rel="noopener noreferrer" className={className}>
+        {text}
+      </a>
+    );
+  }
+  // #hash links scroll to the section instead of routing (e.g. "/services#whats-on")
+  if (link.includes('#')) {
+    return (
+      <a href={link} className={className}>
         {text}
       </a>
     );

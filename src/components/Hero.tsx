@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 const Hero = () => {
   const { getSetting } = useSiteSettings();
   
-  const heroTitle = getSetting('hero_title', 'Welcome to Fablinks Computers');
+  const heroTitle = getSetting('hero_title', 'Welcome to Defabs Media');
   const heroSubtitle = getSetting('hero_subtitle', 'Your one-stop solution for WAEC, JAMB, NECO registrations, printing services, and all computer-assisted services');
   const heroCtaText = getSetting('hero_cta_text', 'Get Started');
   const heroCtaLink = getSetting('hero_cta_link', '/services');
@@ -16,7 +16,7 @@ const Hero = () => {
 
   return (
     <section 
-      className="relative bg-gradient-to-br from-primary via-fablinks-blue to-fablinks-blue-dark text-white min-h-screen flex items-center"
+      className="relative bg-gradient-to-br from-primary via-defabs-primary to-defabs-dark text-white min-h-screen flex items-center"
       style={heroBackground ? { backgroundImage: `url(${heroBackground})`, backgroundSize: 'cover', backgroundPosition: 'center' } : {}}
     >
       <div className="absolute inset-0 bg-black/20"></div>
@@ -39,7 +39,7 @@ const Hero = () => {
               { icon: CheckCircle, text: "Affordable" }
             ].map((item, index) => (
               <div key={index} className="flex items-center space-x-2 bg-white/20 px-4 py-2 rounded-full backdrop-blur-sm">
-                <item.icon className="w-5 h-5 text-fablinks-accent" />
+                <item.icon className="w-5 h-5 text-defabs-accent" />
                 <span className="font-semibold">{item.text}</span>
               </div>
             ))}

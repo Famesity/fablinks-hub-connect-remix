@@ -4,7 +4,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Fablinks Online Café Design System */
+/* Defabs Media Design System */
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -37,11 +37,7 @@
 
     --radius: 0.75rem;
 
-    /* Fablinks Custom Colors */
-    --fablinks-blue: 217 91% 50%;
-    --fablinks-blue-dark: 217 91% 40%;
-    --fablinks-gray: 220 13% 20%;
-    --fablinks-gray-light: 220 13% 95%;
+    /* Success / warning states */
     --success: 142 71% 45%;
     --warning: 38 92% 50%;
     

@@ -16,7 +16,7 @@ const Contact = () => {
     message: ''
   });
 
-  const contactEmail = getSetting('contact_email', 'info@fablinks.com');
+  const contactEmail = getSetting('contact_email', 'hello@defabsmedia.com');
   const contactPhone = getSetting('contact_phone', '+234 706 812 2861');
   const contactAddress = getSetting('contact_address', 'Shop NO 35, Student Affairs, Abia State University Uturu, Abia State, Nigeria');
   const whatsappNumber = getSetting('contact_whatsapp', '2347068122861');
@@ -44,12 +44,12 @@ const Contact = () => {
     <Layout>
       <SEOHead 
         title="Contact Us"
-        description="Get in touch with Fablinks Computers. Visit us at Abia State University or contact us via WhatsApp, phone, or email for fast assistance with all your computer service needs."
-        keywords="contact Fablinks, WhatsApp support, Abia State University, computer cafe contact, customer support Nigeria"
+        description="Get in touch with Defabs Media. Visit us at Abia State University or contact us via WhatsApp, phone, or email for fast assistance with all your computer service needs."
+        keywords="contact Defabs Media, WhatsApp support, Abia State University, computer cafe contact, customer support Nigeria"
       />
       <main className="pt-20">
         {/* Hero Section */}
-        <section className="bg-gradient-to-r from-primary to-fablinks-blue-dark text-white py-16">
+        <section className="bg-gradient-to-r from-primary to-defabs-dark text-white py-16">
           <div className="container-custom text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
             <p className="text-xl">Get in touch with our team for quick assistance</p>
@@ -135,7 +135,7 @@ const Contact = () => {
                       <p className="text-gray-600 mb-2">{contactPhone}</p>
                       <Button 
                         className="btn-whatsapp"
-                        onClick={() => window.open(`https://wa.me/${whatsappNumber.replace(/\+/g, '')}?text=Hello%20Fablinks%20Online%20Café,%20I%20need%20assistance%20today`, '_blank')}
+                        onClick={() => window.open(`https://wa.me/${whatsappNumber.replace(/\+/g, '')}?text=Hello%20Defabs Media%20Online%20Café,%20I%20need%20assistance%20today`, '_blank')}
                       >
                         Chat Now
                       </Button>

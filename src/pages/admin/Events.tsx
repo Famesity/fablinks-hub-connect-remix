@@ -304,7 +304,7 @@ const AdminEvents = () => {
                       id="event-venue"
                       value={formData.venue}
                       onChange={(e) => setFormData({ ...formData, venue: e.target.value })}
-                      placeholder="e.g., Fablinks Lounge, Student Affairs"
+                      placeholder="e.g., Defabs Media Lounge, Student Affairs"
                     />
                   </div>
 

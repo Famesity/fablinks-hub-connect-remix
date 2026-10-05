@@ -442,7 +442,7 @@ export default function AdminSiteSettings() {
                             className="h-4 w-4 object-contain"
                             style={{ imageRendering: 'auto' }}
                           />
-                          <span className="text-xs truncate text-foreground/80">Fablinks Compu...</span>
+                          <span className="text-xs truncate text-foreground/80">Defabs Media Compu...</span>
                           <span className="text-muted-foreground text-xs ml-auto">×</span>
                         </div>
                         <p className="text-[10px] text-muted-foreground mt-2 italic">

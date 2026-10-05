@@ -70,7 +70,7 @@ const Install = () => {
             </div>
             <h1 className="text-3xl font-bold mb-4">App Already Installed!</h1>
             <p className="text-muted-foreground mb-8">
-              You're already using the Fablinks app. Enjoy the full experience!
+              You're already using the Defabs Media app. Enjoy the full experience!
             </p>
             <Button onClick={() => window.location.href = '/'}>
               Go to Home
@@ -91,7 +91,7 @@ const Install = () => {
             </div>
             <h1 className="text-3xl font-bold mb-4">Successfully Installed!</h1>
             <p className="text-muted-foreground mb-8">
-              Fablinks has been added to your home screen. Open it anytime like a regular app!
+              Defabs Media has been added to your home screen. Open it anytime like a regular app!
             </p>
             <Button onClick={() => window.location.href = '/'}>
               Continue Browsing
@@ -111,7 +111,7 @@ const Install = () => {
             <div className="h-24 w-24 mx-auto mb-6 bg-primary/10 rounded-2xl flex items-center justify-center">
               <Smartphone className="h-12 w-12 text-primary" />
             </div>
-            <h1 className="text-4xl font-bold mb-4">Install Fablinks App</h1>
+            <h1 className="text-4xl font-bold mb-4">Install Defabs Media App</h1>
             <p className="text-xl text-muted-foreground max-w-lg mx-auto">
               Get quick access to all our services right from your home screen. No app store needed!
             </p>

@@ -29,7 +29,7 @@ function ArticleCard({ article, onShare }: { article: BlogPost; onShare: (title:
         {article.image_url ? (
           <img src={article.image_url} alt={article.title} className="h-full w-full object-cover transition duration-500 group-hover:scale-105" />
         ) : (
-          <div className="flex h-full items-center justify-center bg-gradient-to-br from-primary/15 to-primary/5 text-sm font-semibold text-primary">Fablinks Journal</div>
+          <div className="flex h-full items-center justify-center bg-gradient-to-br from-primary/15 to-primary/5 text-sm font-semibold text-primary">Defabs Media Journal</div>
         )}
       </Link>
       <div className="p-5">
@@ -166,11 +166,11 @@ const Blog = () => {
     <Layout>
       <SEOHead
         title="Blog & Resources"
-        description="Helpful guides, tips, and updates for Nigerian students. Learn about WAEC, JAMB, NECO registration, university applications, and more from Fablinks Computers."
+        description="Helpful guides, tips, and updates for Nigerian students. Learn about WAEC, JAMB, NECO registration, university applications, and more from Defabs Media."
         keywords="student blog Nigeria, WAEC tips, JAMB guide, university admission tips, Nigerian education blog"
       />
       <main className="pt-20">
-        <section className="bg-gradient-to-r from-primary to-fablinks-blue-dark py-16 text-white">
+        <section className="bg-gradient-to-r from-primary to-defabs-dark py-16 text-white">
           <div className="container-custom text-center">
             <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-white/75">Stories, guides & updates</p>
             <h1 className="mb-4 text-4xl font-bold md:text-5xl">Blog & Resources</h1>
@@ -238,13 +238,13 @@ const Blog = () => {
           </>
         )}
 
-        <section className="section-padding bg-fablinks-gray-light">
+        <section className="section-padding bg-slate-800/5">
           <div className="container-custom text-center">
             <h2 className="mb-4 text-3xl font-bold">Need Help with Any Service?</h2>
             <p className="mb-8 text-lg text-gray-600">Can't find what you're looking for? Our team is ready to assist you 24/7</p>
             <Button
               className="btn-whatsapp"
-              onClick={() => window.open('https://wa.me/2347068122861?text=Hello%20Fablinks%20Computers,%20I%20need%20assistance%20today', '_blank')}
+              onClick={() => window.open('https://wa.me/2347068122861?text=Hello%20Defabs Media%20Computers,%20I%20need%20assistance%20today', '_blank')}
             >
               <MessageCircle className="h-5 w-5" />
               Chat with Us Now

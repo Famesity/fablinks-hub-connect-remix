@@ -124,7 +124,7 @@ const Request = () => {
 ${data.service_details}
 
 ---
-Submitted via Fablinks Request Form`;
+Submitted via Defabs Media Request Form`;
   };
 
   const openWhatsApp = (data: ServiceRequestFormData) => {
@@ -178,7 +178,7 @@ Submitted via Fablinks Request Form`;
     return (
       <Layout>
         <SEOHead
-          title="Request Submitted - Fablinks Online Café"
+          title="Request Submitted - Defabs Media"
           description="Your service request has been submitted successfully."
         />
         <div className="min-h-screen bg-gradient-to-b from-primary/5 to-background py-12">
@@ -240,7 +240,7 @@ Submitted via Fablinks Request Form`;
   return (
     <Layout>
       <SEOHead
-        title="Request a Service - Fablinks Online Café"
+        title="Request a Service - Defabs Media"
         description="Can't find what you need? Submit a service request and we'll help you with any educational, document, or digital service."
       />
       
