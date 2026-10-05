@@ -9,7 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
-import { ArrowLeft, Plus, Pencil, Trash2, GripVertical, Save, Image } from 'lucide-react';
+import { ArrowLeft, Plus, Pencil, Trash2, GripVertical, Save, Image, Upload, Loader2, X } from 'lucide-react';
 import { PermissionGate } from '@/components/admin/PermissionGate';
 import { ADMIN_PERMISSIONS } from '@/hooks/usePermissions';
 import { toast } from 'sonner';
@@ -50,6 +50,7 @@ const AdminHeroSlides = () => {
   const [editingSlide, setEditingSlide] = useState<HeroSlide | null>(null);
   const [formData, setFormData] = useState(defaultSlide);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (!adminLoading && isAdmin) {
@@ -94,6 +95,42 @@ const AdminHeroSlides = () => {
       setFormData({ ...defaultSlide, display_order: slides.length + 1 });
     }
     setIsDialogOpen(true);
+  };
+
+  const handleImageUpload = async (file: File) => {
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image must be 5 MB or smaller');
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random()}.${fileExt}`;
+      const filePath = `hero/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('hero-images')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data } = supabase.storage
+        .from('hero-images')
+        .getPublicUrl(filePath);
+
+      setFormData({ ...formData, image_url: data.publicUrl });
+      toast.success('Image uploaded successfully');
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      toast.error('Failed to upload image');
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleSave = async () => {
@@ -239,12 +276,72 @@ const AdminHeroSlides = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="image_url">Image URL</Label>
+                  <Label htmlFor="hero-image-upload">Slide Image</Label>
+                  <div className="flex items-start gap-4">
+                    {formData.image_url ? (
+                      <div className="relative shrink-0">
+                        <img
+                          src={formData.image_url}
+                          alt="Slide preview"
+                          className="w-28 h-20 object-cover rounded-lg border"
+                        />
+                        <Button
+                          type="button"
+                          variant="secondary"
+                          size="icon"
+                          className="absolute -top-2 -right-2 h-6 w-6 rounded-full shadow-md"
+                          onClick={() => setFormData({ ...formData, image_url: '' })}
+                          disabled={uploading}
+                        >
+                          <X className="h-3 w-3" />
+                        </Button>
+                      </div>
+                    ) : (
+                      <div className="w-28 h-20 rounded-lg border border-dashed flex items-center justify-center text-muted-foreground shrink-0">
+                        <Image className="h-6 w-6" />
+                      </div>
+                    )}
+
+                    <div className="flex-1 min-w-0 space-y-2">
+                      <Button
+                        type="button"
+                        variant="outline"
+                        disabled={uploading}
+                        onClick={() => document.getElementById('hero-image-upload')?.click()}
+                      >
+                        {uploading ? (
+                          <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                        ) : (
+                          <Upload className="h-4 w-4 mr-2" />
+                        )}
+                        {uploading
+                          ? 'Uploading…'
+                          : formData.image_url
+                            ? 'Replace Image'
+                            : 'Upload Image'}
+                      </Button>
+                      <input
+                        id="hero-image-upload"
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) handleImageUpload(file);
+                          e.target.value = '';
+                        }}
+                      />
+                      <p className="text-xs text-muted-foreground">
+                        JPG, PNG or WebP up to 5 MB. Leave empty to show the gradient background.
+                      </p>
+                    </div>
+                  </div>
+
                   <Input
                     id="image_url"
                     value={formData.image_url || ''}
                     onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                    placeholder="https://example.com/image.jpg"
+                    placeholder="…or paste an image URL"
                   />
                 </div>
 
