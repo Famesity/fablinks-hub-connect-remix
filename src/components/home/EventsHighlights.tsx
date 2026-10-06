@@ -49,8 +49,11 @@ const rowToEvent = (row: EventRow): EventItem => {
 };
 
 /**
- * Events highlights shown on the landing page.
- * Events are managed from Admin → Landing Page → Events Highlights.
+ * Events highlights shown on the landing page (and the full line-up on
+ * /experience). Events are managed from Admin → Landing Page → Events
+ * Highlights. The section's "All updates" button label and destination are
+ * customizable via the site_settings keys `whats_on_cta_label` /
+ * `whats_on_cta_link` (Admin → Settings → What's On).
  * This fallback line-up renders until the events table is available.
  */
 const fallbackEvents: EventItem[] = [
@@ -104,10 +107,17 @@ const fallbackEvents: EventItem[] = [
   },
 ];
 
-const EventsHighlights = () => {
+interface EventsHighlightsProps {
+  /** How many upcoming events to show — the experience page shows a fuller line-up. */
+  limit?: number;
+}
+
+const EventsHighlights = ({ limit = 4 }: EventsHighlightsProps) => {
   const { getSetting } = useSiteSettings();
   const siteTitle = getSetting('site_title', 'Defabs Media');
   const whatsapp = getSetting('whatsapp_number', '2348106411463');
+  const allUpdatesLabel = getSetting('whats_on_cta_label', 'All updates');
+  const allUpdatesLink = getSetting('whats_on_cta_link', '/experience');
   const [events, setEvents] = useState<EventItem[]>(fallbackEvents);
 
   useEffect(() => {
@@ -120,7 +130,7 @@ const EventsHighlights = () => {
           .select('id, title, description, category, event_date, event_time, venue')
           .eq('is_active', true)
           .order('event_date', { ascending: true })
-          .limit(4);
+          .limit(limit);
 
         if (error) throw error;
         if (!cancelled && data && data.length > 0) {
@@ -136,12 +146,23 @@ const EventsHighlights = () => {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [limit]);
 
   const reserveLink = (eventTitle: string) =>
     `https://wa.me/${whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(
       `Hello ${siteTitle}, I'd like to reserve a spot for "${eventTitle}".`
     )}`;
+
+  const isInternalLink = allUpdatesLink.startsWith('/') || allUpdatesLink.startsWith('#');
+  const allUpdatesButton = (
+    <Button
+      variant="outline"
+      className="border-white/25 bg-white/5 text-white hover:border-ent-gold/50 hover:bg-white/10 hover:text-ent-gold"
+    >
+      {allUpdatesLabel}
+      <ArrowRight className="ml-2 h-4 w-4" />
+    </Button>
+  );
 
   return (
     <section id="whats-on" className="relative overflow-hidden bg-ent-ink scroll-mt-20 py-16 md:py-20">
@@ -162,15 +183,15 @@ const EventsHighlights = () => {
               Defabs Media floor feel like home.
             </p>
           </div>
-          <Link to="/blog" className="shrink-0">
-            <Button
-              variant="outline"
-              className="border-white/25 bg-white/5 text-white hover:border-ent-gold/50 hover:bg-white/10 hover:text-ent-gold"
-            >
-              All updates
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
+          <div className="shrink-0">
+            {isInternalLink ? (
+              <Link to={allUpdatesLink}>{allUpdatesButton}</Link>
+            ) : (
+              <a href={allUpdatesLink} target="_blank" rel="noopener noreferrer">
+                {allUpdatesButton}
+              </a>
+            )}
+          </div>
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">

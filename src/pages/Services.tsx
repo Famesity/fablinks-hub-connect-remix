@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Layout from '@/components/Layout';
 import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Search, GraduationCap, Building2, FileText, Shield, Smartphone, Filter, School, Printer, CreditCard, Globe, FileImage, Camera, ArrowRight } from 'lucide-react';
+import { Search, GraduationCap, Building2, FileText, Shield, Smartphone, Filter, School, Printer, CreditCard, Globe, FileImage, Camera, ArrowRight, Monitor, PartyPopper } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
 
@@ -127,12 +127,45 @@ const Services = () => {
       icon: Globe,
       color: 'bg-indigo-500',
       services: [
-        { name: 'Computer Training', message: 'Hello Defabs Media, I need computer training services.' },
+        { name: 'Graphics & Logo Design', message: 'Hello Defabs Media, I need graphics and logo design services.' },
         { name: 'Email Setup', message: 'Hello Defabs Media, I need help with email setup.' },
         { name: 'Online Application Assistance', message: 'Hello Defabs Media, I need help with online applications.' },
         { name: 'Digital Marketing Services', message: 'Hello Defabs Media, I need digital marketing services.' },
         { name: 'Website Development', message: 'Hello Defabs Media, I need website development services.' },
         { name: 'Social Media Management', message: 'Hello Defabs Media, I need social media management services.' }
+      ]
+    },
+    {
+      id: 'computer',
+      title: '🖥️ Computer Services',
+      icon: Monitor,
+      color: 'bg-cyan-500',
+      services: [
+        { name: 'Computer Training', message: 'Hello Defabs Media, I need computer training services.' },
+        { name: 'Typing & Data Entry', message: 'Hello Defabs Media, I need typing and data entry services.' },
+        { name: 'Software Installation & Updates', message: 'Hello Defabs Media, I need help with software installation and updates.' },
+        { name: 'Virus & Malware Removal', message: 'Hello Defabs Media, I need virus and malware removal help.' },
+        { name: 'Laptop Diagnosis & Repair', message: 'Hello Defabs Media, I need laptop diagnosis and repair services.' },
+        { name: 'Data Recovery & Backup', message: 'Hello Defabs Media, I need data recovery and backup services.' },
+        { name: 'Internet Browsing & Downloads', message: 'Hello Defabs Media, I need internet browsing and download services.' },
+        { name: 'Printer Set-Up & Repair', message: 'Hello Defabs Media, I need printer set-up and repair services.' },
+        { name: 'Networking & Wi-Fi Setup', message: 'Hello Defabs Media, I need networking and Wi-Fi setup help.' }
+      ]
+    },
+    {
+      id: 'entertainment',
+      title: '🎉 Entertainment Services',
+      icon: PartyPopper,
+      color: 'bg-amber-500',
+      services: [
+        { name: 'Watch Party Passes', message: 'Hello Defabs Media, I would like a watch party pass.' },
+        { name: 'Gaming Tournaments (FIFA & eFootball)', message: 'Hello Defabs Media, I want to enter the gaming tournament.' },
+        { name: 'Live Screenings & Premieres', message: 'Hello Defabs Media, I want to attend the live screening.' },
+        { name: 'Event Hosting & Coverage', message: 'Hello Defabs Media, I need event hosting and coverage.' },
+        { name: 'Photography & Videography', message: 'Hello Defabs Media, I need photography and videography services.' },
+        { name: 'Video Editing & Post-Production', message: 'Hello Defabs Media, I need video editing services.' },
+        { name: 'Content Creation & Brand Shoots', message: 'Hello Defabs Media, I need content creation and brand shoot services.' },
+        { name: 'Sound & Lighting for Events', message: 'Hello Defabs Media, I need sound and lighting for my event.' }
       ]
     }
   ], []);
@@ -443,7 +476,9 @@ const Services = () => {
     { id: 'nysc', label: 'NYSC & Government', icon: Shield },
     { id: 'utilities', label: 'Utilities & Bills', icon: Smartphone },
     { id: 'printing', label: 'Printing & Documents', icon: Printer },
-    { id: 'digital', label: 'Digital Services', icon: Globe }
+    { id: 'digital', label: 'Digital Services', icon: Globe },
+    { id: 'computer', label: 'Computer Services', icon: Monitor },
+    { id: 'entertainment', label: 'Entertainment', icon: PartyPopper }
   ];
 
   const getFilteredCategories = () => {
@@ -478,15 +513,15 @@ const Services = () => {
     <Layout>
       <SEOHead 
         title="Our Services"
-        description="Complete digital solutions for Nigerian students - WAEC, JAMB, NECO, NYSC registration, school fees payment, printing services, passport photos, and more. Fast and affordable."
-        keywords="WAEC registration, JAMB services, NECO, NYSC registration, school fees payment, course registration, Nigerian universities, computer services"
+        description="Complete computer services and entertainment services for Nigerian students — WAEC, JAMB, NECO, NYSC registration, school fees, printing, graphics, laptop repairs, computer training, watch parties, events and more. Fast and affordable."
+        keywords="computer services, cyber cafe, WAEC registration, JAMB services, NECO, NYSC registration, school fees payment, printing services, graphics design, laptop repair, computer training, entertainment services, watch party, events Nigeria"
       />
       <main className="pt-20">
         {/* Hero Section */}
         <section className="bg-gradient-to-r from-primary to-defabs-dark text-white py-16">
           <div className="container-custom text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Our Services</h1>
-            <p className="text-xl mb-8">Complete digital solutions for Nigerian students and communities</p>
+            <p className="text-xl mb-8">Full computer services and entertainment services for Nigerian students and communities</p>
             
             {/* Search and Filters */}
             <div className="max-w-4xl mx-auto space-y-4">
@@ -541,6 +576,25 @@ const Services = () => {
                 </Select>
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Entertainment cross-link — the fun side of the hub */}
+        <section className="bg-ent-ink text-white">
+          <div className="container-custom flex flex-col items-start justify-between gap-4 py-5 sm:flex-row sm:items-center">
+            <p className="text-sm leading-relaxed text-white/70">
+              <span className="font-semibold text-ent-gold">Here for the fun?</span>{' '}
+              Watch parties, tournaments and the full lounge line-up live on the Experience page.
+            </p>
+            <Link to="/experience">
+              <Button
+                variant="outline"
+                className="shrink-0 border-white/25 bg-white/5 text-white hover:border-ent-gold/50 hover:bg-white/10 hover:text-ent-gold"
+              >
+                The Experience
+                <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </Link>
           </div>
         </section>
 
