@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, GraduationCap, Building2, FileText, Shield, Smartphone, Filter, School, Printer, CreditCard, Globe, FileImage, Camera, ArrowRight, Monitor, PartyPopper } from 'lucide-react';
 import SEOHead from '@/components/SEOHead';
+import Reveal from '@/components/Reveal';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
 
 const Services = () => {
@@ -23,7 +24,7 @@ const Services = () => {
   const serviceCategories = useMemo(() => [
     {
       id: 'education',
-      title: '🎓 Education & Exams',
+      title: 'Education & Exams',
       icon: GraduationCap,
       color: 'bg-blue-500',
       services: [
@@ -46,7 +47,7 @@ const Services = () => {
     },
     {
       id: 'university',
-      title: '🏫 University & Polytechnic Portals',
+      title: 'University & Polytechnic Portals',
       icon: Building2,
       color: 'bg-green-500',
       services: [
@@ -63,7 +64,7 @@ const Services = () => {
     },
     {
       id: 'academic',
-      title: '📄 Academic Support',
+      title: 'Academic Support',
       icon: FileText,
       color: 'bg-purple-500',
       services: [
@@ -77,7 +78,7 @@ const Services = () => {
     },
     {
       id: 'nysc',
-      title: '🪖 NYSC & Government',
+      title: 'NYSC & Government',
       icon: Shield,
       color: 'bg-orange-500',
       services: [
@@ -93,7 +94,7 @@ const Services = () => {
     },
     {
       id: 'utilities',
-      title: '📱 Utilities & Bills',
+      title: 'Utilities & Bills',
       icon: Smartphone,
       color: 'bg-red-500',
       services: [
@@ -108,7 +109,7 @@ const Services = () => {
     },
     {
       id: 'printing',
-      title: '🖨️ Printing & Document Services',
+      title: 'Printing & Document Services',
       icon: Printer,
       color: 'bg-teal-500',
       services: [
@@ -123,7 +124,7 @@ const Services = () => {
     },
     {
       id: 'digital',
-      title: '💻 Digital Services',
+      title: 'Digital Services',
       icon: Globe,
       color: 'bg-indigo-500',
       services: [
@@ -137,7 +138,7 @@ const Services = () => {
     },
     {
       id: 'computer',
-      title: '🖥️ Computer Services',
+      title: 'Computer Services',
       icon: Monitor,
       color: 'bg-cyan-500',
       services: [
@@ -154,7 +155,7 @@ const Services = () => {
     },
     {
       id: 'entertainment',
-      title: '🎉 Entertainment Services',
+      title: 'Entertainment Services',
       icon: PartyPopper,
       color: 'bg-amber-500',
       services: [
@@ -580,6 +581,7 @@ const Services = () => {
         </section>
 
         {/* Entertainment cross-link — the fun side of the hub */}
+        <Reveal>
         <section className="bg-ent-ink text-white">
           <div className="container-custom flex flex-col items-start justify-between gap-4 py-5 sm:flex-row sm:items-center">
             <p className="text-sm leading-relaxed text-white/70">
@@ -597,6 +599,7 @@ const Services = () => {
             </Link>
           </div>
         </section>
+        </Reveal>
 
         {/* School-Specific Services */}
         {selectedSchool !== 'general' && schoolServices.length > 0 && (
@@ -642,6 +645,7 @@ const Services = () => {
         )}
 
         {/* Services Categories */}
+        <Reveal>
         <section className="section-padding">
           <div className="container-custom">
             {filteredCategories.map((category) => {
@@ -688,6 +692,7 @@ const Services = () => {
             )}
           </div>
         </section>
+        </Reveal>
 
         {/* CTA to Request Page */}
         <section className="py-16 bg-muted/30">

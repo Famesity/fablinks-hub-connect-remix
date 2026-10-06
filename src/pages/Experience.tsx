@@ -26,6 +26,7 @@ import CTASection from '@/components/CTASection';
 import LocationContact from '@/components/LocationContact';
 import ContactSection from '@/components/ContactSection';
 import SEOHead from '@/components/SEOHead';
+import Reveal from '@/components/Reveal';
 
 interface Pillar {
   tag: string;
@@ -181,9 +182,12 @@ const Experience = () => {
       </section>
 
       {/* Social proof */}
-      <TrustStrip />
+      <Reveal>
+        <TrustStrip />
+      </Reveal>
 
       {/* The entertainment menu */}
+      <Reveal>
       <section className="section-padding bg-white">
         <div className="container-custom">
           <div className="max-w-2xl">
@@ -225,14 +229,20 @@ const Experience = () => {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* Full events line-up (managed from Admin → Landing Page → Events) */}
-      <EventsHighlights limit={8} />
+      <Reveal>
+        <EventsHighlights limit={8} />
+      </Reveal>
 
       {/* Student reviews */}
-      <TestimonialsCarousel />
+      <Reveal>
+        <TestimonialsCarousel />
+      </Reveal>
 
       {/* Subtle computer-services band */}
+      <Reveal>
       <section className="section-padding bg-ent-paper">
         <div className="container-custom grid gap-10 lg:grid-cols-12 lg:gap-14">
           <div className="lg:col-span-5">
@@ -276,20 +286,33 @@ const Experience = () => {
           </div>
         </div>
       </section>
+      </Reveal>
 
       {/* Process & trust */}
-      <HowItWorks />
-      <WhyChooseUs />
+      <Reveal>
+        <HowItWorks />
+      </Reveal>
+      <Reveal>
+        <WhyChooseUs />
+      </Reveal>
 
       {/* Recaps */}
-      <FeaturedBlogPosts
-        title="Recaps from the floor"
-        subtitle="Stories, guides and event round-ups from the Defabs Media lounge — the reads you'll want before everyone else"
-      />
+      <Reveal>
+        <FeaturedBlogPosts
+          title="Recaps from the floor"
+          subtitle="Stories, guides and event round-ups from the Defabs Media lounge — the reads you'll want before everyone else"
+        />
+      </Reveal>
 
-      <CTASection />
-      <LocationContact />
-      <ContactSection />
+      <Reveal>
+        <CTASection />
+      </Reveal>
+      <Reveal>
+        <LocationContact />
+      </Reveal>
+      <Reveal>
+        <ContactSection />
+      </Reveal>
     </Layout>
   );
 };
