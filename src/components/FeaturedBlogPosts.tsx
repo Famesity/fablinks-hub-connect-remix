@@ -3,7 +3,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
-import { Calendar, ChevronLeft, ChevronRight, ArrowRight } from "lucide-react";
+import { Calendar, ChevronLeft, ChevronRight, ArrowRight, Newspaper } from "lucide-react";
 
 interface BlogPost {
   id: string;
@@ -100,7 +100,52 @@ export default function FeaturedBlogPosts({
 
   if (posts.length === 0) return null;
 
-  const displayPosts = posts.slice(0, 3);
+  // One card in the auto-scrolling rail (rendered twice for a seamless loop)
+  const renderRailCard = (group: number, post: BlogPost) => (
+    <Link
+      key={`${group}-${post.id}`}
+      to={`/blog/${post.slug}`}
+      className="block w-[360px] shrink-0"
+      tabIndex={group === 1 ? -1 : undefined}
+    >
+      <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 h-full group border-0 shadow-md">
+        <div className="aspect-video overflow-hidden bg-muted">
+          {post.image_url ? (
+            <img
+              src={post.image_url}
+              alt={post.title}
+              className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
+              <Newspaper className="w-10 h-10 text-primary/60" />
+            </div>
+          )}
+        </div>
+        <CardContent className="p-6">
+          <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+            <Calendar className="h-3 w-3" />
+            {new Date(post.created_at).toLocaleDateString('en-NG', {
+              year: 'numeric',
+              month: 'long',
+              day: 'numeric'
+            })}
+          </div>
+          <h3 className="text-xl font-bold mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+            {post.title}
+          </h3>
+          {post.excerpt && (
+            <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
+              {post.excerpt}
+            </p>
+          )}
+          <span className="inline-flex items-center text-sm font-medium text-primary group-hover:gap-2 transition-all">
+            Read More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+          </span>
+        </CardContent>
+      </Card>
+    </Link>
+  );
 
   return (
     <section className="py-16 bg-muted/30">
@@ -130,10 +175,9 @@ export default function FeaturedBlogPosts({
                             alt={post.title}
                             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                           />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
-                            <span className="text-4xl">📰</span>
-                          </div>
+                        ) : (                            <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
+                              <Newspaper className="w-8 h-8 text-primary/60" />
+                            </div>
                         )}
                       </div>
                       <CardContent className="p-5">
@@ -198,48 +242,19 @@ export default function FeaturedBlogPosts({
           )}
         </div>
 
-        {/* Desktop Grid */}
-        <div className="hidden md:grid md:grid-cols-3 gap-8">
-          {displayPosts.map((post) => (
-            <Link key={post.id} to={`/blog/${post.slug}`}>
-              <Card className="overflow-hidden hover:shadow-xl transition-all duration-300 h-full group border-0 shadow-md">
-                <div className="aspect-video overflow-hidden bg-muted">
-                  {post.image_url ? (
-                    <img
-                      src={post.image_url}
-                      alt={post.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                  ) : (
-                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-primary/20 to-primary/5">
-                      <span className="text-5xl">📰</span>
-                    </div>
-                  )}
-                </div>
-                <CardContent className="p-6">
-                  <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
-                    <Calendar className="h-3 w-3" />
-                    {new Date(post.created_at).toLocaleDateString('en-NG', {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric'
-                    })}
-                  </div>
-                  <h3 className="text-xl font-bold mb-3 line-clamp-2 group-hover:text-primary transition-colors">
-                    {post.title}
-                  </h3>
-                  {post.excerpt && (
-                    <p className="text-sm text-muted-foreground line-clamp-3 mb-4">
-                      {post.excerpt}
-                    </p>
-                  )}
-                  <span className="inline-flex items-center text-sm font-medium text-primary group-hover:gap-2 transition-all">
-                    Read More <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
-                  </span>
-                </CardContent>
-              </Card>
-            </Link>
-          ))}
+        {/* Desktop auto-scrolling rail (pauses on hover, honours reduced motion) */}
+        <div className="hidden md:block overflow-hidden">
+          <div className="ent-marquee flex w-max">
+            {[0, 1].map((group) => (
+              <div
+                key={group}
+                className={`flex shrink-0 gap-8 pr-8 ${group === 1 ? 'ent-marquee-dup' : ''}`}
+                aria-hidden={group === 1}
+              >
+                {posts.map((post) => renderRailCard(group, post))}
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* View All Button */}

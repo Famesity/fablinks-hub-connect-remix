@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import { Loader2, ArrowLeft, Save, Eye, Sparkles, Crop } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import LogoCropDialog from "@/components/admin/LogoCropDialog";
 import { PermissionGate } from "@/components/admin/PermissionGate";
 import { ADMIN_PERMISSIONS } from "@/hooks/usePermissions";
@@ -314,10 +315,11 @@ export default function AdminSiteSettings() {
       <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         <Tabs defaultValue="general" className="w-full">
           <div className="overflow-x-auto -mx-3 px-3 sm:mx-0 sm:px-0">
-            <TabsList className="inline-flex w-max sm:w-full sm:grid sm:grid-cols-8 gap-1 mb-4">
+            <TabsList className="inline-flex w-max sm:w-full sm:grid sm:grid-cols-9 gap-1 mb-4">
               <TabsTrigger value="general" className="text-xs sm:text-sm px-3 sm:px-4">General</TabsTrigger>
               <TabsTrigger value="hero" className="text-xs sm:text-sm px-3 sm:px-4">Hero</TabsTrigger>
               <TabsTrigger value="whatson" className="text-xs sm:text-sm px-3 sm:px-4">What's On</TabsTrigger>
+              <TabsTrigger value="animations" className="text-xs sm:text-sm px-3 sm:px-4">Animations</TabsTrigger>
               <TabsTrigger value="contact" className="text-xs sm:text-sm px-3 sm:px-4">Contact</TabsTrigger>
               <TabsTrigger value="cta" className="text-xs sm:text-sm px-3 sm:px-4">CTA</TabsTrigger>
               <TabsTrigger value="footer" className="text-xs sm:text-sm px-3 sm:px-4">Footer</TabsTrigger>
@@ -515,6 +517,61 @@ export default function AdminSiteSettings() {
               <CardContent className="space-y-4">
                 {renderSetting("whats_on_cta_label", "Button Label")}
                 {renderSetting("whats_on_cta_link", "Button Link")}
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="animations">
+            <Card>
+              <CardHeader>
+                <CardTitle>Section Animations</CardTitle>
+                <CardDescription>
+                  Scroll-reveal animations for the public sections. Pick a style,
+                  or turn animations off entirely — sections stay visible either
+                  way. Changes apply the next time a page loads.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="space-y-2">
+                    <Label htmlFor="animations_style">Animation style</Label>
+                    <Select
+                      value={settings.find((s) => s.key === 'animations_style')?.value || 'fade-up'}
+                      onValueChange={(value) => updateSetting('animations_style', value)}
+                    >
+                      <SelectTrigger id="animations_style">
+                        <SelectValue placeholder="Choose an animation" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="fade-up">Fade up — rise into place</SelectItem>
+                        <SelectItem value="fade-in">Fade in — soft opacity</SelectItem>
+                        <SelectItem value="zoom-in">Zoom in — gentle scale</SelectItem>
+                        <SelectItem value="slide-right">Slide in — from the left</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                  <div className="space-y-2">
+                    <Label htmlFor="animations_enabled">Animations</Label>
+                    <Select
+                      value={settings.find((s) => s.key === 'animations_enabled')?.value || 'on'}
+                      onValueChange={(value) => updateSetting('animations_enabled', value)}
+                    >
+                      <SelectTrigger id="animations_enabled">
+                        <SelectValue placeholder="On or off" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="on">On</SelectItem>
+                        <SelectItem value="off">Off</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+                <div className="rounded-lg border bg-muted/40 p-4 text-sm text-muted-foreground">
+                  Save, then reload the public site to see the change. If anything
+                  ever looks off, set animations to <strong>Off</strong> — every
+                  section renders immediately with no animation, and visitors with
+                  reduced-motion enabled never see animations at all.
+                </div>
               </CardContent>
             </Card>
           </TabsContent>

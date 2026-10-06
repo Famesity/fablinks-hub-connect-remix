@@ -277,7 +277,55 @@
   .animate-pulse,
   .hero-kenburns,
   .hero-kenburns-alt,
-  .hero-text-in {
+  .hero-text-in,
+  .reveal-fade-up.is-visible,
+  .reveal-fade-in.is-visible,
+  .reveal-zoom-in.is-visible,
+  .reveal-slide-right.is-visible {
     animation: none !important;
   }
+
+  /* Hide the duplicated loop copy of auto-scrolling rails */
+  .ent-marquee-dup {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   Scroll-reveal — style + on/off come from site_settings
+   (animations_style / animations_enabled, Admin → Settings → Animations).
+   There is deliberately NO initial hidden state: if the IntersectionObserver
+   never fires, animations are turned off, or a style name is unknown, the
+   section simply renders normally — the toggle can never hide content.
+   ========================================================= */
+.reveal-fade-up.is-visible {
+  animation: reveal-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes reveal-fade-up {
+  from { opacity: 0; transform: translate3d(0, 28px, 0); }
+  to { opacity: 1; transform: none; }
+}
+
+.reveal-fade-in.is-visible {
+  animation: reveal-fade-in 0.7s ease both;
+}
+@keyframes reveal-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.reveal-zoom-in.is-visible {
+  animation: reveal-zoom-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes reveal-zoom-in {
+  from { opacity: 0; transform: scale(0.94); }
+  to { opacity: 1; transform: none; }
+}
+
+.reveal-slide-right.is-visible {
+  animation: reveal-slide-right 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+@keyframes reveal-slide-right {
+  from { opacity: 0; transform: translate3d(-36px, 0, 0); }
+  to { opacity: 1; transform: none; }
 }

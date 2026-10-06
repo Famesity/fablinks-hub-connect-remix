@@ -10,6 +10,7 @@ import GoodToKnow from '@/components/home/GoodToKnow';
 import NewsletterSignup from '@/components/home/NewsletterSignup';
 import CTASection from '@/components/CTASection';
 import SEOHead from '@/components/SEOHead';
+import Reveal from '@/components/Reveal';
 
 const Index = () => {
   return (
@@ -26,31 +27,45 @@ const Index = () => {
       <InfoTicker />
 
       {/* Social proof */}
-      <TrustStrip />
+      <Reveal>
+        <TrustStrip />
+      </Reveal>
 
       {/* Events highlights */}
-      <EventsHighlights />
+      <Reveal>
+        <EventsHighlights />
+      </Reveal>
 
       {/* Blog post highlights */}
-      <FeaturedBlogPosts
-        title="Fresh off the feed"
-        subtitle="Stories, guides and highlights from the Defabs world — the reads you'll want to catch before everyone else"
-      />
+      <Reveal>
+        <FeaturedBlogPosts
+          title="Fresh off the feed"
+          subtitle="Stories, guides and highlights from the Defabs world — the reads you'll want to catch before everyone else"
+        />
+      </Reveal>
 
       {/* Services highlighted */}
-      <FeaturedServices
-        title="The"
-        titleAccent="Line-up of Services"
-        subtitle="From registrations and printing to graphics, design and project support — the digital services our community counts on, started in a single WhatsApp message."
-      />
+      <Reveal>
+        <FeaturedServices
+          title="The"
+          titleAccent="Line-up of Services"
+          subtitle="From registrations and printing to graphics, design and project support — the digital services our community counts on, started in a single WhatsApp message."
+        />
+      </Reveal>
 
       {/* Other information */}
-      <GoodToKnow />
+      <Reveal>
+        <GoodToKnow />
+      </Reveal>
 
       {/* Newsletter signup */}
-      <NewsletterSignup />
+      <Reveal>
+        <NewsletterSignup />
+      </Reveal>
 
-      <CTASection />
+      <Reveal>
+        <CTASection />
+      </Reveal>
     </Layout>
   );
 };
