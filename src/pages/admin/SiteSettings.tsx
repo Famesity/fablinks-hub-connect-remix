@@ -314,9 +314,10 @@ export default function AdminSiteSettings() {
       <main className="container mx-auto px-3 sm:px-4 py-4 sm:py-8">
         <Tabs defaultValue="general" className="w-full">
           <div className="overflow-x-auto -mx-3 px-3 sm:mx-0 sm:px-0">
-            <TabsList className="inline-flex w-max sm:w-full sm:grid sm:grid-cols-7 gap-1 mb-4">
+            <TabsList className="inline-flex w-max sm:w-full sm:grid sm:grid-cols-8 gap-1 mb-4">
               <TabsTrigger value="general" className="text-xs sm:text-sm px-3 sm:px-4">General</TabsTrigger>
               <TabsTrigger value="hero" className="text-xs sm:text-sm px-3 sm:px-4">Hero</TabsTrigger>
+              <TabsTrigger value="whatson" className="text-xs sm:text-sm px-3 sm:px-4">What's On</TabsTrigger>
               <TabsTrigger value="contact" className="text-xs sm:text-sm px-3 sm:px-4">Contact</TabsTrigger>
               <TabsTrigger value="cta" className="text-xs sm:text-sm px-3 sm:px-4">CTA</TabsTrigger>
               <TabsTrigger value="footer" className="text-xs sm:text-sm px-3 sm:px-4">Footer</TabsTrigger>
@@ -497,6 +498,23 @@ export default function AdminSiteSettings() {
                     </div>
                   )}
                 </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+
+          <TabsContent value="whatson">
+            <Card>
+              <CardHeader>
+                <CardTitle>What's On Section</CardTitle>
+                <CardDescription>
+                  Customize the "All updates" button on the landing page's What's On section.
+                  The link defaults to the Experience page — use an internal path like
+                  /experience or /blog, or a full https:// URL.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                {renderSetting("whats_on_cta_label", "Button Label")}
+                {renderSetting("whats_on_cta_link", "Button Link")}
               </CardContent>
             </Card>
           </TabsContent>
