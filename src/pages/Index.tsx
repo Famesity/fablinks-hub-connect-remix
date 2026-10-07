@@ -4,6 +4,7 @@ import HeroCarousel from '@/components/HeroCarousel';
 import InfoTicker from '@/components/home/InfoTicker';
 import TrustStrip from '@/components/TrustStrip';
 import EventsHighlights from '@/components/home/EventsHighlights';
+import EventHighlightsCarousel from '@/components/home/EventHighlightsCarousel';
 import FeaturedBlogPosts from '@/components/FeaturedBlogPosts';
 import FeaturedServices from '@/components/FeaturedServices';
 import GoodToKnow from '@/components/home/GoodToKnow';
@@ -34,6 +35,11 @@ const Index = () => {
       {/* Events highlights */}
       <Reveal>
         <EventsHighlights />
+      </Reveal>
+
+      {/* Past event photo & video highlights */}
+      <Reveal>
+        <EventHighlightsCarousel />
       </Reveal>
 
       {/* Blog post highlights */}

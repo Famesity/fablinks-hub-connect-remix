@@ -29,6 +29,7 @@ import {
   UserRound,
   Users,
   Award,
+  Film,
 } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
 import { cn } from "@/lib/utils";
@@ -65,6 +66,7 @@ const navigation = [
       { label: "Featured services", href: "/admin/featured-services", icon: Star },
       { label: "Why choose us", href: "/admin/why-choose-us", icon: Award },
       { label: "Events", href: "/admin/events", icon: CalendarDays },
+      { label: "Event highlights", href: "/admin/event-highlights", icon: Film },
     ],
   },
   {

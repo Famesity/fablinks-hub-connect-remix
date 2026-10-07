@@ -4,6 +4,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, CalendarDays, Clock, ExternalLink, MapPin, MessageCircle } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
+import { buildRegisterLink } from '@/lib/eventLinks';
 
 interface EventItem {
   id: string;
@@ -180,39 +181,8 @@ const EventsHighlights = ({ limit = 4 }: EventsHighlightsProps) => {
     };
   }, [limit]);
 
-  const reserveLink = (eventTitle: string) =>
-    `https://wa.me/${whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(
-      `Hello ${siteTitle}, I'd like to reserve a spot for "${eventTitle}".`
-    )}`;
-
-  /**
-   * Where the card's register button goes — precedence:
-   * 1. Admin-provided registration URL, opened as-is (normalized to https).
-   * 2. Event-specific WhatsApp number → wa.me deep link with a prefilled
-   *    registration message about this event, exactly like the services page.
-   * 3. Site-wide WhatsApp fallback (the classic "Reserve a spot").
-   */
-  const registerLink = (event: EventItem) => {
-    const message = encodeURIComponent(
-      `Hello ${siteTitle}, I'd like to register for "${event.title}"${
-        event.time ? ` (${event.time})` : ''
-      }.`
-    );
-
-    if (event.registrationUrl?.trim()) {
-      const raw = event.registrationUrl.trim();
-      const href = /^(https?:\/\/|\/|#|mailto:)/i.test(raw) ? raw : `https://${raw}`;
-      return { href, label: 'Register', external: /^https?:\/\//i.test(href) };
-    }
-    if (event.whatsappNumber?.trim()) {
-      return {
-        href: `https://wa.me/${event.whatsappNumber.replace(/\D/g, '')}?text=${message}`,
-        label: 'Register',
-        external: true,
-      };
-    }
-    return { href: reserveLink(event.title), label: 'Reserve a spot', external: true };
-  };
+  /** CTA destinations — shared with the /events/:id detail page. */
+  const linkCtx = { siteTitle, whatsapp };
 
   const isInternalLink = allUpdatesLink.startsWith('/') || allUpdatesLink.startsWith('#');
   const allUpdatesButton = (
@@ -257,9 +227,9 @@ const EventsHighlights = ({ limit = 4 }: EventsHighlightsProps) => {
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {events.map((event) => {
-            const register = registerLink(event);
+            const register = buildRegisterLink(event, linkCtx);
             const registerClass =
-              'mt-auto inline-flex items-center justify-center gap-2 rounded-lg border border-ent-gold/40 bg-ent-gold/10 px-4 py-2.5 text-sm font-semibold text-ent-gold transition-colors hover:bg-ent-gold hover:text-ent-ink';
+              'relative z-20 mt-auto inline-flex items-center justify-center gap-2 rounded-lg border border-ent-gold/40 bg-ent-gold/10 px-4 py-2.5 text-sm font-semibold text-ent-gold transition-colors hover:bg-ent-gold hover:text-ent-ink';
             const registerIcon = !register.external ? (
               <ArrowRight className="h-4 w-4" />
             ) : register.href.includes('wa.me') ? (
@@ -270,8 +240,19 @@ const EventsHighlights = ({ limit = 4 }: EventsHighlightsProps) => {
             return (
               <article
                 key={event.id}
-                className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:border-ent-gold/50"
+                className="group relative flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:border-ent-gold/50"
               >
+                {/* Whole-card link to the detail page — sits above the card
+                    content; the CTA below keeps z-20 so it stays clickable.
+                    Fallback line-up ids are not real events, so they are not
+                    linked. */}
+                {!event.id.startsWith('fallback-') && (
+                  <Link
+                    to={`/events/${event.id}`}
+                    aria-label={`View details for ${event.title}`}
+                    className="absolute inset-0 z-10 rounded-2xl"
+                  />
+                )}
                 {/* Media — an uploaded image renders at its natural aspect
                     ratio (the card auto-adjusts to the image dimensions);
                     otherwise a themed placeholder panel keeps the rhythm. */}
