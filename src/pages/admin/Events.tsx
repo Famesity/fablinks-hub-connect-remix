@@ -15,7 +15,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { ArrowLeft, Plus, Pencil, Trash2, Save, CalendarDays, MapPin, Clock } from 'lucide-react';
+import { ArrowLeft, Plus, Pencil, Trash2, Save, CalendarDays, MapPin, Clock, Image, Upload, Loader2, X } from 'lucide-react';
 import { toast } from 'sonner';
 import { PermissionGate } from '@/components/admin/PermissionGate';
 import { ADMIN_PERMISSIONS } from '@/hooks/usePermissions';
@@ -30,6 +30,8 @@ interface EventRow {
   venue: string | null;
   registration_url: string | null;
   whatsapp_number: string | null;
+  image_url: string | null;
+  price: string | null;
   display_order: number;
   is_active: boolean;
 }
@@ -65,6 +67,7 @@ const AdminEvents = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [editingEvent, setEditingEvent] = useState<EventRow | null>(null);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
 
   const emptyForm = {
     title: '',
@@ -75,6 +78,8 @@ const AdminEvents = () => {
     venue: '',
     registration_url: '',
     whatsapp_number: '',
+    price: '',
+    image_url: '',
     display_order: 0,
     is_active: true,
   };
@@ -117,6 +122,8 @@ const AdminEvents = () => {
         venue: event.venue || '',
         registration_url: event.registration_url || '',
         whatsapp_number: event.whatsapp_number || '',
+        price: event.price || '',
+        image_url: event.image_url || '',
         display_order: event.display_order,
         is_active: event.is_active,
       });
@@ -125,6 +132,42 @@ const AdminEvents = () => {
       setFormData({ ...emptyForm, display_order: events.length + 1 });
     }
     setIsDialogOpen(true);
+  };
+
+  const handleImageUpload = async (file: File) => {
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file');
+      return;
+    }
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image must be 5 MB or smaller');
+      return;
+    }
+
+    setUploading(true);
+    try {
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random()}.${fileExt}`;
+      const filePath = `events/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('event-images')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      const { data } = supabase.storage
+        .from('event-images')
+        .getPublicUrl(filePath);
+
+      setFormData({ ...formData, image_url: data.publicUrl });
+      toast.success('Image uploaded successfully');
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      toast.error('Failed to upload image');
+    } finally {
+      setUploading(false);
+    }
   };
 
   const handleSave = async () => {
@@ -150,14 +193,20 @@ const AdminEvents = () => {
         venue: formData.venue.trim() || null,
         display_order: formData.display_order,
         is_active: formData.is_active,
-        // Only send the registration columns when they are in use or being
-        // cleared, so saving plain events still works before migration
-        // 20261006120000_event_registration_links has been applied.
+        // Only send the optional registration/media columns when they are in
+        // use or being cleared, so saving plain events still works even if
+        // migrations 20261006120000 / 20261007143000 are not applied yet.
         ...(registrationUrl || editingEvent?.registration_url
           ? { registration_url: registrationUrl || null }
           : {}),
         ...(registerWhatsapp || editingEvent?.whatsapp_number
           ? { whatsapp_number: registerWhatsapp || null }
+          : {}),
+        ...(formData.price.trim() || editingEvent?.price
+          ? { price: formData.price.trim() || null }
+          : {}),
+        ...(formData.image_url.trim() || editingEvent?.image_url
+          ? { image_url: formData.image_url.trim() || null }
           : {}),
       };
 
@@ -176,7 +225,7 @@ const AdminEvents = () => {
     } catch (error) {
       console.error('Error saving event:', error);
       const message = (error as Error)?.message || '';
-      if (/registration_url|whatsapp_number|column/i.test(message)) {
+      if (/registration_url|whatsapp_number|image_url|price|column/i.test(message)) {
         toast.error(
           'Registration fields are not in the database yet — apply supabase/migrations/20261006120000_event_registration_links.sql, then save again.'
         );
@@ -337,6 +386,90 @@ const AdminEvents = () => {
                   </div>
 
                   <div className="space-y-2">
+                    <Label htmlFor="event-price">Price / prize</Label>
+                    <Input
+                      id="event-price"
+                      value={formData.price}
+                      onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                      placeholder="e.g., Free, ₦500, Win ₦50,000"
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Optional — the price shows as a badge on the event card.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="event-image-upload">Card image</Label>
+                    <div className="flex items-start gap-4">
+                      {formData.image_url ? (
+                        <div className="relative shrink-0">
+                          <img
+                            src={formData.image_url}
+                            alt="Event preview"
+                            className="h-20 w-28 rounded-lg border object-cover"
+                          />
+                          <Button
+                            type="button"
+                            variant="secondary"
+                            size="icon"
+                            className="absolute -right-2 -top-2 h-6 w-6 rounded-full shadow-md"
+                            onClick={() => setFormData({ ...formData, image_url: '' })}
+                            disabled={uploading}
+                          >
+                            <X className="h-3 w-3" />
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="flex h-20 w-28 shrink-0 items-center justify-center rounded-lg border border-dashed text-muted-foreground">
+                          <Image className="h-6 w-6" />
+                        </div>
+                      )}
+
+                      <div className="min-w-0 flex-1 space-y-2">
+                        <Button
+                          type="button"
+                          variant="outline"
+                          disabled={uploading}
+                          onClick={() => document.getElementById('event-image-upload')?.click()}
+                        >
+                          {uploading ? (
+                            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                          ) : (
+                            <Upload className="mr-2 h-4 w-4" />
+                          )}
+                          {uploading
+                            ? 'Uploading…'
+                            : formData.image_url
+                              ? 'Replace Image'
+                              : 'Upload Image'}
+                        </Button>
+                        <input
+                          id="event-image-upload"
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) handleImageUpload(file);
+                            e.target.value = '';
+                          }}
+                        />
+                        <p className="text-xs text-muted-foreground">
+                          JPG, PNG or WebP up to 5 MB — the card auto-adjusts to the image
+                          dimensions. Leave empty for the themed placeholder.
+                        </p>
+                      </div>
+                    </div>
+
+                    <Input
+                      id="event-image-url"
+                      value={formData.image_url}
+                      onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                      placeholder="…or paste an image URL"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
                     <Label htmlFor="event-registration-url">Registration URL</Label>
                     <Input
                       id="event-registration-url"
@@ -415,6 +548,13 @@ const AdminEvents = () => {
                           {monthShort(event.event_date)}
                         </span>
                       </div>
+                      {event.image_url && (
+                        <img
+                          src={event.image_url}
+                          alt=""
+                          className="h-12 w-16 shrink-0 rounded-lg border object-cover"
+                        />
+                      )}
                       <div className="flex-1 min-w-0">
                         <div className="flex items-center gap-2 flex-wrap">
                           <h3 className="font-semibold truncate">{event.title}</h3>
@@ -424,6 +564,11 @@ const AdminEvents = () => {
                           {(event.registration_url || event.whatsapp_number) && (
                             <span className="text-[10px] font-bold uppercase tracking-wider rounded-full bg-emerald-500/10 px-2 py-0.5 text-emerald-600">
                               Register set
+                            </span>
+                          )}
+                          {event.price && (
+                            <span className="text-[10px] font-bold uppercase tracking-wider rounded-full bg-ent-gold/20 px-2 py-0.5 text-ent-gold-ink">
+                              {event.price}
                             </span>
                           )}
                         </div>
