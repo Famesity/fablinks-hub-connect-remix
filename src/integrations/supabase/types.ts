@@ -448,7 +448,9 @@ export type Database = {
           event_date: string
           event_time: string | null
           id: string
+          image_url: string | null
           is_active: boolean
+          price: string | null
           registration_url: string | null
           title: string
           updated_at: string
@@ -463,7 +465,9 @@ export type Database = {
           event_date: string
           event_time?: string | null
           id?: string
+          image_url?: string | null
           is_active?: boolean
+          price?: string | null
           registration_url?: string | null
           title: string
           updated_at?: string
@@ -478,7 +482,9 @@ export type Database = {
           event_date?: string
           event_time?: string | null
           id?: string
+          image_url?: string | null
           is_active?: boolean
+          price?: string | null
           registration_url?: string | null
           title?: string
           updated_at?: string

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Clock, ExternalLink, MapPin, MessageCircle } from 'lucide-react';
+import { ArrowRight, CalendarDays, Clock, ExternalLink, MapPin, MessageCircle } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
 
@@ -19,6 +19,10 @@ interface EventItem {
   registrationUrl?: string | null;
   /** Admin-provided WhatsApp number for this event (optional). */
   whatsappNumber?: string | null;
+  /** Uploaded card image — rendered at its natural aspect ratio (optional). */
+  imageUrl?: string | null;
+  /** Free-text price/prize badge shown on the card (optional). */
+  price?: string | null;
 }
 
 interface EventRow {
@@ -31,6 +35,8 @@ interface EventRow {
   venue: string | null;
   registration_url?: string | null;
   whatsapp_number?: string | null;
+  image_url?: string | null;
+  price?: string | null;
 }
 
 const monthShort = (date: Date) =>
@@ -53,6 +59,8 @@ const rowToEvent = (row: EventRow): EventItem => {
     venue: row.venue || '',
     registrationUrl: row.registration_url ?? null,
     whatsappNumber: row.whatsapp_number ?? null,
+    imageUrl: row.image_url ?? null,
+    price: row.price ?? null,
   };
 };
 
@@ -137,7 +145,7 @@ const EventsHighlights = ({ limit = 4 }: EventsHighlightsProps) => {
         let rows: EventRow[] = [];
         const { data, error } = await supabase
           .from('events')
-          .select(`${baseColumns}, registration_url, whatsapp_number`)
+          .select(`${baseColumns}, registration_url, whatsapp_number, image_url, price`)
           .eq('is_active', true)
           .order('event_date', { ascending: true })
           .limit(limit);
@@ -262,58 +270,82 @@ const EventsHighlights = ({ limit = 4 }: EventsHighlightsProps) => {
             return (
               <article
                 key={event.id}
-                className="group flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-ent-gold/50"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/5 transition-all duration-300 hover:-translate-y-1 hover:border-ent-gold/50"
               >
-              <div className="flex items-center gap-3">
-                <div className="rounded-xl bg-ent-gold px-3 py-2 text-center leading-none text-ent-ink">
-                  <span className="font-display block text-2xl font-extrabold">{event.day}</span>
-                  <span className="mt-1 block text-[10px] font-bold uppercase tracking-widest">
-                    {event.month}
-                  </span>
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-ent-gold">
+                {/* Media — an uploaded image renders at its natural aspect
+                    ratio (the card auto-adjusts to the image dimensions);
+                    otherwise a themed placeholder panel keeps the rhythm. */}
+                <div className="relative overflow-hidden">
+                  {event.imageUrl ? (
+                    <img
+                      src={event.imageUrl}
+                      alt={event.title}
+                      loading="lazy"
+                      className="h-auto max-h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                  ) : (
+                    <div className="ent-grid-bg flex h-32 w-full items-center justify-center bg-gradient-to-br from-ent-stage via-ent-ink to-ent-ink">
+                      <CalendarDays className="h-8 w-8 text-ent-gold/40" />
+                    </div>
+                  )}
+                  <div className="absolute left-3 top-3 rounded-xl bg-ent-gold px-2.5 py-1.5 text-center leading-none text-ent-ink shadow-lg shadow-ent-ink/20">
+                    <span className="font-display block text-lg font-extrabold">
+                      {event.day}
+                    </span>
+                    <span className="mt-0.5 block text-[9px] font-bold uppercase tracking-widest">
+                      {event.month}
+                    </span>
+                  </div>
+                  <span className="absolute right-3 top-3 rounded-full border border-white/20 bg-ent-ink/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.15em] text-ent-gold backdrop-blur">
                     {event.category}
-                  </p>
-                  <p className="mt-0.5 text-xs text-white/50">{event.weekday}</p>
+                  </span>
+                  {event.price && (
+                    <span className="absolute bottom-3 left-3 rounded-full bg-ent-gold px-3 py-1 text-xs font-bold text-ent-ink shadow-lg shadow-ent-ink/20">
+                      {event.price}
+                    </span>
+                  )}
                 </div>
-              </div>
 
-              <h3 className="font-display mt-5 text-lg font-bold leading-snug text-white transition-colors group-hover:text-ent-gold">
-                {event.title}
-              </h3>
-              <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-white/60">
-                {event.description}
-              </p>
+                <div className="flex flex-1 flex-col p-5">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/50">
+                    {event.weekday}
+                  </p>
+                  <h3 className="font-display mt-2 text-lg font-bold leading-snug text-white transition-colors group-hover:text-ent-gold">
+                    {event.title}
+                  </h3>
+                  <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/60">
+                    {event.description}
+                  </p>
 
-              <div className="mt-4 space-y-1.5 text-xs text-white/50">
-                <p className="flex items-center gap-2">
-                  <Clock className="h-3.5 w-3.5 text-ent-gold" />
-                  {event.time}
-                </p>
-                <p className="flex items-center gap-2">
-                  <MapPin className="h-3.5 w-3.5 text-ent-gold" />
-                  {event.venue}
-                </p>
-              </div>
+                  <div className="mt-3 space-y-1.5 text-xs text-white/50">
+                    <p className="flex items-center gap-2">
+                      <Clock className="h-3.5 w-3.5 text-ent-gold" />
+                      {event.time}
+                    </p>
+                    <p className="flex items-center gap-2">
+                      <MapPin className="h-3.5 w-3.5 text-ent-gold" />
+                      {event.venue}
+                    </p>
+                  </div>
 
-              {register.external ? (
-                <a
-                  href={register.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={registerClass}
-                >
-                  {registerIcon}
-                  {register.label}
-                </a>
-              ) : (
-                <Link to={register.href} className={registerClass}>
-                  {registerIcon}
-                  {register.label}
-                </Link>
-              )}
-            </article>
+                  {register.external ? (
+                    <a
+                      href={register.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={registerClass}
+                    >
+                      {registerIcon}
+                      {register.label}
+                    </a>
+                  ) : (
+                    <Link to={register.href} className={registerClass}>
+                      {registerIcon}
+                      {register.label}
+                    </Link>
+                  )}
+                </div>
+              </article>
             );
           })}
         </div>
