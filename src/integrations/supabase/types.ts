@@ -439,6 +439,39 @@ export type Database = {
         }
         Relationships: []
       }
+      event_highlights: {
+        Row: {
+          caption: string | null
+          created_at: string | null
+          display_order: number
+          id: string
+          is_active: boolean
+          media_type: string
+          media_url: string
+          updated_at: string | null
+        }
+        Insert: {
+          caption?: string | null
+          created_at?: string | null
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          media_type?: string
+          media_url: string
+          updated_at?: string | null
+        }
+        Update: {
+          caption?: string | null
+          created_at?: string | null
+          display_order?: number
+          id?: string
+          is_active?: boolean
+          media_type?: string
+          media_url?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
       events: {
         Row: {
           category: string

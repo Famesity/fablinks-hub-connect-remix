@@ -40,6 +40,7 @@ const AdminHowItWorks = lazy(() => import("./pages/admin/HowItWorks"));
 const AdminFeaturedServices = lazy(() => import("./pages/admin/FeaturedServices"));
 const AdminWhyChooseUs = lazy(() => import("./pages/admin/WhyChooseUs"));
 const AdminEvents = lazy(() => import("./pages/admin/Events"));
+const AdminEventHighlights = lazy(() => import("./pages/admin/EventHighlights"));
 const AdminContent = lazy(() => import("./pages/admin/Content"));
 const AdminLanding = lazy(() => import("./pages/admin/Landing"));
 const AdminCustomers = lazy(() => import("./pages/admin/Customers"));
@@ -47,6 +48,7 @@ const AdminServiceRequests = lazy(() => import("./pages/admin/ServiceRequests"))
 const AdminAnnouncement = lazy(() => import("./pages/admin/Announcement"));
 const AdminNotifications = lazy(() => import("./pages/admin/Notifications"));
 import BlogPost from "./pages/BlogPost";
+import EventDetail from "./pages/EventDetail";
 import Page from "./pages/Page";
 import Install from "./pages/Install";
 
@@ -71,6 +73,7 @@ function AppContent() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/events/:id" element={<EventDetail />} />
           <Route path="/search" element={<Search />} />
           <Route path="/install" element={<Install />} />
           <Route path="/auth" element={<Auth />} />
@@ -100,6 +103,7 @@ function AppContent() {
             <Route path="featured-services" element={<AdminFeaturedServices />} />
             <Route path="why-choose-us" element={<AdminWhyChooseUs />} />
             <Route path="events" element={<AdminEvents />} />
+            <Route path="event-highlights" element={<AdminEventHighlights />} />
             <Route path="service-requests" element={<AdminServiceRequests />} />
             <Route path="announcement" element={<AdminAnnouncement />} />
             <Route path="notifications" element={<AdminNotifications />} />

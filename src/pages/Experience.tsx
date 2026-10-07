@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import TrustStrip from '@/components/TrustStrip';
 import EventsHighlights from '@/components/home/EventsHighlights';
+import EventHighlightsCarousel from '@/components/home/EventHighlightsCarousel';
 import WhyChooseUs from '@/components/WhyChooseUs';
 import HowItWorks from '@/components/HowItWorks';
 import TestimonialsCarousel from '@/components/TestimonialsCarousel';
@@ -234,6 +235,15 @@ const Experience = () => {
       {/* Full events line-up (managed from Admin → Landing Page → Events) */}
       <Reveal>
         <EventsHighlights limit={8} />
+      </Reveal>
+
+      {/* Past event photo & video highlights */}
+      <Reveal>
+        <EventHighlightsCarousel
+          eyebrow="Seen at the hub"
+          title="Relive past events"
+          subtitle="Photos and videos from watch parties, tournaments and clinics — swipe through the archive."
+        />
       </Reveal>
 
       {/* Student reviews */}
