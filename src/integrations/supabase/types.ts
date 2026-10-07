@@ -449,9 +449,11 @@ export type Database = {
           event_time: string | null
           id: string
           is_active: boolean
+          registration_url: string | null
           title: string
           updated_at: string
           venue: string | null
+          whatsapp_number: string | null
         }
         Insert: {
           category?: string
@@ -462,9 +464,11 @@ export type Database = {
           event_time?: string | null
           id?: string
           is_active?: boolean
+          registration_url?: string | null
           title: string
           updated_at?: string
           venue?: string | null
+          whatsapp_number?: string | null
         }
         Update: {
           category?: string
@@ -475,9 +479,11 @@ export type Database = {
           event_time?: string | null
           id?: string
           is_active?: boolean
+          registration_url?: string | null
           title?: string
           updated_at?: string
           venue?: string | null
+          whatsapp_number?: string | null
         }
         Relationships: []
       }

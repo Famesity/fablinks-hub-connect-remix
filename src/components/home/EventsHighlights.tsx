@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Clock, MapPin, MessageCircle } from 'lucide-react';
+import { ArrowRight, Clock, ExternalLink, MapPin, MessageCircle } from 'lucide-react';
 import { supabase } from '@/integrations/supabase/client';
 import { useSiteSettings } from '@/hooks/useSiteSettings';
 
@@ -15,6 +15,10 @@ interface EventItem {
   description: string;
   time: string;
   venue: string;
+  /** Admin-provided registration URL (optional). */
+  registrationUrl?: string | null;
+  /** Admin-provided WhatsApp number for this event (optional). */
+  whatsappNumber?: string | null;
 }
 
 interface EventRow {
@@ -25,6 +29,8 @@ interface EventRow {
   event_date: string;
   event_time: string | null;
   venue: string | null;
+  registration_url?: string | null;
+  whatsapp_number?: string | null;
 }
 
 const monthShort = (date: Date) =>
@@ -45,6 +51,8 @@ const rowToEvent = (row: EventRow): EventItem => {
     description: row.description || '',
     time: row.event_time || '',
     venue: row.venue || '',
+    registrationUrl: row.registration_url ?? null,
+    whatsappNumber: row.whatsapp_number ?? null,
   };
 };
 
@@ -124,17 +132,33 @@ const EventsHighlights = ({ limit = 4 }: EventsHighlightsProps) => {
     let cancelled = false;
 
     const fetchEvents = async () => {
+      const baseColumns = 'id, title, description, category, event_date, event_time, venue';
       try {
+        let rows: EventRow[] = [];
         const { data, error } = await supabase
           .from('events')
-          .select('id, title, description, category, event_date, event_time, venue')
+          .select(`${baseColumns}, registration_url, whatsapp_number`)
           .eq('is_active', true)
           .order('event_date', { ascending: true })
           .limit(limit);
 
-        if (error) throw error;
-        if (!cancelled && data && data.length > 0) {
-          setEvents(data.map(rowToEvent));
+        if (error) {
+          // The registration columns may not exist yet (migration pending) —
+          // retry with the base schema so events keep rendering without them.
+          const retry = await supabase
+            .from('events')
+            .select(baseColumns)
+            .eq('is_active', true)
+            .order('event_date', { ascending: true })
+            .limit(limit);
+          if (retry.error) throw retry.error;
+          rows = retry.data ?? [];
+        } else {
+          rows = data ?? [];
+        }
+
+        if (!cancelled && rows.length > 0) {
+          setEvents(rows.map(rowToEvent));
         }
       } catch (error) {
         // Table not created yet (migration pending) or query failed — keep the fallback line-up
@@ -152,6 +176,35 @@ const EventsHighlights = ({ limit = 4 }: EventsHighlightsProps) => {
     `https://wa.me/${whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(
       `Hello ${siteTitle}, I'd like to reserve a spot for "${eventTitle}".`
     )}`;
+
+  /**
+   * Where the card's register button goes — precedence:
+   * 1. Admin-provided registration URL, opened as-is (normalized to https).
+   * 2. Event-specific WhatsApp number → wa.me deep link with a prefilled
+   *    registration message about this event, exactly like the services page.
+   * 3. Site-wide WhatsApp fallback (the classic "Reserve a spot").
+   */
+  const registerLink = (event: EventItem) => {
+    const message = encodeURIComponent(
+      `Hello ${siteTitle}, I'd like to register for "${event.title}"${
+        event.time ? ` (${event.time})` : ''
+      }.`
+    );
+
+    if (event.registrationUrl?.trim()) {
+      const raw = event.registrationUrl.trim();
+      const href = /^(https?:\/\/|\/|#|mailto:)/i.test(raw) ? raw : `https://${raw}`;
+      return { href, label: 'Register', external: /^https?:\/\//i.test(href) };
+    }
+    if (event.whatsappNumber?.trim()) {
+      return {
+        href: `https://wa.me/${event.whatsappNumber.replace(/\D/g, '')}?text=${message}`,
+        label: 'Register',
+        external: true,
+      };
+    }
+    return { href: reserveLink(event.title), label: 'Reserve a spot', external: true };
+  };
 
   const isInternalLink = allUpdatesLink.startsWith('/') || allUpdatesLink.startsWith('#');
   const allUpdatesButton = (
@@ -195,11 +248,22 @@ const EventsHighlights = ({ limit = 4 }: EventsHighlightsProps) => {
         </div>
 
         <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {events.map((event) => (
-            <article
-              key={event.id}
-              className="group flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-ent-gold/50"
-            >
+          {events.map((event) => {
+            const register = registerLink(event);
+            const registerClass =
+              'mt-auto inline-flex items-center justify-center gap-2 rounded-lg border border-ent-gold/40 bg-ent-gold/10 px-4 py-2.5 text-sm font-semibold text-ent-gold transition-colors hover:bg-ent-gold hover:text-ent-ink';
+            const registerIcon = !register.external ? (
+              <ArrowRight className="h-4 w-4" />
+            ) : register.href.includes('wa.me') ? (
+              <MessageCircle className="h-4 w-4" />
+            ) : (
+              <ExternalLink className="h-4 w-4" />
+            );
+            return (
+              <article
+                key={event.id}
+                className="group flex flex-col rounded-2xl border border-white/10 bg-white/5 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-ent-gold/50"
+              >
               <div className="flex items-center gap-3">
                 <div className="rounded-xl bg-ent-gold px-3 py-2 text-center leading-none text-ent-ink">
                   <span className="font-display block text-2xl font-extrabold">{event.day}</span>
@@ -233,17 +297,25 @@ const EventsHighlights = ({ limit = 4 }: EventsHighlightsProps) => {
                 </p>
               </div>
 
-              <a
-                href={reserveLink(event.title)}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-auto inline-flex items-center justify-center gap-2 rounded-lg border border-ent-gold/40 bg-ent-gold/10 px-4 py-2.5 pt-2.5 text-sm font-semibold text-ent-gold transition-colors hover:bg-ent-gold hover:text-ent-ink"
-              >
-                <MessageCircle className="h-4 w-4" />
-                Reserve a spot
-              </a>
+              {register.external ? (
+                <a
+                  href={register.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={registerClass}
+                >
+                  {registerIcon}
+                  {register.label}
+                </a>
+              ) : (
+                <Link to={register.href} className={registerClass}>
+                  {registerIcon}
+                  {register.label}
+                </Link>
+              )}
             </article>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-10 flex flex-col items-start justify-between gap-4 rounded-2xl border border-white/10 bg-white/5 p-6 sm:flex-row sm:items-center">
