@@ -28,6 +28,8 @@ interface EventRow {
   event_date: string;
   event_time: string | null;
   venue: string | null;
+  registration_url: string | null;
+  whatsapp_number: string | null;
   display_order: number;
   is_active: boolean;
 }
@@ -71,6 +73,8 @@ const AdminEvents = () => {
     event_date: '',
     event_time: '',
     venue: '',
+    registration_url: '',
+    whatsapp_number: '',
     display_order: 0,
     is_active: true,
   };
@@ -111,6 +115,8 @@ const AdminEvents = () => {
         event_date: event.event_date,
         event_time: event.event_time || '',
         venue: event.venue || '',
+        registration_url: event.registration_url || '',
+        whatsapp_number: event.whatsapp_number || '',
         display_order: event.display_order,
         is_active: event.is_active,
       });
@@ -133,11 +139,26 @@ const AdminEvents = () => {
 
     setSaving(true);
     try {
+      const registrationUrl = formData.registration_url.trim();
+      const registerWhatsapp = formData.whatsapp_number.replace(/\D/g, '');
       const payload = {
-        ...formData,
+        title: formData.title,
         description: formData.description.trim() || null,
+        category: formData.category,
+        event_date: formData.event_date,
         event_time: formData.event_time.trim() || null,
         venue: formData.venue.trim() || null,
+        display_order: formData.display_order,
+        is_active: formData.is_active,
+        // Only send the registration columns when they are in use or being
+        // cleared, so saving plain events still works before migration
+        // 20261006120000_event_registration_links has been applied.
+        ...(registrationUrl || editingEvent?.registration_url
+          ? { registration_url: registrationUrl || null }
+          : {}),
+        ...(registerWhatsapp || editingEvent?.whatsapp_number
+          ? { whatsapp_number: registerWhatsapp || null }
+          : {}),
       };
 
       if (editingEvent) {
@@ -154,7 +175,14 @@ const AdminEvents = () => {
       fetchEvents();
     } catch (error) {
       console.error('Error saving event:', error);
-      toast.error('Failed to save event');
+      const message = (error as Error)?.message || '';
+      if (/registration_url|whatsapp_number|column/i.test(message)) {
+        toast.error(
+          'Registration fields are not in the database yet — apply supabase/migrations/20261006120000_event_registration_links.sql, then save again.'
+        );
+      } else {
+        toast.error('Failed to save event');
+      }
     } finally {
       setSaving(false);
     }
@@ -308,6 +336,38 @@ const AdminEvents = () => {
                     />
                   </div>
 
+                  <div className="space-y-2">
+                    <Label htmlFor="event-registration-url">Registration URL</Label>
+                    <Input
+                      id="event-registration-url"
+                      value={formData.registration_url}
+                      onChange={(e) =>
+                        setFormData({ ...formData, registration_url: e.target.value })
+                      }
+                      placeholder="https://… or a full wa.me link"
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Optional — the card's Register button opens this link as-is.
+                    </p>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="event-whatsapp">WhatsApp number for registrations</Label>
+                    <Input
+                      id="event-whatsapp"
+                      value={formData.whatsapp_number}
+                      onChange={(e) =>
+                        setFormData({ ...formData, whatsapp_number: e.target.value })
+                      }
+                      placeholder="e.g., 2348106411463"
+                    />
+                    <p className="text-xs text-muted-foreground">
+                      Visitors are taken to WhatsApp with a prefilled registration message
+                      about this event — just like the services page. Leave both fields empty
+                      to keep the site-wide "Reserve a spot" link.
+                    </p>
+                  </div>
+
                   <div className="flex items-center gap-3">
                     <Switch
                       id="event-active"
@@ -361,6 +421,11 @@ const AdminEvents = () => {
                           <span className="text-[10px] font-bold uppercase tracking-wider rounded-full bg-muted px-2 py-0.5 text-muted-foreground">
                             {event.category}
                           </span>
+                          {(event.registration_url || event.whatsapp_number) && (
+                            <span className="text-[10px] font-bold uppercase tracking-wider rounded-full bg-emerald-500/10 px-2 py-0.5 text-emerald-600">
+                              Register set
+                            </span>
+                          )}
                         </div>
                         <p className="text-xs text-muted-foreground mt-1">
                           {formatDate(event.event_date)}
